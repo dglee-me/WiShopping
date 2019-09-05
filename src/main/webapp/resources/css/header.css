@@ -1,0 +1,35 @@
+.header{position:relative; width:1080px; height:147px; margin: 0 auto;}
+
+.btn_search button, .my-shopping-icon, .cart-icon{background-image:url('/myapp/resources/image/header_img.png'); no-repeat;}
+
+.top_bar{position:relative; height:32px; top:0; right:0; left:0; bottom:0; background:#f0f0f0;}
+.top_bar ul{font-size:11px; line-height:16px; padding-top:7px; width:auto;}
+
+.top_bar_util{position:relative; float:left;}
+.top_bar_util li{float:left; margin-left:10px;}
+.top_bar_login{float:right;}
+.top_bar_login li{float:left; margin-right:10px;}
+
+.header_fix{margin-top:25px; padding-bottom:6px;}
+.logo a{background-image:url('/myapp/resources/image/logo_158_61.png'); width:158px; height:41px; float:left; margin-right:20px; padding-top:20px; color:transparent;}
+
+.search_form{float:left; margin-top:10px; position:relative;}
+.search_bar{position:relative; width:470px; height:44px; border:2px solid #4285f4; margin-right:20px;}
+
+.ui_input_text{float:left; display:inline-block; width:415px; height:43px; line-height:16px; 
+	padding:11px 0 9px 16px; font-size:12px; color:#666; text-overflow:ellipsis;}
+.btn_search{position:absolute; right:20px; top:0; width:55px; height:44px; margin:2px;}
+.btn_search button {width:100%; height:100%; color:transparent; background-position:-110px -69px;}
+	
+.icon-menus{display:block; margin-top:3px; font-size:12px; float:right;}
+.icon-menus li{float:left;}
+
+.my-shopping-more{position:relative; margin-right:30px; width:50px; height:52px; margin-top:8px;}
+.my-shopping-icon{display:block; width:30px; height:30px; margin:0 auto; background-position:-112px -42px;}
+.my-shopping-title{display:block; width:50px; padding-top:7px; text-align:center; color:#333;}
+
+.cart-more{display:inline-block; width:50px; height:60px;}
+.cart-icon{width:40px; height:42px; display:block; margin:0 auto; background-position:-112px 0;}
+.cart-title{display:block; width:50px; padding-top:3px; text-align:center; color:#333;}
+#cartIconCount{position:absolute; width:17px; height:19px; top:69px; right:10px; margin:-5px 0 0 4px; color:#fff;
+	text-align:center; line-height:19px; letter-spacing: -1px; font:bold 10px tahoma;}

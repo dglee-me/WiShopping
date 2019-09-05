@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberMapper">
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<update id="authConfirm" parameterType="com.lee.myapp.domain.MemberVO">
+		UPDATE MEMBER
+		SET AUTH='Y'
+		WHERE EMAIL=#{email} AND AUTH=#{auth}
+	</update>
+
+	<select id="loginInfo" resultType="com.lee.myapp.domain.MemberVO" >
+		SELECT * 
+		  FROM MEMBER
+		 WHERE EMAIL=#{email} AND PW=#{pw} 
+	</select>
+
+	<insert id="create" parameterType="com.lee.myapp.domain.MemberVO">	
+		INSERT INTO MEMBER(mno,email,auth,pw,name,tel,createdate)
+		VALUES(mno_seq.nextval,#{email},#{auth},#{pw},#{name},#{tel},sysdate)
+	</insert>
+
+	<select id="list" resultType="com.lee.myapp.domain.MemberVO">
+		SELECT *
+		FROM MEMBER
+		ORDER BY MNO DESC
+	</select>
+	
+	<select id="read" resultType="com.lee.myapp.domain.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE MNO=#{MNO}
+	</select>
+	
+	<update id="update">
+		UPDATE MEMBER
+		SET PW=#{pw}, TEL=#{tel}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM MEMBER
+		WHERE MNO=#{MNO}
+	</delete>
+</mapper>

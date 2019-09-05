@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardMapper">
+	<select id="list" resultType="com.lee.myapp.domain.BoardVO">
+		SELECT *
+		FROM BOARD
+		ORDER BY BNO DESC
+	</select>
+	
+	<insert id="write" parameterType="com.lee.myapp.domain.BoardVO">
+		INSERT INTO BOARD(bno,subject,nickname,content,category,writedate)
+		VALUES(bno_seq.nextval,#{subject},#{nickname},#{content},#{category},sysdate)
+	</insert>
+	
+	<select id="read" resultType="com.lee.myapp.domain.BoardVO">
+		SELECT *
+		FROM BOARD
+		WHERE BNO=#{bno}
+	</select>
+	
+</mapper>
