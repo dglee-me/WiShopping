@@ -1,7 +1,8 @@
-function bookmarksite(title,url){
+function bookmarksite(){
 	//IE
-	if(document.all){
-		window.external.AddFavorite(url,title);
+	var agent = navigator.userAgent.toLowerCase();
+	if((navigator.appName == "Netscape" && agent.indexOf("trident") != -1) || (agent.indexOf("msie") != -1)){
+		window.external.AddFavorite("http://localhost:8081/myapp","위쇼핑");
 	}
 	//Google Chrome
 	else if(window.chrome){

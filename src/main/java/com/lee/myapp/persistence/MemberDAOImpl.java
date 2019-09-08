@@ -1,6 +1,9 @@
 package com.lee.myapp.persistence;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,6 +27,20 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int authConfirm(MemberVO member) throws Exception{
 		return sqlSession.update(namespace+".authConfirm",member);
+	}
+	
+	@Override
+	public void keepLogin(String email, String sessionId, Date next) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("email", email);
+		map.put("sessionId", sessionId);
+		map.put("next", next);
+		sqlSession.update(namespace+".keepLogin",map);
+	}
+	
+	@Override
+	public MemberVO checkUserWithSessionKey(String value) {
+		return sqlSession.selectOne(namespace+".checkUserWithSessionKey",value);
 	}
 	
 	@Override

@@ -1,12 +1,20 @@
 package com.lee.myapp.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.lee.myapp.domain.MemberVO;
 
 public interface MemberService {
+	//이메일 Ajax 통해 유효성 검사
 	public int emailCheck(String email) throws Exception;
+	
+	//회원가입 Confirm
 	public int authConfirm(MemberVO member) throws Exception;
+
+	//자동로그인 관련
+	public void keepLogin(String email, String sessionId, Date next) throws Exception;
+	public MemberVO checkUserWithSessionKey(String value);
 	
 	public int create(MemberVO member) throws Exception;
 	public List<MemberVO> list() throws Exception;

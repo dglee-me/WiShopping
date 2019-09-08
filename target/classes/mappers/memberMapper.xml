@@ -16,6 +16,19 @@
 		WHERE EMAIL=#{email} AND AUTH=#{auth}
 	</update>
 
+	<update id="keepLogin">
+		UPDATE MEMBER
+		   SET SESSIONKEY=#{sessionId},
+		       SESSIONLIMIT=#{next}
+		 WHERE EMAIL=#{email}
+	</update>
+
+	<select id="checkUserWithSessionKey" resultType="com.lee.myapp.domain.MemberVO">
+		SELECT *
+		  FROM MEMBER
+		 WHERE SESSIONKEY=#{value} 
+		   AND SESSIONLIMIT > sysdate
+	</select>
 	<select id="loginInfo" resultType="com.lee.myapp.domain.MemberVO" >
 		SELECT * 
 		  FROM MEMBER

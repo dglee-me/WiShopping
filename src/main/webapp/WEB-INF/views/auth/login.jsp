@@ -62,7 +62,7 @@
 					</div>
 					<div class="login_content login_content-util">
 						<label class="member_checkbox login_util_keep-state" for="login-keep-state">
-							<input type="checkbox" class="member_checkbox_input member_sprite-checkbox _loginRememberInput" id="login-keep-state">
+							<input type="checkbox" class="member_checkbox_input member_sprite-checkbox _loginRememberInput" id="login-keep-state" name="useCookie">
 							<span class="member_checkbox_label">자동로그인</span>
 						</label>
 						<a href="/auth/accountFind" class="login_link login_link-find-email-pw _loginFindEmailPwLink">

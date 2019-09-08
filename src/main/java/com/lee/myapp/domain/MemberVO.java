@@ -11,6 +11,8 @@ public class MemberVO {
 	private String tel;
 	private Date createddate;
 	private int mlevel;
+	private boolean useCookie;
+	
 	
 	public int getMno() {
 		return mno;
@@ -72,6 +74,14 @@ public class MemberVO {
 		return this;
 	}
 	public String toString() {
-		return "MemberVO [mno="+mno+", email="+email+", auth="+auth+", pw="+pw+", name="+name+", tel="+tel+", createddate="+createddate+", Mlevel="+mlevel+"]";
+		return "MemberVO [mno="+mno+", email="+email+", auth="+auth+", pw="+pw+", name="+name+", tel="+tel+", createddate="+createddate+", Mlevel="+mlevel+", useCookie="+useCookie+"]";
+	}
+	
+	public void setUseCookie(boolean useCookie) {
+        this.useCookie = useCookie;
+    }
+	
+	public boolean isUseCookie() {
+		return this.useCookie;
 	}
 }

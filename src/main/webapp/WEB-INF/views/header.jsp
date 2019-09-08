@@ -5,20 +5,20 @@
 	<div class="top_bar">
 		<h2 class="hide">유틸메뉴</h2>
 		<ul class="top_bar_util">
-			<li><a href="javascript:void(0);" onclick="bookmarksite('내쇼핑몰','localhost:8081/myapp'); return false;">즐겨찾기</a></li>
+			<li><a href="javascript:void(0);" onclick="bookmarksite(); return false;">즐겨찾기</a></li>
 			<li><a href="/myapp/promotions/main">기획전</a></li>
 		</ul>
 		
 		<h2 class="hide">로그인메뉴</h2>
 		<ul class="top_bar_login">
-			<c:if test="${member.name eq null}">
-				<li><a href="/myapp/auth/login">로그인</a></li>
-				<li><a href="/myapp/auth/join">회원가입</a></li>
-				<li><a href="/myapp/service/cs-center">고객센터</a></li>
+			<c:if test="${login.name eq null}">
+				<li><a href="${pageContext.request.contextPath }/auth/login">로그인</a></li>
+				<li><a href="${pageContext.request.contextPath }/auth/join">회원가입</a></li>
+				<li><a href="${pageContext.request.contextPath }/service/cs-center">고객센터</a></li>
 			</c:if>
-			<c:if test="${member.name ne null }">
-				<li><c:out value="${member.name }"/>님, <a href="<%=request.getContextPath() %>/auth/logout">로그아웃</a></li>
-				<li><a href="/myapp/service/cs-center">고객센터</a></li>
+			<c:if test="${login.name ne null }">
+				<li><c:out value="${login.name }"/>님, <a href="<%=request.getContextPath() %>/auth/logout">로그아웃</a></li>
+				<li><a href="${pageContext.request.contextPath }/service/cs-center">고객센터</a></li>
 			</c:if>
 		</ul>
 	</div>
