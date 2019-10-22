@@ -22,15 +22,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> list() throws Exception {
+	public List<BoardVO> list(String cons) throws Exception {
 		// TODO Auto-generated method stub
-		return boardDao.list();
+		return boardDao.list(cons);
 	}
 
 	@Override
-	public BoardVO read(int bno) throws Exception {
+	public BoardVO view(int bno) throws Exception {
 		// TODO Auto-generated method stub
-		return boardDao.read(bno);
+		return boardDao.view(bno);
 	}
 
 }

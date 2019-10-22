@@ -8,16 +8,17 @@
 <mapper namespace="boardMapper">
 	<select id="list" resultType="com.lee.myapp.domain.BoardVO">
 		SELECT *
-		FROM BOARD
+		  FROM BOARD
+		 WHERE CATEGORY=#{cons}
 		ORDER BY BNO DESC
 	</select>
 	
 	<insert id="write" parameterType="com.lee.myapp.domain.BoardVO">
-		INSERT INTO BOARD(bno,subject,nickname,content,category,writedate)
-		VALUES(bno_seq.nextval,#{subject},#{nickname},#{content},#{category},sysdate)
+		INSERT INTO BOARD(bno,category,subject,content,author,readcount,writedate,replycount)
+		VALUES(bno_seq.nextval,#{category},#{subject},#{content},#{author},#{readcount},sysdate,#{replycount})
 	</insert>
 	
-	<select id="read" resultType="com.lee.myapp.domain.BoardVO">
+	<select id="view" resultType="com.lee.myapp.domain.BoardVO">
 		SELECT *
 		FROM BOARD
 		WHERE BNO=#{bno}

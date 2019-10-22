@@ -1,0 +1,23 @@
+.container{position:relative; width:1084px;  margin:15px auto 0; border:1px solid #ccc; border-top:none;}
+.content_register{width:100%; padding:0; background-color:transparent;}
+.regist_edit{border-radius:2px; }
+
+.regist_edit ul.subject .item{position:absolute; top:3px; width:68px; font-weight:bold; color:#444444; font-size:12px;}
+.regist_edit ul.subject .box_input{width:478px; height:21px; padding:3px 0 0 3px; color:#8C8C8C; font-size:12px; 
+	border:1px solid #A7A7A7; border-bottom:1px solid #D8D8D8; border-right:1px solid #D8D8D8; backgroun-color:#FBFBFB; box-sizing:border-box;}
+.regist_edit ul.subject li{position:relative; width:100%; margin:0 0 9px 0;}
+.regist_edit ul.subject div{padding:0 0 0 68px;}
+
+.title_main{display:blcok; width:1084px; height:76px; margin-top:20px; padding-bottom:30px; 
+	background-image:url('/myapp/resources/image/write_banner.gif'); color:transparent;}
+
+.subject{padding:0 30px 30px; }
+.category{min-width:100px; padding:5px 10px; border:1px solid #E2E2E2; border-radius:2px; text-align:left; color:#666;}
+.content{height:400px; width:773px;}
+#content{border:1px solid #ccc; margin:0 26px;}
+
+.warning_message{padding:5px 0 16px 0; color:#6D6D6D; font-size:11px; font-family:'µ¸¿ò',dotum,Helvetica,sans-serif; letter-spacing:-1px; text-algin:left; line-height:1.4em;}
+
+.btn_post{position:relative; width:100%; text-align:center; margin-top:10px;}
+.btn_post .btn_write{width:57px; height:27px; margin-top:-1px; background-image:url('/myapp/resources/image/btn_bconfirm.gif'); }
+.btn_post a{display:inline-block; min-width:auto; margin:0; padding:0; border:0; color:transparent; font-size:1px; line-height:100px;}

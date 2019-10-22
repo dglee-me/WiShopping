@@ -4,49 +4,81 @@ import java.sql.Date;
 
 public class BoardVO {
 	private int bno;
-	private String subject;
-	private String nickname;
-	private String content;
 	private String category;
+	private String subject;
+	private String content;
+	private String author;
+	private int readcount;
 	private Date writedate;
+	private int replycount;
 	
 	public int getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	
+	public BoardVO setBno(int bno) {
 		this.bno = bno;
+		return this;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+	
+	public BoardVO setCategory(String category) {
+		this.category = category;
+		return this;
 	}
 	public String getSubject() {
 		return subject;
 	}
-	public void setSubject(String subject) {
+	
+	public BoardVO setSubject(String subject) {
 		this.subject = subject;
+		return this;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+	
 	public String getContent() {
 		return content;
 	}
-	public void setContent(String content) {
+	public BoardVO setContent(String content) {
 		this.content = content;
+		return this;
 	}
-	public String getCategory() {
-		return category;
+	
+	public String getAuthor() {
+		return author;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public BoardVO setAuthor(String author) {
+		this.author = author;
+		return this;
 	}
+	
+	public int getReadcount() {
+		return readcount;
+	}
+	public BoardVO setReadcount(int readcount) {
+		this.readcount = readcount;
+		return this;
+	}
+	
 	public Date getWritedate() {
 		return writedate;
 	}
-	public void setWritedate(Date writedate) {
+	public BoardVO setWritedate(Date writedate) {
 		this.writedate = writedate;
+		return this;
 	}
+	
+	public int getReplycount() {
+		return replycount;
+	}
+	public BoardVO setReplycount(int replycount) {
+		this.replycount = replycount;
+		return this;
+	}
+	
 	public String toString() {
-		return "BoardVO [bno="+bno+", nickname="+nickname+", subject="+subject+", category="+category+", content="+content+", writedate="+writedate+"]";
+		return "BoardVO [bno="+bno+", category="+category+", subject="+subject+", content="+content+", author="+author+", readcount="+readcount+", writedate="+writedate+", replycount="+replycount;
 	}
 }

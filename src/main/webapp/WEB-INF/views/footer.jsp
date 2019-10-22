@@ -1,0 +1,1 @@
+<footer class="home-footer">©WiShopping<a href="${pageContext.request.contextPath }/admin/main">.</a> All rights reserved.</footer>

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>HELLO!@@@!!!!</h1>
+	<h1>HELLO!@@@!!!! IT'S ADMIN PAGE!!</h1>
+	
+	<div>
+		<h2><a href="${pageContext.request.contextPath}/admin/write">공지사항 쓰기</a></h2>
+	</div>
 </body>
 </html>

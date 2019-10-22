@@ -23,15 +23,15 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<BoardVO> list() throws Exception {
+	public List<BoardVO> list(String cons) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".list");
+		return sqlSession.selectList(namespace+".list",cons);
 	}
 	
 	@Override
-	public BoardVO read(int bno) throws Exception{
+	public BoardVO view(int bno) throws Exception{
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".read",bno);
+		return sqlSession.selectOne(namespace+".view",bno);
 	}
 	
 }

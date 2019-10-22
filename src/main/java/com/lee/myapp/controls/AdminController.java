@@ -16,4 +16,9 @@ public class AdminController {
 		logger.info("-------- ADMIN : ADMIN HOME METHOD=GET --------");
 		
 	}
+	
+	@RequestMapping(value="/admin/write", method=RequestMethod.GET)
+	public void serviceWriteGet() throws Exception{
+		logger.info("-------- Service : ADMIN WRITE METHOD=GET --------");
+	}
 }

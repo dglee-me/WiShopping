@@ -1,0 +1,36 @@
+.container_inner{width:1084px; margin:0 auto;}
+.contents{float:left; width:1084px;}
+.board{position:relative; width:100%;}
+
+.title_notice{display:block; width:65px; height:17px; margin:29px 0 10px; font-size:0; line-height:0; 
+	background-image:url('/myapp/resources/image/title_customer.gif')}
+.wrap_tbl{float:none; width:100%; padding:0; border-top:2px solid #e11e22; border-bottom:1px solid #333; border-right:1px solid #ddd;}
+.wrap_tbl th{height:32px; background-image:url('/myapp/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; font-size:11px; color:#333; text-align:center;}
+.wrap_tbl .view{width:100%; border-collapse:collapse; border-spacing:0;}
+
+.wrap_view th{height:38px; border:0 none;}
+.wrap_tbl th.fst{padding-left:30px; border-left:0 none; font-weight:bold; font-size:12px; color:#333; text-align:left; letter-spacing:-1px;}
+
+.wrap_view th .num{padding-left:4px; font:11px tahoma; color:#999;}
+.wrap_view th .txt_bar{padding:0 7px 0 5px; font-size:12px; color:#ccc;}
+
+.wrap_tbl td{padding:12px 0 10px;}
+.wrap_view td{border-top:1px solid #333; background:none; text-align:left;}
+
+.tbody{position:relative; padding-left:43px; padding-right:43px; margin-right:0px; 
+	color:#222; line-height:1.4; font-family:"Apple SD Gothic Neo", "¸¼Àº °íµñ", "Malgun Gothic", µ¸¿ò, dotum, sans-serif !important}
+	
+.view_button{height:100%; padding-top:30px;}
+.view_button .view_left{display:block; float:left;}
+.view_button .view_right{display:block; float:right;}
+
+
+.view_button .btn{float:left; width:75px; height:29px;}
+
+.view_button .btn_prev{margin-right:9px; background-position:0 -100px;}
+.view_button .btn_next{background-position:0 -150px;}
+.view_button .btn_list{background-position:0 -200px; width:85px;}
+
+.btn{background-image:url('/myapp/resources/image/btn.gif'); font-size:0; line-height:0;}
+
+.btn .btn_button{width:100%; height:100%; border:0 none; background:none; font-size:0; line-height:0; text-indent:-999em; cursor:pointer;}
