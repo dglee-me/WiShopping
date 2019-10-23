@@ -6,11 +6,21 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="boardMapper">
-	<select id="list" resultType="com.lee.myapp.domain.BoardVO">
-		SELECT *
-		  FROM BOARD
-		 WHERE CATEGORY=#{cons}
-		 ORDER BY BNO DESC
+	<select id="listPaging" resultType="com.lee.myapp.domain.BoardVO" parameterType="com.lee.myapp.domain.Criteria">
+		<![CDATA[
+			SELECT *
+  		      FROM(
+        		   SELECT A.*,ROWNUM AS RNUM
+         			 FROM(
+                		  SELECT *
+                  			FROM BOARD
+                 		   WHERE CATEGORY=#{category}
+                		   ORDER BY BNO DESC
+              			 ) A
+         	   	   WHERE ROWNUM<=#{rowEnd}
+      			  )
+ 			 WHERE RNUM>=#{rowStart}
+		]]>
 	</select>
 	
 	<insert id="write" parameterType="com.lee.myapp.domain.BoardVO">
@@ -29,5 +39,11 @@
 		   SET READCOUNT = READCOUNT+1
 		 WHERE BNO=#{bno}
 	</update>
+	
+	<select id="listCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE CATEGORY=#{category}
+	</select>
 	
 </mapper>

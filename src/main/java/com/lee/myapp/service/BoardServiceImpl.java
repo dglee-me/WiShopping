@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.Criteria;
 import com.lee.myapp.persistence.BoardDAO;
 
 @Service
@@ -22,12 +23,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> list(String cons) throws Exception {
-		// TODO Auto-generated method stub
-		return boardDao.list(cons);
-	}
-
-	@Override
 	public BoardVO view(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDao.view(bno);
@@ -37,6 +32,18 @@ public class BoardServiceImpl implements BoardService {
 	public void viewCount(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		boardDao.viewCount(bno);
+	}
+
+	@Override
+	public int listCount(String category) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.listCount(category);
+	}
+
+	@Override
+	public List<BoardVO> listPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.listPaging(cri);
 	}
 
 }

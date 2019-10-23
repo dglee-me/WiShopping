@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css?after">
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/write.js" async></script>
+
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -15,7 +17,7 @@
 	<jsp:include page="../header.jsp"/>
 	<div class="container">
 		<div class="content_register">
-			<form id="boardRegistForm" method="post" action="write">
+			<form name="fr" id="boardRegistForm" method="post" action="write">
 			<input type="hidden" value="${login.name}" name="author">
 				<div class="regist_edit">
 					<h2 class="title_main">글쓰기</h2>

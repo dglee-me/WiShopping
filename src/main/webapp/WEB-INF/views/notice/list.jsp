@@ -58,8 +58,29 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="write_btn">
+					<div class="fr">
+						<c:if test="${login.mlevel eq 1}">
+							<a href="${pageContext.request.contextPath }/admin/write" class="btn_type1 post_write">글쓰기</a>
+						</c:if>
+						<c:if test="${login.mlevel ne 1}">
+						</c:if>
+					</div>
+				</div>
+				<div class="notice_paging">
+				    <ul class="inner_paging">
+				       <li><a href="${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+				  
+				      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				       <li><a href="${pageMaker.makeQuery(idx)}">${idx}</a></li>
+				      </c:forEach>
+				  
+				       <li><a href="${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+				    </ul>
+		  		</div>
 			</div>
 		</div>
+				
 	</div>
 </body>
 </html>

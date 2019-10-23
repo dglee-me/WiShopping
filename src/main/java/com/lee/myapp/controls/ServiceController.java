@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.Criteria;
+import com.lee.myapp.domain.PageMaker;
 import com.lee.myapp.service.BoardService;
 
 @Controller
@@ -24,12 +26,18 @@ public class ServiceController {
 	BoardService boardService;
 	
 	@RequestMapping(value="/notice/list", method=RequestMethod.GET)
-	public void noticeMainGET(HttpServletRequest request) throws Exception{
+	public void noticeMainGET(HttpServletRequest request, Criteria cri) throws Exception{
 		logger.info("-------- Service : NOTICE MAIN METHOD=GET --------");
 		
 		List<BoardVO> noticeList = new ArrayList<BoardVO>();
-		noticeList = boardService.list("공지사항");
+		cri.setCategory("공지사항");
+		noticeList = boardService.listPaging(cri);
 		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.listCount("공지사항"));
+		
+		request.setAttribute("pageMaker", pageMaker);
 		request.setAttribute("noticeList", noticeList);
 	}
 	
