@@ -16,13 +16,14 @@
 	<div class="container">
 		<div class="content_register">
 			<form id="boardRegistForm" method="post" action="write">
+			<input type="hidden" value="${login.name}" name="author">
 				<div class="regist_edit">
 					<h2 class="title_main">글쓰기</h2>
 					<ul class="subject">
 						<li>
 							<label class="item" for="boardCategory">게시판</label>
 							<div>
-								<select class="category">
+								<select class="category" name="category">
 									<option value="">게시판 선택</option>
 									<option value="공지사항">공지사항</option>
 								</select>
@@ -41,7 +42,7 @@
 				</div>
 				<div class="warning_message">  저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를 받으실 수 있습니다.</div>
 				<div class="btn_post">
-					<a href="#" class="btn_write"><strong>확인</strong></a>
+					<button type="submit" class="btn_write"><strong>확인</strong></button>
 				</div>
 			</form>
 		</div>

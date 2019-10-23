@@ -33,5 +33,11 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".view",bno);
 	}
+
+	@Override
+	public void viewCount(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".viewCount",bno);
+	}
 	
 }

@@ -10,18 +10,24 @@
 		SELECT *
 		  FROM BOARD
 		 WHERE CATEGORY=#{cons}
-		ORDER BY BNO DESC
+		 ORDER BY BNO DESC
 	</select>
 	
 	<insert id="write" parameterType="com.lee.myapp.domain.BoardVO">
 		INSERT INTO BOARD(bno,category,subject,content,author,readcount,writedate,replycount)
-		VALUES(bno_seq.nextval,#{category},#{subject},#{content},#{author},#{readcount},sysdate,#{replycount})
+		VALUES(bno_seq.nextval,#{category},#{subject},#{content},#{author},0,sysdate,0)
 	</insert>
 	
 	<select id="view" resultType="com.lee.myapp.domain.BoardVO">
 		SELECT *
-		FROM BOARD
-		WHERE BNO=#{bno}
+		  FROM BOARD
+		 WHERE BNO=#{bno}
 	</select>
+	
+	<update id="viewCount">
+		UPDATE BOARD
+		   SET READCOUNT = READCOUNT+1
+		 WHERE BNO=#{bno}
+	</update>
 	
 </mapper>

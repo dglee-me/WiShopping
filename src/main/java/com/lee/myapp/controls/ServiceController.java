@@ -36,11 +36,15 @@ public class ServiceController {
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
 	public void noticeViewGET(HttpServletRequest request, int bno) throws Exception{
 		logger.info("-------- Service : NOTICE VIEW METHOD=GET --------");
+
+		//Increase Views by 1 
+		boardService.viewCount(bno);
 		
 		BoardVO board = boardService.view(bno);
-		System.out.println(board.getContent());
-		board.getContent().replace("\r\n", "</p><p>");
-				
+
+		//Line change processing
+		board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
+		
 		request.setAttribute("view",board);
 	}
 }

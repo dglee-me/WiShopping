@@ -42,9 +42,7 @@
 							<tbody>
 								<tr>
 									<td colspan="3">
-										<div class="tbody">
-											<p>${view.content}</p>
-										</div>
+										<div class="tbody">${view.content}</div>
 									</td>
 								</tr>
 							</tbody>
@@ -75,7 +73,5 @@
 			</div>
 		</div>
 	</div>
-	
-	
 </body>
 </html>

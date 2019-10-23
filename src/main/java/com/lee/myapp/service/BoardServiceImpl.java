@@ -33,4 +33,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.view(bno);
 	}
 
+	@Override
+	public void viewCount(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		boardDao.viewCount(bno);
+	}
+
 }
