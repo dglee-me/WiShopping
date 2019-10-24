@@ -46,5 +46,11 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".listPaging",cri);
 	}
+
+	@Override
+	public int modify(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".modify",board);
+	}
 	
 }

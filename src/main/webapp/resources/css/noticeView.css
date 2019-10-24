@@ -25,12 +25,10 @@
 .view_button .view_right{display:block; float:right;}
 
 
-.view_button .btn{float:left; width:75px; height:29px;}
+.view_button .btn{float:left; width:75px; height:29px; border:1px solid #d3d3d3;}
 
-.view_button .btn_prev{margin-right:9px; background-position:0 -100px;}
-.view_button .btn_next{background-position:0 -150px;}
-.view_button .btn_list{background-position:0 -200px; width:85px;}
+.view_button .btn_prev{margin-right:9px;}
+.view_button .btn_modify{margin-right:9px;}
+.view_button .btn_list{width:85px;}
 
-.btn{background-image:url('/myapp/resources/image/btn.gif'); font-size:0; line-height:0;}
-
-.btn .btn_button{width:100%; height:100%; border:0 none; background:none; font-size:0; line-height:0; text-indent:-999em; cursor:pointer;}
+.btn .btn_button{width:100%; height:100%; border:0 none; background:none; font-size:13px; cursor:pointer;}

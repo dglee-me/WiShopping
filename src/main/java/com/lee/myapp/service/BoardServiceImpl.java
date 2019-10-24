@@ -46,4 +46,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.listPaging(cri);
 	}
 
+	@Override
+	public int modify(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.modify(board);
+	}
+
 }

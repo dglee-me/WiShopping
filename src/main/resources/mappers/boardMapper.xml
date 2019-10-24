@@ -34,6 +34,14 @@
 		 WHERE BNO=#{bno}
 	</select>
 	
+	<update id="modify">
+		UPDATE BOARD
+		   SET SUBJECT=#{subject}
+		     , CATEGORY=#{category}
+		     , CONTENT=#{content}
+		 WHERE BNO=#{bno}    
+	</update>
+	
 	<update id="viewCount">
 		UPDATE BOARD
 		   SET READCOUNT = READCOUNT+1

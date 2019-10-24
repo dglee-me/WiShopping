@@ -51,8 +51,29 @@ public class ServiceController {
 		BoardVO board = boardService.view(bno);
 
 		//Line change processing
-		board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
+		if(board.getContent().contains("\r\n")) {
+			board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
+		}else {
+			board.setContent("<p>"+board.getContent()+"</P>");
+		}
 		
 		request.setAttribute("view",board);
+	}
+	
+	@RequestMapping(value="/notice/modify", method=RequestMethod.GET)
+	public void noticeModifyGET(HttpServletRequest request,int bno) throws Exception{
+		logger.info("-------- Service : NOTICE MODIFY METHOD=GET --------");
+		BoardVO board = boardService.view(bno);
+		
+		request.setAttribute("board",board);
+	}
+	
+	@RequestMapping(value="/notice/modify", method=RequestMethod.POST)
+	public String noticeModifyPOST(BoardVO board) throws Exception{
+		logger.info("-------- Service : NOTICE MODIFY METHOD=POST --------");
+		
+		boardService.modify(board);
+		
+		return "redirect:/notice/view?bno="+board.getBno();
 	}
 }

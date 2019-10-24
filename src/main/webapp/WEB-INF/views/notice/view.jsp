@@ -63,6 +63,11 @@
 						</span>
 					</p>
 					<p class="view_right">
+						<span class="btn btn_modify">
+							<a href="${pageContext.request.contextPath }/notice/modify?bno=${view.bno}">
+								<button type="button" class="btn_button">수정하기</button>
+							</a>
+						</span>
 						<span class="btn btn_list">
 							<a href="${pageContext.request.contextPath }/notice/list">
 								<button type="button" class="btn_button">목록보기</button>
