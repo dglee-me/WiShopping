@@ -63,11 +63,18 @@
 						</span>
 					</p>
 					<p class="view_right">
-						<span class="btn btn_modify">
-							<a href="${pageContext.request.contextPath }/notice/modify?bno=${view.bno}">
-								<button type="button" class="btn_button">수정하기</button>
+						<c:if test="${view.author eq login.name }">
+						<span class="btn btn_delete">
+							<a href="${pageContext.request.contextPath }/notice/delete?bno=${view.bno}&category=${view.category}">
+								<button type="button" class="btn_button">삭제</button>
 							</a>
 						</span>
+						<span class="btn btn_modify">
+							<a href="${pageContext.request.contextPath }/notice/modify?bno=${view.bno}">
+								<button type="button" class="btn_button">수정</button>
+							</a>
+						</span>
+						</c:if>
 						<span class="btn btn_list">
 							<a href="${pageContext.request.contextPath }/notice/list">
 								<button type="button" class="btn_button">목록보기</button>

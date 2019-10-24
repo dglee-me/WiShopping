@@ -1,6 +1,7 @@
 package com.lee.myapp.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.Criteria;
@@ -10,6 +11,7 @@ public interface BoardDAO {
 	public BoardVO view(int bno) throws Exception;
 	public void viewCount(int bno) throws Exception;
 	public int modify(BoardVO board) throws Exception;
+	public int delete(Map<String,Object> map) throws Exception;
 	
 	public int listCount(String category) throws Exception;
 	public List<BoardVO> listPaging(Criteria cri) throws Exception;

@@ -1,6 +1,7 @@
 package com.lee.myapp.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -51,6 +52,12 @@ public class BoardDAOImpl implements BoardDAO{
 	public int modify(BoardVO board) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+".modify",board);
+	}
+
+	@Override
+	public int delete(Map<String,Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".delete",map);
 	}
 	
 }

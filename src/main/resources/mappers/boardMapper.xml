@@ -42,6 +42,12 @@
 		 WHERE BNO=#{bno}    
 	</update>
 	
+	<delete id="delete">
+		DELETE 
+		  FROM BOARD
+		 WHERE CATEGORY=#{category} AND BNO=#{bno}
+	</delete>
+	
 	<update id="viewCount">
 		UPDATE BOARD
 		   SET READCOUNT = READCOUNT+1

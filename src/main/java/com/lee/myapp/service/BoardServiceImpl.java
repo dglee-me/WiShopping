@@ -1,6 +1,7 @@
 package com.lee.myapp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -50,6 +51,12 @@ public class BoardServiceImpl implements BoardService {
 	public int modify(BoardVO board) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDao.modify(board);
+	}
+
+	@Override
+	public int delete(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.delete(map);
 	}
 
 }

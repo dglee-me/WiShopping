@@ -1,7 +1,9 @@
 package com.lee.myapp.controls;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -75,5 +77,19 @@ public class ServiceController {
 		boardService.modify(board);
 		
 		return "redirect:/notice/view?bno="+board.getBno();
+	}
+	
+	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
+	public String noticeDeleteGET(String category, int bno) throws Exception{
+		logger.info("-------- Service : NOTICE DELETE METHOD=GET --------");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+
+		map.put("category", category);
+		map.put("bno", bno);
+		
+		boardService.delete(map);
+		
+		return "redirect:/notice/list";
 	}
 }
