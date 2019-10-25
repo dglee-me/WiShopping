@@ -30,8 +30,20 @@
 	
 	<select id="view" resultType="com.lee.myapp.domain.BoardVO">
 		SELECT *
-		  FROM BOARD
-		 WHERE BNO=#{bno}
+  		  FROM (
+        SELECT BNO,
+               SUBJECT,
+               CATEGORY,
+               AUTHOR,
+               CONTENT,
+               READCOUNT,
+               WRITEDATE,
+               REPLYCOUNT,
+               lag(bno,1) over(order by bno desc) as prev_bno,
+               lead(bno,1) over(order by bno desc) as next_bno
+          FROM BOARD
+               )
+ 		 WHERE BNO=#{bno}
 	</select>
 	
 	<update id="modify">

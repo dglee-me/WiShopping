@@ -11,6 +11,8 @@ public class BoardVO {
 	private int readcount;
 	private Date writedate;
 	private int replycount;
+	private int prev_bno;
+	private int next_bno;
 	
 	public int getBno() {
 		return bno;
@@ -75,6 +77,22 @@ public class BoardVO {
 	}
 	public BoardVO setReplycount(int replycount) {
 		this.replycount = replycount;
+		return this;
+	}
+	
+	public int getPrev_bno() {
+		return prev_bno;
+	}
+	public BoardVO setPrev_bno(int prev_bno) {
+		this.prev_bno = prev_bno;
+		return this;
+	}
+	
+	public int getNext_bno() {
+		return next_bno;
+	}
+	public BoardVO setNext_bno(int next_bno) {
+		this.next_bno = next_bno;
 		return this;
 	}
 	

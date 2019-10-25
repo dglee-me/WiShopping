@@ -75,9 +75,22 @@
 					</ul>
 				</div>
 				<div class="category_wrap">
-					<a href="#" class="all_category_open">
-						<span>카테고리</span>
+					<a href="javascript:void(0)" class="all_category_open">
+						<span>전체 카테고리</span>
 					</a>
+					<div class="category_list_wrap">
+						<div class="depth1">
+							<ul>
+								<li class="m_category">
+									<a href="#">
+										<strong class="category_title">
+											<span class="m_title">패션</span>
+										</strong>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

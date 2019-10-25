@@ -51,16 +51,20 @@
 				</div>
 				<div class="view_button">
 					<p class="view_left">
+						<c:if test="${view.prev_bno ne 0 }">
 						<span class="btn btn_prev">
-							<a href="#">
+							<a href="${pageContext.request.contextPath }/notice/view?bno=${view.prev_bno}">
 								<button type="button" class="btn_button">이전글</button>
 							</a>
 						</span>
+						</c:if>
+						<c:if test="${view.next_bno ne 0 }">
 						<span class="btn btn_next">
-							<a href="#">
+							<a href="${pageContext.request.contextPath }/notice/view?bno=${view.next_bno}">
 								<button type="button" class="btn_button">다음글</button>
 							</a>
 						</span>
+						</c:if>
 					</p>
 					<p class="view_right">
 						<c:if test="${view.author eq login.name }">
