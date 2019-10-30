@@ -4,7 +4,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header_js.js" async></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
-	
+
 <div class="header">
 	<div class="inner_top_wrap">
 		<div class="mix_inner top_bar">
@@ -74,22 +74,53 @@
 						<li><a href="#" class="t_bold">특가</a></li>
 					</ul>
 				</div>
-				<div class="category_wrap">
+				<div class="all_category_wrap">
 					<a href="javascript:void(0)" class="all_category_open">
 						<span>전체 카테고리</span>
 					</a>
 					<div class="category_list_wrap">
-						<div class="depth1">
-							<ul>
-								<li class="m_category">
-									<a href="#">
-										<strong class="category_title">
-											<span class="m_title">패션</span>
-										</strong>
-									</a>
-								</li>
-							</ul>
-						</div>
+						<ul>
+							<li class="m_category">
+								<a href="${pageContext.request.contextPath }/category/group/fashion">
+									<strong class="category_title">
+										<span class="thum">
+											<img src="${pageContext.request.contextPath }/resources/image/fashion.png" alt="패션">
+										</span>
+										<span class="m_title">패션</span>
+									</strong>
+								</a>
+							</li>
+							<li class="m_category">
+								<a href="${pageContext.request.contextPath }/category/group/2">
+									<strong class="category_title">
+										<span class="thum">
+											<img src="${pageContext.request.contextPath }/resources/image/accessories.png" alt="잡화">
+										</span>
+										<span class="m_title">잡화</span>
+									</strong>
+								</a>
+							</li>
+							<li class="m_category">
+								<a href="${pageContext.request.contextPath }/category/group/3">
+									<strong class="category_title">
+										<span class="thum">
+											<img src="${pageContext.request.contextPath }/resources/image/interior.png" alt="인테리어">
+										</span>
+										<span class="m_title">인테리어</span>
+									</strong>
+								</a>
+							</li>
+							<li class="m_category">
+								<a href="${pageContext.request.contextPath }/category/group/4">
+									<strong class="category_title">
+										<span class="thum">
+											<img src="${pageContext.request.contextPath }/resources/image/appliances.png" alt="가전·디지털">
+										</span>
+										<span class="m_title">가전·디지털</span>
+									</strong>
+								</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>

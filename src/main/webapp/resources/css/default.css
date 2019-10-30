@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 /* Reset */
-head,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,p,button,table,th,td,pre{margin:0;padding:0; font-size:12px; font-family:'돋움',dotum,sans-serif}
+head,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,p,button,table,th,td,pre{margin:0;padding:0; font-size:13px; font-family:"Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;}
 body,input,select,textarea,button {border:none;font-size:11px; font-family:'돋움', sans-serif;color:#727272;}
 input[type="text"]{outline-style:none; -webkit-appearance:none;}
 button{margin:0; padding:0; background-color:transparent;}

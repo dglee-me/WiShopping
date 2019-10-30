@@ -1,0 +1,18 @@
+package com.lee.myapp.controls;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+@RequestMapping("/category/group/*")
+public class CategoryController {
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@RequestMapping(value="/category/group/fashion", method=RequestMethod.GET)
+	public void fashionCategoryGET() throws Exception{
+		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
+	}
+}
