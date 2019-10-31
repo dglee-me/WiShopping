@@ -143,5 +143,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

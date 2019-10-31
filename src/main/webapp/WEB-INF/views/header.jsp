@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header_js.js" async></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">

@@ -31,5 +31,17 @@
 		</interceptor>
 	</interceptors>
 	
+	<!-- Upload path setting  -->
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="C:\Users\dlald\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\WiShopping\resources"/>
+	</beans:bean>
+	
+	<!-- Common files upload path -->
+	<resources mapping="/imgUpload/**" location="/resources/imgUpload/"/>
+	
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<beans:property name="maxUploadSize" value="52428800"/>
+	</beans:bean>
+	
 	<context:component-scan base-package="com.lee.myapp" />
 </beans:beans>

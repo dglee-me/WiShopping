@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="productMapper">
+	<!-- Category Register -->
+	<insert id="register">
+		INSERT INTO PRODUCT(PNO,CATEGORY1,CATEGORY2,PNAME,BRAND,INVENTORY,PRICE,PRODUCT_DESC,PRODUCT_URL,PRODUCT_THUMURL)
+		VALUES(pno_seq.nextval,#{category1},#{category2},#{pname},#{brand},#{inventory},#{price},#{product_desc},#{product_url},#{product_thumurl})
+	</insert>
+</mapper>

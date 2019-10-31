@@ -1,0 +1,59 @@
+em{font-style:normal;}
+.product_selling_category ul li:before{background-image:url('/myapp/resources/image/common.png');}
+.product_selling_category ul li:first-child:before{background:none;}
+
+.product_selling{position:relative; min-height:1px; -webkit-flex:0 0 auto;}
+.container{margin-right:auto; margin-left:auto; width:1084px; max-width:100%; box-sizing:border-box; min-height:1px; }
+.product_selling_category{margin:20px 0 0; padding:0; border:none; display:inline-block; }
+.product_selling_category .commerce-category-list{width:75px; margin-right:5px; font-size:15px; display:inline-block; color:#757575; line-height:1.2;}
+.product_selling_category .commerce-category-list select{width:100%; padding:5px 10px; border:1px solid #E2E2E2; border-radius:2px; color:#666; text-align:left;}
+
+.product_selling_category ul li{position:relative; float:left; padding:0 9px 0 14px; line-height:14px; color:#666;}
+.product_selling_category ul li:before{content:''; position:absolute; top:7px; left:0; background-position:-165px -319px; width:5px; height:9px;}
+
+.container_inner{position:relative; width:100%; min-width:1084px;}
+.container_inner .contents_wrap{width:100%; min-height:auto; padding-bottom:100px;}
+.content_main{position:static; line-height:16px; width:1084px; margin:0 auto; hegiht:100%;}
+.content_main .title_box{position:relative; min-height:53px; margin-top:30px;}
+.content_main .title_box input[type="text"]{width:100%; height:56px; border-bottom:1px solid #ddd; 
+	font-size:24px; line-height:28px; letter-spacing:-2px; vertical-align:bottom; color:#666;}
+.info_box{display:block; position:relative; min-height:540px; margin-top:15px; padding:20px 0 50px;}
+.info_box .info_thumnail{float:left; width:460px;}
+.info_thumnail .info_img_wrap{position:relative; width:460px; height:460px; background-color:#f5f5f5;}
+.info_description{position:relative; float:right; width:552px;}
+.info_description .info_product{min-height:373px;}
+.info_description .info_product div.price{position:relative; padding:3px 0 6px;}
+.info_description .info_product div.price .sale_price{font-size:18px; line-height:42px;}
+
+.info_description .info_product div.price .sale_box input[type="text"]{position:relative; top:-3px; height:30px; border:2px solid #E2E2E2; border-radius:5px;
+	font-size:15px; width:100px;}
+.info_price_wrap{margin-top:6px; padding-top:28px; border-top:1px solid #ededed;}
+.info_price_wrap dl.info_price{min-height:21px; line-height:21px;}
+
+.shipping_select{width:60px; border:2px solid #E2E2E2; border-radius:5px;}
+.shipping_select select{width:60px; padding:5px 7px;}
+.info_price_wrap dl.info_price.shipping .ico{float:left; width:20px; height:14px;
+background-image:url('/myapp/resources/image/deals.png'); background-position:-243px -218px; color:transparent;}
+.info_price_wrap dl.info_price dd{padding-left:40px; color:#666;}
+.color_blue{color:#00a8d1;}
+.info_price_wrap dl.info_price .line{display:inline-block; width:1px; height:11px; margin:-3px 8px 0; text-indent:-9999px; vertical-align:middle; background:#c3c3c3;}
+.info_price_wrap dl.info_price.shipping p.today .text_etc{display:block; color:#999;}
+
+.today select{width:25px; height:25px; padding:5px 7px; border:2px solid #E2E2E2; border-radius:2px;}
+
+.box_optarea{margin-top:35px;}
+
+.info_description .info_product.wrap_button{min-height:auto;}
+.wrap_button{margin-top:23px;}
+
+.wrap_button .button_box .btn_sys.cart{width:271px; line-height:58px;}
+.wrap_button .btn_sys{float:left; margin-right:10px; display:block; font-size:18px; box-sizing:border-box; margin-left:0; padding:0 5px; border:1px solid #c3c3c3;
+	border-radius:3px; background:#fff; text-align:center; overflow:hidden;}
+..btn_sys.big_xl{line-height:58px; font-weight:bold; color:#333;}
+.wrap_button .btn_sys.red_big_xb{border-color:#5FCAEC; background-color:#5FCAEC; width:261px; line-height:58px; font-weight:bold; color:#fff;}
+
+.item_desc{width:1083px; float:left; position:relative; padding-top:30px; padding-bottom:50px;}
+.cut.prd_detail{padding-bottom:90px; max-height:none;}
+.prd_detail{position:relative; width:758px; margin-right:auto; margin-left:auto;}
+
+.info_itemdetail .deal_detailimg{overflow:hidden;}
