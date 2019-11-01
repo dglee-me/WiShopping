@@ -64,8 +64,12 @@
 									<div class="info_product">
 										<div class="price">
 											<div class="sale_box">
-												<input type="text" name="price" placeholder="가격"><strong class="sale_price">원</strong>
-												<input type="text" name="inventory" placeholder="수량"><strong class="sale_price">개</strong>
+												<div class="sale_box-pi">
+													<input type="text" name="price" placeholder="가격"><strong class="sale_price">원</strong>
+												</div>
+												<div class="sale_box-pi">
+													<input type="text" name="inventory" placeholder="수량"><strong class="sale_price">개</strong>
+												</div>
 											</div>
 										</div>
 										<div class="info_price_wrap">
@@ -84,7 +88,7 @@
 														<span class="color_blue">상품별배송</span>
 														<span class="line">ㅣ</span>
 														<span class="post">택배배송<span class="line">ㅣ</span>
-														<select name="date">
+														<select name="shippingday">
 															<option value="1">1</option>
 															<option value="2" selected>2</option>
 															<option value="3">3</option>
@@ -119,8 +123,10 @@
 												<input type="file" id="inputDetails" name="producturl">
 											</div>
 										</div>
-									</div>
-									<textarea name="product_desc"></textarea>
+										<div class="item_desc_text">
+											<textarea name="product_desc" placeholder="여기에 상품 설명을 입력하세요."></textarea>
+										</div>
+									</div>	
 								</div>
 							</div>
 						</div>

@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,10 @@ public class CategoryController {
 	ProductService productService;
 	
 	@RequestMapping(value="/group/fashion", method=RequestMethod.GET)
-	public void fashionCategoryGET() throws Exception{
+	public void fashionCategoryGET(HttpServletRequest request) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
+		
+		request.setAttribute("list", productService.list("패션"));
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -40,12 +43,8 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
-	public void categoryRegistPOST(ProductVO pd, @RequestParam("productthumurl") MultipartFile file1,@RequestParam("producturl") MultipartFile file2  ) throws Exception{
+	public String categoryRegistPOST(ProductVO pd, @RequestParam("productthumurl") MultipartFile file1,@RequestParam("producturl") MultipartFile file2  ) throws Exception{
 		logger.info("-------- REGIST : CATEGORY METHOD=POST --------");
-		
-		logger.info("파일이름 : "+file1.getOriginalFilename()+" /// "+file2.getOriginalFilename());
-		logger.info("파일크키 : "+file1.getSize()+" /// "+file2.getSize());
-		logger.info("Content 타입 : "+file1.getContentType()+" /// "+file2.getContentType());
 		
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -63,5 +62,7 @@ public class CategoryController {
 		pd.setProduct_url(File.separator + "imgUpload" + ymdPath + File.separator + detailUrl);
 		
 		productService.register(pd);
+		
+		return "redirect:/";
 	}
 }

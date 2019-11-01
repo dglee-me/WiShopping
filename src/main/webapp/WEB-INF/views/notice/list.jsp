@@ -47,7 +47,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="notice" items="${noticeList }">
+							<c:forEach var="notice" items="${noticeList}">
 								<tr class="on">
 									<td>${notice.bno}</td>
 									<td><a href="${pageContext.request.contextPath }/notice/view?bno=${notice.bno}">${notice.subject}</a></td>

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/category.css?after">
 
 <!DOCTYPE html>
@@ -67,74 +70,25 @@
 						<div class="category_wrap">
 							<div class="box_listwrap">
 								<div class="box_imagedeal">
-									<div class="col-md-3 product-item-wrap">
-										<article class="product-item">
-											<a href="#" class="product-item_overlay"></a>
-											<div class="product-item-image">
-												<img class="image" alt src="https://image.ohou.se/image/central_crop/bucketplace-v2-development/uploads-productions-157164394038733839.jpg/360/360?quality=0.8">
-											</div>
-											<div class="product-item-content">
-												<h1 class="product-item_header">
-													<span class="product-item_header__brand">벨레</span>
-													<span class="product-item_header__name">[오늘의딜] 멜로우 Mellow 우드 블루투스 스피커 테이블 W501T + 핸드폰거치대 증정(선착순)</span>
-												</h1>
-												<span class="product-item-price">
-													<span class="product-item-price__price">329,000</span>
-												</span>
-											</div>
-										</article>
-									</div>
-									<div class="col-md-3 product-item-wrap">
-										<article class="product-item">
-											<a href="#" class="product-item_overlay"></a>
-											<div class="product-item-image">
-												<img class="image" alt src="https://image.ohou.se/image/central_crop/bucketplace-v2-development/uploads-productions-156592962755439189.jpg/360/360?quality=0.8">
-											</div>
-											<div class="product-item-content">
-												<h1 class="product-item_header">
-													<span class="product-item_header__brand">순백수</span>
-													<span class="product-item_header__name">순백수 히노키 스프레이(편백살균탈취제)</span>
-												</h1>
-												<span class="product-item-price">
-													<span class="product-item-price__price">14,900</span>
-												</span>
-											</div>
-										</article>
-									</div>
-									<div class="col-md-3 product-item-wrap">
-										<article class="product-item">
-											<a href="#" class="product-item_overlay"></a>
-											<div class="product-item-image">
-												<img class="image" alt src="https://image.ohou.se/image/central_crop/bucketplace-v2-development/uploads-productions-157231348069986458.jpg/360/360?quality=0.8">
-											</div>
-											<div class="product-item-content">
-												<h1 class="product-item_header">
-													<span class="product-item_header__brand">카카오프렌즈</span>
-													<span class="product-item_header__name">[오늘의딜] 카카오미니C AI 블루투스스피커</span>
-												</h1>
-												<span class="product-item-price">
-													<span class="product-item-price__price">49,000</span>
-												</span>
-											</div>
-										</article>
-									</div>
-									<div class="col-md-3 product-item-wrap">
-										<article class="product-item">
-											<a href="#" class="product-item_overlay"></a>
-											<div class="product-item-image">
-												<img class="image" alt src="https://image.ohou.se/image/central_crop/bucketplace-v2-development/uploads-productions-157129780659988666.jpg/360/360?quality=0.8">
-											</div>
-											<div class="product-item-content">
-												<h1 class="product-item_header">
-													<span class="product-item_header__brand">타카타카</span>
-													<span class="product-item_header__name">간편교체, 위생적인 순면화이바/극세사 베개커버 택1</span>
-												</h1>
-												<span class="product-item-price">
-													<span class="product-item-price__price">4,100</span>
-												</span>
-											</div>
-										</article>
-									</div>
+									<c:forEach items="${list}" var="product">
+										<div class="col-md-3 product-item-wrap">
+											<article class="product-item">
+												<a href="/production/view?pno=${product.pno}" class="product-item_overlay"></a>
+												<div class="product-item-image">
+													<img class="image" src="${pageContext.request.contextPath}/${product.product_thumurl}">
+												</div>
+												<div class="product-item-content">
+													<h1 class="product-item_header">
+														<span class="product-item_header__brand">${product.brand }</span>
+														<span class="product-item_header__name">${product.pname }</span>
+													</h1>
+													<span class="product-item-price">
+														<span class="product-item-price__price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}"/></span>
+													</span>
+												</div>
+											</article>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>

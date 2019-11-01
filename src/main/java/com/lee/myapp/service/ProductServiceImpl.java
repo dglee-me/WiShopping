@@ -1,5 +1,7 @@
 package com.lee.myapp.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,12 @@ public class ProductServiceImpl implements ProductService{
 	public int register(ProductVO pd) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.register(pd);
+	}
+
+	@Override
+	public List<ProductVO> list(String category) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.list(category);
 	}
 
 }

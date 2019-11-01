@@ -9,6 +9,7 @@ public class ProductVO {
 	private int inventory; //수량
 	private int price; //가격
 	private int shipping; //배송비
+	private int shippingday; //배송일자
 	private String product_desc; //제품 설명
 	private String product_url; //product detail description url
 	private String product_thumurl; //product thumnail image url
@@ -72,6 +73,15 @@ public class ProductVO {
 		return this;
 	}
 	
+	public int getShippingDay() {
+		return shippingday;
+	}
+	
+	public ProductVO setShippingDay(int shippingday) {
+		this.shippingday = shippingday;
+		return this;
+	}
+	
 	public String getProduct_desc() {
 		return product_desc;
 	}
@@ -96,6 +106,7 @@ public class ProductVO {
 	
 	public String toString() {
 		return "ProductVO [pno= "+pno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+
-				", inventory= "+inventory+", price= "+price+", product_desc= "+product_desc+", product_url= "+product_url+", product_thumurl= "+product_thumurl;
+				", inventory= "+inventory+", price= "+price+", product_desc= "+product_desc+", product_url= "+product_url+
+				", product_thumurl= "+product_thumurl+", shipping= "+shipping+", shippingday= "+shippingday;
 	}
 }
