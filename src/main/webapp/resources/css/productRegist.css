@@ -32,7 +32,7 @@ em{font-style:normal;}
 
 .shipping_select{width:60px; border:2px solid #E2E2E2; border-radius:5px;}
 .shipping_select select{width:60px; padding:5px 7px;}
-.info_price_wrap dl.info_price.shipping .ico{float:left; width:20px; height:14px;
+.info_price_wrap dl.info_price.shipping .ico{float:left; width:20px; height:14px; margin-top:5px;
 background-image:url('/myapp/resources/image/deals.png'); background-position:-243px -218px; color:transparent;}
 .info_price_wrap dl.info_price dd{padding-left:40px; color:#666;}
 .color_blue{color:#00a8d1;}
@@ -42,6 +42,10 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .today select{width:25px; height:25px; padding:5px 7px; border:2px solid #E2E2E2; border-radius:2px;}
 
 .box_optarea{margin-top:35px;}
+.box_optarea .sel{width:40px; padding-top:0; padding-bottom:2px; display:inline-block; margin-top:3px; padding:2px 4px 1px 4px; background:#efeff0; border:1px solid #999999;
+	line-height:17px; font-size:11px; color:#666666; text-align:center;}
+.box_size_opt{margin-top:5px;}
+.box_size_opt-input input[type="text"]{border:2px solid #E2E2E2; border-radius:2px; width:50px; padding:2px 4px 1px 4px; margin-top:3px; text-align:center;}
 
 .info_description .info_product.wrap_button{min-height:auto;}
 .wrap_button{margin-top:23px;}
@@ -49,7 +53,6 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .wrap_button .button_box .btn_sys.cart{width:271px; line-height:58px;}
 .wrap_button .btn_sys{float:left; margin-right:10px; display:block; font-size:18px; box-sizing:border-box; margin-left:0; padding:0 5px; border:1px solid #c3c3c3;
 	border-radius:3px; background:#fff; text-align:center; overflow:hidden;}
-..btn_sys.big_xl{line-height:58px; font-weight:bold; color:#333;}
 .wrap_button .btn_sys.red_big_xb{border-color:#5FCAEC; background-color:#5FCAEC; width:261px; line-height:58px; font-weight:bold; color:#fff;}
 
 .item_desc{width:1083px; float:left; position:relative; padding-top:30px; padding-bottom:50px;}
@@ -57,7 +60,3 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .prd_detail{position:relative; width:758px; margin-right:auto; margin-left:auto;}
 
 .info_itemdetail .deal_detailimg{overflow:hidden;}
-
-.item_desc_text{padding-top:30px;}
-
-.item_desc_text textarea{border:1px solid #E2E2E2; width:100%; height:50%;}

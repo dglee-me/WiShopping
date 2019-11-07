@@ -2,13 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/category.css?after">
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+	
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
@@ -22,7 +25,7 @@
 							<div class="nav">
 								<ul>
 									<li><a href="${pageContext.request.contextPath}/">홈</a></li>
-									<li><a href="${pageContext.request.contextPath}/category/group/1">패션</a></li>
+									<li><a href="${pageContext.request.contextPath}/category/group/fashion">패션</a></li>
 								</ul>
 							</div>
 						</div>
@@ -73,9 +76,9 @@
 									<c:forEach items="${list}" var="product">
 										<div class="col-md-3 product-item-wrap">
 											<article class="product-item">
-												<a href="/production/view?pno=${product.pno}" class="product-item_overlay"></a>
+												<a href="${pageContext.request.contextPath}/productions/view?pno=${product.pno}" class="product-item_overlay"></a>
 												<div class="product-item-image">
-													<img class="image" src="${pageContext.request.contextPath}/${product.product_thumurl}">
+													<img class="image" src="${pageContext.request.contextPath}${product.product_thumurl}">
 												</div>
 												<div class="product-item-content">
 													<h1 class="product-item_header">

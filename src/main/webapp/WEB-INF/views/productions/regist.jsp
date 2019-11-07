@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/regist.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/productRegist.css?after">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/regist.js" async></script>
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
@@ -18,7 +19,7 @@
 	<jsp:include page="../header.jsp"/>
 	<div class="product_selling">
 		<form method="post" id="frm" action="regist" enctype="multipart/form-data">
-			<input type="hidden" name="brand" value="${login.name }">
+			<input type="hidden" name="brand" value="${login.name}">
 			<div class="container">
 				<h2 class="hide">컨텐츠 영역</h2>
 				<nav class="product_selling_category">
@@ -67,9 +68,6 @@
 												<div class="sale_box-pi">
 													<input type="text" name="price" placeholder="가격"><strong class="sale_price">원</strong>
 												</div>
-												<div class="sale_box-pi">
-													<input type="text" name="inventory" placeholder="수량"><strong class="sale_price">개</strong>
-												</div>
 											</div>
 										</div>
 										<div class="info_price_wrap">
@@ -101,7 +99,19 @@
 											</dl>
 										</div>
 										<div class="box_optarea">
-											
+											<label>Size 별 재고(사이즈가 없을 경우 Free에 기입)</label>
+											<div class="box_size_opt">
+												<div class="sel">S size</div>
+												<div class="sel">M size</div>
+												<div class="sel">L size</div>
+												<div class="sel">FREE</div>
+											</div>
+											<div class="box_size_opt-input">
+												<input type="text" name="s" value="0">
+												<input type="text" name="m" value="0">
+												<input type="text" name="l" value="0">
+												<input type="text" name="free" value="0">
+											</div>
 										</div>
 									</div>
 									<div class="info_product wrap_button">
@@ -122,9 +132,6 @@
 												</p>
 												<input type="file" id="inputDetails" name="producturl">
 											</div>
-										</div>
-										<div class="item_desc_text">
-											<textarea name="product_desc" placeholder="여기에 상품 설명을 입력하세요."></textarea>
 										</div>
 									</div>	
 								</div>

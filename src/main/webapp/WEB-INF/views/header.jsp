@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header_js.js" async></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
 
 <div class="header">
 	<div class="inner_top_wrap">

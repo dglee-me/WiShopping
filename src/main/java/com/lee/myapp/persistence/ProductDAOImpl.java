@@ -28,4 +28,10 @@ public class ProductDAOImpl implements ProductDAO{
 		return sqlSession.selectList(namespace+".list",category);
 	}
 
+	@Override
+	public ProductVO view(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".view",pno);
+	}
+
 }

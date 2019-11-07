@@ -26,4 +26,10 @@ public class ProductServiceImpl implements ProductService{
 		return productDAO.list(category);
 	}
 
+	@Override
+	public ProductVO view(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.view(pno);
+	}
+
 }
