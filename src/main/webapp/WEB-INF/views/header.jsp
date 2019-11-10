@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header_js.js" async></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header.js" async></script>
 
 <div class="header">
 	<div class="inner_top_wrap">
@@ -55,7 +55,7 @@
 					</a>
 				</li>
 				<li class="cart-more">
-					<a href="#">
+					<a href="${pageContext.request.contextPath}/cart/main">
 						<span class="cart-icon">&nbsp;</span>
 						<span class="cart-title">장바구니</span>
 					</a>
@@ -89,7 +89,7 @@
 								</a>
 							</li>
 							<li class="m_category">
-								<a href="${pageContext.request.contextPath }/category/group/2">
+								<a href="${pageContext.request.contextPath }/category/group/accessories">
 									<strong class="category_title">
 										<span class="thum">
 											<img src="${pageContext.request.contextPath }/resources/image/accessories.png" alt="잡화">

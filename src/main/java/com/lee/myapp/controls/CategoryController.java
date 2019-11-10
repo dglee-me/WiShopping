@@ -25,4 +25,11 @@ public class CategoryController {
 		
 		request.setAttribute("list", productService.list("패션"));
 	}
+	
+	@RequestMapping(value="/group/accessories", method=RequestMethod.GET)
+	public void accessoriesCategoryGET(HttpServletRequest request) throws Exception{
+		logger.info("-------- CATEGORY : GROUP 1 (ACCESSORIES) METHOD=GET --------");	
+		
+		request.setAttribute("list", productService.list("잡화"));
+	}
 }

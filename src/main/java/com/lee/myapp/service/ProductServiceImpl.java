@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.persistence.ProductDAO;
 
-@Repository
+@Service
 public class ProductServiceImpl implements ProductService{
 	@Inject
 	ProductDAO productDAO;

@@ -15,6 +15,9 @@ select::-ms-expand{opacity:0;}
 
 .home-footer{position:relative; padding:20px 0 40px; padding-top:20px; text-align:center; font-family:dotum,sans-serif; font-size:12px; line-height:1.6; color:#555;}
 
+.button{display:inline-block; margin:0; padding:0; user-select:none; box-sizing:border-box; border:1px solid transparent; background:none; font-family:inherit;
+	font-weight:700; text-decoration:none; text-align:center; transition:color .1s,background-color .1s,border-color .1s; border-radius:4px; cusor:pointer;}
+.button-color-blue{background-color:#5FCAEC; border-color:#5FCAEC; color:#fff;}
 .hide {position:absolute; left:-5000px;}
 .count{color:#5FCAEC; margin-left:4px;}
 .t_bold{font-weight:bold;}

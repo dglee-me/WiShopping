@@ -11,7 +11,7 @@
 <head>
 	
 	<meta charset="UTF-8">
-	<title>위쇼핑! - 패션</title>
+	<title>위쇼핑! - 잡화</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
@@ -25,37 +25,17 @@
 							<div class="nav">
 								<ul>
 									<li><a href="${pageContext.request.contextPath}/">홈</a></li>
-									<li><a href="${pageContext.request.contextPath}/category/group/fashion">패션</a></li>
+									<li><a href="${pageContext.request.contextPath}/category/group/accessories">잡화</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="content_main">
 						<div class="category_lnb">
-							<h3 class="lnb_title">패션</h3>
+							<h3 class="lnb_title">잡화</h3>
 							<div class="lnb_wrap">
 								<div class="category_list">
 									<ul class="group">
-										<li>
-											<a href="#">
-												<span class="category_title">아우터</span>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<span class="category_title">상의</span>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<span class="category_title">하의</span>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<span class="category_title">신발</span>
-											</a>
-										</li>
 										<li>
 											<a href="#">
 												<span class="category_title">가방</span>
@@ -63,7 +43,27 @@
 										</li>
 										<li>
 											<a href="#">
-												<span class="category_title">잡화</span>
+												<span class="category_title">지갑</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="category_title">벨트</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="category_title">안경테/선글라스</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="category_title">양말/스타킹</span>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="category_title">패션 잡화/소품</span>
 											</a>
 										</li>
 									</ul>

@@ -12,6 +12,46 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/productions.js" async></script>
 	
+	<script>
+		$(document).ready(function(){
+			$(document).on("click",".cart",function(){
+				var cartsize = $('.prdprice_left').text().charAt(0);
+				var cartstock = $('.ipt_count_chk').val();
+				
+				
+				if(cartstock == null){
+					alert("사이즈를 선택하여 주세요. :x")
+				}else{
+					var url = location.href;
+					var pno = url.slice(url.indexOf('=') + 1);
+					
+					
+					var data = {
+							cartsize : cartsize,
+							cartstock : cartstock,
+							pno : pno
+					};
+					
+					$.ajax({
+						url : "/myapp/cart/addCart",
+						type : "post",
+						data : data,
+						success : function(result){
+							if(result == 1){
+								alert("장바구니에 상품을 담았습니다.");
+							}else{
+								alert("회원만 담을 수 있습니다.");
+							}
+						},
+						error : function(){
+							alert("삐이");
+						}
+					});
+				}
+			});
+		});
+	</script>
+	
 	<meta charset="UTF-8">
 	<title>위쇼핑! - ${product.pname}</title>
 </head>
@@ -85,7 +125,7 @@
 									</div>
 									<div class="info_product wrap_button">
 										<div class="button_box">
-											<a href="javascript:void(0);" class="btn_sys big_xl cart" onclick="document.getElementById('frm').submit()"><span>장바구니</span></a>
+											<a href="javascript:void(0);" class="btn_sys big_xl cart"><span>장바구니</span></a>
 											<a href="javascript:void(0);" class="btn_sys red_big_xb bui" onclick="document.getElementById('frm').submit()"><span>구매하기</span></a>
 										</div>
 									</div>
