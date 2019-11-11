@@ -14,6 +14,8 @@ public class MemberVO {
 	private String sessionkey;
 	private Date sessionlimit;
 	
+	private boolean useCookie;
+	
 	public int getMno() {
 		return mno;
 	}
@@ -83,6 +85,14 @@ public class MemberVO {
 	public MemberVO setSessionlimit(Date sessionlimit) {
 		this.sessionlimit = sessionlimit;
 		return this;
+	}
+	
+	public void setUseCookie(boolean useCookie) {
+        this.useCookie = useCookie;
+    }
+	
+	public boolean isUseCookie() {
+		return this.useCookie;
 	}
 	
 	public String toString() {

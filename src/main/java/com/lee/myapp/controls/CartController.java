@@ -6,10 +6,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.service.CartService;
@@ -23,8 +25,12 @@ public class CartController {
 	CartService cartService;
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public void cartMainGET(CartVO cart) throws Exception{
+	public void cartMainGET(HttpSession session, Model model) throws Exception{
 		logger.info("-------- Cart : MAIN METHOD=GET --------");
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		model.addAttribute("cartList",cartService.cartList(member.getMno()));
 	}
 	
 	@ResponseBody
@@ -37,6 +43,7 @@ public class CartController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
+			cart.setMno(member.getMno());
 			cartService.addCart(cart);
 			result = 1;
 		}

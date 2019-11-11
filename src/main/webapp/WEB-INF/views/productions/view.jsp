@@ -18,13 +18,11 @@
 				var cartsize = $('.prdprice_left').text().charAt(0);
 				var cartstock = $('.ipt_count_chk').val();
 				
-				
 				if(cartstock == null){
 					alert("사이즈를 선택하여 주세요. :x")
 				}else{
 					var url = location.href;
 					var pno = url.slice(url.indexOf('=') + 1);
-					
 					
 					var data = {
 							cartsize : cartsize,

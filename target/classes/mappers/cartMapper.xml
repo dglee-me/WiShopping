@@ -11,4 +11,13 @@
 		INSERT INTO TBL_CART
 		VALUES(CARTNO_SEQ.NEXTVAL,#{mno},#{pno},#{cartstock},#{cartsize})
 	</insert>
+	
+	<select id="cartList" resultType="com.lee.myapp.domain.CartListVO">
+		select 
+    		row_number() over(order by a.cartno asc) as num,
+   			a.cartno,a.mno,a.pno,a.cartsize,a.cartstock,b.brand,b.pname,b.product_thumurl,b.price,c.shipping
+   		  from tbl_cart a inner join product b on a.pno = b.pno inner join product_option c on b.pno = c.pno
+  		 where a.pno = b.pno
+    	   and mno = #{mno}
+	</select>
 </mapper>

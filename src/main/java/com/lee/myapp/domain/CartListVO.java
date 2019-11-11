@@ -9,6 +9,7 @@ public class CartListVO {
 	private int cartstock;
 	private String brand;
 	private String pname;
+	private String product_thumurl;
 	private int price;
 	private int shipping;
 	
@@ -68,6 +69,13 @@ public class CartListVO {
 		this.pname = pname;
 		return this;
 	}
+	public String getProduct_thumurl() {
+		return product_thumurl;
+	}
+	public CartListVO setProduct_thumurl(String product_thumurl) {
+		this.product_thumurl = product_thumurl;
+		return this;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -85,6 +93,6 @@ public class CartListVO {
 	
 	public String toString() {
 		return "CartListVO = [num= "+num+", cartno= "+cartno+", mno= "+mno+", pno= "+pno+", cartsize= "+cartsize+", cartstock= "+cartstock+", brand= "+brand+", pname= "
-				+pname+", price= "+price+", shipping= "+shipping+" ]";
+				+pname+", product_thumrul= "+product_thumurl+", price= "+price+", shipping= "+shipping+" ]";
 	}
 }
