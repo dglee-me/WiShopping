@@ -50,4 +50,15 @@ public class CartController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/cartRemove", method=RequestMethod.GET)
+	public String cartRemove(int pno) throws Exception{
+		logger.info("-------- Cart : Remove METHOD=GET --------");
+		
+		if(cartService.cartRemove(pno) == 1) {
+			return "redirect:/cart/main";
+		}else {
+			return "/error";
+		}
+	}
 }

@@ -196,4 +196,15 @@
 	</c:if>
 	<jsp:include page="../footer.jsp"/>
 </body>
+<script>
+	$(".carted-product_delete").click(function(){
+		var url = $(this).closest(".carted-product").find("a").attr("href");
+		var pno = url.slice(url.indexOf('=') + 1);
+		
+		var result = confirm("해당 상품을 삭제하시겠습니까?");
+		if(result){
+			location.href= "/myapp/cart/cartRemove?pno="+pno;
+		}
+	});
+</script>
 </html>

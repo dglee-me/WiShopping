@@ -27,4 +27,10 @@ public class CartServiceImpl implements CartService{
 		return cartDAO.cartList(mno);
 	}
 
+	@Override
+	public int cartRemove(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return cartDAO.cartRemove(pno);
+	}
+
 }

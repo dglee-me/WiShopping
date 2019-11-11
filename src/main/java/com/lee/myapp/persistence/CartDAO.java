@@ -8,4 +8,5 @@ import com.lee.myapp.domain.CartVO;
 public interface CartDAO {
 	public void addCart(CartVO cart) throws Exception;
 	public List<CartListVO> cartList(int mno) throws Exception;
+	public int cartRemove(int pno) throws Exception;
 }
