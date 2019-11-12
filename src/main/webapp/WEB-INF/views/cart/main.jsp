@@ -27,9 +27,65 @@
 		$(document).ready(function(){		
 			var count = $("input:checkbox[name='product_check']").length;
 			$(".commerce-cart_side-bar_order_btn").append(count+"개 상품 구매하기");
-			$(".caption").append("모두선택 ("+count+")개")
-		});			
+			$(".caption").append("모두선택 ("+count+")개");
+		});		
+		
+		/* Select box onchange*/
+		$(document).ready(function(){			
+			$("#checkAll").click(function(){
+				if($("#checkAll").prop("checked")){
+					$(".round-checkbox-input_input").prop("checked",true);
+				}else{
+					$(".round-checkbox-input_input").prop("checked",false);
+				}
+			});
+		});
+		
+		$(document).ready(function(){
+			$(".round-checkbox-input_input").click(function(){
+				var checkbox = $(".round-checkbox-input_input");
 
+				var string_price = $(".carted-product_subtotal").text();
+				var delivery = parseInt(uncomma($(".summary_delivery").text()));
+				var total_price = 0;
+				
+				string_price = string_price.split("원");
+				
+				/* 55~69 Line CheckAll when checking all checkbox */
+				var check_select = 0;
+
+				for(var i=1;i<checkbox.length;i++){
+					if(checkbox[i].checked == false){
+						$("#checkAll").prop("checked",false);
+						check_select = 0 ;
+					}
+					if(checkbox[i].checked == true){
+						check_select += 1;
+					}
+				}
+				
+				if(check_select == checkbox.length-1){
+					$("#checkAll").prop("checked",true);
+				}
+				
+				/* 72~85 Line Only checked checkbox will be reflected in total price */
+				if(checkbox[0].checked == true){
+					for(var i=0;i<checkbox.length-1;i++){
+						total_price += parseInt(uncomma(string_price[i]));
+					}
+				}else{
+					for(var i=1;i<checkbox.length;i++){
+						if(checkbox[i].checked == true){
+							total_price += parseInt(uncomma(string_price[i-1]));
+						}
+					}
+				}
+				
+				$(".summary_total-price").text(comma(total_price)+"원");
+				$(".summary_payment").text(comma(total_price+delivery)+"원");
+			});
+		});
+		
 		/* Reflect price when stock changes */
 		$(document).ready(function(){
 			$(".form-control").change(function(){
@@ -43,30 +99,23 @@
 						.children(".carted-product_subtotal").children(".carted-product_subtotal_number").text(option_price);
 				
 				/*Side bar price modify*/
-				var string_price = $(".carted-product_subtotal").text();
-				var delivery = parseInt(uncomma($(".summary_delivery").text()));
+				var checkbox = $(this).closest("ul").parent()
+					.children(".carted-product_select").children(".round-checkbox-input_label").children(".round-checkbox-input_input");
 				
-				string_price = string_price.split("원");
-				
-				var total_price = 0;
-				
-				for(var i=0; i<string_price.length-1; i++){
-					string_price[i] = uncomma(string_price[i]);
-					total_price += parseInt(string_price[i]);
-				}
-				
-				$(".summary_total-price").text(comma(total_price)+"원");
-				$(".summary_payment").text(comma(total_price+delivery)+"원");
-			});
-		});
-		
-		/* Select box onchange*/
-		$(document).ready(function(){			
-			$("#checkAll").click(function(){
-				if($("#checkAll").prop("checked")){
-					$(".round-checkbox-input_input").prop("checked",true);
-				}else{
-					$(".round-checkbox-input_input").prop("checked",false);
+				if(checkbox[0].checked == true){
+					var string_price = $(".carted-product_subtotal").text();
+					var delivery = parseInt(uncomma($(".summary_delivery").text()));
+					
+					string_price = string_price.split("원");
+					
+					var total_price = 0;
+					
+					for(var i=0; i<string_price.length-1; i++){
+						total_price += parseInt(uncomma(string_price[i]));
+					}
+					
+					$(".summary_total-price").text(comma(total_price)+"원");
+					$(".summary_payment").text(comma(total_price+delivery)+"원");
 				}
 			});
 		});
