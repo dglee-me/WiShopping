@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
@@ -12,12 +13,83 @@
 	<meta charset="UTF-8">
 	<title>위쇼핑! - 장바구니</title>
 	<script type="text/javascript">
+		function comma(str) {
+		    str = String(str);
+		    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		};
+	
+		function uncomma(str) {
+		    str = String(str);
+		    return str.replace(/[^\d]+/g, '');
+		}
+		
+		/*check all product count*/
+		$(document).ready(function(){		
+			var count = $("input:checkbox[name='product_check']").length;
+			$(".commerce-cart_side-bar_order_btn").append(count+"개 상품 구매하기");
+			$(".caption").append("모두선택 ("+count+")개")
+		});			
+
+		/* Reflect price when stock changes */
+		$(document).ready(function(){
+			$(".form-control").change(function(){
+				/* A product total price modify*/
+				var stock = $(this).val();
+				var price = uncomma($(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text());
+				
+				var option_price = comma(stock*price);
+				
+				$(this).closest("article").parent().parent().parent().children(".carted-product_footer")
+						.children(".carted-product_subtotal").children(".carted-product_subtotal_number").text(option_price);
+				
+				/*Side bar price modify*/
+				var string_price = $(".carted-product_subtotal").text();
+				var delivery = parseInt(uncomma($(".summary_delivery").text()));
+				
+				string_price = string_price.split("원");
+				
+				var total_price = 0;
+				
+				for(var i=0; i<string_price.length-1; i++){
+					string_price[i] = uncomma(string_price[i]);
+					total_price += parseInt(string_price[i]);
+				}
+				
+				$(".summary_total-price").text(comma(total_price)+"원");
+				$(".summary_payment").text(comma(total_price+delivery)+"원");
+			});
+		});
+		
+		/* Select box onchange*/
 		$(document).ready(function(){			
 			$("#checkAll").click(function(){
 				if($("#checkAll").prop("checked")){
 					$(".round-checkbox-input_input").prop("checked",true);
 				}else{
 					$(".round-checkbox-input_input").prop("checked",false);
+				}
+			});
+		});
+
+		/* All check btn*/
+		$(document).ready(function(){			
+			$("#checkAll").click(function(){
+				if($("#checkAll").prop("checked")){
+					$(".round-checkbox-input_input").prop("checked",true);
+				}else{
+					$(".round-checkbox-input_input").prop("checked",false);
+				}
+			});
+		});
+		
+		$(document).ready(function(){			
+			$(".carted-product_delete").click(function(){
+				var url = $(this).closest(".carted-product").find("a").attr("href");
+				var pno = url.slice(url.indexOf('=') + 1);
+				
+				var result = confirm("해당 상품을 삭제하시겠습니까?");
+				if(result){
+					location.href= "/myapp/cart/cartRemove?pno="+pno;
 				}
 			});
 		});
@@ -51,7 +123,7 @@
 															<path fill="#FFF" d="M9.9 14.6l7-7.3 1.5 1.4-8.4 8.7-5-4.6 1.4-1.5z"></path>
 														</svg>
 													</span>
-													<span class="caption">모두선택 (${cart.count}개)</span>
+													<span class="caption"></span>
 												</label>
 											</div>
 										</span>
@@ -61,7 +133,11 @@
 									</div>
 								</div>
 								<ul class="commerce-cart_content_group-list">
-									<c:forEach var="cart" items="${cartList}">
+									<c:forEach var="cart" items="${cartList}" varStatus="status">
+										<c:set var="stock" value="${cart.cartstock}"/>
+										<c:set var="total_delivery" value="${total_delivery + cart.shipping }"/>
+										<c:set var="total_price" value="${total_price + (cart.price * stock) }"/>
+										
 										<li class="commerce-cart_content_group-item">
 											<article class="commerce-cart_group">
 												<h1 class="commerce-cart_group_header">${cart.brand}<!--  --> 배송</h1>
@@ -73,7 +149,7 @@
 																	<article class="carted-product">
 																		<div class="round-checkbox-input round-checkbox-input-blue carted-product_select">
 																			<label class="round-checkbox-input_label">
-																				<input type="checkbox" class="round-checkbox-input_input" checked>
+																				<input type="checkbox" class="round-checkbox-input_input" name="product_check" checked>
 																				<span class="round-checkbox-input_icon">
 																					<svg class="check" width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
 																						<path fill="#FFF" d="M9.9 14.6l7-7.3 1.5 1.4-8.4 8.7-5-4.6 1.4-1.5z"></path>
@@ -102,26 +178,20 @@
 																			<li class="carted-product_option-list_item">
 																				<article class="selling-option-item">
 																					<h1 class="selling-option-item_name">${cart.cartsize}</h1>
-																					<button type="button" class="selling-option-item_delete" aria-label="삭제">
-																						<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" preserveAspectRatio="xMidYMid meet">
-																							<path fill-rule="nonzero" d="M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z"></path>
-																						</svg>
-																					</button>
-																					
 																					<div class="selling-option-item_controls">
 																						<div class="selling-option-item_quantity">
 																							<div class="input-group select-input option-count-input">
-																								<select class="form-control">
-																									<option value="0">1</option>
-																									<option value="1">2</option>
-																									<option value="2">3</option>
-																									<option value="3">4</option>
-																									<option value="4">5</option>
-																									<option value="5">6</option>
-																									<option value="6">7</option>
-																									<option value="7">8</option>
-																									<option value="8">9</option>
-																									<option value="9">10+</option>
+																								<select name="stock" class="form-control">
+																									<option value="1"<c:if test="${cart.cartstock eq 1}">selected</c:if>>1</option>
+																									<option value="2"<c:if test="${cart.cartstock eq 2}">selected</c:if>>2</option>
+																									<option value="3"<c:if test="${cart.cartstock eq 3}">selected</c:if>>3</option>
+																									<option value="4"<c:if test="${cart.cartstock eq 4}">selected</c:if>>4</option>
+																									<option value="5"<c:if test="${cart.cartstock eq 5}">selected</c:if>>5</option>
+																									<option value="6"<c:if test="${cart.cartstock eq 6}">selected</c:if>>6</option>
+																									<option value="7"<c:if test="${cart.cartstock eq 7}">selected</c:if>>7</option>
+																									<option value="8"<c:if test="${cart.cartstock eq 8}">selected</c:if>>8</option>
+																									<option value="9"<c:if test="${cart.cartstock eq 9}">selected</c:if>>9</option>
+																									<option value="10"<c:if test="${cart.cartstock eq 10}">selected</c:if>>10</option>
 																								</select>
 																								<span class="select-input_icon">
 																									<svg class="icon" width="10" height="10" preserveAspectRatio="xMidYMid meet" style="fill: currentcolor;">
@@ -131,7 +201,7 @@
 																							</div>
 																						</div>
 																						<p class="selling-option-item_price">
-																							<span class="selling-option-item_price_number">${cart.price}</span>원
+																							<span class="selling-option-item_price_number"><fmt:formatNumber type="number" maxFractionDigits="3" value="${cart.price}"/></span>원
 																						</p>
 																					</div>
 																					
@@ -144,7 +214,7 @@
 																				<button class="carted-product_order-btn" type="button">바로구매</button>
 																			</span>
 																			<span class="carted-product_subtotal">
-																				<span class="carted-product_subtotal_number">${cart.price}</span>원
+																				<span class="carted-product_subtotal_number"><fmt:formatNumber type="number" maxFractionDigits="3" value="${stock * cart.price}"/></span>원
 																			</span>
 																		</div>
 																	</article>
@@ -168,23 +238,23 @@
 									<dl class="commerce-cart_summary">
 										<div class="commerce-cart_summary_row">
 											<dt>총 상품금액</dt>
-											<dd><span class="number">1232141원</span></dd>
+											<dd><span class="number summary_total-price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total_price}"/>원</span></dd>
 										</div>
 										<div class="commerce-cart_summary_row">
 											<dt>배송비</dt>
-											<dd>+ <span class="number">12500원</span>
+											<dd>+ <span class="number summary_delivery"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total_delivery}"/>원</span>
 										</div>
 										<div class="commerce-cart_summary_row">
 											<dt>총 할인금액</dt>
-											<dd>- <span class="number">1293821원</span></dd>
+											<dd>- <span class="number summary_discount-price">0원</span></dd>
 										</div>
 										<div class="commerce-cart_summary_row commerce-cart_summary_row-total">
 											<dt>결제금액</dt>
-											<dd><span class="number">190238912원</span></dd>
+											<dd><span class="number summary_payment"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total_price + total_delivery}"/>원</span></dd>
 										</div>
 									</dl>
 									<div class="commerce-cart_side-bar_order">
-										<button class="button button-color-blue commerce-cart_side-bar_order_btn" type="button">0개 상품 구매하기</button>
+										<button class="button button-color-blue commerce-cart_side-bar_order_btn" type="button"></button>
 									</div>
 								</div>
 							</div>
@@ -196,15 +266,4 @@
 	</c:if>
 	<jsp:include page="../footer.jsp"/>
 </body>
-<script>
-	$(".carted-product_delete").click(function(){
-		var url = $(this).closest(".carted-product").find("a").attr("href");
-		var pno = url.slice(url.indexOf('=') + 1);
-		
-		var result = confirm("해당 상품을 삭제하시겠습니까?");
-		if(result){
-			location.href= "/myapp/cart/cartRemove?pno="+pno;
-		}
-	});
-</script>
 </html>
