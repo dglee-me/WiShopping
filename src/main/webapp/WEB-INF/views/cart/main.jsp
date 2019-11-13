@@ -23,7 +23,7 @@
 		    return str.replace(/[^\d]+/g, '');
 		}
 		
-		/*check all product count*/
+		/*Check all product count*/
 		$(document).ready(function(){		
 			var count = $("input:checkbox[name='product_check']").length;
 			$(".commerce-cart_side-bar_order_btn").append(count+"개 상품 구매하기");
@@ -35,10 +35,21 @@
 			$("#checkAll").click(function(){
 				if($("#checkAll").prop("checked")){
 					$(".round-checkbox-input_input").prop("checked",true);
+					$(".commerce-cart_side-bar_order_btn").text("4개 상품 구매하기");
 				}else{
 					$(".round-checkbox-input_input").prop("checked",false);
+					$(".commerce-cart_side-bar_order_btn").text("0개 상품 구매하기");
 				}
 			});
+		});
+
+		/*Check checked product count*/
+		$(document).ready(function(){
+			$(".round-checkbox-input_input").click(function(){
+				var count = $("input:checkbox[name='product_check']:checked").length;
+				
+				$(".commerce-cart_side-bar_order_btn").text(count+"개 상품 구매하기");
+			})
 		});
 		
 		$(document).ready(function(){
@@ -46,10 +57,9 @@
 				var checkbox = $(".round-checkbox-input_input");
 
 				var string_price = $(".carted-product_subtotal").text();
-				var delivery = parseInt(uncomma($(".summary_delivery").text()));
-				var total_price = 0;
-				
 				string_price = string_price.split("원");
+				
+				var total_price = 0;
 				
 				/* 55~69 Line CheckAll when checking all checkbox */
 				var check_select = 0;
@@ -63,15 +73,22 @@
 						check_select += 1;
 					}
 				}
-				
 				if(check_select == checkbox.length-1){
 					$("#checkAll").prop("checked",true);
 				}
 				
 				/* 72~85 Line Only checked checkbox will be reflected in total price */
+				var total_delivery = 0;
+				
 				if(checkbox[0].checked == true){
+					var delivery = $(".product-small-item_delivery").text();
+					delivery = delivery.split("원");
 					for(var i=0;i<checkbox.length-1;i++){
+						if(isNaN(parseInt(delivery[i],10)) == true){
+							delivery[i]=0;
+						}
 						total_price += parseInt(uncomma(string_price[i]));
+						total_delivery += parseInt(delivery[i],10)
 					}
 				}else{
 					for(var i=1;i<checkbox.length;i++){
@@ -79,10 +96,21 @@
 							total_price += parseInt(uncomma(string_price[i-1]));
 						}
 					}
+
+					total_delivery =  0;
+					
+					var delivery = $(".round-checkbox-input_input:checked").closest("article")
+						.children(".product-small-item-clickable").children(".product-small-item_content")
+						.children(".product-small-item_caption").children(".product-small-item_delivery").text().split(" 원 ");
+					for(var i=0;i<delivery.length-1;i++){
+						total_delivery += parseInt(delivery[i],10);
+					}
 				}
 				
+				
 				$(".summary_total-price").text(comma(total_price)+"원");
-				$(".summary_payment").text(comma(total_price+delivery)+"원");
+				$(".summary_delivery").text(comma(total_delivery)+"원");
+				$(".summary_payment").text(comma(total_price+total_delivery)+"원");
 			});
 		});
 		
@@ -131,14 +159,56 @@
 			});
 		});
 		
+		/* Delete only one cart */
 		$(document).ready(function(){			
 			$(".carted-product_delete").click(function(){
-				var url = $(this).closest(".carted-product").find("a").attr("href");
-				var pno = url.slice(url.indexOf('=') + 1);
+				var confirm_val = confirm("선택한 상품을 삭제하시겠습니까?");
 				
-				var result = confirm("해당 상품을 삭제하시겠습니까?");
-				if(result){
-					location.href= "/myapp/cart/cartRemove?pno="+pno;
+				if(confirm_val){
+					var checkArray = new Array();
+
+					checkArray.push($(this).parent().children(".carted-product_select").children(".round-checkbox-input_label")
+						.children(".round-checkbox-input_input").attr("data-cartno"));
+					
+					$.ajax({
+						url : "/myapp/cart/cartRemove",
+						type : "post",
+						data : {checkArray : checkArray},
+						success : function(result){
+							if(result==1){
+								location.href="/myapp/cart/main";	
+							}else{
+								location.href="/myapp/error";
+							}
+						}
+					});
+				}
+			});
+		});
+		
+		/*Delete all selected carts*/
+		$(document).ready(function(){
+			$(".commerce-cart_header_delete").click(function(){
+				var confirm_val = confirm("선택한 상품을 삭제하시겠습니까?");
+				
+				if(confirm_val){
+					var checkArray = new Array();
+					$("input:checkbox[name='product_check']:checked").each(function(){
+						checkArray.push($(this).attr("data-cartno"));
+					});
+					
+					$.ajax({
+						url : "/myapp/cart/cartRemove",
+						type : "post",
+						data : {checkArray : checkArray},
+						success : function(result){
+							if(result==1){
+								location.href="/myapp/cart/main";	
+							}else{
+								location.href="/myapp/error";
+							}
+						}
+					});
 				}
 			});
 		});
@@ -198,7 +268,7 @@
 																	<article class="carted-product">
 																		<div class="round-checkbox-input round-checkbox-input-blue carted-product_select">
 																			<label class="round-checkbox-input_label">
-																				<input type="checkbox" class="round-checkbox-input_input" name="product_check" checked>
+																				<input type="checkbox" class="round-checkbox-input_input" name="product_check" data-cartno="${cart.cartno}" checked>
 																				<span class="round-checkbox-input_icon">
 																					<svg class="check" width="24" height="24" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
 																						<path fill="#FFF" d="M9.9 14.6l7-7.3 1.5 1.4-8.4 8.7-5-4.6 1.4-1.5z"></path>
@@ -214,7 +284,7 @@
 																				<h1 class="product-small-item_title">[${cart.brand}] ${cart.pname}</h1>
 																				<p class="product-small-item_caption">
 																					<c:if test="${cart.shipping eq 0 }">무료배송 </c:if>
-																					<c:if test="${cart.shipping ne 0 }">${cart.shipping } 원 </c:if>| 일반택배
+																					<span class="product-small-item_delivery"><c:if test="${cart.shipping ne 0 }">${cart.shipping} 원 </c:if></span>| 일반택배
 																				</p>
 																			</div>
 																		</a>

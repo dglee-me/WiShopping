@@ -24,6 +24,7 @@
 	<delete id="cartRemove">
 		DELETE
 		  FROM TBL_CART
-		 WHERE PNO = #{pno}
+		 WHERE CARTNO = #{cartno}
+		   AND MNO = #{mno}
 	</delete>
 </mapper>

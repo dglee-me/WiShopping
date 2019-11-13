@@ -1,5 +1,7 @@
 package com.lee.myapp.controls;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.myapp.domain.CartListVO;
@@ -51,14 +54,27 @@ public class CartController {
 		return result;
 	}
 	
-	@RequestMapping(value="/cartRemove", method=RequestMethod.GET)
-	public String cartRemove(int pno) throws Exception{
-		logger.info("-------- Cart : Remove METHOD=GET --------");
+	@ResponseBody
+	@RequestMapping(value="/cartRemove", method=RequestMethod.POST)
+	public int cartRemovePOST(@RequestParam(value="checkArray[]") List<String> checkArray,CartListVO cart,HttpSession session) throws Exception{
+		logger.info("-------- Cart : Remove METHOD=POST --------");
 		
-		if(cartService.cartRemove(pno) == 1) {
-			return "redirect:/cart/main";
-		}else {
-			return "/error";
+		int result = 0;
+		int cartNo = 0;
+
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member != null) {
+			cart.setMno(member.getMno());
+			
+			for(String i : checkArray) {
+				cart.setCartno(Integer.parseInt(i));
+				cartService.cartRemove(cart);
+			}
+			result = 1;
 		}
+		
+		
+		return result;
 	}
 }

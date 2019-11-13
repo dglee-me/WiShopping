@@ -29,10 +29,11 @@ public class CartDAOImpl  implements CartDAO {
 		return sqlSession.selectList(namespace+".cartList",mno);
 	}
 
+
 	@Override
-	public int cartRemove(int pno) throws Exception {
+	public int cartRemove(CartListVO cart) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(namespace+".cartRemove",pno);
+		return sqlSession.delete(namespace+".cartRemove",cart);
 	}
 
 }
