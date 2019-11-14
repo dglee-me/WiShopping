@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderMapper">
+	<insert id="orderInfo">
+		INSERT INTO TBL_ORDER(ORDERNO,MNO,ORDER_REC,ZIPCODE,RECEIVED_AT,RECEIVED_AT_DETAIL,RECEIVED_PHONE,DELIVERY_MESSAGE,PAYER_NAME,PAYER_EMAIL,PAYER_PHONE,amount)
+		VALUES(#{orderno},#{mno},#{order_rec},#{zipcode},#{received_at},#{received_at_detail},#{received_phone},#{delivery_message},#{payer_name},#{payer_email},#{payer_phone},#{amount})
+	</insert>
+	
+	<insert id="orderInfo_detail">
+		INSERT INTO TBL_ORDER_DETAIL(ORDERDETAILNO,ORDERNO,PNO,CARTSIZE,CARTSTOCK)
+			SELECT TBL_ORDER_DETAILS_SEQ.NEXTVAL,#{orderno},#{pno},#{cartsize},#{cartstock}
+			  FROM TBL_CART
+	</insert>
+	
+</mapper>
