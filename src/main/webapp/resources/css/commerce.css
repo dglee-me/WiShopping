@@ -107,12 +107,87 @@
 .commerce-cart_side-bar_order_btn{display:block; width:100%; padding:11px 10px; font-size:17px; line-height:26px;}
 
 /* Orders - Pre-order*/
+#body{display:flex; flex-direction:column; flex:1 0 auto; min-height:1px;}
+#pre_order{font-size:14px; width:760px; margin:40px auto 0;}
 
+#title{position:relative; font-size:28px; font-weight:bold; letter-spacing:-0.3px; color:#000000; padding-bottom:10px;}
 
+#pre_order>form>.panel{margin-top:50px;}
+#pre_order>form>.panel>.title{display:flex; font-size:20px; padding-bottom:24px; font-weight:bold; line-height:1; color:#000000;
+	border-bottom:2px solid #eee;}
 
+#pre_order>form>.panel>.title>.title{flex:0 0 auto; padding-right:20px; min-width:140px; font-size:20px; box-sizing:border-box;}
 
+#pre_order>form #order_productions{width:100%;}
+#pre_order>form #order_productions td{border-bottom:1px solid #eee; box-sizing:content-box;}
+#pre_order>form #order_productions td:first-child{border-right:1px solid #eee;}
+#pre_order>form #order_productions div.information{display:flex; padding:10px;}
+#pre_order>form #order_productions div.information>img{flex:0 0 auto; width:85px; height:85px; margin-right:10px; background-color:#f5f5f5;}
+#pre_order>form #order_productions div.information>div{flex:1 0 auto;}
+#pre_order>form #order_productions div.information>div>.name{font-size:15px; color:#424242; maegin-bottom:5px; font-weight:bold;}
+#pre_order>form #order_productions div.information>div>.option{font-size:15px; color:#757575; margin-bottom:5px; word-break:break-word;}
+#pre_order>form #order_productions div.information>div>.cost_count{display:flex; font-size:15px;}
+#pre_order>form #order_productions div.information>div>.cost_count>.cost{color:#424242; font-weight:bold;}
+#pre_order>form #order_productions div.information>div>.cost_count>.divider{color:#bdbdbd; padding:0 10px;}
+#pre_order>form #order_productions div.information>div>.cost_count>.count{color:#bdbdbd;}
 
+#pre_order>form #order_productions td.delivery_fee{width:120px; font-size:12px; text-align:center; color:#757575;}
+#pre_order>form #order_productions td.delivery_fee>.type{margin-bottom:5px;}
 
+#pre_order>form>.panel>.input{padding-left:10px;}
+#pre_order>form>.panel>.input>.field{display:flex; margin-top:20px;}
+#pre_order>form>.panel>.input>.field>.label{flex:0 0 auto; width:140px; padding-left:10px; 
+	font-size:15px; color:#424242; line-height:40px;}
+#pre_order>form>.panel>.input>.field>.input{flex:1 0 0px; display:flex;}
 
+#pre_order>form>.panel>.input>.field .non_edit{background-color:#eeeeee;}
+#pre_order>form input[type=text].half, #pre_order>form input[type=number].half{width:50%;}
+#pre_order>form input[type=text].quarter, #pre_order>form input[type=number].quarter{width:25%;}
+#pre_order>form input[type=text], #pre_order>form input[type=number]{border:1px solid #dcdcdc; margin:0; padding:0 15px;
+	line-height:38px; height:40px; box-sizing:border-box; font-size:14px;}
+#pre_order>form input[type=text]+span, #pre_order>form input[type=text]+a{display:block; height:40px; line-height:40px; color:white;
+	background:#5FCAEC; width:calc(25% - 10px); margin-left:10px; text-align:center; font-size:15px; font-weight:bold; cursor:pointer;
+	border-radius:3px;}
+	
+#pre_order>form>.panel>.input>.field>.input.vertical{flex-direction:column;}
+#pre_order>form input[type=text].full, #pre_order>form input[type=number].full{width:100%;}
+#pre_order>form>.panel>.input>.field>.input.vertical>input:first-child{margin-bottom:10px;}
+#pre_order>form>.panel>.input>.field>.input.phone>input{width:50%;}
+#pre_order>form>.panel>.input>.field>.input #delivery_message{margin-bottom:3px;}
+#pre_order>form>.panel>.input>.field>.input #delivery_alert{font-size:12px; color:#757575;}
+	
+#pre_order>form>.panel>.title>.button{flex:0 0 auto; font-size:13px; border-radius:3px; background-color:#fafafa;
+	border:solid 1px #dcdcdc; padding:3px; cursor:pointer;}	
+	
+#pre_order>form>.panel>.cost{font-size:15px; padding:10px 10px 0; color:#424242;}
+#pre_order>form>.panel>.cost>.cost_panel{margin-top:10px; display:flex;}	
+#pre_order>form>.panel>.cost>.cost_panel>.title{flex:1 0 0px; font-size:15px;}		
+#pre_order>form>.panel>.cost>.cost_panel>.amount{flex:1 0 0px; text-align:right; font-family:Tahoma; font-size:15px;}
+#pre_order>form>.panel>.cost>.cost_panel.total{margin-top:20px; font-size:24px; font-weight:bold;}
+#pre_order>form>.panel>.cost>.cost_panel.total>.amount{font-size:24px;}
 
+#pre_order>form #confirm_checkbox{margin-top:40px; padding:0 10px;}
+.form-check{font-size:15px; flex:1 1 auto;}
+.form-check .form-check-label{cursor:pointer; display:block; margin-bottom:10px; padding-left:32px; min-height:22px; line-height:22px;
+	position:relative;}
+.form-check .form-check-label .form-check{left:-9999px; position:absolute; opacity:0;}
+.form-check .form-check-label .check-img{box-sizing:border-box; height:22px; width:22px; border-radius:4px; 
+	background-color:white; border:solid 1px #dbdbdb; display:block; transition:.2s ease; position:absolute; left:0; top:0;}
 
+.form-check .form-check-label .form-check:not(:disabled):checked+.check-img{background-color:#5FCAEC; border-color:#5FCAEC;}
+.form-check .form-check-label .check-img:after{background-image:url('/myapp/resources/image/ic-checkbox.png'); 
+	content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); box-sizing:border-box; display:block;
+	width:14px; height:14px; background-size:14px; opacity:1;}
+
+#pre_order>form #confirm_checkbox>.all_policy{display:flex;}	
+#pre_order>form #confirm_checkbox>.all_policy>.title{flex:1 0 0px; font-size:12px; line-height:1; color:#757575;}
+#pre_order>form #confirm_checkbox>.all_policy>.opener{flex:0 0 auto; font-size:12px; line-height:1;
+	color:#bdbdbd; margin-left:10px; cursor:pointer;}
+#pre_order>form #confirm_checkbox>.policies{margin-top:20px; border-top:1px solid #eee;}
+#pre_order>form #confirm_checkbox>.policies>.policy>.title_panel{display:flex; margin-top:20px;}
+#pre_order>form #confirm_checkbox>.policies>.policy>.title_panel>.title{flex:1 0 0px; font-size:13px; line-height:1; color:#424242;}
+#pre_order>form #confirm_checkbox>.policies>.policy>.title_panel>.opener{flex:0 0 auto; font-size:12px; line-hieght:1;
+	color:#bdbdbd; margin-left:10px; cursor:pointer;}
+
+#pre_order>form #do_payment{margin:40px 10px 40px; text-align:center; color:white; font-weight:bold;
+	font-size:24px; line-height:50px; background:#5FCAEC; border-radius:4px; cursor:pointer;}

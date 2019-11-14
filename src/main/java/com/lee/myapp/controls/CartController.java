@@ -29,7 +29,7 @@ public class CartController {
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public void cartMainGET(HttpSession session, Model model) throws Exception{
-		logger.info("-------- Cart : MAIN METHOD=GET --------");
+		logger.info("-------- CART : MAIN METHOD=GET --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
@@ -39,7 +39,7 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value="/addCart", method=RequestMethod.POST)
 	public int addCartListPOST(CartVO cart, HttpSession session) throws Exception{
-		logger.info("-------- Cart : ADD METHOD=POST --------");
+		logger.info("-------- CART : ADD METHOD=POST --------");
 		
 		int result = 0;
 		
@@ -55,9 +55,27 @@ public class CartController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/cartUpdate", method=RequestMethod.POST)
+	public int cartUpdatePOST(CartVO cart,HttpSession session) throws Exception{
+		logger.info("-------- CART : UPDATE METHOD=POST --------");
+		
+		int result = 0;
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member != null) {
+			cart.setMno(member.getMno());
+			cartService.cartUpdate(cart);
+			
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/cartRemove", method=RequestMethod.POST)
 	public int cartRemovePOST(@RequestParam(value="checkArray[]") List<String> checkArray,CartListVO cart,HttpSession session) throws Exception{
-		logger.info("-------- Cart : Remove METHOD=POST --------");
+		logger.info("-------- CART : REMOVE METHOD=POST --------");
 		
 		int result = 0;
 		int cartNo = 0;

@@ -147,7 +147,30 @@
 				}
 			});
 		});
-
+		
+		/*Reflect stock changes to db*/
+		$(document).ready(function(){
+			$(".form-control").change(function(){
+				var cartno = $(this).closest("ul").closest("li").attr("cart-data");
+				var pno = $(this).closest("ul").closest("article").children(".product-small-item-clickable").attr("data-number");
+				var cartstock = $(this).val();
+				
+				$.ajax({
+					url : "/myapp/cart/cartUpdate",
+					type : "post",
+					data : {
+						cartno : cartno,
+						pno : pno,
+						cartstock : cartstock
+					},success : function(result){
+						if(result == 0){
+							location.href="/myapp/error";
+						}
+					}
+				});
+			})
+		});
+		
 		/* All check btn*/
 		$(document).ready(function(){			
 			$("#checkAll").click(function(){
@@ -264,7 +287,7 @@
 													<li class="commerce-cart_group_item">
 														<article class="commerce-cart_delivery-group">
 															<ul class="commerce-cart_delivery-group_product_list">
-																<li class="commerce-cart_delivery-group_product-item">
+																<li class="commerce-cart_delivery-group_product-item" cart-data="${cart.cartno}">
 																	<article class="carted-product">
 																		<div class="round-checkbox-input round-checkbox-input-blue carted-product_select">
 																			<label class="round-checkbox-input_label">
@@ -276,7 +299,7 @@
 																				</span>
 																			</label>
 																		</div>
-																		<a class="product-small-item product-small-item-clickable" href="${pageContext.request.contextPath}/productions/view?pno=${cart.pno}">
+																		<a class="product-small-item product-small-item-clickable" href="${pageContext.request.contextPath}/productions/view?pno=${cart.pno}" data-number="${cart.pno}">
 																			<div class="product-small-item_image">
 																				<img src="${pageContext.request.contextPath}${cart.product_thumurl}">
 																			</div>

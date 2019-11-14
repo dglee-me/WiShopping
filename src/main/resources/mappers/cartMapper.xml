@@ -21,6 +21,14 @@
     	   AND MNO = #{mno}
 	</select>
 	
+	<update id="cartUpdate">
+		UPDATE TBL_CART
+		   SET CARTSTOCK=#{cartstock}
+		 WHERE CARTNO=#{cartno}
+		   AND PNO=#{pno}
+		   AND MNO=#{mno}
+	</update>
+	
 	<delete id="cartRemove">
 		DELETE
 		  FROM TBL_CART
