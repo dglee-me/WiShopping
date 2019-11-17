@@ -13,8 +13,9 @@ public class OrderDetailVO {
 	 */
 	
 	private int orderdetailno;
-	private int orderno;
+	private String orderno;
 	private int pno;
+	private String cartsize;
 	private int cartstock;
 	
 	public int getOrderdetailno() {
@@ -24,10 +25,10 @@ public class OrderDetailVO {
 		this.orderdetailno = orderdetailno;
 		return this;
 	}
-	public int getOrderno() {
+	public String getOrderno() {
 		return orderno;
 	}
-	public OrderDetailVO setOrderno(int orderno) {
+	public OrderDetailVO setOrderno(String orderno) {
 		this.orderno = orderno;
 		return this;
 	}
@@ -38,11 +39,22 @@ public class OrderDetailVO {
 		this.pno = pno;
 		return this;
 	}
+	public String getCartsize() {
+		return cartsize;
+	}
+	public OrderDetailVO setCartsize(String cartsize) {
+		this.cartsize = cartsize;
+		return this;
+	}
 	public int getCartstock() {
 		return cartstock;
 	}
 	public OrderDetailVO setCartstock(int cartstock) {
 		this.cartstock = cartstock;
 		return this;
+	}
+	
+	public String toString() {
+		return "OrderDetailVO = [orderdetailno= "+orderdetailno+", orderno= "+orderno+", pno= "+pno+", cartsize= "+cartsize+", cartstock= "+cartstock;
 	}
 }

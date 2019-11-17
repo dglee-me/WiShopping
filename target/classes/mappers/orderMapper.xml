@@ -6,15 +6,47 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
+	<select id="orderList" resultType="com.lee.myapp.domain.OrderListVO">
+		SELECT A.PNO, B.CARTNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.CARTSIZE, B.CARTSTOCK, C.SHIPPING
+		  FROM PRODUCT A INNER JOIN TBL_CART B ON A.PNO = B.PNO INNER JOIN PRODUCT_OPTION C ON B.PNO = C.PNO
+		 WHERE A.PNO IN 
+		 <foreach collection="array" item="pno" open="(" separator="," close=")">
+		 	#{pno}
+		 </foreach>
+	</select>
+
 	<insert id="orderInfo">
-		INSERT INTO TBL_ORDER(ORDERNO,MNO,ORDER_REC,ZIPCODE,RECEIVED_AT,RECEIVED_AT_DETAIL,RECEIVED_PHONE,DELIVERY_MESSAGE,PAYER_NAME,PAYER_EMAIL,PAYER_PHONE,amount)
+		INSERT INTO TBL_ORDER(ORDERNO,MNO,ORDER_REC,ZIPCODE,RECEIVED_AT,RECEIVED_AT_DETAIL,RECEIVED_PHONE,DELIVERY_MESSAGE,PAYER_NAME,PAYER_EMAIL,PAYER_PHONE,AMOUNT)
 		VALUES(#{orderno},#{mno},#{order_rec},#{zipcode},#{received_at},#{received_at_detail},#{received_phone},#{delivery_message},#{payer_name},#{payer_email},#{payer_phone},#{amount})
 	</insert>
 	
 	<insert id="orderInfo_detail">
 		INSERT INTO TBL_ORDER_DETAIL(ORDERDETAILNO,ORDERNO,PNO,CARTSIZE,CARTSTOCK)
-			SELECT TBL_ORDER_DETAILS_SEQ.NEXTVAL,#{orderno},#{pno},#{cartsize},#{cartstock}
+			SELECT TBL_ORDER_DETAIL_SEQ.NEXTVAL,#{orderno},pno,cartsize,cartstock
 			  FROM TBL_CART
+		 WHERE PNO IN 
+		 <foreach item="pno" collection="pno" open="(" separator="," close=")">
+		 	#{pno}
+		 </foreach>
 	</insert>
+	
+	<!-- Delete cart when order completes successfully -->
+	<delete id="cartDelete">
+		DELETE
+		  FROM TBL_CART
+		 WHERE MNO = #{mno}
+		   AND CARTNO IN
+		  <foreach collection="cartno" item="cartno" open="(" separator="," close=")">
+		 	#{cartno}
+		 </foreach>
+		   AND PNO IN
+		  <foreach collection="pno" item="pno" open="(" separator="," close=")">
+		 	#{pno}
+		 </foreach>
+		   AND CARTSIZE IN
+		  <foreach collection="cartsize" item="cartsize" open="(" separator="," close=")">
+		 	#{cartsize}
+		 </foreach>
+	</delete>
 	
 </mapper>

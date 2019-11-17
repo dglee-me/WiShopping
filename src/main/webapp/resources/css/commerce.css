@@ -191,3 +191,18 @@
 
 #pre_order>form #do_payment{margin:40px 10px 40px; text-align:center; color:white; font-weight:bold;
 	font-size:24px; line-height:50px; background:#5FCAEC; border-radius:4px; cursor:pointer;}
+	
+/* Orders Result*/
+#order_result{width:100%; max-width:370px; margin:48px auto; text-align:center;}
+#order_result>.image{margin:0 auto 24px;}
+#order_result>.image.success{width:160px; height:154px; background-image:url('/myapp/resources/image/mobile_order_group.png');
+	background-position:top -101px left 0px; background-size:335px;}
+#order_result>a>div{display:inline-block; padding:12px 24px; border:2px solid #5FCAEC; color:#5FCAEC; font-weight:bold;}
+
+/*Orders cancel*/
+#cancel_result{width:100%; max-width:370px; margin:48px auto 0; text-align:center;}
+#cancel_result>.image.success_cancel{width:160px; height:172px; background-image:url('/myapp/resources/image/mobile_order_group.png');
+	background-position:top -448px left 0px; background-size:335px;}
+#cancel_result>.image{margin:0 auto 24px;}
+#cancel_result>a>div{margin-top:10px; display:inline-block; padding:12px 24px; border:2px solid #5FCAEC; color:#5FCAEC; font-weight:bold; border-radius:3px;}
+

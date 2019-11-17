@@ -154,7 +154,7 @@
 				var cartno = $(this).closest("ul").closest("li").attr("cart-data");
 				var pno = $(this).closest("ul").closest("article").children(".product-small-item-clickable").attr("data-number");
 				var cartstock = $(this).val();
-				
+
 				$.ajax({
 					url : "/myapp/cart/cartUpdate",
 					type : "post",
@@ -235,6 +235,34 @@
 				}
 			});
 		});
+		
+		/*Check productions order*/
+		$(document).ready(function(){
+			$(".commerce-cart_side-bar_order").click(function(){
+				var pnoArray = new Array();
+				
+				
+				$("input:checkbox[name='product_check']:checked").each(function(){
+					pnoArray.push($(this).closest("article").children(".product-small-item-clickable").attr("data-number"));
+					console.log(pnoArray);
+				})
+
+				$.ajax({
+					url : "/myapp/order/order_request",
+					type : "post",
+					data : {pnoArray : pnoArray},
+					success : function(result){
+						if(result == 1){
+							location.href="/myapp/order/pre_order";
+						}else{
+							location.href="/myapp/error";
+						}
+							
+					}
+				});
+			});
+		});
+		
 	</script>
 </head>
 <body>

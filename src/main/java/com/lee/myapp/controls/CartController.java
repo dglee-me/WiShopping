@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.service.CartService;
 
 @Controller

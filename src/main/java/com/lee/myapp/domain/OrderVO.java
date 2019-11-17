@@ -1,5 +1,7 @@
 package com.lee.myapp.domain;
 
+import java.sql.Date;
+
 public class OrderVO {
 	/* 
 		CREATE TABLE TBL_ORDER(
@@ -14,12 +16,13 @@ public class OrderVO {
 		    payer_name VARCHAR2(50) NOT NULL,
 		    payer_email varchar2(50) not null,
 		    payer_phone varchar2(11) not null,
-		    amount int not null
+		    amount int not null,
+		    orderdate date default sysdate
 		); 
 		
 		ALTER TABLE TBL_ORDER ADD CONSTRAINT TBL_ORDER_MNO FOREIGN KEY(MNO) REFERENCES MEMBER(MNO);
 	 */
-	private int orderno;
+	private String orderno;
 	private int mno;
 	private String order_rec;
 	private String zipcode;
@@ -31,11 +34,12 @@ public class OrderVO {
 	private String payer_email;
 	private String payer_phone;
 	private int amount;
+	private Date orderdate;
 	
-	public int getOrderno() {
+	public String getOrderno() {
 		return orderno;
 	}
-	public OrderVO setOrderno(int orderno) {
+	public OrderVO setOrderno(String orderno) {
 		this.orderno = orderno;
 		return this;
 	}
@@ -116,5 +120,17 @@ public class OrderVO {
 		this.amount = amount;
 		return this;
 	}
+	public Date getOrderdate() {
+		return orderdate;
+	}
+	public OrderVO setOrderdate(Date orderdate) {
+		this.orderdate = orderdate;
+		return this;
+	}
 	
+	public String toString() {
+		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", order_rec= "+order_rec+", zipcode= "+zipcode+", received_at= "+received_at+", received_at_detail= "
+				+received_at_detail+", received_phone= "+received_phone+", delivery_message= "+delivery_message+", payer_name= "+payer_name+", payer_email= "+payer_email
+				+", payer_phone= "+payer_phone+", amount= "+amount+orderdate+", orderdate= "+orderdate+"]";
+	}
 }
