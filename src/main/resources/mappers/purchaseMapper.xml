@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="purchaseMapper">
+	<select id="purchaseList" resultType="com.lee.myapp.domain.PurchaseVO">
+		SELECT ROW_NUMBER() OVER(PARTITION BY A.ORDERNO ORDER BY A.ORDERNO DESC) AS NUM,A.ORDERNO,B.PNO,A.ORDERDATE,C.BRAND,C.PNAME,C.PRODUCT_THUMURL,B.CARTSIZE AS PRODUCT_OPTION,B.CARTSTOCK AS PRODUCT_STOCK,C.PRICE,A.DELIVERY_STATE
+		  FROM TBL_ORDER A INNER JOIN TBL_ORDER_DETAIL B ON A.ORDERNO = B.ORDERNO INNER JOIN PRODUCT C ON B.PNO = C.PNO
+		 WHERE A.MNO = #{mno}
+		 ORDER BY ORDERDATE DESC, NUM ASC
+	</select>
+	
+	<select id="ordernoList" resultType="com.lee.myapp.domain.OrderVO">
+		SELECT ORDERNO,ORDERDATE
+		  FROM TBL_ORDER
+ 		 WHERE MNO = #{mno}
+ 		 ORDER BY ORDERDATE DESC
+	</select>
+</mapper>

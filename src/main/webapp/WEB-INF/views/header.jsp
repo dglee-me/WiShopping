@@ -49,7 +49,7 @@
 				</div>				
 				<ul class="icon-menus">
 				<li class="my-shopping-more">
-					<a href="./purchase/list">
+					<a href="${pageContext.request.contextPath}/purchase/list">
 						<span class="my-shopping-icon">&nbsp;</span>
 						<span class="my-shopping-title">마이쇼핑</span>
 					</a>

@@ -17,7 +17,8 @@ public class OrderVO {
 		    payer_email varchar2(50) not null,
 		    payer_phone varchar2(11) not null,
 		    amount int not null,
-		    orderdate date default sysdate
+		    orderdate date default sysdate,
+		    delivery_state int default 0
 		); 
 		
 		ALTER TABLE TBL_ORDER ADD CONSTRAINT TBL_ORDER_MNO FOREIGN KEY(MNO) REFERENCES MEMBER(MNO);
@@ -35,6 +36,7 @@ public class OrderVO {
 	private String payer_phone;
 	private int amount;
 	private Date orderdate;
+	private int delivery_state;
 	
 	public String getOrderno() {
 		return orderno;
@@ -127,10 +129,17 @@ public class OrderVO {
 		this.orderdate = orderdate;
 		return this;
 	}
+	public int getDelivery_state() {
+		return delivery_state;
+	}
+	public OrderVO setDelivery_state(int delivery_state) {
+		this.delivery_state = delivery_state;
+		return this;
+	}
 	
 	public String toString() {
 		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", order_rec= "+order_rec+", zipcode= "+zipcode+", received_at= "+received_at+", received_at_detail= "
 				+received_at_detail+", received_phone= "+received_phone+", delivery_message= "+delivery_message+", payer_name= "+payer_name+", payer_email= "+payer_email
-				+", payer_phone= "+payer_phone+", amount= "+amount+orderdate+", orderdate= "+orderdate+"]";
+				+", payer_phone= "+payer_phone+", amount= "+amount+orderdate+", orderdate= "+orderdate+", delivery_state= "+delivery_state+"]";
 	}
 }
