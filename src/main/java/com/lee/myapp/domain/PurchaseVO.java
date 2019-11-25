@@ -13,7 +13,7 @@ public class PurchaseVO {
 	private String product_option;
 	private int product_stock;
 	private int price;
-	private int state;
+	private int delivery_status;
 	
 	public int getNum() {
 		return num;
@@ -85,15 +85,15 @@ public class PurchaseVO {
 		this.price = price;
 		return this;
 	}
-	public int getState() {
-		return state;
+	public int getDelivery_status() {
+		return delivery_status;
 	}
-	public PurchaseVO setState(int state) {
-		this.state = state;
+	public PurchaseVO setDelivery_status(int delivery_status) {
+		this.delivery_status = delivery_status;
 		return this;
 	}
 	public String toString() {
 		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", product_option= "+product_option
-				+", product_stock= "+product_stock+", price= "+price+", state= "+state+" ]";
+				+", product_stock= "+product_stock+", price= "+price+", delivery_status= "+delivery_status+" ]";
 	}
 }

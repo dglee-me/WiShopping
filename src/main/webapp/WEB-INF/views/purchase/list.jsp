@@ -103,7 +103,7 @@
 					<c:if test="${order.orderno eq orderno.orderno}">
 					<div class="order">
 						<a href="${pageContext.request.contextPath}/productions/view?pno=${order.pno}">
-							<div class="image" style="background-image:url('http://localhost:8081/myapp${order.product_thumurl}');"></div>
+							<div class="image" style="background-image:url('${pageContext.request.contextPath}${order.product_thumurl}');"></div>
 						</a>
 						<div class="product_info">
 							<div class="product_title">
@@ -116,7 +116,12 @@
 								<div class="bar">|</div>
 								<div class="count"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.product_stock}"/>개</div>
 								<div class="purchase_state">
-									<c:if test="${order.state eq 0}">결제완료</c:if>
+									<c:if test="${order.delivery_status eq 0}">입금대기</c:if>
+									<c:if test="${order.delivery_status eq 1}">결제완료</c:if>
+									<c:if test="${order.delivery_status eq 2}">배송준비</c:if>
+									<c:if test="${order.delivery_status eq 3}">배송중</c:if>
+									<c:if test="${order.delivery_status eq 4}">배송완료</c:if>
+									<c:if test="${order.delivery_status eq 5}">구매확정</c:if>
 									<span></span>
 									<span class="purchase_state_text">| 택배배송</span>
 								</div>

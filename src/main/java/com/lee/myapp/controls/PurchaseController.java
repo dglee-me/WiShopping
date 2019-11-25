@@ -35,6 +35,10 @@ public class PurchaseController {
 			List<PurchaseVO> orders = purchaseService.purchaseList(member.getMno());
 			List<OrderVO> ordernos = purchaseService.ordernoList(member.getMno());
 			
+			for(int i=0;i<orders.size();i++) {
+				orders.get(i).setProduct_thumurl(orders.get(i).getProduct_thumurl().replace("\\","/"));
+			}
+			
 			model.addAttribute("orders",orders);
 			model.addAttribute("ordernos",ordernos);
 			

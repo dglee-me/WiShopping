@@ -36,7 +36,7 @@ public class OrderVO {
 	private String payer_phone;
 	private int amount;
 	private Date orderdate;
-	private int delivery_state;
+	private int delivery_status;
 	
 	public String getOrderno() {
 		return orderno;
@@ -129,17 +129,17 @@ public class OrderVO {
 		this.orderdate = orderdate;
 		return this;
 	}
-	public int getDelivery_state() {
-		return delivery_state;
+	public int getDelivery_status() {
+		return delivery_status;
 	}
-	public OrderVO setDelivery_state(int delivery_state) {
-		this.delivery_state = delivery_state;
+	public OrderVO setDelivery_status(int delivery_status) {
+		this.delivery_status = delivery_status;
 		return this;
 	}
 	
 	public String toString() {
 		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", order_rec= "+order_rec+", zipcode= "+zipcode+", received_at= "+received_at+", received_at_detail= "
 				+received_at_detail+", received_phone= "+received_phone+", delivery_message= "+delivery_message+", payer_name= "+payer_name+", payer_email= "+payer_email
-				+", payer_phone= "+payer_phone+", amount= "+amount+orderdate+", orderdate= "+orderdate+", delivery_state= "+delivery_state+"]";
+				+", payer_phone= "+payer_phone+", amount= "+amount+orderdate+", orderdate= "+orderdate+", delivery_status= "+delivery_status+"]";
 	}
 }

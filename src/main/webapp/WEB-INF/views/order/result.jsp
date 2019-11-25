@@ -16,7 +16,7 @@
 	<div id="body" class="orders order_result" style="padding-bottom:0px;">
 		<div id="order_result">
 			<div class="image success"></div>
-			<a href="${pageContext.request.contextPath}/">
+			<a href="${pageContext.request.contextPath}/purchase/list">
 				<div class="icon">주문현황보기</div>
 			</a>
 		</div>
