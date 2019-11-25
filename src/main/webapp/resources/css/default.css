@@ -21,6 +21,6 @@ select::-ms-expand{opacity:0;}
 .button-color-blue{background-color:#5FCAEC; border-color:#5FCAEC; color:#fff;}
 .hide {position:absolute; left:-5000px;}
 .count{color:#5FCAEC; margin-left:4px;}
-.t_bold{font-weight:bold;}
+.t_bold{font-weight:bold; color:#424242;}
 .clear {clear:both;}
 .clear:after {content:""; display:block; clear:both;}

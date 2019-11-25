@@ -20,7 +20,6 @@ import com.lee.myapp.service.MemberService;
  */
 @Controller
 public class HomeController {
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Inject

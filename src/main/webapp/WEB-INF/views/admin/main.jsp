@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,8 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>HELLO!@@@!!!! IT'S ADMIN PAGE!!</h1>
-	
+	<jsp:include page="../header.jsp"/>
+	<h1 style="text-align:center;">HELLO!@@@!!!! IT'S ADMIN PAGE!!</h1><br>
 	<div>
 		<h2><a href="${pageContext.request.contextPath}/admin/write">공지사항 쓰기</a></h2>
 		<h2><a href="${pageContext.request.contextPath}/productions/regist">상품 등록</a></h2>

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css?after">
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 

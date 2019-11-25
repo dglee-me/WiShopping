@@ -261,7 +261,7 @@
 							<div class="amount" id="preview_delivery_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total_delivery}"/></div>
 						</div>
 						<div class="total cost_panel">
-							<div class="amount" id="preview_selling_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total_price + total_delivery}"/>원</div>
+							<div class="amount" id="preview_selling_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${amount + total_delivery}"/>원</div>
 						</div>
 					</div>
 				</div>

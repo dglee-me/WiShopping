@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
 import com.lee.myapp.domain.MemberVO;
-import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.service.CartService;
 
 @Controller
 @RequestMapping("/cart/")
 public class CartController {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	@Inject
 	CartService cartService;

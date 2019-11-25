@@ -26,7 +26,7 @@ import com.lee.myapp.service.OrderService;
 @Controller
 @RequestMapping("/order/")
 public class OrderController {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Inject
 	OrderService orderService;

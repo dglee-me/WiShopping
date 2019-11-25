@@ -21,7 +21,7 @@ import com.lee.myapp.utils.UploadFileUtils;
 @Controller
 @RequestMapping("/productions/")
 public class ProductionsController {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(ProductionsController.class);
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;

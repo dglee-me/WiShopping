@@ -62,7 +62,12 @@
 				<nav class="product_selling_category">
 					<ul>
 						<li class="commerce-category-list"><a href="${pageContext.request.contextPath}/">홈</a></li>
-						<li class="commerce-category-list"><a href="javascript:void(0);">${product.category1}</a></li>
+						<li class="commerce-category-list">
+							<c:if test="${product.category1 eq '패션'}"><a href="${pageContext.request.contextPath}/category/group/fashion">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '잡화'}"><a href="${pageContext.request.contextPath}/category/group/accessories">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '인테리어'}"><a href="${pageContext.request.contextPath}/category/group/interior">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '가전·디지털'}"><a href="${pageContext.request.contextPath}/category/group/digital">${product.category1}</a></c:if>
+						</li>
 						<li class="commerce-category-list"><a href="javascript:void(0);">${product.category2}</a></li>
 					</ul>
 				</nav>

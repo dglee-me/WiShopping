@@ -14,7 +14,7 @@ import com.lee.myapp.service.BoardService;
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Inject
 	BoardService boardService;

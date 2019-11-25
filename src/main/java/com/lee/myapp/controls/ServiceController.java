@@ -22,7 +22,7 @@ import com.lee.myapp.service.BoardService;
 @Controller
 @RequestMapping("/notice/*")
 public class ServiceController {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
 	
 	@Inject
 	BoardService boardService;

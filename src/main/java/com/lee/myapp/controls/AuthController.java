@@ -26,7 +26,7 @@ import com.lee.myapp.service.MemberService;
 @Controller
 @RequestMapping("/auth/*")
 public class AuthController {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
 	@Inject
 	MemberService memberService;
@@ -56,7 +56,7 @@ public class AuthController {
 	}
 
 	@RequestMapping(value="/auth/joinConfirm", method=RequestMethod.GET)
-	public String joinConfirm(@ModelAttribute("member") MemberVO member, Model model ) throws Exception{
+	public String joinConfirm(@ModelAttribute("member") MemberVO member) throws Exception{
 		logger.info(member.getEmail() + " : AUTH Confirmed");
 		
 		memberService.authConfirm(member);

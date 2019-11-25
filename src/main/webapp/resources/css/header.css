@@ -13,7 +13,7 @@
 .top_bar_util{position:relative; float:left;}
 .top_bar_util li{float:left; margin-left:10px;}
 .top_bar_login{float:right;}
-.top_bar_login li{float:left; margin-right:10px;}
+.top_bar_login li{float:left; margin-right:10px; color:#424242;}
 
 .logo a{background-image:url('/myapp/resources/image/logo_158_61.png'); width:158px; height:41px; float:left; display:block;
 	margin-right:20px; padding-top:20px; color:transparent;}
