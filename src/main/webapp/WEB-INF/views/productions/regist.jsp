@@ -1,17 +1,73 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/productRegist.css?after">
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/regist.js" async></script>
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/write.js" async></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/regist.js" async></script>
 
 <html lang="ko">
 <head>
+	<script type="text/javascript">
+		var clickFlag = false;
+		
+		function clickCheck(){
+			if(clickFlag){
+				return clickFlag;
+			}else{
+				clickFlag = true;
+				return false;
+			}
+		}
+		
+		$(document).ready(function(){
+			$(".main_category").change(function(){
+				var fashion = ["아우터","상의","하의","신발","가방","잡화"];
+				var accessories = ["가방","지갑","벨트","안경테/선글라스","양말/스타킹","패션 잡화/소품"];
+				var interior = ["가구","침구","조명·인테리어"];
+				var digital = ["대형가전","주방가전","컴퓨터·태블릿","음향가전","디지털·휴대폰·카메라"];
+				
+				var selectItem = $(".main_category").val();
+				var changeItem;
+				
+				if(selectItem == "패션"){
+					changeItem = fashion;
+				}else if(selectItem == "잡화"){
+					changeItem = accessories;
+				}else if(selectItem == "인테리어"){
+					changeItem = interior;
+				}else if(selectItem == "가전·디지털"){
+					changeItem = digital;
+				}else{
+					changeItem = ["중분류"];
+				}
+				
+				$(".sub_category").empty();
+				
+				for(var i=0;i<changeItem.length;i++){
+					var option = $("<option>"+changeItem[i]+"</option>");
+					$(".sub_category").append(option);
+				}
+			});
+
+			$(".plus_option").click(function(){
+				if(clickCheck()) return;
+			
+				var inputDiv = document.createElement("div");
+				inputDiv.className="selling-option-plus-option";
+				
+				inputDiv.innerHTML = "<input type='text' maxlength='50' class='input_option'>"
+					+"<button type='button' class='btn_input_option'>옵션 추가</button>"
+					+"<button type='button' class='btn_input_option close'>닫기</button>";
+				
+				
+				$(".selling-option-form-content").append(inputDiv);
+			});
+		});
+	</script>
 	<meta charset="UTF-8">
 	<title>글쓰기</title>
 </head>
@@ -25,7 +81,7 @@
 				<nav class="product_selling_category">
 					<ul>
 						<li class="commerce-category-list">
-							<select class="category" name="category1">
+							<select class="category main_category" name="category1">
 								<option value="">대분류</option>
 								<option value="패션">패션</option>
 								<option value="잡화">잡화</option>
@@ -34,14 +90,8 @@
 							</select>
 						</li>
 						<li class="commerce-category-list">
-							<select class="category" name="category2">
+							<select class="category sub_category" name="category2">
 								<option value="">중분류</option>
-								<option value="아우터">아우터</option>
-								<option value="상의">상의</option>
-								<option value="하의">하의</option>
-								<option value="신발">신발</option>
-								<option value="가방">가방</option>
-								<option value="잡화">잡화</option>
 							</select>
 						</li>
 					</ul>
@@ -99,18 +149,21 @@
 											</dl>
 										</div>
 										<div class="box_optarea">
-											<label>Size 별 재고(사이즈가 없을 경우 Free에 기입)</label>
-											<div class="box_size_opt">
-												<div class="sel">S size</div>
-												<div class="sel">M size</div>
-												<div class="sel">L size</div>
-												<div class="sel">FREE</div>
-											</div>
-											<div class="box_size_opt-input">
-												<input type="text" name="s" value="0">
-												<input type="text" name="m" value="0">
-												<input type="text" name="l" value="0">
-												<input type="text" name="free" value="0">
+											<div class="selling-option-form-content">
+												<label>※반드시 색상;옵션(사이즈 등);갯수 순으로 입력하며, 구분은 ;(세미콜론)으로 합니다.</label>
+												<div class="selling-option-select-input">
+													<div class="input-group select-input">
+														<select class="form-control">
+															<option selected value disabled>옵션 보기</option>
+														</select>
+														<span class="select-input_icon">
+															<svg class="icon" width="10" height="10" style="fill:currentColor" preserveAspectRatio="xMidYMid meet">
+																<path fill-rule="evenodd" d="M0 3l5 5 5-5z"></path>
+															</svg>
+														</span>
+														<button type="button" class="plus_option">추가</button>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>

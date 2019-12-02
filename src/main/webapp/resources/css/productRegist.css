@@ -42,10 +42,22 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .today select{width:25px; height:25px; padding:5px 7px; border:2px solid #E2E2E2; border-radius:2px;}
 
 .box_optarea{margin-top:35px;}
-.box_optarea .sel{width:40px; padding-top:0; padding-bottom:2px; display:inline-block; margin-top:3px; padding:2px 4px 1px 4px; background:#efeff0; border:1px solid #999999;
-	line-height:17px; font-size:11px; color:#666666; text-align:center;}
-.box_size_opt{margin-top:5px;}
-.box_size_opt-input input[type="text"]{border:2px solid #E2E2E2; border-radius:2px; width:50px; padding:2px 4px 1px 4px; margin-top:3px; text-align:center;}
+.box_optarea .input_option{font-size:16px;}
+.box_optarea .selling-option-form-content{flex:0 0 auto;}
+.box_optarea .selling-option-form-content .selling-option-select-input{margin-top:5px; margin-bottom:10px;}
+.box_optarea .selling-option-form-content .selling-option-select-input .select-input{position:relative; flex:1 0 auto;}
+.box_optarea .selling-option-form-content .selling-option-select-input .select-input .form-control{display:inline; border-color:#5FCAEC; font-size:15px; border-radius:4px; 
+	padding-right:30px; background-image:none;}
+.form-control{display:block; transition:.2s border-color, .2s box-shadow, .2s background-color; box-sizing:border-box; height:40px; width:50%; padding:0 15px;
+	line-height:40px; border-radius:4px; border:solid 1px #dbdbdb; background-color:white; color:#424242; flex:1 0 auto;}
+.box_optarea .selling-option-form-content .selling-option-select-input .select-input .select-input_icon{color:#5FCAEC;}
+.select-input_icon{position:absolute; top:10px; right:290px; padding:5px; font-size:0; cursor:default; pointer-events:none;}
+.selling-option-plus-option{font-size:15px; width:100%; height:40px;}
+.input_option{width:50%; height:100%; padding:11px 0 9px 16px; border:1px solid #5FCAEC; border-radius:4px; }
+
+.plus_option{width:10%; height:40px; vertical-align:top; border:1px solid #5FCAEC; border-radius:4px; color:#fff; background-color:#5FCAEC; font-weight:bold; font-size:16px;}
+.btn_input_option{width:10%; height:40px; border:1px solid #5FCAEC; border-radius:4px; color:#fff; background-color:#5FCAEC; font-weight:bold; font-size:16px;
+	margin-left:2px; vertical-align:top;}
 
 .info_description .info_product.wrap_button{min-height:auto;}
 .wrap_button{margin-top:23px;}
