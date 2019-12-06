@@ -37,32 +37,32 @@
 								<div class="category_list">
 									<ul class="group">
 										<li>
-											<a href="#">
+											<a href="javascript:void(0);">
 												<span class="category_title">아우터</span>
 											</a>
 										</li>
 										<li>
-											<a href="#">
+											<a href="javascript:void(0);">
 												<span class="category_title">상의</span>
 											</a>
 										</li>
 										<li>
-											<a href="#">
+											<a href="javascript:void(0);">
 												<span class="category_title">하의</span>
 											</a>
 										</li>
 										<li>
-											<a href="#">
+											<a href="javascript:void(0);">
 												<span class="category_title">신발</span>
 											</a>
 										</li>
 										<li>
-											<a href="#">
+											<a href="javascript:void(0);">
 												<span class="category_title">가방</span>
 											</a>
 										</li>
 										<li>
-											<a href="#">
+											<a href="javascript:void(0);">
 												<span class="category_title">잡화</span>
 											</a>
 										</li>
@@ -78,12 +78,12 @@
 											<article class="product-item">
 												<a href="${pageContext.request.contextPath}/productions/view?pno=${product.pno}" class="product-item_overlay"></a>
 												<div class="product-item-image">
-													<img class="image" src="${pageContext.request.contextPath}${product.product_thumurl}">
+													<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
 												</div>
 												<div class="product-item-content">
 													<h1 class="product-item_header">
-														<span class="product-item_header__brand">${product.brand }</span>
-														<span class="product-item_header__name">${product.pname }</span>
+														<span class="product-item_header__brand">${product.brand}</span>
+														<span class="product-item_header__name">${product.pname}</span>
 													</h1>
 													<span class="product-item-price">
 														<span class="product-item-price__price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}"/></span>

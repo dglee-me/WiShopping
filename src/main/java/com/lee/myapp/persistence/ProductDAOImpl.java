@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 
 @Repository
@@ -17,11 +18,17 @@ public class ProductDAOImpl implements ProductDAO{
 	SqlSession sqlSession;
 	
 	@Override
-	public int register(ProductVO pd) throws Exception {
+	public int register(ProductVO product) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+".register",pd);
+		return sqlSession.insert(namespace+".register",product);
 	}
 
+	@Override
+	public int register_option(ProductOptionVO option) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+".register_option",option);
+	}
+	
 	@Override
 	public List<ProductVO> list(String category) throws Exception {
 		// TODO Auto-generated method stub

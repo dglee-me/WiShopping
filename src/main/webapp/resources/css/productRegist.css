@@ -42,22 +42,29 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .today select{width:25px; height:25px; padding:5px 7px; border:2px solid #E2E2E2; border-radius:2px;}
 
 .box_optarea{margin-top:35px;}
-.box_optarea .input_option{font-size:16px;}
-.box_optarea .selling-option-form-content{flex:0 0 auto;}
-.box_optarea .selling-option-form-content .selling-option-select-input{margin-top:5px; margin-bottom:10px;}
-.box_optarea .selling-option-form-content .selling-option-select-input .select-input{position:relative; flex:1 0 auto;}
-.box_optarea .selling-option-form-content .selling-option-select-input .select-input .form-control{display:inline; border-color:#5FCAEC; font-size:15px; border-radius:4px; 
-	padding-right:30px; background-image:none;}
-.form-control{display:block; transition:.2s border-color, .2s box-shadow, .2s background-color; box-sizing:border-box; height:40px; width:50%; padding:0 15px;
-	line-height:40px; border-radius:4px; border:solid 1px #dbdbdb; background-color:white; color:#424242; flex:1 0 auto;}
-.box_optarea .selling-option-form-content .selling-option-select-input .select-input .select-input_icon{color:#5FCAEC;}
-.select-input_icon{position:absolute; top:10px; right:290px; padding:5px; font-size:0; cursor:default; pointer-events:none;}
-.selling-option-plus-option{font-size:15px; width:100%; height:40px;}
-.input_option{width:50%; height:100%; padding:11px 0 9px 16px; border:1px solid #5FCAEC; border-radius:4px; }
+.box_optarea table{border-top:1px solid #dedede;}
+.box_optarea tbody th{border:1px solid #dedede; text-align:left; word-break:keep-all; padding:11px 15px 10px; vertical-align:top; color:#2e3039; background-color:#f3f3f3;
+	font-family: '¸¼Àº °íµñ', 'Malgun Gothic', 'Dotum', 'µ¸¿ò', 'arial', 'verdana', sans-serif; font-size:14px;}
+.flabel{display:inline-block; position:relative; min-height:20px; margin:7px 28px 7px 0; padding:0 0 0 30px; line-height:18px; cursor:pointer; font-size:14px; color:#555;}	
+.box_optarea tbody td{border:1px solid #dedede;}
 
-.plus_option{width:10%; height:40px; vertical-align:top; border:1px solid #5FCAEC; border-radius:4px; color:#fff; background-color:#5FCAEC; font-weight:bold; font-size:16px;}
-.btn_input_option{width:10%; height:40px; border:1px solid #5FCAEC; border-radius:4px; color:#fff; background-color:#5FCAEC; font-weight:bold; font-size:16px;
-	margin-left:2px; vertical-align:top;}
+.flabel input.fcheck{position:absolute; height:0; width:0; opacity:0; cursor:pointer;}
+input[type="radio"]{background-image:url('/myapp/resources/image/bg_radio.png'); background-size:20px 20px;}
+input[type="radio"]:checked{background-image:url('/myapp/resources/image/bg_radio_checked.png'); transition: .2s ease-out;}
+.flabel .checkMark{position:absolute; top:0; left:5; height:18px; width:18px; border:1px solid #d4d4d4; background:#fff; transition:all .2s ease-out;}
+
+.flabel input.fcheck:checked ~ .checkMark:after{display:block;}
+.checkMark:after{display:none; content:""; position:absolute; left:5px; top:5px; width:8px; height:8px; border-radius:50%; background:#5FCAEC; transition:all .2s ease-out;}
+.checkMark{border-color:#5FCAEC; border-radius:50%; background:#fff;}
+
+.optionSet{display:block; margin-top:5px;}
+.option_color{height:32px; line-height:14px; padding:0 9px 2px; font-size:14px; color:#686b6d; }
+.optionSet tbody td{height:30px;}
+.optionSet table{margin-left:5px; margin-bottom:5px;}
+[contenteditable=true]:empty:before{content:attr(placeholder); display:block;}
+#option_btn{position:relative; float:right; top:3px; right:8px; height:30px; color:#fff; padding:0 10px; font-size:13px; font-weight:normal; line-height:28px; 
+	background-color:#7c7e8c; transition: .2s ease-out;}
+
 
 .info_description .info_product.wrap_button{min-height:auto;}
 .wrap_button{margin-top:23px;}

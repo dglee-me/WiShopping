@@ -78,7 +78,7 @@
 								<div class="info_thumnail">
 									<div>
 										<div class="info_img_wrap">
-											<img src="${pageContext.request.contextPath}/${product.product_thumurl}" style="display:block;">
+											<img src="${pageContext.request.contextPath}/${product.productthumurl}" style="display:block;">
 										</div>
 									</div>
 								</div>
@@ -98,7 +98,7 @@
 											<dl class="info_price shipping">
 												<dt class="ico">배송</dt>
 												<dd>
-													<p class="shipping"><c:if test="${product.shipping eq '0'}">무료배송</c:if><c:if test="${product.shipping ne '0'}">${product.shipping}원</c:if></p>
+													<p class="shipping"><c:if test="${product.shippingfee eq '0'}">무료배송</c:if><c:if test="${product.shippingfee ne '0'}">${product.shippingfee}원</c:if></p>
 													<p class="today">
 														<span class="color_blue">상품별배송</span>
 														<span class="line">ㅣ</span>
@@ -111,14 +111,7 @@
 										<div class="box_optarea">
 											<label><span>Size</span></label>
 											<div class="box_size_opt">
-												<c:if test="${product.free eq 0 }">
-													<div class="sel" id="select_s"><a href="javascript:void(0);">S size</a></div>
-													<div class="sel" id="select_m"><a href="javascript:void(0);">M size</a></div>
-													<div class="sel" id="select_l"><a href="javascript:void(0);">L size</a></div>
-												</c:if>
-												<c:if test="${product.free ne 0 }">
-													<div class="sel" id="select_free"><a href="javascript:void(0);">FREE</a></div>
-												</c:if>
+												<!-- 여기에 사이즈를 입력해야한다. 잘 생각해서 할것 -->
 											</div>
 											<div class="optselect_area">
 												<ul id="_optionSelectList" class="opt_selectlist">
@@ -152,7 +145,7 @@
 										<div id="productdetails" class="tab_conts">
 											<div class="deal_detailimg">
 												<p>
-													<img src="${pageContext.request.contextPath}/${product.product_url}">
+													<img src="${pageContext.request.contextPath}${product.producturl}">
 												</p>
 											</div>
 										</div>

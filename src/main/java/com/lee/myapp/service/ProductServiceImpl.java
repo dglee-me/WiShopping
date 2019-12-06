@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.persistence.ProductDAO;
 
@@ -15,11 +16,17 @@ public class ProductServiceImpl implements ProductService{
 	ProductDAO productDAO;
 	
 	@Override
-	public int register(ProductVO pd) throws Exception {
+	public int register(ProductVO product) throws Exception {
 		// TODO Auto-generated method stub
-		return productDAO.register(pd);
+		return productDAO.register(product);
 	}
 
+	@Override
+	public int register_option(ProductOptionVO option) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.register_option(option);
+	}
+	
 	@Override
 	public List<ProductVO> list(String category) throws Exception {
 		// TODO Auto-generated method stub
@@ -31,5 +38,4 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDAO.view(pno);
 	}
-
 }

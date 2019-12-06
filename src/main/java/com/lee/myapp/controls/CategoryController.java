@@ -1,5 +1,7 @@
 package com.lee.myapp.controls;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.service.ProductService;
 
 @Controller
@@ -22,6 +25,11 @@ public class CategoryController {
 	@RequestMapping(value="/group/fashion", method=RequestMethod.GET)
 	public void fashionCategoryGET(Model model) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
+		ArrayList<ProductVO> a = new ArrayList<ProductVO>();
+		
+		a = (ArrayList<ProductVO>) productService.list("패션");
+		
+		System.out.println(a.get(0).toString());
 		
 		model.addAttribute("list", productService.list("패션"));
 	}
