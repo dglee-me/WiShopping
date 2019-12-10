@@ -195,6 +195,10 @@
 		//Add to cart
 		$(document).on("click",".cart",function(){
 			var selected = $(".selling-option-item_name").text().split(" ");
+			
+			var url = location.href;
+			var pno = url.slice(url.indexOf('=') + 1);
+			
 			var optioncolor = "";
 			var optionsize = "";
 			var inventory = "";
@@ -220,7 +224,8 @@
 			var data = {
 					optioncolor : optioncolor,
 					optionsize : optionsize,
-					inventory : inventory
+					inventory : inventory,
+					pno : pno
 			}; 
 			
 			$.ajax({

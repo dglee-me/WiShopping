@@ -38,7 +38,7 @@ public class CartController {
 	
 	@ResponseBody
 	@RequestMapping(value="/addCart", method=RequestMethod.POST)
-	public int addCartListPOST(CartVO cart, HttpSession session) throws Exception{
+	public int addCartListPOST(String optioncolor, String optionsize, String inventory, int pno, HttpSession session) throws Exception{
 		logger.info("-------- CART : ADD METHOD=POST --------");
 		
 		int result = 0;
@@ -46,8 +46,23 @@ public class CartController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
-			System.out.println("들어왔따링");
+			String[] color = optioncolor.split(";");
+			String[] size = optionsize.split(";");
+			String[] stock = inventory.split(";");
 			
+			for(int i=0;i<color.length;i++) {
+				if(color[i] == "") continue;
+				
+				CartVO cart = new CartVO()
+						.setMno(member.getMno())
+						.setPno(pno)
+						.setOptioncolor(color[i])
+						.setOptionsize(size[i])
+						.setInventory(Integer.parseInt(stock[i]));
+
+				cartService.addCart(cart);
+			}
+
 			result = 1;
 		}
 		

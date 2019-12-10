@@ -9,7 +9,7 @@
 <mapper namespace="cartMapper">
 	<insert id="addCart">
 		INSERT INTO TBL_CART
-		VALUES(CARTNO_SEQ.NEXTVAL,#{mno},#{pno},#{cartstock},#{cartsize})
+		VALUES(CARTNO_SEQ.NEXTVAL,#{mno},#{pno},#{optioncolor},#{optionsize},#{inventory})
 	</insert>
 	
 	<select id="cartList" resultType="com.lee.myapp.domain.CartListVO">
