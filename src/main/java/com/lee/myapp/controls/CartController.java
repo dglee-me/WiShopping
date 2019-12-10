@@ -46,8 +46,8 @@ public class CartController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
-			cart.setMno(member.getMno());
-			cartService.addCart(cart);
+			System.out.println("들어왔따링");
+			
 			result = 1;
 		}
 		

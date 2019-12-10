@@ -38,4 +38,10 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDAO.view(pno);
 	}
+
+	@Override
+	public List<ProductOptionVO> view_option(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.view_option(pno);
+	}
 }

@@ -93,8 +93,8 @@ public class ProductVO {
 	public int getShippingday() {
 		return shippingday;
 	}
-	public ProductVO setShippingday(int shipping_day) {
-		this.shippingday = shipping_day;
+	public ProductVO setShippingday(int shippingday) {
+		this.shippingday = shippingday;
 		return this;
 	}
 	

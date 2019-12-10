@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
 	<meta charset="UTF-8">
 	<title>위쇼핑! - 패션</title>
 </head>

@@ -13,17 +13,24 @@ public class ProductOptionVO {
 		);
 	*/
 	private int ono;
+	private int sequence;
 	private int pno;
-	private String color;
-	private String size;
+	private String optioncolor;
+	private String optionsize;
 	private int inventory;
-	
 	
 	public int getOno() {
 		return ono;
 	}
 	public ProductOptionVO setOno(int ono) {
 		this.ono = ono;
+		return this;
+	}
+	public int getSequence() {
+		return sequence;
+	}
+	public ProductOptionVO setSequence(int sequence) {
+		this.sequence = sequence;
 		return this;
 	}
 	public int getPno() {
@@ -33,18 +40,18 @@ public class ProductOptionVO {
 		this.pno = pno;
 		return this;
 	}
-	public String getColor() {
-		return color;
+	public String getOptioncolor() {
+		return optioncolor;
 	}
-	public ProductOptionVO setColor(String color) {
-		this.color = color;
+	public ProductOptionVO setOptioncolor(String optioncolor) {
+		this.optioncolor = optioncolor;
 		return this;
 	}
-	public String getSize() {
-		return size;
+	public String getOptionsize() {
+		return optionsize;
 	}
-	public ProductOptionVO setSize(String size) {
-		this.size = size;
+	public ProductOptionVO setOptionsize(String optionsize) {
+		this.optionsize = optionsize;
 		return this;
 	}
 	public int getInventory() {
@@ -56,6 +63,6 @@ public class ProductOptionVO {
 	}
 	
 	public String toString() {
-		return "ProductOptionVO = [ono= "+ono+", pno= "+pno+", color= "+color+", size= "+size+", inventory= "+inventory+"]";
+		return "ProductOptionVO = [ono= "+ono+", sequence= "+sequence+", pno= "+pno+", option_color= "+optioncolor+", option_size= "+optionsize+", inventory= "+inventory+"]";
 	}
 }

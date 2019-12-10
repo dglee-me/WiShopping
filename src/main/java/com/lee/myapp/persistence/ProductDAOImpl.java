@@ -41,4 +41,10 @@ public class ProductDAOImpl implements ProductDAO{
 		return sqlSession.selectOne(namespace+".view",pno);
 	}
 
+	@Override
+	public List<ProductOptionVO> view_option(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".view_option",pno);
+	}
+
 }

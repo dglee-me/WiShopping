@@ -14,7 +14,7 @@
 	
 	<insert id="register_option">
 		INSERT INTO TBL_PRODUCT_OPTION(ONO,PNO,OPTION_COLOR,OPTION_SIZE,INVENTORY)
-			VALUES(ono_seq.nextval,pno_seq.currval,#{color},#{size},#{inventory})
+			VALUES(ono_seq.nextval,pno_seq.currval,#{optioncolor},#{optionsize},#{inventory})
 	</insert>
 	
 	<!-- Cateogry list -->
@@ -26,9 +26,15 @@
 	</select>
 	
 	<select id="view" resultType="com.lee.myapp.domain.ProductVO">
-		SELECT PNO, CATEGORY1, CATEGORY2, PNAME, BRAND, PRICE, PRODUCT_THUMURL, PRODUCT_URL
+		SELECT PNO, CATEGORY1, CATEGORY2, PNAME, BRAND, PRICE, PRODUCT_THUMURL, PRODUCT_URL, SHIPPING_FEE, SHIPPING_DAY
 		  FROM PRODUCT
-		 WHERE PNO = 205
-		 ORDER BY PNO DESC;
+		 WHERE PNO = #{pno}
+	</select>
+	
+	<select id="view_option" resultType="com.lee.myapp.domain.ProductOptionVO">
+		SELECT ONO, ROW_NUMBER() OVER(ORDER BY ONO ASC) AS SEQUENCE, PNO, OPTION_COLOR, OPTION_SIZE, INVENTORY
+		  FROM TBL_PRODUCT_OPTION
+		 WHERE PNO = #{pno}
+		 ORDER BY ONO ASC
 	</select>
 </mapper>

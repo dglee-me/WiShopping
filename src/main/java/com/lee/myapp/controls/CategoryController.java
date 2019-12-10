@@ -25,11 +25,6 @@ public class CategoryController {
 	@RequestMapping(value="/group/fashion", method=RequestMethod.GET)
 	public void fashionCategoryGET(Model model) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
-		ArrayList<ProductVO> a = new ArrayList<ProductVO>();
-		
-		a = (ArrayList<ProductVO>) productService.list("패션");
-		
-		System.out.println(a.get(0).toString());
 		
 		model.addAttribute("list", productService.list("패션"));
 	}

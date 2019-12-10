@@ -130,7 +130,7 @@
 					var input_option = document.createElement("input");
 
 					input_option.type = "hidden";
-					input_option.name = "color";
+					input_option.name = "optioncolor";
 					input_option.value = option_color[i];
 					
 					$(".option-row_color").append(input_option);
@@ -143,7 +143,7 @@
 					var input_option = document.createElement("input");
 
 					input_option.type = "hidden";
-					input_option.name = "size";
+					input_option.name = "optionsize";
 					input_option.value = option_size[i];
 					
 					$(".option-row_color").append(input_option);
@@ -490,7 +490,7 @@
 											<th scope="row">배송비 상세 설정</th>
 											<td id="delivery-fee-content">
 												<span id="delivery-shipfee-grade" class="delivery-shipfee-grade-hidden">
-													배송비 <input type="text" class="ftext right" style="width:100px; border:1px solid #ededed;" name="shippingfee" value="0"> 원을 부과합니다.
+													배송비 <input type="text" class="ftext right" style="width:100px; border:1px solid #ededed;" name="shipping_fee" value="0"> 원을 부과합니다.
 												</span>
 											</td>
 										</tr>

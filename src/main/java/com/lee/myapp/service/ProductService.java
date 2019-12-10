@@ -10,4 +10,5 @@ public interface ProductService {
 	public int register_option(ProductOptionVO option) throws Exception;
 	public List<ProductVO> list(String category) throws Exception;
 	public ProductVO view(int pno) throws Exception;
+	public List<ProductOptionVO> view_option(int pno) throws Exception;
 }
