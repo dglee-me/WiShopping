@@ -63,12 +63,12 @@
 											<article class="product-item">
 												<a href="${pageContext.request.contextPath}/productions/view?pno=${product.pno}" class="product-item_overlay"></a>
 												<div class="product-item-image">
-													<img class="image" src="${pageContext.request.contextPath}${product.product_thumurl}">
+													<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
 												</div>
 												<div class="product-item-content">
 													<h1 class="product-item_header">
-														<span class="product-item_header__brand">${product.brand }</span>
-														<span class="product-item_header__name">${product.pname }</span>
+														<span class="product-item_header__brand">${product.brand}</span>
+														<span class="product-item_header__name">${product.pname}</span>
 													</h1>
 													<span class="product-item-price">
 														<span class="product-item-price__price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}"/></span>

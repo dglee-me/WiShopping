@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.service.CartService;
@@ -32,8 +31,9 @@ public class CartController {
 		logger.info("-------- CART : MAIN METHOD=GET --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
-		
+
 		model.addAttribute("cartList",cartService.cartList(member.getMno()));
+		model.addAttribute("cartOption",cartService.cartOption(member.getMno()));
 	}
 	
 	@ResponseBody
@@ -86,27 +86,25 @@ public class CartController {
 		
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/cartRemove", method=RequestMethod.POST)
-	public int cartRemovePOST(@RequestParam(value="checkArray[]") List<String> checkArray,CartListVO cart,HttpSession session) throws Exception{
+	public int cartRemovePOST(@RequestParam(value="checkArray[]") List<String> pno, HttpSession session) throws Exception{
 		logger.info("-------- CART : REMOVE METHOD=POST --------");
 		
 		int result = 0;
-		int cartNo = 0;
 
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
-			cart.setMno(member.getMno());
-			
-			for(String i : checkArray) {
-				cart.setCartno(Integer.parseInt(i));
-				cartService.cartRemove(cart);
+			CartVO cart = new CartVO().setMno(member.getMno());
+
+			for(int i=0;i<pno.size();i++) {
+				cartService.cartRemove(cart.setPno(Integer.parseInt(pno.get(i))));
 			}
+			
 			result = 1;
 		}
-		
 		
 		return result;
 	}

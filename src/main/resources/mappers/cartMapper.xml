@@ -13,17 +13,24 @@
 	</insert>
 	
 	<select id="cartList" resultType="com.lee.myapp.domain.CartListVO">
-		SELECT 
-    		ROW_NUMBER() OVER(ORDER BY a.CARTNO ASC) AS NUM,
-   			a.CARTNO,a.MNO,a.PNO,a.CARTSIZE,a.CARTSTOCK,b.BRAND,b.PNAME,b.PRODUCT_THUMURL,b.PRICE,b.SHIPPING_FEE
-   		  FROM TBL_CART a INNER JOIN PRODUCT b ON a.PNO = b.PNO INNER JOIN TBL_PRODUCT_OPTION c ON b.PNO = c.PNO
-  		 WHERE a.PNO = b.PNO
-    	   AND MNO = #{mno}
+		<!-- SELECT ROW_NUMBER() OVER(ORDER BY a.CARTNO ASC) AS NUM, 
+			   a.CARTNO, a.MNO, A.PNO, a.OPTIONCOLOR, A.OPTIONSIZE, a.INVENTORY, b.BRAND, b.PNAME, b.PRODUCT_THUMURL, b.PRICE, b.SHIPPING_FEE
+  		  FROM TBL_CART a INNER JOIN PRODUCT b ON a.PNO = b.PNO
+ 		 WHERE a.MNO = #{mno} -->
+		SELECT ROW_NUMBER() OVER(ORDER BY a.CARTNO ASC) AS NUM, a.CARTNO, a.MNO, a.PNO, b.BRAND, b.PNAME, b.PRODUCT_THUMURL, b.PRICE, b.SHIPPING_FEE
+		  FROM TBL_CART a INNER JOIN PRODUCT b ON a.PNO = b.PNO
+		 WHERE a.MNO = #{mno}
+	</select>
+	
+	<select id="cartOption" resultType="com.lee.myapp.domain.CartVO">
+		SELECT *
+		  FROM TBL_CART
+		 WHERE MNO = #{mno}
 	</select>
 	
 	<update id="cartUpdate">
 		UPDATE TBL_CART
-		   SET CARTSTOCK=#{cartstock}
+		   SET INVENTORY=#{inventory}
 		 WHERE CARTNO=#{cartno}
 		   AND PNO=#{pno}
 		   AND MNO=#{mno}
@@ -32,7 +39,7 @@
 	<delete id="cartRemove">
 		DELETE
 		  FROM TBL_CART
-		 WHERE CARTNO = #{cartno}
+		 WHERE PNO = #{pno}
 		   AND MNO = #{mno}
 	</delete>
 </mapper>

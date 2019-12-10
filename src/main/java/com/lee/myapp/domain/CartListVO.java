@@ -5,13 +5,11 @@ public class CartListVO {
 	private int cartno;
 	private int mno;
 	private int pno;
-	private String cartsize;
-	private int cartstock;
 	private String brand;
 	private String pname;
-	private String product_thumurl;
+	private String productthumurl;
 	private int price;
-	private int shipping;
+	private int shippingfee;
 	
 	public int getNum() {
 		return num;
@@ -41,20 +39,6 @@ public class CartListVO {
 		this.pno = pno;
 		return this;
 	}
-	public String getCartsize() {
-		return cartsize;
-	}
-	public CartListVO setCartsize(String cartsize) {
-		this.cartsize = cartsize;
-		return this;
-	}
-	public int getCartstock() {
-		return cartstock;
-	}
-	public CartListVO setCartstock(int cartstock) {
-		this.cartstock = cartstock;
-		return this;
-	}
 	public String getBrand() {
 		return brand;
 	}
@@ -69,11 +53,11 @@ public class CartListVO {
 		this.pname = pname;
 		return this;
 	}
-	public String getProduct_thumurl() {
-		return product_thumurl;
+	public String getProductthumurl() {
+		return productthumurl;
 	}
-	public CartListVO setProduct_thumurl(String product_thumurl) {
-		this.product_thumurl = product_thumurl;
+	public CartListVO setProductthumurl(String productthumurl) {
+		this.productthumurl = productthumurl;
 		return this;
 	}
 	public int getPrice() {
@@ -83,16 +67,16 @@ public class CartListVO {
 		this.price = price;
 		return this;
 	}
-	public int getShipping() {
-		return shipping;
+	public int getShippingfee() {
+		return shippingfee;
 	}
-	public CartListVO setShipping(int shipping) {
-		this.shipping = shipping;
+	public CartListVO setShippingfee(int shippingfee) {
+		this.shippingfee = shippingfee;
 		return this;
 	}
 	
 	public String toString() {
-		return "CartListVO = [num= "+num+", cartno= "+cartno+", mno= "+mno+", pno= "+pno+", cartsize= "+cartsize+", cartstock= "+cartstock+", brand= "+brand+", pname= "
-				+pname+", product_thumrul= "+product_thumurl+", price= "+price+", shipping= "+shipping+" ]";
+		return "CartListVO = [num= "+num+", cartno= "+cartno+", mno= "+mno+", pno= "+pno+", brand= "+brand+", pname= "
+				+pname+", productthumrul= "+productthumurl+", price= "+price+", shippingfee= "+shippingfee+" ]";
 	}
 }

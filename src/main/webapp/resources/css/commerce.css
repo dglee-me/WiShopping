@@ -195,8 +195,8 @@ span.txt_byte{margin-left:5px;}
 .button-size-55{padding:13px 10px 14px; font-size:17px; line-height:26px;}
 .button-color-blue-inverted{background-color:#fff; border-color:c3c3c3;}
 
-.sticky-container{position:-webkit-sticky; position:sticky; top:0px; z-index:999;}
-.sticky-child{position:relative; background-color:#fafafa; border-top:1px solid #ededed; border-bottom:1px solid #ededed; z-index:100; transition:top .1s;}
+.production-selling .sticky-container{position:-webkit-sticky; position:sticky; top:0px; z-index:999;}
+.production-selling .sticky-child{position:relative; background-color:#fafafa; border-top:1px solid #ededed; border-bottom:1px solid #ededed; z-index:100; transition:top .1s;}
 .product_selling_nav_content{padding:0 60px; max-width:1084px; margin:0 auto;}
 .product_selling_nav_content-list{width:66.6666%; display:flex; border-bottom:1px solid #ededed;}
 .product_selling_nav_content-list>li{-webkit-box-flex:1; flex:1 0 0px;}

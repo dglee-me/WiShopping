@@ -28,13 +28,19 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
+	public List<CartVO> cartOption(int mno) throws Exception {
+		// TODO Auto-generated method stub
+		return cartDAO.cartOption(mno);
+	}
+	
+	@Override
 	public int cartUpdate(CartVO cart) throws Exception {
 		// TODO Auto-generated method stub
 		return cartDAO.cartUpdate(cart);
 	}
 
 	@Override
-	public int cartRemove(CartListVO cart) throws Exception {
+	public int cartRemove(CartVO cart) throws Exception {
 		// TODO Auto-generated method stub
 		return cartDAO.cartRemove(cart);
 	}
