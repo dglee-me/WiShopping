@@ -5,15 +5,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commerce.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <!-- Daum Address API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/default.js"></script>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<script>	
+<script type="text/javascript">
 	//Login session confirm
 	$(document).ready(function(){
 		var session = "${login.name}";
@@ -22,6 +24,28 @@
 			alert("로그인 후 이용하여 주세요.");
 			location.href="/myapp/auth/login";
 		}
+	});
+	
+	//If the products are the same, set rowspan the shipping td
+	$(document).ready(function(){
+		tableRowSpanning("#order_productions",1);
+	});
+	
+	//Total delivery fee setting
+	$(document).ready(function(){
+		var delivery = $(".type").text();
+		delivery = delivery.split("원");
+		
+		var total_delivery =0;
+		for(var i=0; i<delivery.length;i++){
+			delivery[i] = parseInt(uncomma(delivery[i]),10);
+			
+			if(isNaN(delivery[i])) continue;
+			
+			total_delivery += delivery[i];
+		}
+		
+		$("#preview_delivery_cost").text(comma(total_delivery));
 	});
 	
 	$(document).ready(function(){	
@@ -78,28 +102,33 @@
 					<table cellspacing="0" id="order_productions">
 						<tbody>
 							<c:forEach var="item" items="${orderList}">	
-								<c:set var="amount" value="${amount + (item.price * item.cartstock)}"/>
-								<c:set var="total_delivery" value="${total_delivery + item.shipping}"/>
-								<tr class="production">
+								<c:set var="equal_pno" value="${item.pno}"/>
+								<c:set var="amount" value="${amount + (item.price * item.inventory)}"/>
+								<tr class="production" data-number="${item.pno}">
 									<input type="hidden" name="pno" value="${item.pno}">
 									<input type="hidden" name="cartno" value="${item.cartno}">
-									<input type="hidden" name="cartsize" value="${item.cartsize}">
+									<input type="hidden" name="cartsize" value="${item.optionsize}">
 									<td>
 										<div class="information">
-											<img src="${pageContext.request.contextPath}/${item.product_thumurl}">
+											<img src="${pageContext.request.contextPath}/${item.productthumurl}">
 											<div>
 												<div class="name">[${item.brand}] ${item.pname}</div>
-												<div class="option">${item.cartsize}</div>
+												<div class="option">${item.optioncolor}/${item.optionsize}</div>
 												<div class="cost_count">
-													<div class="cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${item.price * item.cartstock}"/>원</div>
+													<div class="cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${item.price * item.inventory}"/>원</div>
 													<div class="divider">|</div>
-													<div class="count">${item.cartstock}개</div>
+													<div class="count">${item.inventory}개</div>
 												</div>
 											</div>
 										</div>
 									</td>
-									<td class="delivery_fee" data-id="">
-										<div class="type"><c:if test="${item.shipping eq 0 }">무료배송 </c:if><c:if test="${item.shipping ne 0 }">${item.shipping} 원 </c:if></div>
+									<td class="delivery_fee" data-number="${item.pno}">
+										<div class="type">
+											<c:if test="${item.shippingfee eq 0 }">무료배송 </c:if>
+											<c:if test="${item.shippingfee ne 0 }">
+												<fmt:formatNumber type="number" maxFractionDigits="3" value="${item.shippingfee}"/>원 
+											</c:if>
+										</div>
 										<div class="seller">${item.brand}</div>
 									</td>
 								</tr>
@@ -258,7 +287,7 @@
 						</div>
 						<div class="cost_panel">
 							<div class="title">배송비</div>
-							<div class="amount" id="preview_delivery_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${total_delivery}"/></div>
+							<div class="amount" id="preview_delivery_cost">0</div>
 						</div>
 						<div class="total cost_panel">
 							<div class="amount" id="preview_selling_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${amount + total_delivery}"/>원</div>

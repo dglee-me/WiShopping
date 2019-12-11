@@ -7,12 +7,13 @@
 
 <mapper namespace="orderMapper">
 	<select id="orderList" resultType="com.lee.myapp.domain.OrderListVO">
-		SELECT A.PNO, B.CARTNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.CARTSIZE, B.CARTSTOCK, C.SHIPPING
-		  FROM PRODUCT A INNER JOIN TBL_CART B ON A.PNO = B.PNO INNER JOIN PRODUCT_OPTION C ON B.PNO = C.PNO
+		SELECT B.CARTNO, B.PNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, A.SHIPPING_FEE
+		  FROM PRODUCT A INNER JOIN TBL_CART B ON A.PNO = B.PNO
 		 WHERE A.PNO IN 
 		 <foreach collection="array" item="pno" open="(" separator="," close=")">
 		 	#{pno}
 		 </foreach>
+		 ORDER BY A.PNO DESC
 	</select>
 
 	<insert id="orderInfo">

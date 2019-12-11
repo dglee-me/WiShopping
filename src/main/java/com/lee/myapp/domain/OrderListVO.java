@@ -2,28 +2,29 @@ package com.lee.myapp.domain;
 
 public class OrderListVO {
 	// Product information shown in the pre_order view
-	private int pno;
 	private int cartno;
+	private int pno;
 	private String brand;
 	private String pname;
 	private int price;
-	private String product_thumurl;
-	private String cartsize;
-	private int cartstock;
-	private int shipping;
-
-	public int getPno() {
-		return pno;
-	}
-	public OrderListVO setPno(int pno) {
-		this.pno = pno;
-		return this;
-	}
+	private String productthumurl;
+	private String optioncolor;
+	private String optionsize;
+	private int inventory;
+	private int shippingfee;
+	
 	public int getCartno() {
 		return cartno;
 	}
 	public OrderListVO setCartno(int cartno) {
 		this.cartno = cartno;
+		return this;
+	}
+	public int getPno() {
+		return pno;
+	}
+	public OrderListVO setPno(int pno) {
+		this.pno = pno;
 		return this;
 	}
 	public String getBrand() {
@@ -47,37 +48,44 @@ public class OrderListVO {
 		this.price = price;
 		return this;
 	}
-	public String getProduct_thumurl() {
-		return product_thumurl;
+	public String getProductthumurl() {
+		return productthumurl;
 	}
-	public OrderListVO setProduct_thumurl(String product_thumurl) {
-		this.product_thumurl = product_thumurl;
+	public OrderListVO setProductthumurl(String productthumurl) {
+		this.productthumurl = productthumurl;
 		return this;
 	}
-	public String getCartsize() {
-		return cartsize;
+	public String getOptioncolor() {
+		return optioncolor;
 	}
-	public OrderListVO setCartsize(String cartsize) {
-		this.cartsize = cartsize;
+	public OrderListVO setOptioncolor(String optioncolor) {
+		this.optioncolor = optioncolor;
 		return this;
 	}
-	public int getCartstock() {
-		return cartstock;
+	public String getOptionsize() {
+		return optionsize;
 	}
-	public OrderListVO setCartstock(int cartstock) {
-		this.cartstock = cartstock;
+	public OrderListVO setOptionsize(String optionsize) {
+		this.optionsize = optionsize;
 		return this;
 	}
-	public int getShipping() {
-		return shipping;
+	public int getInventory() {
+		return inventory;
 	}
-	public OrderListVO setShipping(int shipping) {
-		this.shipping = shipping;
+	public OrderListVO setInventory(int inventory) {
+		this.inventory = inventory;
 		return this;
 	}
-	
+	public int getShippingfee() {
+		return shippingfee;
+	}
+	public OrderListVO setShippingfee(int shippingfee) {
+		this.shippingfee = shippingfee;
+		return this;
+	}
+
 	public String toString() {
-		return "OrderListVO = [pno= "+pno+", cartno= "+cartno+", brand= "+brand+", pname= "+pname+", price= "+price+", product_thumurl= "+product_thumurl+", cartsize= "+cartsize+", cartstock= "
-				+cartstock+", shipping= "+shipping+"]";
+		return "OrderListVO = [cartno= "+cartno+", pno= "+pno+", brand= "+brand+", pname= "+pname+", price= "+price+", productthumurl= "+productthumurl+", optioncolor= "
+				+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+", shippingfee= "+shippingfee+"]";
 	}
 }

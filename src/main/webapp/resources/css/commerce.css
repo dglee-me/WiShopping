@@ -374,6 +374,8 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 #pre_order>form #order_productions td.delivery_fee{width:120px; font-size:12px; text-align:center; color:#757575;}
 #pre_order>form #order_productions td.delivery_fee>.type{margin-bottom:5px;}
 
+.production .delivery_fee{border-left:1px solid #ededed;}
+
 #pre_order>form>.panel>.input{padding-left:10px;}
 #pre_order>form>.panel>.input>.field{display:flex; margin-top:20px;}
 #pre_order>form>.panel>.input>.field>.label{flex:0 0 auto; width:140px; padding-left:10px; 
@@ -511,16 +513,3 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 	text-align:center; font-size:16px; line-height:16px; padding:10px 0;}
 
 .user_shopping_page.order_list>.order_list_set>.not_have_result{padding:40px 0 20px; text-align:center; font-size:18px; color:#424242;}
-
-
-
-
-
-
-
-
-
-
-
-
-
