@@ -42,4 +42,11 @@
 		 WHERE PNO = #{pno}
 		   AND MNO = #{mno}
 	</delete>
+	
+	<delete id="cartOptionRemove">
+		DELETE
+		  FROM TBL_CART
+		 WHERE CARTNO = #{cartno}
+		   AND MNO = #{mno}
+	</delete>
 </mapper>

@@ -11,4 +11,5 @@ public interface CartService {
 	public List<CartVO> cartOption(int mno) throws Exception;
 	public int cartUpdate(CartVO cart) throws Exception;
 	public int cartRemove(CartVO cart) throws Exception;
+	public int cartOptionRemove(CartVO cart) throws Exception;
 }

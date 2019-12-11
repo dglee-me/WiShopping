@@ -178,13 +178,13 @@
 			});
 		});
 		
-		/*Reflect stock changes to db*/
+		/*Reflect inventory changes to db*/
 		$(document).ready(function(){
 			$(".form-control").change(function(){
-				var cartno = $(this).closest("ul").closest("li").attr("cart-data");
+				var cartno = $(this).closest("li").attr("cart-data")
 				var pno = $(this).closest("ul").closest("article").children(".product-small-item-clickable").attr("data-number");
 				var inventory = $(this).val();
-
+				
 				$.ajax({
 					url : "/myapp/cart/cartUpdate",
 					type : "post",
@@ -251,6 +251,20 @@
 							}
 						}
 					});
+				}
+			});
+		});
+		
+		$(document).on("click",".selling-option-item_delete",function(){				
+			var cartno = $(this).closest("li").attr("cart-data");
+						
+			$.ajax({
+				url : "/myapp/cart/cartOptionRemove",
+				type : "post",
+				data : {cartno : cartno},
+				success : function(result){
+					if(result == 0)	location.href = "/myapp/error";
+					if(result == 1) location.href = "/myapp/cart/main";
 				}
 			});
 		});
@@ -338,6 +352,11 @@
 																					<li class="carted-product_option-list_item" cart-data="${option.cartno}">
 																						<article class="selling-option-item">
 																							<h1 class="selling-option-item_name">${option.optioncolor}/${option.optionsize}</h1>
+																							<button class="selling-option-item_delete" type="button" aria-label="삭제">
+																								<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" preserveAspectRatio="xMidYMid meet">
+																									<path fill-rule="nonzero" d="M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z"></path>
+																								</svg>
+																							</button>
 																							<div class="selling-option-item_controls">
 																								<div class="selling-option-item_quantity">
 																									<div class="input-group select-input option-count-input">

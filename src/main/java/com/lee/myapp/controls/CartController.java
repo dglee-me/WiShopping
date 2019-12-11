@@ -95,17 +95,32 @@ public class CartController {
 		int result = 0;
 
 		MemberVO member = (MemberVO)session.getAttribute("login");
-		
 		if(member != null) {
 			CartVO cart = new CartVO().setMno(member.getMno());
 
 			for(int i=0;i<pno.size();i++) {
 				cartService.cartRemove(cart.setPno(Integer.parseInt(pno.get(i))));
 			}
+			result = 1;
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/cartOptionRemove", method=RequestMethod.POST)
+	public int cartOptionRemovePOST(int cartno, HttpSession session) throws Exception{
+		logger.info("-------- CART : OPTION REMOVE METHOD=POST --------");
+
+		int result = 0;
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		if(member != null) {
+			CartVO cart = new CartVO().setMno(member.getMno()).setCartno(cartno);
+			
+			cartService.cartOptionRemove(cart);
 			
 			result = 1;
 		}
-		
-		return result;
+		return result;		
 	}
 }

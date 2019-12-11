@@ -44,4 +44,10 @@ public class CartServiceImpl implements CartService{
 		// TODO Auto-generated method stub
 		return cartDAO.cartRemove(cart);
 	}
+
+	@Override
+	public int cartOptionRemove(CartVO cart) throws Exception {
+		// TODO Auto-generated method stub
+		return cartDAO.cartOptionRemove(cart);
+	}
 }
