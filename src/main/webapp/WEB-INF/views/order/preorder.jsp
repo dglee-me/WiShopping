@@ -31,12 +31,25 @@
 		tableRowSpanning("#order_productions",1);
 	});
 	
-	//Total delivery fee setting
+	//All price setting
 	$(document).ready(function(){
+		//Total product price setting
+		var price = $(".cost").text();
+		price = price.split("원");
+
+		var total_price = 0;
+		for(var i=0;i<price.length;i++){
+			if(price[i] == "") continue;
+			total_price += parseInt(uncomma(price[i]),10);
+		}
+		
+		$("#preview_product_cost").text(comma(total_price));
+		
+		//Total delivery fee setting
 		var delivery = $(".type").text();
 		delivery = delivery.split("원");
 		
-		var total_delivery =0;
+		var total_delivery = 0;
 		for(var i=0; i<delivery.length;i++){
 			delivery[i] = parseInt(uncomma(delivery[i]),10);
 			
@@ -46,6 +59,10 @@
 		}
 		
 		$("#preview_delivery_cost").text(comma(total_delivery));
+		
+		//Total payment setting
+		$("#preview_selling_cost").text(comma(total_price + total_delivery)+"원")
+		$("input:hidden[name='amount']").val(total_price + total_delivery);
 	});
 	
 	$(document).ready(function(){	
@@ -93,7 +110,7 @@
 	<jsp:include page="../header.jsp"/>
 	<div id="body" class="orders pre_order" style="padding-bottom:0px;">
 		<div id="pre_order" class="bucket">
-			<form id="edit_order" class="eidt_order" name="order_frm" action="${pageContext.request.contextPath}/order/pre_order" method="post" accept-charset="UTF-8">
+			<form id="edit_order" class="eidt_order" name="order_frm" action="pre_order" method="post" accept-charset="UTF-8">
 				<div id="title">주문/결제</div>
 				<div class="panel">
 					<div class="title">
@@ -102,12 +119,10 @@
 					<table cellspacing="0" id="order_productions">
 						<tbody>
 							<c:forEach var="item" items="${orderList}">	
-								<c:set var="equal_pno" value="${item.pno}"/>
 								<c:set var="amount" value="${amount + (item.price * item.inventory)}"/>
 								<tr class="production" data-number="${item.pno}">
 									<input type="hidden" name="pno" value="${item.pno}">
 									<input type="hidden" name="cartno" value="${item.cartno}">
-									<input type="hidden" name="cartsize" value="${item.optionsize}">
 									<td>
 										<div class="information">
 											<img src="${pageContext.request.contextPath}/${item.productthumurl}">
@@ -255,7 +270,7 @@
 						<div class="field">
 							<div class="label">이름</div>
 							<div class="input">
-								<input type="text" name="payer_name" id="order_payer_name" class="half">
+								<input type="text" name="payer_name" id="order_payer_name" class="half" value="${login.name}">
 							</div>
 						</div>
 						<div class="field">
@@ -276,10 +291,10 @@
 					<div class="title">
 						<div class="title">최종 결제 금액</div>
 					</div>
-					<div class="cost">
+					<div class="all_cost">
 						<div class="cost_panel">
 							<div class="title">총 상품 금액</div>
-							<div class="amount" id="preview_product_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${amount}"/></div>
+							<div class="amount" id="preview_product_cost">0</div>
 						</div>
 						<div class="cost_panel">
 							<div class="title">할인 금액</div>
@@ -290,7 +305,7 @@
 							<div class="amount" id="preview_delivery_cost">0</div>
 						</div>
 						<div class="total cost_panel">
-							<div class="amount" id="preview_selling_cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${amount + total_delivery}"/>원</div>
+							<div class="amount" id="preview_selling_cost">0원</div>
 						</div>
 					</div>
 				</div>
@@ -327,7 +342,7 @@
 					</div>
 				</div>
 				<div id="do_payment">결제하기</div>
-				<input type="hidden" name="amount" value="${amount}">
+				<input type="hidden" name="amount" value="0">
 				<script>
 					//Item session confirm
 					$(document).ready(function(){

@@ -22,12 +22,12 @@
 	</insert>
 	
 	<insert id="orderInfo_detail">
-		INSERT INTO TBL_ORDER_DETAIL(ORDERDETAILNO,ORDERNO,PNO,CARTSIZE,CARTSTOCK)
-			SELECT TBL_ORDER_DETAIL_SEQ.NEXTVAL,#{orderno},pno,cartsize,cartstock
-			  FROM TBL_CART
-		 WHERE PNO IN 
-		 <foreach item="pno" collection="pno" open="(" separator="," close=")">
-		 	#{pno}
+		INSERT INTO TBL_ORDER_DETAIL(ORDERDETAILNO, ORDERNO, PNO, OPTIONCOLOR, OPTIONSIZE, INVENTORY)
+		SELECT TBL_ORDER_DETAIL_SEQ.NEXTVAL, #{orderno}, PNO, OPTIONCOLOR, OPTIONSIZE, INVENTORY
+		  FROM TBL_CART
+		 WHERE CARTNO IN
+		 <foreach item="cartno" collection="cartno" open="(" separator="," close=")">
+		 	#{cartno}
 		 </foreach>
 	</insert>
 	
@@ -39,14 +39,6 @@
 		   AND CARTNO IN
 		  <foreach collection="cartno" item="cartno" open="(" separator="," close=")">
 		 	#{cartno}
-		 </foreach>
-		   AND PNO IN
-		  <foreach collection="pno" item="pno" open="(" separator="," close=")">
-		 	#{pno}
-		 </foreach>
-		   AND CARTSIZE IN
-		  <foreach collection="cartsize" item="cartsize" open="(" separator="," close=")">
-		 	#{cartsize}
 		 </foreach>
 	</delete>
 	

@@ -1,7 +1,5 @@
 package com.lee.myapp.controls;
 
-import java.text.DecimalFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
+import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.service.OrderService;
+import com.lee.myapp.utils.CommonUtils;
 
 @Controller
 @RequestMapping("/order/")
@@ -64,56 +64,41 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/pre_order", method=RequestMethod.POST)
-	public String pre_orderPOST(HttpSession session, OrderVO order, String[] pno, String[] cartno, String[] cartsize) throws Exception{
+	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, ProductOptionVO option) throws Exception{
 		logger.info("-------- ORDER : PRE_ORDER METHOD=POST --------");
-
-		MemberVO member = (MemberVO)session.getAttribute("login");
 		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+				
 		if(member != null) {
-			//Make orderno
-			Calendar calendar = Calendar.getInstance();
-			String subNum = "";
-			
-			String ymd = calendar.get(Calendar.YEAR) 
-					+ new DecimalFormat("00").format(calendar.get(Calendar.MONTH) + 1)
-					+ new DecimalFormat("00").format(calendar.get(Calendar.DATE));
-			
-			for(int i=1;i<=6;i++) {
-				subNum += (int)(Math.random() * 10);
-			}
-			
-			String orderNo = ymd + "-" + subNum;
+			String orderNo = CommonUtils.CreateRandomNumber();
 			
 			//To order
 			order.setMno(member.getMno());
 			orderService.orderInfo(order.setOrderno(orderNo));
 			
-			HashMap<String,Object> map = new HashMap<String,Object>();
-			map.put("mno", member.getMno());
-			map.put("pno", pno);
-			map.put("orderno", orderNo);
-			orderService.orderInfo_Detail(map);
-			
-			//Delete cart when order completes successfully
+			//If cart to order case
 			if(cartno != null) {
-				//Cart to order case
-				int toInt[] = new int[10];
-
-				for(int i=0;i<cartno.length;i++) {
-					toInt[i] = Integer.parseInt(cartno[i]);
-				}
+				HashMap<String,Object> map = new HashMap<String,Object>();
 				
-				map.put("cartno", toInt);
-				map.put("cartsize", cartsize);
-				orderService.cartDelete(map);
-			}else {
-				//Product to order case
-				System.out.println("Product to order case는 아직 미구현입니다~ 빠르게 처리하겠습니다.");
-			}
+				map.put("cartno", cartno);
+				map.put("orderno", orderNo);
+			
+				int result = orderService.orderInfo_Detail(map);
 
-			return "redirect:/order/result";
+				//When the number of insert is more than 1
+				if(result >= 1) {
+					//Delete cart if order succeeds
+					map.put("mno", member.getMno());
+					orderService.cartDelete(map);
+				}else {
+					//If order failed
+					return "redirect:/error";
+				}
+			}else {
+				System.out.println("cart to order 만 구현. 곧 product to order 구현 예정");
+			}
 		}
-		return "redirect:/error";
+		return "redirect:/order/result";
 	}
 	
 	@RequestMapping(value="/result", method=RequestMethod.GET)

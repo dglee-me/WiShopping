@@ -6,17 +6,19 @@ public class OrderDetailVO {
 		    orderDetailno int primary key,
 		    orderno varchar2(50) not null,
 		    pno int not null,
-		    cartstock int not null
+		    optioncolor varchar2(50) not null,
+            optionsize varchar2(50) not null,
+            inventory int not null
 		);
 		
 		ALTER TABLE TBL_ORDER_DETAIL ADD CONSTRAINT TBL_ORDER_DETAIL_ORDERNO FOREIGN KEY(ORDERNO) REFERENCES TBL_ORDER(ORDERNO);
 	 */
-	
 	private int orderdetailno;
 	private String orderno;
 	private int pno;
-	private String cartsize;
-	private int cartstock;
+	private String optioncolor;
+	private String optionsize;
+	private int inventory;
 	
 	public int getOrderdetailno() {
 		return orderdetailno;
@@ -39,22 +41,30 @@ public class OrderDetailVO {
 		this.pno = pno;
 		return this;
 	}
-	public String getCartsize() {
-		return cartsize;
+	public String getOptioncolor() {
+		return optioncolor;
 	}
-	public OrderDetailVO setCartsize(String cartsize) {
-		this.cartsize = cartsize;
+	public OrderDetailVO setOptioncolor(String optioncolor) {
+		this.optioncolor = optioncolor;
 		return this;
 	}
-	public int getCartstock() {
-		return cartstock;
+	public String getOptionsize() {
+		return optionsize;
 	}
-	public OrderDetailVO setCartstock(int cartstock) {
-		this.cartstock = cartstock;
+	public OrderDetailVO setOptionsize(String optionsize) {
+		this.optionsize = optionsize;
+		return this;
+	}
+	public int getInventory() {
+		return inventory;
+	}
+	public OrderDetailVO setInventory(int inventory) {
+		this.inventory = inventory;
 		return this;
 	}
 	
 	public String toString() {
-		return "OrderDetailVO = [orderdetailno= "+orderdetailno+", orderno= "+orderno+", pno= "+pno+", cartsize= "+cartsize+", cartstock= "+cartstock;
+		return "OrderDetailVO = [orderdetailno= "+orderdetailno+", orderno= "+orderno+", pno= "+pno+", optioncolor= "+optioncolor+", optionsize= "+optionsize
+				+", inventory= "+inventory+"]";
 	}
 }

@@ -401,12 +401,12 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 #pre_order>form>.panel>.title>.button{flex:0 0 auto; font-size:13px; border-radius:3px; background-color:#fafafa;
 	border:solid 1px #dcdcdc; padding:3px; cursor:pointer;}	
 	
-#pre_order>form>.panel>.cost{font-size:15px; padding:10px 10px 0; color:#424242;}
-#pre_order>form>.panel>.cost>.cost_panel{margin-top:10px; display:flex;}	
-#pre_order>form>.panel>.cost>.cost_panel>.title{flex:1 0 0px; font-size:15px;}		
-#pre_order>form>.panel>.cost>.cost_panel>.amount{flex:1 0 0px; text-align:right; font-family:Tahoma; font-size:15px;}
-#pre_order>form>.panel>.cost>.cost_panel.total{margin-top:20px; font-size:24px; font-weight:bold;}
-#pre_order>form>.panel>.cost>.cost_panel.total>.amount{font-size:24px;}
+#pre_order>form>.panel>.all_cost{font-size:15px; padding:10px 10px 0; color:#424242;}
+#pre_order>form>.panel>.all_cost>.cost_panel{margin-top:10px; display:flex;}	
+#pre_order>form>.panel>.all_cost>.cost_panel>.title{flex:1 0 0px; font-size:15px;}		
+#pre_order>form>.panel>.all_cost>.cost_panel>.amount{flex:1 0 0px; text-align:right; font-family:Tahoma; font-size:15px;}
+#pre_order>form>.panel>.all_cost>.cost_panel.total{margin-top:20px; font-size:24px; font-weight:bold;}
+#pre_order>form>.panel>.all_cost>.cost_panel.total>.amount{font-size:24px;}
 
 #pre_order>form #confirm_checkbox{margin-top:40px; padding:0 10px;}
 .form-check{font-size:15px; flex:1 1 auto;}

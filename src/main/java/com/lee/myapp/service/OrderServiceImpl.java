@@ -30,9 +30,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void orderInfo_Detail(Map<String,Object> map) throws Exception {
+	public int orderInfo_Detail(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		orderDAO.orderInfo_Detail(map);
+		return orderDAO.orderInfo_Detail(map);
 	}
 
 	@Override

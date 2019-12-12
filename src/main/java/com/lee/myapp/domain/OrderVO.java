@@ -140,6 +140,6 @@ public class OrderVO {
 	public String toString() {
 		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", order_rec= "+order_rec+", zipcode= "+zipcode+", received_at= "+received_at+", received_at_detail= "
 				+received_at_detail+", received_phone= "+received_phone+", delivery_message= "+delivery_message+", payer_name= "+payer_name+", payer_email= "+payer_email
-				+", payer_phone= "+payer_phone+", amount= "+amount+orderdate+", orderdate= "+orderdate+", delivery_status= "+delivery_status+"]";
+				+", payer_phone= "+payer_phone+", amount= "+amount+", orderdate= "+orderdate+", delivery_status= "+delivery_status+"]";
 	}
 }
