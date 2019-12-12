@@ -11,4 +11,5 @@ public interface ProductDAO {
 	public List<ProductVO> list(String category) throws Exception;
 	public ProductVO view(int pno) throws Exception;
 	public List<ProductOptionVO> view_option(int pno) throws Exception;
+	public int checkInventory(int ono) throws Exception;
 }

@@ -37,4 +37,10 @@
 		 WHERE PNO = #{pno}
 		 ORDER BY ONO ASC
 	</select>
+	
+	<select id="checkInventory" resultType="int">
+		SELECT INVENTORY 
+		  FROM TBL_PRODUCT_OPTION
+		 WHERE ONO = #{ono}
+	</select>
 </mapper>

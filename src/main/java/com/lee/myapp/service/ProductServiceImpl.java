@@ -44,4 +44,10 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDAO.view_option(pno);
 	}
+
+	@Override
+	public int checkInventory(int ono) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.checkInventory(ono);
+	}
 }

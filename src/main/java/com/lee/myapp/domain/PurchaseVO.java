@@ -9,12 +9,13 @@ public class PurchaseVO {
 	private Date orderdate;
 	private String brand;
 	private String pname;
-	private String product_thumurl;
-	private String product_option;
-	private int product_stock;
+	private String productthumurl;
+	private String optioncolor;
+	private String optionsize;
+	private int inventory;
 	private int price;
-	private int delivery_status;
-	
+	private int deliverystatus;
+
 	public int getNum() {
 		return num;
 	}
@@ -57,25 +58,32 @@ public class PurchaseVO {
 		this.pname = pname;
 		return this;
 	}
-	public String getProduct_thumurl() {
-		return product_thumurl;
+	public String getProductthumurl() {
+		return productthumurl;
 	}
-	public PurchaseVO setProduct_thumurl(String product_thumurl) {
-		this.product_thumurl = product_thumurl;
+	public PurchaseVO setProductthumurl(String productthumurl) {
+		this.productthumurl = productthumurl;
 		return this;
 	}
-	public String getProduct_option() {
-		return product_option;
+	public String getOptioncolor() {
+		return optioncolor;
 	}
-	public PurchaseVO setProduct_option(String product_option) {
-		this.product_option = product_option;
+	public PurchaseVO setOptioncolor(String optioncolor) {
+		this.optioncolor = optioncolor;
 		return this;
 	}
-	public int getProduct_stock() {
-		return product_stock;
+	public String getOptionsize() {
+		return optionsize;
 	}
-	public PurchaseVO setProduct_stock(int product_stock) {
-		this.product_stock = product_stock;
+	public PurchaseVO setOptionsize(String optionsize) {
+		this.optionsize = optionsize;
+		return this;
+	}
+	public int getInventory() {
+		return inventory;
+	}
+	public PurchaseVO setInventory(int inventory) {
+		this.inventory = inventory;
 		return this;
 	}
 	public int getPrice() {
@@ -85,15 +93,17 @@ public class PurchaseVO {
 		this.price = price;
 		return this;
 	}
-	public int getDelivery_status() {
-		return delivery_status;
+	public int getDeliverystatus() {
+		return deliverystatus;
 	}
-	public PurchaseVO setDelivery_status(int delivery_status) {
-		this.delivery_status = delivery_status;
+	public PurchaseVO setDeliverystatus(int deliverystatus) {
+		this.deliverystatus = deliverystatus;
 		return this;
 	}
+
 	public String toString() {
-		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", product_option= "+product_option
-				+", product_stock= "+product_stock+", price= "+price+", delivery_status= "+delivery_status+" ]";
+		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", productthumurl= "
+				+productthumurl+", optioncolor= "+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+", price= "+price+", deliverystatus= "+deliverystatus
+				+"] ";
 	}
 }

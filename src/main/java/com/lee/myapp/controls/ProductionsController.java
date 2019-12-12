@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lee.myapp.domain.ProductOptionVO;
@@ -119,5 +120,15 @@ public class ProductionsController {
 		model.addAttribute("product",product);
 		model.addAttribute("option",productService.view_option(pno));
 		model.addAttribute("image",imageList);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/view/checkOption", method=RequestMethod.POST)
+	public int productionCheckOptionPOST(int ono) throws Exception{
+		logger.info("-------- VIEW : PRODUCTIONS CHECK OPTION METHOD=POST --------");
+		
+		int result = productService.checkInventory(ono);
+		
+		return result;
 	}
 }

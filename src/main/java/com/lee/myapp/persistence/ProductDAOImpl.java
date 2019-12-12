@@ -47,4 +47,10 @@ public class ProductDAOImpl implements ProductDAO{
 		return sqlSession.selectList(namespace+".view_option",pno);
 	}
 
+	@Override
+	public int checkInventory(int ono) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".checkInventory",ono);
+	}
+
 }

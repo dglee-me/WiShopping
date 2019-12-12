@@ -27,22 +27,22 @@
 	<c:set var="count_4" value="0"/>
 	<c:set var="count_5" value="0"/>
 	<c:forEach var="order" items="${orders}">
-		<c:if test="${order.delivery_status eq 0}">
+		<c:if test="${order.deliverystatus eq 0}">
 			<c:set var="count_0" value="${count_0 + 1}"/>
 		</c:if>
-		<c:if test="${order.delivery_status eq 1}">
+		<c:if test="${order.deliverystatus eq 1}">
 			<c:set var="count_1" value="${count_1 + 1}"/>
 		</c:if>
-		<c:if test="${order.delivery_status eq 2}">
+		<c:if test="${order.deliverystatus eq 2}">
 			<c:set var="count_2" value="${count_2 + 1}"/>
 		</c:if>
-		<c:if test="${order.delivery_status eq 3}">
+		<c:if test="${order.deliverystatus eq 3}">
 			<c:set var="count_3" value="${count_3 + 1}"/>
 		</c:if>
-		<c:if test="${order.delivery_status eq 4}">
+		<c:if test="${order.deliverystatus eq 4}">
 			<c:set var="count_4" value="${count_4 + 1}"/>
 		</c:if>
-		<c:if test="${order.delivery_status eq 5}">
+		<c:if test="${order.deliverystatus eq 5}">
 			<c:set var="count_5" value="${count_5 + 1}"/>
 		</c:if>
 	</c:forEach>
@@ -142,7 +142,7 @@
 						<c:if test="${order.orderno eq orderno.orderno}">
 						<div class="order">
 							<a href="${pageContext.request.contextPath}/productions/view?pno=${order.pno}">
-								<div class="image" style="background-image:url('${pageContext.request.contextPath}${order.product_thumurl}');"></div>
+								<div class="image" style="background-image:url('${pageContext.request.contextPath}${order.productthumurl}');"></div>
 							</a>
 							<div class="product_info">
 								<div class="product_title">
@@ -150,17 +150,17 @@
 									<a class="product_name" href="${pageContext.request.contextPath}/productions/view?pno=${order.pno}">${order.pname}</a>
 								</div>
 								<div class="product_detail">
-									<div class="option_name">${order.product_option}</div>
+									<div class="option_name">${order.optioncolor}/${order.optionsize}</div>
 									<div class="cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.price}"/>원</div>
 									<div class="bar">|</div>
-									<div class="count"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.product_stock}"/>개</div>
-									<div class="purchase_state" data-status="${order.delivery_status}">
-										<c:if test="${order.delivery_status eq 0}">입금대기</c:if>
-										<c:if test="${order.delivery_status eq 1}">결제완료</c:if>
-										<c:if test="${order.delivery_status eq 2}">배송준비</c:if>
-										<c:if test="${order.delivery_status eq 3}">배송중</c:if>
-										<c:if test="${order.delivery_status eq 4}">배송완료</c:if>
-										<c:if test="${order.delivery_status eq 5}">구매확정</c:if>
+									<div class="count"><fmt:formatNumber type="number" maxFractionDigits="3" value="${order.inventory}"/>개</div>
+									<div class="purchase_state" data-status="${order.deliverystatus}">
+										<c:if test="${order.deliverystatus eq 0}">입금대기</c:if>
+										<c:if test="${order.deliverystatus eq 1}">결제완료</c:if>
+										<c:if test="${order.deliverystatus eq 2}">배송준비</c:if>
+										<c:if test="${order.deliverystatus eq 3}">배송중</c:if>
+										<c:if test="${order.deliverystatus eq 4}">배송완료</c:if>
+										<c:if test="${order.deliverystatus eq 5}">구매확정</c:if>
 										<span></span>
 										<span class="purchase_state_text">| 택배배송</span>
 									</div>

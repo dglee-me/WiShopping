@@ -13,10 +13,13 @@
 <html lang="ko">
 <head>
 <script type="text/javascript">
+	var previous;
+	
 	$(document).ready(function(){
 		//If you select option, present this
 		$(document).on("change",".form-control",function(){
 			var select_text = $(".form-control option:checked").text();
+			var select_ono = $(".form-control option:checked").attr("data-number");
 			var option_arr = $(".selling-option-item_name").text().split(" ");
 			var flag = true;
 			
@@ -35,7 +38,7 @@
 				var option_li = document.createElement("li");
 				option_li.innerHTML = 
 					"<article class='selling-option-item'>"
-					+"<h1 class='selling-option-item_name'>"+select_text+" "+"</h1>" //The reason for adding " " is because it splits above to compare option duplication.
+					+"<h1 class='selling-option-item_name' data-number='"+select_ono+"'>"+select_text+" "+"</h1>" //The reason for adding " " is because it splits above to compare option duplication.
 					+"<button type='button' class='selling-option-item_delete' label='삭제'>"
 					+"<svg width='12' height='12' viewBox='0 0 12 12' fill='currentColor' preserveAspectRatio='xMidYMid meet'>"
 					+"<path fill-rule='nonzero' d='M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z'></path></svg>"
@@ -65,37 +68,43 @@
 					price[i] = uncomma(price[i]) * 1;
 					total_price += price[i];
 				}
-				
 				$(".selling-option-form-content_price_number").text(comma(total_price));
 			}
 		});
 		
 		/*Count num ++ event*/
 		$(document).ready(function(){
-			$(document).on("click",".up_count",function(){
+			$(document).on("click",".up_count",function(){				
 				var count = parseInt($(this).parent().children(".ipt_count_chk").val(),10);
 
 				var totalPrice = parseInt(uncomma($(".selling-option-form-content_price_number").text()),10);
 				var optPrice = parseInt(uncomma($('#price').text()),10);
 									
-				$(this).parent().children(".ipt_count_chk").val(++count);
-				$(this).closest("article")
-					.children(".selling-option-item_controls")
-					.children(".selling-option-item_price")
-					.children(".selling-option-item_price_number").text(comma(optPrice*count)+" ");
 				
-				//Set total order amount
-				var price = $(".selling-option-item_price_number").text().split(" ");
-				var total_price = 0;
+				var flag = productionOptionCheck($(this).parent().children(".ipt_count_chk"),count);
 				
-				for(var i=0;i<price.length;i++){
-					if(price[i] == ""){
-						continue;
+				if(flag > count){
+					$(this).parent().children(".ipt_count_chk").val(++count);
+					$(this).closest("article")
+						.children(".selling-option-item_controls")
+						.children(".selling-option-item_price")
+						.children(".selling-option-item_price_number").text(comma(optPrice*count)+" ");
+					
+					//Set total order amount
+					var price = $(".selling-option-item_price_number").text().split(" ");
+					var total_price = 0;
+					
+					for(var i=0;i<price.length;i++){
+						if(price[i] == ""){
+							continue;
+						}
+						price[i] = uncomma(price[i]) * 1;
+						total_price += price[i];
 					}
-					price[i] = uncomma(price[i]) * 1;
-					total_price += price[i];
+					$(".selling-option-form-content_price_number").text(comma(total_price));
+				}else{
+					alert("선택한 수량이 재고보다 많습니다!");
 				}
-				$(".selling-option-form-content_price_number").text(comma(total_price));
 			});
 		});
 		
@@ -131,6 +140,14 @@
 			});
 		});
 	
+		//If the selected option is out of stock
+		$(document).on("focus",".ipt_count_chk",function(){
+			previous = this.value;	
+		});
+		$(document).on("change",".ipt_count_chk",function(){
+			direct_productionOptionCheck($(this));
+		});
+		
 		//Delete select option
 		$(document).on("click",".selling-option-item_delete",function(){
 			$(this).closest("li").remove();
@@ -156,41 +173,6 @@
 
 			$(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text(comma(price*count));
 		})
-		
-		/*
-		$(document).on("click",".cart",function(){
-			var cartsize = $('.prdprice_left').text().charAt(0);
-			var cartstock = $('.ipt_count_chk').val();
-			
-			if(cartstock == null){
-				alert("사이즈를 선택하여 주세요. :x")
-			}else{
-				var url = location.href;
-				var pno = url.slice(url.indexOf('=') + 1);
-				
-				var data = {
-						cartsize : cartsize,
-						cartstock : cartstock,
-						pno : pno
-				};
-				
-				$.ajax({
-					url : "/myapp/cart/addCart",
-					type : "post",
-					data : data,
-					success : function(result){
-						if(result == 1){
-							alert("장바구니에 상품을 담았습니다.");
-						}else{
-							alert("회원만 담을 수 있습니다.");
-						}
-					},
-					error : function(){
-						alert("삐이");
-					}
-				});
-			}
-		});*/
 		
 		//Add to cart
 		$(document).on("click",".cart",function(){
@@ -326,7 +308,7 @@
 											<select class="form-control empty">
 												<option selected value disabled>옵션 선택</option>
 												<c:forEach items="${option}" var="option">
-													<option value="${option.sequence}">${option.optioncolor}/${option.optionsize}</option>
+													<option data-number ="${option.ono}" value="${option.sequence}">${option.optioncolor}/${option.optionsize}</option>
 												</c:forEach>
 											</select>
 											<span class="select-input_icon">

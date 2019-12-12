@@ -38,4 +38,41 @@ function tableRowSpanning(table, spanning_row_index){
 	});
 	
 	$(rowspan_td).attr("rowspan", rowspan_count);
-}	
+}
+
+function direct_productionOptionCheck(input){
+	var ono = input.closest("article").children("h1").attr("data-number");
+	var now = input.val();
+	var price = parseInt(uncomma($('#price').text()),10);
+		
+	$.ajax({
+		url : "/myapp/productions/view/checkOption",
+		type : "post",
+		data : {ono : ono},
+		success : function(result){
+			if(now > result){
+				alert("선택한 수량이 재고보다 많습니다!");
+				
+				//Setting price and input value
+				input.val(previous);				
+				input.closest("article").children("div").children("p").children("span").text(comma(price * previous)+" ");//The reason for adding " " is because it splits above to compare option duplication.
+			}
+		}
+	});
+}
+
+function productionOptionCheck(input,now){
+	var ono = input.closest("article").children("h1").attr("data-number");
+	var inventory;
+	
+	$.ajax({
+		url : "/myapp/productions/view/checkOption",
+		type : "post",
+		async : false,
+		data : {ono : ono},
+		success : function(result){
+			inventory = result;
+		}
+	});
+	return inventory;
+}
