@@ -178,53 +178,57 @@
 		$(document).on("click",".cart",function(){
 			var selected = $(".selling-option-item_name").text().split(" ");
 			
-			var url = location.href;
-			var pno = url.slice(url.indexOf('=') + 1);
-			
-			var optioncolor = "";
-			var optionsize = "";
-			var inventory = "";
-			
-			//Store in inventory string of input
-			var input = $(".ipt_count_chk");
-			for(var i=0;i<input.length;i++){
-				inventory = inventory + input[i].value +";";
-			}
-			
-			//Split color and size
-			var temp_selected;
-			for(var i=0;i<selected.length;i++){
-				if(selected[i] == "") continue;
+			if(selected.length == 1 && selected[0] == ""){
+				alert("상품을 선택하여 주세요.");
+			}else{
+				var url = location.href;
+				var pno = url.slice(url.indexOf('=') + 1);
 				
-				temp_selected = selected[i].split("/");
-
-				optioncolor = optioncolor + temp_selected[0] + ";";
-				optionsize = optionsize + temp_selected[1] + ";";
-			}
-			
-			
-			var data = {
-					optioncolor : optioncolor,
-					optionsize : optionsize,
-					inventory : inventory,
-					pno : pno
-			}; 
-			
-			$.ajax({
-				url : "/myapp/cart/addCart",
-				type : "post",
-				data : data,
-				success : function(result){
-					if(result == 1){
-						alert("장바구니에 상품을 담았습니다.");
-					}else{
-						alert("회원만 담을 수 있습니다.");
-					}
-				},
-				error : function(){
-					alert("삐이");
+				var optioncolor = "";
+				var optionsize = "";
+				var inventory = "";
+				
+				//Store in inventory string of input
+				var input = $(".ipt_count_chk");
+				for(var i=0;i<input.length;i++){
+					inventory = inventory + input[i].value +";";
 				}
-			});
+				
+				//Split color and size
+				var temp_selected;
+				for(var i=0;i<selected.length;i++){
+					if(selected[i] == "") continue;
+					
+					temp_selected = selected[i].split("/");
+
+					optioncolor = optioncolor + temp_selected[0] + ";";
+					optionsize = optionsize + temp_selected[1] + ";";
+				}
+				
+				
+				var data = {
+						optioncolor : optioncolor,
+						optionsize : optionsize,
+						inventory : inventory,
+						pno : pno
+				}; 
+				
+				$.ajax({
+					url : "/myapp/cart/addCart",
+					type : "post",
+					data : data,
+					success : function(result){
+						if(result == 1){
+							alert("장바구니에 상품을 담았습니다.");
+						}else{
+							alert("회원만 담을 수 있습니다.");
+						}
+					},
+					error : function(){
+						alert("삐이");
+					}
+				});
+			}
 		});
 	});
 </script>
