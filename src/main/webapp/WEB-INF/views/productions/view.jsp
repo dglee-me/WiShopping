@@ -308,6 +308,7 @@
 							<section class="selling-option-form-content">
 								<div class="selling-option-form-content_contents">
 									<div class="selling-option-select-input">
+										<c:if test="${max ne 1}">
 										<div class="input-group select-input selling-option-select-input_option">
 											<select class="form-control empty">
 												<option selected value disabled>옵션 선택</option>
@@ -321,9 +322,31 @@
 												</svg>
 											</span>
 										</div>
+										</c:if>
 									</div>
 								</div>
-								<ul class="selling-option-form-content_list"></ul>
+								<ul class="selling-option-form-content_list">
+									<c:if test="${max eq 1}"> 
+										<li>
+											<article class="selling-option-item">
+												<c:forEach items="${option}" var="option">
+													<h1 class="selling-option-item_name">${option.optioncolor}/${option.optionsize}</h1>
+													<div class="selling-option-item_controls">
+														<div class="selling-option-item_inventory">
+															<div class="input-group select-input option-count-input">
+																<a href="javascript:void(0);" class="ico down_count on">-감소</a>
+																<input type="text" class="ipt_count_chk" value="1">
+																<a href="javascript:void(0);" class="ico up_count on">+증가</a></div>
+															</div>
+														<p class="selling-option-item_price">
+															<span class="selling-option-item_price_number">${product.price}</span>원
+														</p>
+													</div>
+												</c:forEach>
+											</article>
+										</li>
+									</c:if>
+								</ul>
 								<p class="selling-option-form-content_price">
 									<span class="selling-option-form-content_price_left">주문금액</span>
 									<span class="selling-option-form-content_price_right">

@@ -12,4 +12,6 @@ public interface CartService {
 	public int cartUpdate(CartVO cart) throws Exception;
 	public int cartRemove(CartVO cart) throws Exception;
 	public int cartOptionRemove(CartVO cart) throws Exception;
+	public String existCart(CartVO cart) throws Exception;
+	public int upInventory(String cartno) throws Exception;
 }

@@ -49,4 +49,18 @@
 		 WHERE CARTNO = #{cartno}
 		   AND MNO = #{mno}
 	</delete>
+	
+	<select id="existCart" resultType="String">
+		SELECT CARTNO
+		  FROM TBL_CART
+		 WHERE PNO = #{pno}
+		   AND OPTIONCOLOR = #{optioncolor}
+		   AND OPTIONSIZE = #{optionsize}
+	</select>
+	
+	<update id="upInventory">
+		UPDATE TBL_CART
+		   SET INVENTORY=INVENTORY+1
+		 WHERE CARTNO = #{cartno}
+	</update>
 </mapper>

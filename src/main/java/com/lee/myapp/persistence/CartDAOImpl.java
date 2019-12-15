@@ -52,4 +52,16 @@ public class CartDAOImpl  implements CartDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".cartOptionRemove",cart);
 	}
+
+	@Override
+	public String existCart(CartVO cart) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".existCart",cart);
+	}
+
+	@Override
+	public int upInventory(String cartno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+".upInventory",cartno);
+	}
 }

@@ -60,9 +60,15 @@ public class CartController {
 						.setOptionsize(size[i])
 						.setInventory(Integer.parseInt(stock[i]));
 
-				cartService.addCart(cart);
-			}
+				//If there is already a product and option in the cart
+				String cartno = cartService.existCart(cart);
 
+				if(cartno == null) {
+					cartService.addCart(cart);
+				}else {
+					cartService.upInventory(cartno);
+				}
+			}
 			result = 1;
 		}
 		

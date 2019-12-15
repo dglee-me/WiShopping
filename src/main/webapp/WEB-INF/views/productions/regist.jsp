@@ -443,6 +443,16 @@
 												</div>
 											</td>
 										</tr>
+										<tr>
+											<th scope="row">기본옵션</th>
+											<td>
+												<span class="formRequired">
+													색상 <input type="text" name="optioncolor" class="fText" placeholder="ex) 블랙" style="border:1px solid #ededed; margin-right:20px;">
+													사이즈 <input type="text" name="optionsize" class="fText" placeholder="ex) free" style="border:1px solid #ededed; margin-right:20px;">
+													수량 <input type="text" name="inventory" class="fText" placeholder="ex) 1" style="border:1px solid #ededed;">
+												</span>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>

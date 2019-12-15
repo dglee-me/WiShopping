@@ -98,6 +98,8 @@ public class ProductionsController {
 					productService.register_option(option);
 				}
 			}
+		}else {
+			productService.register_option(option);
 		}
 		
 		return "redirect:/";
@@ -119,6 +121,7 @@ public class ProductionsController {
 		
 		model.addAttribute("product",product);
 		model.addAttribute("option",productService.view_option(pno));
+		model.addAttribute("max",productService.view_option(pno).size());
 		model.addAttribute("image",imageList);
 	}
 	
