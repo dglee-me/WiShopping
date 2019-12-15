@@ -43,4 +43,16 @@ public class PurchaseController {
 			return "/error";
 		}
 	}
+	
+	@RequestMapping(value="/detail", method=RequestMethod.GET)
+	public void purchaseDetailViewGET(HttpSession session, Model model, String orderno) throws Exception{
+		logger.info("-------- PURCHASE : DETAIL VIEW METHOD=GET --------");
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member != null) {
+			model.addAttribute("order",purchaseService.viewOrderNo(orderno));
+			model.addAttribute("purchase",purchaseService.viewOrder(orderno));
+		}
+	}
 }

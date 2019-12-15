@@ -19,4 +19,17 @@
  		 WHERE MNO = #{mno}
  		 ORDER BY ORDERDATE DESC
 	</select>
+	
+	<!-- Detail View -->
+	<select id="viewOrderNo" resultType="com.lee.myapp.domain.OrderVO">
+		SELECT *
+		  FROM TBL_ORDER
+		 WHERE ORDERNO=#{orderno}
+	</select>
+	<select id="viewOrder" resultType="com.lee.myapp.domain.PurchaseVO">
+		SELECT ROW_NUMBER() OVER(PARTITION BY C.PNO ORDER BY C.PNO DESC) AS NUM,A.ORDERNO,B.PNO,A.ORDERDATE,C.BRAND,C.PNAME,C.PRODUCT_THUMURL,B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, C.PRICE, C.SHIPPING_FEE, A.DELIVERY_STATUS
+		  FROM TBL_ORDER A INNER JOIN TBL_ORDER_DETAIL B ON A.ORDERNO = B.ORDERNO INNER JOIN PRODUCT C ON B.PNO = C.PNO
+		 WHERE A.ORDERNO = #{orderno}
+ 		 ORDER BY C.PNO ASC
+	</select>
 </mapper>

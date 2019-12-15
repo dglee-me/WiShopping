@@ -27,4 +27,15 @@ public class PurchaseServiceImpl implements PurchaseService{
 		return purchaseDAO.ordernoList(mno);
 	}
 
+	@Override
+	public OrderVO viewOrderNo(String orderno) throws Exception {
+		// TODO Auto-generated method stub
+		return purchaseDAO.viewOrderNo(orderno);
+	}
+	
+	@Override
+	public List<PurchaseVO> viewOrder(String orderno) throws Exception {
+		// TODO Auto-generated method stub
+		return purchaseDAO.viewOrder(orderno);
+	}
 }

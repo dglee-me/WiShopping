@@ -159,7 +159,7 @@
 						<div class="field">
 							<div class="label">받는분</div>
 							<div class="input">
-								<input type="text" name="order_rec" id="order_recipient" class="can_copy half">
+								<input type="text" name="orderrec" id="order_recipient" class="can_copy half">
 							</div>
 						</div>
 						<div class="field">
@@ -242,20 +242,20 @@
 						<div class="field">
 							<div class="label">주소</div>
 							<div class="input vertical">
-								<input type="text" name="received_at" id="order_received_at" class="non_edit full" readonly="readonly">
-								<input type="text" name="received_at_detail" id="order_received_at_detail" class="full">
+								<input type="text" name="receivedat" id="order_received_at" class="non_edit full" readonly="readonly">
+								<input type="text" name="receivedatdetail" id="order_received_at_detail" class="full">
 							</div>
 						</div>
 						<div class="field">
 							<div class="label">휴대전화</div>
 							<div class="input phone">
-								<input type="text" name="received_phone" id="order_received_phone" class>
+								<input type="text" name="receivedphone" id="order_received_phone" class>
 							</div>
 						</div>
 						<div class="field">
 							<div class="label">배송 메모</div>
 							<div class="input vertical">
-								<input type="text" name="delivery_message" id="delivery_message" class="delivery_memo full">
+								<input type="text" name="deliverymessage" id="delivery_message" class="delivery_memo full">
 								<div id="delivery_alert">OO자 이하로 입력해주세요!</div>
 							</div>
 						</div>
@@ -270,19 +270,19 @@
 						<div class="field">
 							<div class="label">이름</div>
 							<div class="input">
-								<input type="text" name="payer_name" id="order_payer_name" class="half" value="${login.name}">
+								<input type="text" name="payername" id="order_payer_name" class="half" value="${login.name}">
 							</div>
 						</div>
 						<div class="field">
 							<div class="label">이메일</div>
 							<div class="input email">
-								<input type="text" name="payer_email" id="order_payer_email" class="half" value="${login.email}">
+								<input type="text" name="payeremail" id="order_payer_email" class="half" value="${login.email}">
 							</div>
 						</div>
 						<div class="field">
 							<div class="label">휴대전화</div>
 							<div class="input phone">
-								<input type="text" name="payer_phone" id="order_payer_phone" class="half" value="${login.tel}">
+								<input type="text" name="payerphone" id="order_payer_phone" class="half" value="${login.tel}">
 							</div>
 						</div>
 					</div>

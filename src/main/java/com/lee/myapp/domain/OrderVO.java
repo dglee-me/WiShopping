@@ -25,18 +25,18 @@ public class OrderVO {
 	 */
 	private String orderno;
 	private int mno;
-	private String order_rec;
+	private String orderrec;
 	private String zipcode;
-	private String received_at;
-	private String received_at_detail;
-	private String received_phone;
-	private String delivery_message;
-	private String payer_name;
-	private String payer_email;
-	private String payer_phone;
+	private String receivedat;
+	private String receivedatdetail;
+	private String receivedphone;
+	private String deliverymessage;
+	private String payername;
+	private String payeremail;
+	private String payerphone;
 	private int amount;
 	private Date orderdate;
-	private int delivery_status;
+	private int deliverystatus;
 	
 	public String getOrderno() {
 		return orderno;
@@ -52,11 +52,11 @@ public class OrderVO {
 		this.mno = mno;
 		return this;
 	}
-	public String getOrder_rec() {
-		return order_rec;
+	public String getOrderrec() {
+		return orderrec;
 	}
-	public OrderVO setOrder_rec(String order_rec) {
-		this.order_rec = order_rec;
+	public OrderVO setOrderrec(String orderrec) {
+		this.orderrec = orderrec;
 		return this;
 	}
 	public String getZipcode() {
@@ -66,53 +66,53 @@ public class OrderVO {
 		this.zipcode = zipcode;
 		return this;
 	}
-	public String getReceived_at() {
-		return received_at;
+	public String getReceivedat() {
+		return receivedat;
 	}
-	public OrderVO setReceived_at(String received_at) {
-		this.received_at = received_at;
+	public OrderVO setReceivedat(String receivedat) {
+		this.receivedat = receivedat;
 		return this;
 	}
-	public String getReceived_at_detail() {
-		return received_at_detail;
+	public String getReceivedatdetail() {
+		return receivedatdetail;
 	}
-	public OrderVO setReceived_at_detail(String received_at_detail) {
-		this.received_at_detail = received_at_detail;
+	public OrderVO setReceivedatdetail(String receivedatdetail) {
+		this.receivedatdetail = receivedatdetail;
 		return this;
 	}
-	public String getReceived_phone() {
-		return received_phone;
+	public String getReceivedphone() {
+		return receivedphone;
 	}
-	public OrderVO setReceived_phone(String received_phone) {
-		this.received_phone = received_phone;
+	public OrderVO setReceivedphone(String receivedphone) {
+		this.receivedphone = receivedphone;
 		return this;
 	}
 	public String getDelivery_message() {
-		return delivery_message;
+		return deliverymessage;
 	}
-	public OrderVO setDelivery_message(String delivery_message) {
-		this.delivery_message = delivery_message;
+	public OrderVO setDeliverymessage(String deliverymessage) {
+		this.deliverymessage = deliverymessage;
 		return this;
 	}
-	public String getPayer_name() {
-		return payer_name;
+	public String getPayername() {
+		return payername;
 	}
-	public OrderVO setPayer_name(String payer_name) {
-		this.payer_name = payer_name;
+	public OrderVO setPayername(String payername) {
+		this.payername = payername;
 		return this;
 	}
-	public String getPayer_email() {
-		return payer_email;
+	public String getPayeremail() {
+		return payeremail;
 	}
-	public OrderVO setPayer_email(String payer_email) {
-		this.payer_email = payer_email;
+	public OrderVO setPayeremail(String payeremail) {
+		this.payeremail = payeremail;
 		return this;
 	}
-	public String getPayer_phone() {
-		return payer_phone;
+	public String getPayerphone() {
+		return payerphone;
 	}
-	public OrderVO setPayer_phone(String payer_phone) {
-		this.payer_phone = payer_phone;
+	public OrderVO setPayerphone(String payerphone) {
+		this.payerphone = payerphone;
 		return this;
 	}
 	public int getAmount() {
@@ -129,17 +129,17 @@ public class OrderVO {
 		this.orderdate = orderdate;
 		return this;
 	}
-	public int getDelivery_status() {
-		return delivery_status;
+	public int getDeliverystatus() {
+		return deliverystatus;
 	}
-	public OrderVO setDelivery_status(int delivery_status) {
-		this.delivery_status = delivery_status;
+	public OrderVO setDeliverystatus(int deliverystatus) {
+		this.deliverystatus = deliverystatus;
 		return this;
 	}
 	
 	public String toString() {
-		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", order_rec= "+order_rec+", zipcode= "+zipcode+", received_at= "+received_at+", received_at_detail= "
-				+received_at_detail+", received_phone= "+received_phone+", delivery_message= "+delivery_message+", payer_name= "+payer_name+", payer_email= "+payer_email
-				+", payer_phone= "+payer_phone+", amount= "+amount+", orderdate= "+orderdate+", delivery_status= "+delivery_status+"]";
+		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", orderrec= "+orderrec+", zipcode= "+zipcode+", receivedat= "+receivedat+", receivedatdetail= "
+				+receivedatdetail+", receivedphone= "+receivedphone+", deliverymessage= "+deliverymessage+", payername= "+payername+", payeremail= "+payeremail
+				+", payerphone= "+payerphone+", amount= "+amount+", orderdate= "+orderdate+", deliverystatus= "+deliverystatus+"]";
 	}
 }

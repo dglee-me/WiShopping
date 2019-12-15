@@ -485,7 +485,7 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .user_shopping_page.order_list>.order_list_set>.order_list{padding:30px 0 40px; width:984px; color:#424242;}
 .user_shopping_page.order_list>.order_list_set>.order_list>.head{padding:0 20px 20px; border-bottom:solid 2px #eeeeee; overflow:hidden; font-weight:700;}
 .user_shopping_page.order_list>.order_list_set>.order_list>.head>.order_num{float:left; font-size:18px; line-height:24px;}
-.user_shopping_page.order_list>.order_list_set>.order_list>.head>a{float:right; font-size:13px; line-height:24px; overflow:hidden;}
+.user_shopping_page.order_list>.order_list_set>.order_list>.head>a{position:relative; display:block; float:right; font-size:13px; line-height:25px; overflow:hidden;}
 .user_shopping_page.order_list>.order_list_set>.order_list>.head>a>div{float:left;}
 .user_shopping_page.order_list>.order_list_set>.order_list>.head>a>div.image_arrow{margin:6px 0 5px 10px; width:7px; height:14px;
 	background-image:url('/myapp/resources/image/icon-pointer.png'); background-repeat:no-repeat; background-size:400px; background-position:top 2px left -55px;}
@@ -513,3 +513,44 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 	text-align:center; font-size:16px; line-height:16px; padding:10px 0;}
 
 .user_shopping_page.order_list>.order_list_set>.not_have_result{padding:40px 0 20px; text-align:center; font-size:18px; color:#424242;}
+
+/* Orders detail view */
+.orders.show>.contents{max-width:1030px; width:100%; margin:30px auto; background-color:#ffffff; box-sizing:border-box; overflow:hidden; padding:40px 50px; color:#424242;}
+.orders.show>.contents>.title{font-size:24px; font-weight:700; padding:0 0 30px;}
+.orders.show>.contents>#order_detail_info,.orders.show>.contents>#payment_info,.orders.show>.contents>#delivery_info{font-size:15px; margin-bottom:55px;}
+.orders.show>.contents>#order_detail_info>.subtitle{font-size:15px; font-weight:700; padding:15px 10px;}
+
+.orders.show>.contents>#order_detail_info>.table{margin-bottom:40px;}
+.orders.show>.contents>#order_detail_info>.table>.order_list{display:table; width:100%; border-top:solid 1px #dcdcdc; font-size:15px;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_image{display:table-cell; width:90px; vertical-align:top;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_image>.image{width:90px; height:90px; 
+	background-size:cover; background-position:center; margin:20px 0 0 10px;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail{display:table-cell; padding:20px;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.name{font-size:15px; font-weight:700; margin-bottom:15px; display:block;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.option{margin-bottom:10px; color:#bdbdbd; word-break:break-word;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.cost{font-weight:700; margin-bottom:10px; float:left; margin-right:20px;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.count{margin-bottom:10px; color:#bdbdbd;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.status{color:#5FCAEC; font-weight:bold; font-size:15px;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.status>.status_divider{border-left:1px solid #ededed; height:15px; width:5px; margin:0 4px;
+	display:inline-block; vertical-align:middle;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.product_detail>.status>span{color:#bdbdbd;}	
+	
+	
+.orders.show>.contents>#order_detail_info>.table>.order_list>.button_set{display:table-cell; width:189px; border-left:solid 1px #dcdcdc; 
+	text-align:center; vertical-align:middle;}
+.orders.show>.contents>#order_detail_info>.table>.order_list>.button_set>.buttons>.button{display:inline-block; width:73px; border:solid 1px #dcdcdc;
+	text-align:center; padding:8px 0; font-size:12px; margin:5px 3px;}
+	
+.orders.show>.contents>#order_detail_info>.table>.order_delivery{padding:15px 0; background-color:#eeeeee; font-size:13px; text-align:center; color:#757575;}
+.orders.show>.contents>#order_detail_info>.table>.order_delivery>.method{margin-bottom:8px;}
+.orders.show>.contents>#order_detail_info>.table>.order_delivery>span{font-size:15px; font-weight:bold;}
+
+.orders.show>.contents>#payment_info>.subtitle,.orders.show>.contents>#delivery_info>.subtitle{font-weight:700; border-bottom:1px solid #dcdcdc; 
+	padding:15px 10px; font-size:15px;}
+
+.orders.show>.contents>#payment_info>.wrap_panel.divide{width:360px;}
+.orders.show>.contents>#payment_info>.wrap_panel,.orders.show>.contents>#delivery_info>.wrap_panel{display:table-cell; padding:5px 10px;}
+.orders.show>.contents>#payment_info>.wrap_panel>.field,.orders.show>.contents>#delivery_info>.wrap_panel>.field{margin:15px 0; overflow:hidden;}
+.orders.show>.contents>#payment_info>.wrap_panel>.field>.title,.orders.show>.contents>#delivery_info>.wrap_panel>.field>.title{color:#bdbdbd; float:left; font-size:15px;}
+.orders.show>.contents>#payment_info>.wrap_panel>.field>.content,.orders.show>.contents>#delivery_info>.wrap_panel>.field>.content{padding-left:110px; font-size:15px;}
+

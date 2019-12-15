@@ -18,7 +18,7 @@
 
 	<insert id="orderInfo">
 		INSERT INTO TBL_ORDER(ORDERNO,MNO,ORDER_REC,ZIPCODE,RECEIVED_AT,RECEIVED_AT_DETAIL,RECEIVED_PHONE,DELIVERY_MESSAGE,PAYER_NAME,PAYER_EMAIL,PAYER_PHONE,AMOUNT)
-		VALUES(#{orderno},#{mno},#{order_rec},#{zipcode},#{received_at},#{received_at_detail},#{received_phone},#{delivery_message},#{payer_name},#{payer_email},#{payer_phone},#{amount})
+		VALUES(#{orderno},#{mno},#{orderrec},#{zipcode},#{receivedat},#{receivedatdetail},#{receivedphone},#{deliverymessage},#{payername},#{payeremail},#{payerphone},#{amount})
 	</insert>
 	
 	<insert id="orderInfo_detail">

@@ -67,7 +67,7 @@ public class ProductionsController {
 		detailUrl = "";
 		
 		for(int i=0;i<url.length;i++) {
-			url[i] = File.separator + "imgUpload" + ymdPath + File.separator + url[i];
+			url[i] = "/" + "imgUpload" + ymdPath + "/" + url[i];
 			
 			if(i == 0) {
 				detailUrl = url[i];
@@ -76,7 +76,7 @@ public class ProductionsController {
 			detailUrl += ";" + url[i];
 		}
 		
-		product.setProductthumurl(File.separator + "imgUpload" + ymdPath + File.separator + thumbUrl);		
+		product.setProductthumurl("/" + "imgUpload" + ymdPath + "/" + thumbUrl);		
 		product.setProducturl(detailUrl);
 		
 		//Insert product into database

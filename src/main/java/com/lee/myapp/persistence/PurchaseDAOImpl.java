@@ -29,4 +29,15 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		return sqlSession.selectList(namespace+".ordernoList",mno);
 	}
 
+	@Override
+	public OrderVO viewOrderNo(String orderno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".viewOrderNo",orderno);
+	}
+	
+	@Override
+	public List<PurchaseVO> viewOrder(String orderno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".viewOrder",orderno);
+	}
 }

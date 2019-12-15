@@ -133,7 +133,7 @@
 					<div class="order_list">
 						<div class="head">
 							<div class="order_num">${orderno.orderno} | ${orderno.orderdate}</div>
-							<a href="javascript:void(0);">
+							<a class="order-list_item_title_link" href="${pageContext.request.contextPath}/purchase/detail?orderno=${orderno.orderno}">
 								<div>상세보기</div>
 								<div class="image_arrow"></div>
 							</a>
