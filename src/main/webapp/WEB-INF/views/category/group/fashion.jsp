@@ -13,8 +13,9 @@
 	<title>위쇼핑! - 패션</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
-	<div class="container">
+	<div class="wrapper">
+		<jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
+		<div class="container">
 		<h2 class="hide">컨텐츠 영역</h2>
 		<div class="container_inner">
 			<div class="contents_wrap">
@@ -100,5 +101,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/footer.jsp"/>
+	</div>
 </body>
 </html>

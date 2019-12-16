@@ -111,9 +111,19 @@
 	        if(checked == "T"){
 	           document.getElementById("option_btn").style.display = "block";
 	           document.getElementById("product-register-option-area").style.display = "table-row";
+	           document.getElementById("product-register-option-area_default").style.display = "none";
+	           document.getElementById("defaultcolor").name="none";
+	           document.getElementById("defaultsize").name="none";
+	           document.getElementById("defaultinventory").name="none";
+	           
 	        }else{
 	           document.getElementById("option_btn").style.display = "none";
 	           document.getElementById("product-register-option-area").style.display = "none";
+	           document.getElementById("product-register-option-area_default").style.display = "table-row";
+	           document.getElementById("defaultcolor").name="optioncolor";
+	           document.getElementById("defaultsize").name="optionsize";
+	           document.getElementById("defaultinventory").name="inventory";
+	           
 	        }
 	     });
 		
@@ -196,7 +206,28 @@
 		
 		$(document).ready(function(){
 			$(".button_box").click(function(){
-				document.getElementById('frm').submit();
+				//Validate before product regist
+				var pname = $("#pname").val();
+				var thumbnail = $("#product-register-thumb-image").val();
+				var price = $("#price").val();
+				var category1 = $(".main_category").val();
+				var category2 = $(".sub_category").val();
+				var detail = $("#product-register-detail-image").val();
+				var optioncolor = $("input:text[name='optioncolor']").val();
+				var optionsize = $("input:text[name='optionsize']").val();
+				var inventory = $("input:text[name='inventory']").val();
+				
+
+				console.log(optioncolor);
+				console.log(optionsize);
+				console.log(inventory);
+				
+				if(pname == "" || thumbnail == "" || price == "" || category1 == "" || category2 == "" || detail == "" || 
+						optioncolor == "" || optionsize == "" || inventory == ""){
+					alert("입력 항목을 모두 입력하여주세요.");
+				}else{
+					document.getElementById('frm').submit();
+				}
 			});
 		});
 	</script>
@@ -443,13 +474,13 @@
 												</div>
 											</td>
 										</tr>
-										<tr>
+										<tr id="product-register-option-area_default">
 											<th scope="row">기본옵션</th>
 											<td>
 												<span class="formRequired">
-													색상 <input type="text" name="optioncolor" class="fText" placeholder="ex) 블랙" style="border:1px solid #ededed; margin-right:20px;">
-													사이즈 <input type="text" name="optionsize" class="fText" placeholder="ex) free" style="border:1px solid #ededed; margin-right:20px;">
-													수량 <input type="text" name="inventory" class="fText" placeholder="ex) 1" style="border:1px solid #ededed;">
+													색상 <input type="text" name="optioncolor" id="defaultcolor" class="fText" placeholder="ex) 블랙" style="border:1px solid #ededed; margin-right:20px;">
+													사이즈 <input type="text" name="optionsize" id="defaultsize" class="fText" placeholder="ex) free" style="border:1px solid #ededed; margin-right:20px;">
+													수량 <input type="text" name="inventory" id="defaultinventory" class="fText" placeholder="ex) 1" style="border:1px solid #ededed;">
 												</span>
 											</td>
 										</tr>

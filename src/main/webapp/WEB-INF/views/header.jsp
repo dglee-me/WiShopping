@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/header.js" async></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/default.js" async></script>
 
 <div class="header">
 	<div class="inner_top_wrap">
