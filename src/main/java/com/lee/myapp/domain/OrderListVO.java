@@ -3,6 +3,7 @@ package com.lee.myapp.domain;
 public class OrderListVO {
 	// Product information shown in the pre_order view
 	private int cartno;
+	private int ono;
 	private int pno;
 	private String brand;
 	private String pname;
@@ -18,6 +19,13 @@ public class OrderListVO {
 	}
 	public OrderListVO setCartno(int cartno) {
 		this.cartno = cartno;
+		return this;
+	}
+	public int getOno() {
+		return ono;
+	}
+	public OrderListVO setOno(int ono) {
+		this.ono = ono;
 		return this;
 	}
 	public int getPno() {
@@ -85,7 +93,7 @@ public class OrderListVO {
 	}
 
 	public String toString() {
-		return "OrderListVO = [cartno= "+cartno+", pno= "+pno+", brand= "+brand+", pname= "+pname+", price= "+price+", productthumurl= "+productthumurl+", optioncolor= "
+		return "OrderListVO = [cartno= "+cartno+", ono= "+ono+", pno= "+pno+", brand= "+brand+", pname= "+pname+", price= "+price+", productthumurl= "+productthumurl+", optioncolor= "
 				+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+", shippingfee= "+shippingfee+"]";
 	}
 }

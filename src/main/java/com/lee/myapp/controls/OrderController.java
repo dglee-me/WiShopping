@@ -1,7 +1,6 @@
 package com.lee.myapp.controls;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.myapp.domain.MemberVO;
-import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.service.OrderService;
@@ -33,18 +30,27 @@ public class OrderController {
 	
 	@ResponseBody
 	@RequestMapping(value="/order_request", method=RequestMethod.POST)
-	public int orderRequestPOST(@RequestParam(value="pnoArray[]") String[] pnoList,HttpSession session, Model model) throws Exception{
+	public int cartToOrderRequestPOST(String[] ono, HttpSession session, Model model) throws Exception{
 		logger.info("-------- ORDER : ORDER_REQUEST METHOD=POST --------");
 		
 		int result = 0;
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
-		
+
 		if(member != null) {
-			//Product information displayed in the pre_order view
-			List<OrderListVO> orderList = orderService.orderList(pnoList);
-			session.setAttribute("orderList",orderList);
 			
+			/*
+			if(pnoList.length == 0) { // If order directly from the product screen
+				List<OrderListVO> orderList = orderService.productToOrderList(onoList); 
+				session.setAttribute("orderList", orderList);
+				
+				for(int i=0;i<orderList.size();i++) {
+					System.out.println(orderList.get(i).toString());
+				}
+			}else { // If order from a cart
+				List<OrderListVO> orderList = orderService.cartToOrderList(pnoList);
+				session.setAttribute("orderList",orderList);
+			}*/
 			result = 1;
 		}
 		
@@ -64,7 +70,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/pre_order", method=RequestMethod.POST)
-	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, ProductOptionVO option) throws Exception{
+	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, String[] ono, ProductOptionVO option) throws Exception{
 		logger.info("-------- ORDER : PRE_ORDER METHOD=POST --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");

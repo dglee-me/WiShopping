@@ -19,9 +19,15 @@ public class OrderDAOImpl implements OrderDAO{
 	SqlSession sqlSession;
 	
 	@Override
-	public List<OrderListVO> orderList(String[] pno) throws Exception {
+	public List<OrderListVO> cartToOrderList(String[] pno) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".orderList",pno);
+		return sqlSession.selectList(namespace+".cartToOrderList",pno);
+	}
+
+	@Override
+	public List<OrderListVO> productToOrderList(String[] ono) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".productToOrderList",ono);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.lee.myapp.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,9 +17,9 @@ public class CartServiceImpl implements CartService{
 	CartDAO cartDAO;
 	
 	@Override
-	public void addCart(CartVO cart) throws Exception {
+	public void addCart(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		cartDAO.addCart(cart);
+		cartDAO.addCart(map);
 	}
 
 	@Override
@@ -52,14 +53,14 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public String existCart(CartVO cart) throws Exception {
+	public String existCart(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return cartDAO.existCart(cart);
+		return cartDAO.existCart(map);
 	}
 
 	@Override
-	public int upInventory(String cartno) throws Exception {
+	public int upInventory(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return cartDAO.upInventory(cartno);
+		return cartDAO.upInventory(map);
 	}
 }

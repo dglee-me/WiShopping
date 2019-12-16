@@ -8,8 +8,15 @@
 <!-- Put the goods in the cart -->
 <mapper namespace="cartMapper">
 	<insert id="addCart">
-		INSERT INTO TBL_CART
-		VALUES(CARTNO_SEQ.NEXTVAL,#{mno},#{pno},#{optioncolor},#{optionsize},#{inventory})
+		INSERT INTO TBL_CART   
+		SELECT CARTNO_SEQ.NEXTVAL,
+		       #{mno} MNO,
+		       (SELECT PNO FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}) AS PNO,
+		       #{ono} AS ONO,
+		       (SELECT OPTION_COLOR FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}) AS OPTIONCOLOR,
+		       (SELECT OPTION_SIZE FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}) AS OPTIONSIZE,
+		       #{inventory} AS INVENTORY
+		  FROM DUAL
 	</insert>
 	
 	<select id="cartList" resultType="com.lee.myapp.domain.CartListVO">
@@ -17,7 +24,7 @@
 			   a.CARTNO, a.MNO, A.PNO, a.OPTIONCOLOR, A.OPTIONSIZE, a.INVENTORY, b.BRAND, b.PNAME, b.PRODUCT_THUMURL, b.PRICE, b.SHIPPING_FEE
   		  FROM TBL_CART a INNER JOIN PRODUCT b ON a.PNO = b.PNO
  		 WHERE a.MNO = #{mno} -->
-		SELECT ROW_NUMBER() OVER(ORDER BY a.CARTNO ASC) AS NUM, a.CARTNO, a.MNO, a.PNO, b.BRAND, b.PNAME, b.PRODUCT_THUMURL, b.PRICE, b.SHIPPING_FEE
+		SELECT ROW_NUMBER() OVER(ORDER BY a.CARTNO ASC) AS NUM, a.CARTNO, a.MNO, a.PNO, a.ONO, b.BRAND, b.PNAME, b.PRODUCT_THUMURL, b.PRICE, b.SHIPPING_FEE
 		  FROM TBL_CART a INNER JOIN PRODUCT b ON a.PNO = b.PNO
 		 WHERE a.MNO = #{mno}
 	</select>
@@ -53,14 +60,13 @@
 	<select id="existCart" resultType="String">
 		SELECT CARTNO
 		  FROM TBL_CART
-		 WHERE PNO = #{pno}
-		   AND OPTIONCOLOR = #{optioncolor}
-		   AND OPTIONSIZE = #{optionsize}
+		 WHERE ONO = #{ono}
+		   AND MNO = #{mno}
 	</select>
 	
 	<update id="upInventory">
 		UPDATE TBL_CART
-		   SET INVENTORY=INVENTORY+1
+		   SET INVENTORY=INVENTORY+#{inventory}
 		 WHERE CARTNO = #{cartno}
 	</update>
 </mapper>

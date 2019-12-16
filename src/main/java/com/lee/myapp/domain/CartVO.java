@@ -6,6 +6,7 @@ public class CartVO {
 		    CARTNO VARCHAR2(50) NOT NULL,
 		    MNO INT NOT NULL,
 		    PNO INT NOT NULL,
+		    ONO INT NOT NULL,
 		    OPTIONCOLOR VARCHAR2(50) NOT NULL,
 		    OPTIONSIZE VARCHAR2(50) NOT NULL,
 		    INVENTORY INT NOT NULL,
@@ -15,11 +16,13 @@ public class CartVO {
 		ALTER TABLE TBL_CART ADD CONSTRAINT TBL_CART_MNO FOREIGN KEY(MNO) REFERENCES MEMBER(MNO);
 		
 		ALTER TABLE TBL_CART ADD CONSTRAINT TBL_CART_PNO FOREIGN KEY(PNO) REFERENCES PRODUCT(PNO);
+		
+		ALTER TABLE TBL_CART ADD CONSTRAINT TBL_CART_ONO FOREIGN KEY(ONO) REFERENCES TBL_PRODUCT_OPTION(ONO);
 	 */
-	
 	private int cartno; //cart number
 	private int mno; //users number
 	private int pno; //product number
+	private int ono; //product option number
 	private String optioncolor; //product quantity in the cart
 	private String optionsize; //product size in the cart
 	private int inventory;
@@ -45,6 +48,13 @@ public class CartVO {
 		this.pno = pno;
 		return this;
 	}
+	public int getOno() {
+		return ono;
+	}
+	public CartVO setOno(int ono) {
+		this.ono = ono;
+		return this;
+	}
 	public String getOptioncolor() {
 		return optioncolor;
 	}
@@ -68,6 +78,6 @@ public class CartVO {
 	}
 	
 	public String toString() {
-		return "CartVO = [cartno= "+cartno+", mno= "+mno+", pno= "+pno+", optioncolor= "+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+"]";
+		return "CartVO = [cartno= "+cartno+", mno= "+mno+", pno= "+pno+", ono="+ono+", optioncolor= "+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+"]";
 	}
 }

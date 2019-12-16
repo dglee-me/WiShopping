@@ -1,5 +1,6 @@
 package com.lee.myapp.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,9 +19,9 @@ public class CartDAOImpl  implements CartDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public void addCart(CartVO cart) throws Exception {
+	public void addCart(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.insert(namespace+".addCart",cart);
+		sqlSession.insert(namespace+".addCart",map);
 	}
 
 	@Override
@@ -54,14 +55,14 @@ public class CartDAOImpl  implements CartDAO {
 	}
 
 	@Override
-	public String existCart(CartVO cart) throws Exception {
+	public String existCart(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".existCart",cart);
+		return sqlSession.selectOne(namespace+".existCart",map);
 	}
 
 	@Override
-	public int upInventory(String cartno) throws Exception {
+	public int upInventory(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+".upInventory",cartno);
+		return sqlSession.insert(namespace+".upInventory",map);
 	}
 }

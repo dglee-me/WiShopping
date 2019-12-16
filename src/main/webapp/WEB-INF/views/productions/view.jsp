@@ -173,7 +173,7 @@
 
 			$(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text(comma(price*count));
 		})
-		
+		/*
 		//Add to cart
 		$(document).on("click",".cart",function(){
 			var selected = $(".selling-option-item_name").text().split(" ");
@@ -204,13 +204,14 @@
 					optioncolor = optioncolor + temp_selected[0] + ";";
 					optionsize = optionsize + temp_selected[1] + ";";
 				}
-				
+				/
 				
 				var data = {
 						optioncolor : optioncolor,
 						optionsize : optionsize,
 						inventory : inventory,
 						pno : pno
+						ono : ono
 				}; 
 				
 				$.ajax({
@@ -229,6 +230,70 @@
 					}
 				});
 			}
+		});*/
+
+		//add to cart
+		$(document).on("click",".cart",function(){
+			var selected = $(".selling-option-item_name").text().split(" ");
+			
+			if(selected.length == 1 && selected[0] == ""){
+				alert("상품을 선택하여 주세요.");
+			}else{
+				var ono = new Array();
+				var option = $(".selling-option-item_name");
+				
+				$.each(option,function(){
+					var option_number = $(this).attr("data-number");
+					ono.push(option_number);
+				});
+				
+				var number = "";
+				var input = $(".ipt_count_chk");
+				for(var i=0;i<input.length;i++){
+					number = number + input[i].value +";";
+				}
+				
+				$.ajax({
+					url : "/myapp/cart/addCart",
+					type : "post",
+					data : {ono : ono,
+							number : number
+					},success : function(result){
+						if(result == 1){
+							alert("장바구니에 상품을 담았습니다. :)");
+						}else{
+							alert("회원만 담을 수 있습니다.");
+						}
+					},error : function(){
+						alert("다시 시도해주세요.");
+						location.href="/myapp/error";
+					}
+				});
+			}
+		});
+	});
+	
+	$(document).ready(function(){
+		$(".buy").click(function(){
+			var selected = $(".selling-option-item_name");
+			var ono = new Array();
+			
+			$.each(selected,function(){
+				ono.push($(this).attr("data-number"));							
+			});
+			
+			$.ajax({
+				url : "/myapp/order/order_request",
+				type : "post",
+				data : {ono : ono},
+				success : function(result){
+					if(result == 1){
+						location.href="/myapp/order/pre_order";
+					}else{
+						location.href="/myapp/error";
+					}
+				}
+			});
 		});
 	});
 </script>
