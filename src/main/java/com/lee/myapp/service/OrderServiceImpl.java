@@ -18,16 +18,16 @@ public class OrderServiceImpl implements OrderService{
 	OrderDAO orderDAO;
 
 	@Override
-	public List<OrderListVO> cartToOrderList(String[] pno) throws Exception {
+	public List<OrderListVO> cartToOrderList(Map<String,Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return orderDAO.cartToOrderList(pno);
+		return orderDAO.cartToOrderList(map);
 	}
 
 	@Override
-	public List<OrderListVO> productToOrderList(String[] ono) throws Exception {
+	public OrderListVO productToOrderList(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return orderDAO.productToOrderList(ono);
-	}	
+		return orderDAO.productToOrderList(map);
+	}
 
 	@Override
 	public void orderInfo(OrderVO order) throws Exception {

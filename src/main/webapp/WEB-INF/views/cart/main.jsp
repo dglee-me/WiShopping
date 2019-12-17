@@ -270,25 +270,32 @@
 			});
 		});
 		
-		//Checkout product order
+		//Checkout product to order
 		$(document).ready(function(){
 			$(".commerce-cart_side-bar_order_btn").click(function(){
-				var pnoArray = new Array();
+				var option = $("input:checkbox[name='product_check']:checked").closest("article")
+					.children(".carted-product_option-list").children(".carted-product_option-list_item");
+
+				var ono = new Array();
 				
-				$("input:checkbox[name='product_check']:checked").each(function(){
-					pnoArray.push($(this).closest("article").children(".product-small-item-clickable").attr("data-number"));
-				})
+				$.each(option,function(){
+					ono.push($(this).attr("data-number"));
+				});
+				
+				var number = "";
+				var input = $(".form-control");
+				for(var i=0;i<input.length;i++){
+					number = number + input[i].value +";";
+				}
 				
 				$.ajax({
 					url : "/myapp/order/order_request",
 					type : "post",
-					data : {pnoArray : pnoArray},
-					success : function(result){
-						if(result == 1){
-							location.href="/myapp/order/pre_order";
-						}else{
-							location.href="/myapp/error";
-						}
+					data : {ono : ono,
+							number : number		
+					},success : function(result){
+						if(result == 1)	location.href="/myapp/order/pre_order"; 
+						else location.href="/myapp/error";
 					}
 				});
 			});
@@ -374,7 +381,7 @@
 																			<ul class="carted-product_option-list">
 																				<c:forEach var="option" items="${cartOption}">
 																				<c:if test="${option.pno eq cart.pno}">
-																					<li class="carted-product_option-list_item" cart-data="${option.cartno}">
+																					<li class="carted-product_option-list_item" data-number="${option.ono}" cart-data="${option.cartno}">
 																						<article class="selling-option-item">
 																							<h1 class="selling-option-item_name">${option.optioncolor}/${option.optionsize}</h1>
 																							<button class="selling-option-item_delete" type="button" aria-label="삭제">

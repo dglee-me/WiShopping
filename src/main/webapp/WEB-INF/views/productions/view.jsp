@@ -282,11 +282,18 @@
 				ono.push($(this).attr("data-number"));							
 			});
 			
+			var number = "";
+			var input = $(".ipt_count_chk");
+			for(var i=0;i<input.length;i++){
+				number = number + input[i].value +";";
+			}
+			
 			$.ajax({
 				url : "/myapp/order/order_request",
 				type : "post",
-				data : {ono : ono},
-				success : function(result){
+				data : {ono : ono,
+						number : number
+				},success : function(result){
 					if(result == 1){
 						location.href="/myapp/order/pre_order";
 					}else{

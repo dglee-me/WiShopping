@@ -1,6 +1,8 @@
 package com.lee.myapp.controls;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.service.OrderService;
@@ -30,7 +34,8 @@ public class OrderController {
 	
 	@ResponseBody
 	@RequestMapping(value="/order_request", method=RequestMethod.POST)
-	public int cartToOrderRequestPOST(String[] ono, HttpSession session, Model model) throws Exception{
+	public int orderRequestPOST(@RequestParam(value="ono[]") String[] ono, @RequestParam(value="number") String number,
+			HttpServletRequest request, HttpSession session, Model model) throws Exception{
 		logger.info("-------- ORDER : ORDER_REQUEST METHOD=POST --------");
 		
 		int result = 0;
@@ -38,19 +43,32 @@ public class OrderController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 
 		if(member != null) {
+			String[] inventory = number.split(";");
 			
-			/*
-			if(pnoList.length == 0) { // If order directly from the product screen
-				List<OrderListVO> orderList = orderService.productToOrderList(onoList); 
-				session.setAttribute("orderList", orderList);
+			String referer = request.getHeader("referer");
+			if(referer.equals("http://localhost:8081/myapp/cart/main")) {
+				//If order from a cart
+				HashMap<String,Object> map = new HashMap<String,Object>();
 				
-				for(int i=0;i<orderList.size();i++) {
-					System.out.println(orderList.get(i).toString());
+				map.put("ono", ono);
+				map.put("mno", member.getMno());
+				
+				session.setAttribute("orderList",orderService.cartToOrderList(map));
+			}else {
+				//If order directly from the product screen
+				List<OrderListVO> list = new ArrayList<OrderListVO>();
+
+				for(int i=0;i<ono.length;i++) {
+					HashMap<String,Object> map = new HashMap<String,Object>();
+					map.put("ono",ono[i]);
+					map.put("inventory",inventory[i]);
+					
+					OrderListVO order = orderService.productToOrderList(map);
+					
+					list.add(order);
 				}
-			}else { // If order from a cart
-				List<OrderListVO> orderList = orderService.cartToOrderList(pnoList);
-				session.setAttribute("orderList",orderList);
-			}*/
+				session.setAttribute("orderList",list);
+			}
 			result = 1;
 		}
 		

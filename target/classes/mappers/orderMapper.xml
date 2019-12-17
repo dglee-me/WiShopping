@@ -7,23 +7,20 @@
 
 <mapper namespace="orderMapper">
 	<select id="cartToOrderList" resultType="com.lee.myapp.domain.OrderListVO">
-		SELECT B.CARTNO, B.PNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, A.SHIPPING_FEE
+		 SELECT B.CARTNO, A.PNO, B.ONO, B.MNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, A.SHIPPING_FEE
 		  FROM PRODUCT A INNER JOIN TBL_CART B ON A.PNO = B.PNO
-		 WHERE A.PNO IN 
-		 <foreach collection="array" item="pno" open="(" separator="," close=")">
-		 	#{pno}
+		 WHERE B.MNO = #{mno}
+		   AND B.ONO IN
+		 <foreach collection="ono" item="ono" open="(" separator="," close=")">
+		 	#{ono}
 		 </foreach>
-		 ORDER BY A.PNO DESC
+ 		 ORDER BY A.PNO DESC
 	</select>
 	
 	<select id="productToOrderList" resultType="com.lee.myapp.domain.OrderListVO">
-		SELECT B.PNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTION_COLOR, B.OPTION_SIZE, B.INVENTORY, A.SHIPPING_FEE
-  		  FROM PRODUCT A INNER JOIN TBL_PRODUCT_OPTION B ON A.PNO = B.PNO
-  		 WHERE B.ONO IN
-		 <foreach collection="array" item="ono" open="(" separator="," close=")">
-		 	#{ono}
-		 </foreach>
-		 ORDER BY A.PNO DESC
+		SELECT A.PNO, B.ONO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTION_COLOR, B.OPTION_SIZE, #{inventory} AS INVENTORY, A.SHIPPING_FEE
+		  FROM PRODUCT A INNER JOIN TBL_PRODUCT_OPTION B ON A.PNO = B.PNO
+		 WHERE B.ONO = #{ono}
 	</select>
 
 	<insert id="orderInfo">

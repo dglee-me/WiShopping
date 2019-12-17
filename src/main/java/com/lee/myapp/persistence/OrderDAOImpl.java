@@ -19,17 +19,17 @@ public class OrderDAOImpl implements OrderDAO{
 	SqlSession sqlSession;
 	
 	@Override
-	public List<OrderListVO> cartToOrderList(String[] pno) throws Exception {
+	public List<OrderListVO> cartToOrderList(Map<String,Object> map) throws Exception{
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".cartToOrderList",pno);
+		return sqlSession.selectList(namespace+".cartToOrderList",map);
 	}
 
 	@Override
-	public List<OrderListVO> productToOrderList(String[] ono) throws Exception {
+	public OrderListVO productToOrderList(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".productToOrderList",ono);
+		return sqlSession.selectOne(namespace+".productToOrderList",map);
 	}
-
+	
 	@Override
 	public void orderInfo(OrderVO order) throws Exception {
 		// TODO Auto-generated method stub
