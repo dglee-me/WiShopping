@@ -91,11 +91,6 @@
 			var checked = $("#check_agree_policy");
 			
 			if(checked[0].checked == true){	
-				var pd = $(".production");
-								
-				for(var i=0;i<pd.length;i++){
-				}
-				
 				document.order_frm.submit();
 			}else{
 				alert("결제 진행 필수사항에 동의해주세요.");
@@ -122,6 +117,8 @@
 								<c:set var="amount" value="${amount + (item.price * item.inventory)}"/>
 								<tr class="production" data-number="${item.pno}">
 									<input type="hidden" name="pno" value="${item.pno}">
+									<input type="hidden" name="ono" value="${item.ono}">
+									<input type="hidden" name="inventory" value="${item.inventory}">
 									<input type="hidden" name="cartno" value="${item.cartno}">
 									<td>
 										<div class="information">

@@ -37,9 +37,15 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 
 	@Override
-	public int orderInfo_Detail(Map<String,Object> map) throws Exception {
+	public int cart_orderInfo_detail(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+".orderInfo_detail",map);
+		return sqlSession.insert(namespace+".cart_orderInfo_detail",map);
+	}
+
+	@Override
+	public int product_orderInfo_detail(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+".product_orderInfo_detail",map);
 	}
 
 	@Override

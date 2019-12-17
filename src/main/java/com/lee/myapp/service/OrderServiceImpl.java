@@ -35,10 +35,17 @@ public class OrderServiceImpl implements OrderService{
 		orderDAO.orderInfo(order);
 	}
 
+
 	@Override
-	public int orderInfo_Detail(Map<String,Object> map) throws Exception {
+	public int cart_orderInfo_detail(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return orderDAO.orderInfo_Detail(map);
+		return orderDAO.cart_orderInfo_detail(map);
+	}
+	
+	@Override
+	public int product_orderInfo_detail(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.product_orderInfo_detail(map);
 	}
 
 	@Override

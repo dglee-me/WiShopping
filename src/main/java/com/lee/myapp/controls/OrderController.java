@@ -88,7 +88,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/pre_order", method=RequestMethod.POST)
-	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, String[] ono, ProductOptionVO option) throws Exception{
+	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, String[] ono, int[] inventory) throws Exception{
 		logger.info("-------- ORDER : PRE_ORDER METHOD=POST --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
@@ -99,15 +99,19 @@ public class OrderController {
 			//To order
 			order.setMno(member.getMno());
 			orderService.orderInfo(order.setOrderno(orderNo));
+
+			//If product to order case, flag is false, and cart to order case, flag is true;
+			boolean flag = true;
+			if(cartno[0].equals("0")) flag = false;
 			
-			//If cart to order case
-			if(cartno != null) {
+			if(flag == true) {
+				//If cart to order case
 				HashMap<String,Object> map = new HashMap<String,Object>();
 				
 				map.put("cartno", cartno);
 				map.put("orderno", orderNo);
 			
-				int result = orderService.orderInfo_Detail(map);
+				int result = orderService.cart_orderInfo_detail(map);
 
 				//When the number of insert is more than 1
 				if(result >= 1) {
@@ -119,7 +123,18 @@ public class OrderController {
 					return "redirect:/error";
 				}
 			}else {
-				System.out.println("cart to order 만 구현. 곧 product to order 구현 예정");
+				//If product to order case
+				HashMap<String,Object> map = new HashMap<String,Object>();
+				
+				for(int i=0;i<ono.length;i++) {
+					map.put("ono", ono[i]);
+					map.put("orderno", orderNo);
+					map.put("inventory", inventory[i]);
+					
+					orderService.product_orderInfo_detail(map);
+					
+					map.clear();
+				}
 			}
 		}
 		return "redirect:/order/result";

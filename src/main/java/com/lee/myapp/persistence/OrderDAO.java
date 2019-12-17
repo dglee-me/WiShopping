@@ -10,6 +10,7 @@ public interface OrderDAO {
 	public List<OrderListVO> cartToOrderList(Map<String,Object> map) throws Exception; 
 	public OrderListVO productToOrderList(Map<String,Object> map) throws Exception; 
 	public void orderInfo(OrderVO order) throws Exception;
-	public int orderInfo_Detail(Map<String,Object> map) throws Exception;
+	public int cart_orderInfo_detail(Map<String,Object> map) throws Exception;
+	public int product_orderInfo_detail(Map<String,Object> map) throws Exception;
 	public void cartDelete(Map<String,Object> map) throws Exception;
 }

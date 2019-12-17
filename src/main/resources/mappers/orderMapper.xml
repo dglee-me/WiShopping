@@ -6,6 +6,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderMapper">
+	<!-- Cart to order case for pre_order -->
 	<select id="cartToOrderList" resultType="com.lee.myapp.domain.OrderListVO">
 		 SELECT B.CARTNO, A.PNO, B.ONO, B.MNO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, A.SHIPPING_FEE
 		  FROM PRODUCT A INNER JOIN TBL_CART B ON A.PNO = B.PNO
@@ -17,6 +18,7 @@
  		 ORDER BY A.PNO DESC
 	</select>
 	
+	<!-- Product to order case for pre_order -->
 	<select id="productToOrderList" resultType="com.lee.myapp.domain.OrderListVO">
 		SELECT A.PNO, B.ONO, A.BRAND, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.OPTION_COLOR, B.OPTION_SIZE, #{inventory} AS INVENTORY, A.SHIPPING_FEE
 		  FROM PRODUCT A INNER JOIN TBL_PRODUCT_OPTION B ON A.PNO = B.PNO
@@ -28,7 +30,8 @@
 		VALUES(#{orderno},#{mno},#{orderrec},#{zipcode},#{receivedat},#{receivedatdetail},#{receivedphone},#{deliverymessage},#{payername},#{payeremail},#{payerphone},#{amount})
 	</insert>
 	
-	<insert id="orderInfo_detail">
+	<!-- Cart To order case -->
+	<insert id="cart_orderInfo_detail">
 		INSERT INTO TBL_ORDER_DETAIL(ORDERDETAILNO, ORDERNO, PNO, OPTIONCOLOR, OPTIONSIZE, INVENTORY)
 		SELECT TBL_ORDER_DETAIL_SEQ.NEXTVAL, #{orderno}, PNO, OPTIONCOLOR, OPTIONSIZE, INVENTORY
 		  FROM TBL_CART
@@ -36,6 +39,19 @@
 		 <foreach item="cartno" collection="cartno" open="(" separator="," close=")">
 		 	#{cartno}
 		 </foreach>
+	</insert>
+	
+	<!-- Product to order case -->
+	<insert id="product_orderInfo_detail">
+		INSERT INTO TBL_ORDER_DETAIL(ORDERDETAILNO, ORDERNO, PNO, OPTIONCOLOR, OPTIONSIZE, INVENTORY)
+		SELECT TBL_ORDER_DETAIL_SEQ.NEXTVAL AS ORDERDETAILNO,
+		       #{orderno} AS ORDERNO,
+		       (SELECT PNO FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}) AS PNO,
+		       (SELECT OPTION_COLOR FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}) AS OPTIONCOLOR,
+		       (SELECT OPTION_SIZE FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono})AS OPTIONSIZE,
+		       #{inventory} AS INVENTORY
+		  FROM TBL_PRODUCT_OPTION
+		 WHERE ONO = #{ono}
 	</insert>
 	
 	<!-- Delete cart when order completes successfully -->
