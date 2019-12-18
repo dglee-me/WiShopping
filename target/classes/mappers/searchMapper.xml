@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="searchMapper">
+	<select id="searchProductList" resultType="com.lee.myapp.domain.ProductVO">
+		SELECT *
+		  FROM PRODUCT
+		 WHERE BRAND LIKE '%'||#{query}||'%'
+		    OR PNAME LIKE '%'||#{query}||'%'
+	</select>
+	
+	<select id="countResult" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM PRODUCT
+		 WHERE BRAND LIKE '%'||#{query}||'%'
+		    OR PNAME LIKE '%'||#{query}||'%'
+	</select>
+	
+	<select id="isBrand" resultType="String">
+		SELECT DISTINCT BRAND
+		  FROM PRODUCT
+		 WHERE BRAND LIKE #{query}
+	</select>
+</mapper>

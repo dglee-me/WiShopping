@@ -3,6 +3,27 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/default.js" async></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".btn_search").click(function(){
+			var query = $(".ui_input_text").val();
+			
+			if(query != ""){
+				header_search($(".ui_input_text"));
+			}
+		});
+		
+		$(".ui_input_text").keyup(function(e){
+			var query = $(".ui_input_text").val();
+			
+			if(query != ""){
+				if(e.keyCode == 13){
+					header_search($(".ui_input_text"));
+				}
+			}
+		});
+	});
+</script>
 
 <div class="header">
 	<div class="inner_top_wrap">
@@ -28,12 +49,12 @@
 		<div class="mix_inner mix_search_wrap">
 				<h1 class="logo"><a href="${pageContext.request.contextPath}/">위쇼핑</a></h1>
 				<div class="search_form">
-					<form>
+					<form id="header_search_bar" name="header_search_bar" action="${pageContext.request.contextPath}/search/index" method="GET" onsubmit="return false;">
 						<div class="search_bar">
-							<input type="text" class="ui_input_text" maxlength="50" title="검색어 입력" placeholder="찾고 싶은 상품을 검색해보세요!">
+							<input type="text" name="query" class="ui_input_text" maxlength="50" title="검색어 입력" placeholder="찾고 싶은 상품을 검색해보세요!">
 						</div>
 						<span class="btn_search">
-							<button type="button" id="_searchBtn" onclick="location.href='#'">검색</button>
+							<button type="button" id="_searchBtn">검색</button>
 						</span>
 					</form>	
 				</div>
