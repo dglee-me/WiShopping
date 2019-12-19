@@ -300,6 +300,9 @@
 					},success : function(result){
 						if(result == 1){
 							location.href="/myapp/order/pre_order";
+						}else if(result == 2){
+							alert("로그인 후 이용해주세요!");
+							location.href="/myapp/auth/login";
 						}else{
 							location.href="/myapp/error";
 						}

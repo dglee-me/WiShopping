@@ -40,7 +40,7 @@ public class PurchaseController {
 			
 			return "/purchase/list";
 		}else {
-			return "/error";
+			return "/auth/login";
 		}
 	}
 	

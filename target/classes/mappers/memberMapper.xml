@@ -61,4 +61,15 @@
 		DELETE FROM MEMBER
 		WHERE MNO=#{MNO}
 	</delete>
+	
+	<insert id="sellerRegist" parameterType="com.lee.myapp.domain.SellerVO">
+		INSERT INTO SELLER
+		VALUES(SELLER_SEQ.NEXTVAL,#{company},#{license1},#{license2},#{license3},#{salesname},#{salesphone1},#{salesphone2},#{salesphone3},#{salesemail},#{brand},#{category},#{aboutproduct})		
+	</insert>
+	
+	<update id="sellerUpdate">
+		UPDATE MEMBER
+		   SET MLEVEL=1
+		 WHERE EMAIL=#{email}
+	</update>
 </mapper>

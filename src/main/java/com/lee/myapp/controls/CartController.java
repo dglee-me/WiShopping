@@ -28,13 +28,20 @@ public class CartController {
 	CartService cartService;
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public void cartMainGET(HttpSession session, Model model) throws Exception{
+	public String cartMainGET(HttpSession session, Model model) throws Exception{
 		logger.info("-------- CART : MAIN METHOD=GET --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 
-		model.addAttribute("cartList",cartService.cartList(member.getMno()));
-		model.addAttribute("cartOption",cartService.cartOption(member.getMno()));
+		if(member != null) {
+			model.addAttribute("cartList",cartService.cartList(member.getMno()));
+			model.addAttribute("cartOption",cartService.cartOption(member.getMno()));
+			
+			return "/cart/main";
+		}else {
+			return "/auth/login";
+		}
+		
 	}
 	
 	@ResponseBody

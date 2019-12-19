@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.SellerVO;
 import com.lee.myapp.service.MemberService;
 
 @Controller
@@ -141,5 +141,36 @@ public class AuthController {
 		}
 
 		return "redirect:/";
+	}
+
+	@RequestMapping(value="/auth/seller_regist", method=RequestMethod.GET)
+	public String seller_registGET(HttpSession session) throws Exception{
+		logger.info("-------- AUTH : SELLER REGIST : GET --------");
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member != null) {
+			return "/auth/sellerregist";
+		}else {
+			return "/auth/login";
+		}
+		
+	}
+	
+	@RequestMapping(value="/auth/seller_regist", method=RequestMethod.POST)
+	public String seller_registPOST(HttpSession session, SellerVO seller) throws Exception{
+		logger.info("-------- AUTH : SELLER REGIST : POST --------");
+
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member != null) {
+			memberService.sellerRegist(seller);
+			memberService.sellerUpdate(seller.getSalesemail());
+			
+			return "redirect:/";
+		}else {
+			return "redirect:/auth/login";
+		}
+		
 	}
 }

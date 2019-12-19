@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.SellerVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -75,5 +76,17 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO loginInfo(MemberVO member) throws Exception{
 		return sqlSession.selectOne(namespace+".loginInfo",member);
+	}
+
+	@Override
+	public int sellerRegist(SellerVO seller) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+".sellerRegist",seller);
+	}
+
+	@Override
+	public int sellerUpdate(String email) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".sellerUpdate",email);
 	}
 }

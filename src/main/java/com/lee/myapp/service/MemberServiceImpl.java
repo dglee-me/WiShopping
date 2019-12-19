@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.SellerVO;
 import com.lee.myapp.persistence.MemberDAO;
 import com.lee.myapp.utils.MailUtils;
 import com.lee.myapp.utils.TempKey;
@@ -98,6 +99,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO loginInfo(MemberVO member) throws Exception {
 		return memberDao.loginInfo(member);
+	}
+
+	@Override
+	public int sellerRegist(SellerVO seller) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.sellerRegist(seller);
+	}
+
+	@Override
+	public int sellerUpdate(String email) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.sellerUpdate(email);
 	}
 
 }

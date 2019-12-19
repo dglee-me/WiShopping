@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.SellerVO;
 
 public interface MemberDAO {
 	//이메일 Ajax 통해 유효성 검사
@@ -24,4 +25,7 @@ public interface MemberDAO {
 	public int delete(int mno) throws Exception;
 	public MemberVO read(int mno) throws Exception;
 	public MemberVO loginInfo(MemberVO member) throws Exception;
+	
+	public int sellerRegist(SellerVO seller) throws Exception;
+	public int sellerUpdate(String email) throws Exception;
 }

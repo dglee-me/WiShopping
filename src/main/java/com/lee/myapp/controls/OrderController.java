@@ -70,6 +70,8 @@ public class OrderController {
 				session.setAttribute("orderList",list);
 			}
 			result = 1;
+		}else {
+			result = 2;
 		}
 		
 		return result;
