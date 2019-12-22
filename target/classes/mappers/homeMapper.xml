@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="homeMapper">
+	<select id="selectAllBest" resultType="com.lee.myapp.domain.ProductVO">
+		<![CDATA[
+			SELECT A.PNO, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
+			  FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
+			 WHERE ROWNUM <= 4
+			 ORDER BY SALES DESC
+		]]>
+	</select>
+	
+	<select id="selectBest" resultType="com.lee.myapp.domain.ProductVO">
+		<![CDATA[
+			SELECT A.PNO, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
+			  FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
+			 WHERE ROWNUM <= 4 AND A.CATEGORY1 = #{data}
+			 ORDER BY SALES DESC
+		]]>
+	</select>
+</mapper>

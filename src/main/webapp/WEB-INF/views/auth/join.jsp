@@ -11,7 +11,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<form action="join" method="POST" id="frm">
+	<form action="join" method="POST" name="join_frm" id="frm">
 	<input type="hidden" name="auth" value="IMSI">
 	<div class="member-wrapper member-wrapper-flex">
 		<header class="member-header">
@@ -101,7 +101,7 @@
 				</div>
 			</div>
 			<div class="join_footer _joinTriggerRoot">
-				<button type="submit" class="join_button join_button-skyblue-large-block _joinTrigger">동의하고 가입하기</button>
+				<button type="button" class="join_button join_button-skyblue-large-block _joinTrigger">동의하고 가입하기</button>
 			</div>
 			<footer class="member-footer">©WiShopping. All rights reserved.</footer>
 		</div>

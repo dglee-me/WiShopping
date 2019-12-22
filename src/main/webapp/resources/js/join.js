@@ -124,7 +124,7 @@ $("._joinTrigger").click(function(){
 	//유효성 모두 통과
 	if(validAll == true){
 		alert("가입한 이메일로 인증 이메일을 보냈으니 확인해주세요! :)");
-		
+		document.join_frm.submit();
 	}else{
 		alert("입력한 정보들을 다시 확인 해주세요! :(");
 	}
