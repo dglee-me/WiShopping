@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commerceMapper">
+	<select id="bestList" resultType="com.lee.myapp.domain.ProductVO">
+		SELECT A.PNO, A.PNAME, A.BRAND, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
+		  FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
+		 <if test='_parameter != null and _parameter != "all"'>
+		 	WHERE A.CATEGORY1 = #{_parameter}
+		 </if>
+		 ORDER BY SALES DESC
+	</select>
+</mapper>

@@ -76,8 +76,34 @@ input, textarea, select{font-family:inherit; font-size:inherit; font-weight:inhe
 .col-4{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 25%; max-width:25%; padding-left:10px; padding-right:10px;}
 .active{color:#5FCAEC;}
 
+/* Best CSS */
+.best-feed{position:relative; z-index:0;}
+.best-feed_title{background-color: #f7f8fa; text-align:center; padding:17px 0; font-size:20px; font-weight:600; color:#000;}
+.best-feed_header-child{position:relative; z-index:1000;}
+.best-category-filter{justify-content:center; margin-bottom:40px; background-color:#f7f8fa; border-bottom:1px solid #ededed; padding:20px 0 0;}
+.best-category-filter_wrap{display:flex; overflow:auto; max-width:960px; margin:0 auto;}
 
+.best-category-filter_item{display:inline-block; flex:1 0 auto; text-align:center; color:#424242; font-weight:700; padding:0 0 16px;
+	font-size:17px; line-height:18px; margin-right:25px;}
+.best-category-filter_item-active{color:#5FCAEC; border-bottom:2px solid #5FCAEC;}
+.best-category-filter_item:active, .best-category-filter_item:hover{opacity: .5;}
+.best-feed_content{margin-bottom:10px;}
 
+.best-feed_item-wrap{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 25%; max-width:25%; padding-left:10px; padding-right:10px;}
+.best-production-item_wrap{position:relative; align-items:center; margin-bottom:10px;}
+.best-production-item_link{position:absolute; top:0; left:0; right:0; bottom:0; z-index:1;}
+.best-production-item_img-wrap{position:relative;}
+.production-item_image{position:relative; background-color:#f5f5f5; padding-bottom:100%; border-radius:4px; overflow:hidden;}
+.production-item_image>.image{position:absolute; top:50%; left:50%; width:100%; transform:translate(-50%,-50%); transition:transform .2s;}
+.best-production-item_link:active~.best-production-item_img-wrap .production-item-image>img, .best-production-item_link:hover~
+	.best-production-item_img-wrap .production-item-image>img{transform:translate(-50%,-50%) scale(1.1);}
+.best-production-item_content{padding:0 4px;}
+.best-production-item_header{margin:9px 0 0;}
+.best-production-item_header-brand{display:block; color:#757575; word-break:break-all; font-size:11px; font-weight:400; line-height:13px;}
+.best-production-item_header-name{display:-webkit-box; max-height:34px; margin-top:5px; word-break:break-all; font-size:13px; font-weight:400; line-height:17px;
+	color:#000; transition:opacity .1s; overflow:hidden; text-overflow:ellipsis;}
+.best-production-item_price{margin:2px 0 0;}
+.production-item-price_price{color:#000;}
 
 
 /* Product Regist CSS */

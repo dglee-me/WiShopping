@@ -208,25 +208,25 @@
 								<input type="hidden" id="sales-production-category" name="category" value="">
 								<div class="form-check sales-form_form-check">
 									<label class="form-check-label">
-										<input type="checkbox" id="sales_category-0" name="category0" class="form-check category_checkbox" value="0">
+										<input type="checkbox" id="sales_category-1" name="category1" class="form-check category_checkbox" value="1">
 										<span class="check-img"></span>패션
 									</label>
 								</div>
 								<div class="form-check sales-form_form-check">
 									<label class="form-check-label">
-										<input type="checkbox" id="sales_category-1" name="category1" class="form-check category_checkbox" value="1">
+										<input type="checkbox" id="sales_category-2" name="category2" class="form-check category_checkbox" value="2">
 										<span class="check-img"></span>잡화
 									</label>
 								</div>
 								<div class="form-check sales-form_form-check">
 									<label class="form-check-label">
-										<input type="checkbox" id="sales_category-2" name="category2" class="form-check category_checkbox" value="2">
+										<input type="checkbox" id="sales_category-3" name="category3" class="form-check category_checkbox" value="3">
 										<span class="check-img"></span>인테리어
 									</label>
 								</div>
 								<div class="form-check sales-form_form-check">
 									<label class="form-check-label">
-										<input type="checkbox" id="sales_category-3" name="category3" class="form-check category_checkbox" value="3">
+										<input type="checkbox" id="sales_category-4" name="category4" class="form-check category_checkbox" value="4">
 										<span class="check-img"></span>가전·디지털
 									</label>
 								</div>

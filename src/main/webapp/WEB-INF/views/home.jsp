@@ -23,16 +23,22 @@
 				type : "post",
 				data : {data : data},
 				success : function(best){
+					
 					var count = 0;
-					$.each(best, function(){
-						var item = $(".production-best-feed_item")[count++];
-						
-						//Product reflect for selected tab
-						$(item).children().children().attr("href","${pageContext.request.contextPath}/productions/view?pno="+this.pno);
-						$(item).children().children().children().children().attr("src","/myapp"+this.productthumurl);
-						$(item).children().children().children(".info").children(".product-name").text(this.pname);
-						$(item).children().children().children(".info").children(".price").children(".selling-price").text(comma(this.price));
-					});
+					
+					if(best.length != 0){
+						$.each(best, function(){
+							var item = $(".production-best-feed_item")[count++];
+							
+							//Product reflect for selected tab
+							$(item).children().children().attr("href","${pageContext.request.contextPath}/productions/view?pno="+this.pno);
+							$(item).children().children().children().children().attr("src","/myapp"+this.productthumurl);
+							$(item).children().children().children(".info").children(".product-name").text(this.pname);
+							$(item).children().children().children(".info").children(".price").children(".selling-price").text(comma(this.price));
+						});
+					}else{
+						console.log("해당 항목이 비어있습니다.");
+					}
 				}
 			});
 		});
@@ -98,7 +104,7 @@
 			</div>
 			<section class="container home-section home-best">
 				<header class="row home-section_header">
-					<h2 class="col home-section_header_content"><a href="javascript:void(0);">베스트</a></h2>
+					<h2 class="col home-section_header_content"><a href="${pageContext.request.contextPath}/commerce/best/main?category=all">베스트</a></h2>
 				</header>
 				<div class="production-best-feed">
 					<ul class="production-best-feed_category">
