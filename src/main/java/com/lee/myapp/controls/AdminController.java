@@ -1,6 +1,7 @@
 package com.lee.myapp.controls;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.service.BoardService;
 
 @Controller
@@ -39,5 +41,22 @@ public class AdminController {
 			return "redirect:/notice/list";
 		}
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/admin/banner", method=RequestMethod.GET)
+	public String bannerGET(HttpSession session) throws Exception{
+		logger.info("-------- ADMIN : BANNER CARE METHOD=GET --------");
+		
+		String path = "";
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			path = "/admin/banner";
+		}else {
+			path = "redirect:/";
+		}
+		
+		return path;
 	}
  }

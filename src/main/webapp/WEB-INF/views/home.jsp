@@ -12,6 +12,7 @@
 <head>
 <script type="text/javascript">
 	$(document).ready(function(){
+		//Change best category
 		$(".production-best-feed_category_item").click(function(){
 			$(".active").removeClass("active");
 			$(this).addClass("active");
@@ -44,6 +45,123 @@
 		});
 	});
 	
+	//Carousel rolling banner
+	$(document).ready(function(){
+		var banner = $(".carousel_content");
+		var banner_item = banner.children();
+		var banner_length = banner.children().length;
+		
+		var count = 0;
+		
+		var rollingId;
+		
+		auto();
+		
+		//Banner mouse over event
+		banner.mouseover(function(){
+			clearInterval(rollingId);
+		});
+		
+		//Banner mouse out event
+		banner.mouseout(function(){
+			auto();
+		});
+
+		$(".left").mouseover(function(){
+			clearInterval(rollingId);
+		});
+		
+		$(".left").mouseout(function(){
+			auto();
+		});
+
+		$(".right").mouseover(function(){
+			clearInterval(rollingId);
+		});
+		
+		$(".right").mouseout(function(){
+			auto();
+		});
+		
+		//Prev banner show
+		$(".left").click(function(){
+			var li = $(".banner_show");
+			var li_alt = li.children().children().children().attr("alt");
+			
+			//Calculate the count to be shown next
+			for(var i=0;i<banner_length;i++){
+				var alt = $(banner_item[i]).children().children().children().attr("alt");
+				
+				if(li_alt == alt){
+					count = i-1;
+					
+					if(count < 0){
+						count = banner_length-1;
+					}
+					break;
+				}
+			}
+
+			//Setting banner
+			li.removeClass("banner_show").addClass("banner_hide");
+			$(banner_item[count]).removeClass("banner_hide").addClass("banner_show");
+		});
+		
+		//Next banner show
+		$(".right").click(function(){
+			var li = $(".banner_show");
+			var li_alt = li.children().children().children().attr("alt");
+
+			//Calculate the count to be shown next
+			for(var i=0;i<banner_length;i++){
+				var alt = $(banner_item[i]).children().children().children().attr("alt");
+
+				if(li_alt == alt){
+					count = i+1;
+					
+					if(count > (banner_length - 1)){
+						count = 0;
+					}
+					break;
+				}
+			}
+
+			//Setting banner
+			li.removeClass("banner_show").addClass("banner_hide");
+			$(banner_item[count]).removeClass("banner_hide").addClass("banner_show");
+		});
+		
+		function auto(){
+			//Call start event 2sec
+			rollingId = setInterval(function(){
+				start();
+			}, 3000);
+		};
+
+		function start(count){
+			var li = $(".banner_show");
+			var li_alt = li.children().children().children().attr("alt");
+			var count = 0;
+
+			//Calculate the count to be shown next
+			for(var i=0;i<banner_length;i++){
+				var alt = $(banner_item[i]).children().children().children().attr("alt");
+				
+				if(li_alt == alt){
+					count = i+1;
+					
+					if(count >= banner_length){
+						count = 0;
+					}
+				}
+			} 
+			
+			//Setting banner
+			li.removeClass("banner_show").addClass("banner_hide");
+			$(banner_item[count]).removeClass("banner_hide").addClass("banner_show");
+		};
+		
+	});
 </script>
 <title>Home</title>
 <meta charset="UTF-8">
@@ -52,53 +170,34 @@
 	<div class="layout">
 		<jsp:include page="header.jsp"/>
 		<div class="home">
-			<div class="container home-header">
-				<div class="row">
-					<div class="home-header_banner-large">
-						<article class="large-entry">
-							<a class="large-entry-link" href="javascript:void(0);">
-								<div class="large-entry_image-wrap">
-									<div class="large-entry_image" style="background-image:url('https://image.ohou.se/image/resize/bucketplace-v2-development/uploads-projects-cover_images-157649599922720846.jpg/850/none'); 
-										background-size:cover; background-repeat:no-repeat;"></div>
-								</div>
-								<div class="large-entry_content-wrap">
-									<div class="large-entry_content">
-										<div class="large-entry_content_title">테스트용입니다.</div>
-										<div class="large-entry_content_profile">
-											<span class="large-entry_content_profile_name">이동근</span>
-										</div>
-									</div>
-									<div class="home-header_large_more">보러가기</div>
-								</div>
-							</a>
-						</article>
+			<div class="container home-header" style="width:100%;">
+				<div class="carousel full main_banner">
+					<div class="page_info full left big">
+						<button type="button">
+							<span class="hide">이전 배너 보기</span>
+						</button>
 					</div>
-					<div class="home-header_banner-small">
-						<div class="home-header_banner-wrap">
-							<div class="home-header_banner-container">
-								<div class="list-wrap home-header_banner">
-									<div class="list home-header_banner_list" style="transform:translateX(0%); transition;">
-										<div class="list_entry home-header_banner_item" style="width:100%;">
-											<a href="javascript:void(0);" class="home-header_banner_item_link">
-												<div class="banner" style="background-image:url('https://image.ohou.se/image/resize/bucketplace-v2-development/uploads-contests-pc_banner-157594094666018677.png/320/none'); background-size:cover; background-repeat:no-repeat;"></div>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="home-header_banner-control">
-									<div class="home-header_banner-control_icon">
-										<svg class="home-header_banner-control_icon_arrow home-header_banner-control_icon_arrow-left" width="10" height="18" viewBox="0 0 10 18" preserveAspectRatio="xMidYMid meet">
-											<path fill="#FFF" fill-rule="evenodd" d="M9.89 9l.137-.137L1.343.18l-1.37 1.37L7.424 9l-7.451 7.451 1.37 1.37 8.684-8.684L9.89 9z"></path>
-										</svg>
-									</div>
-									<div class="home-header_banner-control_icon right">
-										<svg class="home-header__banner-control_icon_arrow home-header_banner-control_icon_arrow-right" width="10" height="18" viewBox="0 0 10 18" preserveAspectRatio="xMidYMid meet">
-											<path fill="#FFF" fill-rule="evenodd" d="M9.89 9l.137-.137L1.343.18l-1.37 1.37L7.424 9l-7.451 7.451 1.37 1.37 8.684-8.684L9.89 9z"></path>
-										</svg>
-									</div>
-								</div>
+					<ul class="carousel_content">
+						<li class="banner_show">
+							<div class="banner_inner">
+								<a href="javascript:void(0);"><img src="https://view01.wemep.co.kr/wmp-main/19/201912/23/pmb_ra4sulplwymq.jpg" alt="에어팟특가"></a>
 							</div>
-						</div>
+						</li>
+						<li class="banner_hide">
+							<div class="banner_inner">
+								<a href="javascript:void(0);"><img src="https://view01.wemep.co.kr/wmp-main/12/201912/21/pmb_fjusjebchl3l.jpg" alt="여행최저가"></a>
+							</div>
+						</li>
+						<li class="banner_hide">
+							<div class="banner_inner">
+								<a href="javascript:void(0);"><img src=https://view01.wemep.co.kr/wmp-main/06/201912/23/pmb_eejuusfw3vmg.jpg alt="패션위크"></a>
+							</div>
+						</li>
+					</ul>
+					<div class="page_info full right big">
+						<button type="button">
+							<span class="hide">다음 배너 보기</span>
+						</button>
 					</div>
 				</div>
 			</div>

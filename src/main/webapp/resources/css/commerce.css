@@ -6,7 +6,6 @@ input, textarea, select{font-family:inherit; font-size:inherit; font-weight:inhe
 
 /* Home Page CSS*/
 .home{display:flex; flex-direction:column; flex:1 0 auto; min-height:1px; margin-bottom:60px;}
-.home-header{padding:30px 0 0;}
 .home-header .row{align-items:stretch;}
 .home-header_banner-large{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 74%; max-width:74%; padding-left:10px; padding-right:10px;}
 .large-entry{position:relative; overflow:hidden; border-radius:6px;}
@@ -47,6 +46,36 @@ input, textarea, select{font-family:inherit; font-size:inherit; font-weight:inhe
 .home-header_banner-control_icon_arrow-left{transform:rotate(180deg);}
 .home-header_banner-control_icon:hover{background-color:#5FCAEC;}
 .home-header_banner-control_icon.right{position:relative; left:160px;}
+
+/* banner*/
+.carousel{position:relative; overflow:hidden;}
+.main_banner{height:430px;}
+.carousel_content{position:relative; width:200%; }
+.carousel.full .carousel_content>li{width:50%; }
+.carousel .carousel_content>li{float:left; }
+.banner_hide{display:none;}
+.banner_show{display:block;}
+.banner_inner{width:1084px; margin-left:auto; margin-right:auto;}
+.carousel .carousel_content>li a{display:block;}
+
+.carousel.full .page_info.left{left:50%; margin-left:-542px;}
+.page_info.big.left{padding-right:11px;}
+.page_info.big{height:60px; line-height:60px; margin-top:-30px;}
+.page_info{position:absolute; top:50%; z-index:1; overflow:hidden;}
+.page_info.big button{width:46px; height:60px;}
+.page_info.left button{float:left; text-align:left; padding-left:17px;}
+.page_info button{vertical-align:top; background:none;}
+
+.page_info button:before{content:''; width:15px; height:25px; display:inline-block; vertical-align:middle;}
+.page_info.big.left button:before{background-position:-393px -55px; width:21px; height:35px;}
+.page_info.left button:before{position:absolute; top:13px; left:17px;}
+.page_info button:before{background-image:url('/myapp/resources/image/main.png'); background-repeat:no-repeat;}
+
+.carousel.full .page_info.right{right:50%; margin-right:-542px;}
+.page_info.big.right{padding-right:10px;}
+.page_info.big.right button:before{background-position:-395px -110px; width:21px; height:35px;}
+.page_info.right button:before{position:absolute; top:13px; right:17px;}
+
 
 .home-section{margin:30px auto;}
 .home-best .home-section_header{align-items:center; margin-bottom:0;}
@@ -736,3 +765,18 @@ textarea.form-control{resize:none; line-height:20px; padding-top:9px; padding-bo
 .sales-form_btn-apply>button{display:inline-block; width:360px;}
 .btn-submit{background-color:#5FCAEC; border-color:#5FCAEC; color:#ffffff; line-height:1; height:70px; padding:26px 0; font-size:18px; transition:.2s ease;
 	box-sizing:border-box; border-width:1px; border-style:solid; text-align:center; border-radius:4px; font-weight:bold;}
+	
+/* Admin banner regist CSS */
+.banner-regist{position:relative;}
+.banner-regist_title{background-color:#f7f8fa; text-align:center; padding:17px 0; font-size:20px; font-weight:600; color:#000;}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	

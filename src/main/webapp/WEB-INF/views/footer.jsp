@@ -8,10 +8,10 @@
 				<li><a class="layout-footer_shorcut-item" href="${pageContext.request.contextPath}/auth/seller_regist">판매자 등록</a></li>
 			</c:if>
 		</ul>
-		<c:if test="${login.mlevel eq 1}">
+		<c:if test="${login.mlevel eq 2}">
 			<p class="layout-footer_copyright">©WiShopping<a href="${pageContext.request.contextPath}/admin/main">.</a> All rights reserved.</p>
 		</c:if>
-		<c:if test="${login.mlevel ne 1}">
+		<c:if test="${login.mlevel ne 2}">
 			<p class="layout-footer_copyright">©WiShopping. All rights reserved.</p>
 		</c:if>
 	</div>

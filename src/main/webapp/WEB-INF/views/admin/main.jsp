@@ -15,6 +15,7 @@
 	<div>
 		<h2><a href="${pageContext.request.contextPath}/admin/write">공지사항 쓰기</a></h2>
 		<h2><a href="${pageContext.request.contextPath}/productions/regist">상품 등록</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/admin/banner">배너 관리</a></h2>
 	</div>
 </body>
 </html>
