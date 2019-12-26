@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commerce.css?after">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/regist.js" async></script>
 
 <html lang="ko">
 <head>
@@ -216,11 +215,6 @@
 				var optioncolor = $("input:text[name='optioncolor']").val();
 				var optionsize = $("input:text[name='optionsize']").val();
 				var inventory = $("input:text[name='inventory']").val();
-				
-
-				console.log(optioncolor);
-				console.log(optionsize);
-				console.log(inventory);
 				
 				if(pname == "" || thumbnail == "" || price == "" || category1 == "" || category2 == "" || detail == "" || 
 						optioncolor == "" || optionsize == "" || inventory == ""){

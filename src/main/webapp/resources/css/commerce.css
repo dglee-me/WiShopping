@@ -440,8 +440,6 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .option-count-input.select-input>.form-control{height:24px; padding:0 10px; padding-right:30px; font-size:13px; line-height:22px; 
 	border-radius:3px; text-align:center; font-family:tahoma,sans;}
 .select-input.input-group>.form-control{width:100%; background-image:none;}
-.form-control{transition:.2s border-color, .2s box-shadow, .2s background-color; display:block; 
-	box-sizing:border-box; border:solid 1px #dbdbdb; background-color:white; color:#424242; flex:1 0 auto;}
 .option-count-input .select-input_icon{position:absolute; top:2px; right:5px; padding:5px; font-size:0; cursor:default; color:rgba(0,0,0,.3); pointer-events:none;}
 	
 .selling-option-item_price{flex:0 0 auto; font-size:15px; font-weight:700; line-height:24px; color:#424242;}
@@ -769,14 +767,45 @@ textarea.form-control{resize:none; line-height:20px; padding-top:9px; padding-bo
 /* Admin banner regist CSS */
 .banner-regist{position:relative;}
 .banner-regist_title{background-color:#f7f8fa; text-align:center; padding:17px 0; font-size:20px; font-weight:600; color:#000;}
-	
 
+.banner-register{margin-left:1px;}
+
+section[class*="admin-banner-"]{padding-top:20px; padding-bottom:57px;}
+.table-block{border:1px solid #ededed; border-top:1px solid #dbdbdb; border-radius:6px; overflow:hidden;}
+
+.table-block table tr:first-child th, .table-block table tr:first-child td{border-top:0;}
+.table-block table th{width:137px; font-weight:700; height:45px; font-size:15px; border-top:1px solid #cdd2d7; background-color:#f7f8fa;}
+
+.table-block table th + th, .table-block table td + th, .table-block table td + td{border-left:1px solid #cdd2d7;}
+
+.admin-banner-area .table-block td.area{width:391px;}
+.table-block table td{border-left:1px solid #bdbdbd; font-size:15px; padding-left:18px; text-align:left;}
+.table-block table td{padding:10px 18px 11px; border-top:1px solid #cdd2d7;}
+
+.banner-form-control{display:block; width:100%; height:100%; }
+.admin-banner-area .table-block td.size input[type="number"]{width:90px;}
+input[type="number"]{background-color:#fff; border:1px solid #a9a9a9; box-sizing:border-box; height:24px; outline:none; padding-bottom:1px; text-indent:8px;}
+.admin-banner-area .table-block td.size span{display:inline-block; margin:0 5px; vertical-align:1px;}
+.admin-banner-area .table-block td .msg{display:inline-block; color:#8c8c8c; font-size:12px; margin-left:4px;}
 	
+section[class*="admin-banner-"] .table-block td.image{padding:18px;}	
 	
-	
-	
-	
-	
-	
-	
-	
+section[class*="admin-banner-"] .table-block td.image .img_empty:empty{background:#f5f6f8 url('/myapp/resources/image/bg_img.png') center center no-repeat; 
+	width:520px; height:207px; cursor:pointer; transition:transform .2s;}	
+section[class*="admin-banner-"] .table-block td.image .img_empty:empty:hover, section[class*="admin-banner-"] .table-block td.image .img_empty:empty:focus{transform:scale(1.05);}
+
+
+.banner_main_input{display:none;}
+section[class*="admin-banner-"] .table-block td.link input[type="text"]{width:615px; background-color:#fff; border:1px solid #a9a9a9; box-sizing:border-box;
+	height:24px; outline:none; padding-bottom:1px; text-indent:8px;}
+
+section[class*="admin-banner-"]>.btns{position:relative; display:flex; margin-top:37px; justify-content:center;}
+section[class*="admin-banner-"]>.btns .btn_save{background-color:#5FCAEC; border-color:transparent; color:#fff;}
+
+section[class*="admin-banner-"]>.btns button{font-size:16px; font-weight:700; height:40px; margin:0 9px; width:140px;}
+.btn_save,.btn_cancel{display:flex; align-items:center; justify-content:center; border:1px solid #dbdbdb; border-radius:4px; box-sizing:border-box; padding-bottom:1px;
+	text-align:center;}
+
+.img_exist{width:520px; height:207px; cursor:pointer; transition:transform .2s; background-size:contain; background-repeat:no-repeat;}
+section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[class*="admin-banner-"] .table-block td.image .img_exsit:focus{transform:scale(1.05);}
+

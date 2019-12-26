@@ -10,12 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../header.jsp"/>
+	<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<h1 style="text-align:center;">HELLO!@@@!!!! IT'S ADMIN PAGE!!</h1><br>
 	<div>
 		<h2><a href="${pageContext.request.contextPath}/admin/write">공지사항 쓰기</a></h2>
 		<h2><a href="${pageContext.request.contextPath}/productions/regist">상품 등록</a></h2>
-		<h2><a href="${pageContext.request.contextPath}/admin/banner">배너 관리</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/admin/banner/regist">배너 등록</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/admin/banner/management">배너 관리</a></h2>
 	</div>
 </body>
 </html>
