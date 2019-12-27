@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -94,5 +95,24 @@ public class AdminController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value="/banner/management", method=RequestMethod.GET)
+	public String bannerManagementGET(HttpSession session, Model model) throws Exception{
+		logger.info("-------- ADMIN : BANNER MANAGETMENT METHOD=GET --------");
+		
+		String path = "";
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			model.addAttribute("banners",adminService.bannerList());
+			
+			path = "admin/banner/management";
+		}else {
+			path = "redirect:/error";
+		}
+		
+		return path;
 	}
  }

@@ -1,5 +1,7 @@
 package com.lee.myapp.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -24,5 +26,11 @@ public class AdminServiceImpl implements AdminService{
 	public int bannerRegist(BannerVO banner) throws Exception {
 		// TODO Auto-generated method stub
 		return adminDAO.bannerRegist(banner);
+	}
+
+	@Override
+	public List<BannerVO> bannerList() throws Exception {
+		// TODO Auto-generated method stub
+		return adminDAO.bannerList();
 	}
 }

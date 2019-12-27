@@ -50,6 +50,7 @@
 			formData.append("area",$(".form-control option:checked").text());
 			formData.append("bannerlink",$("input:text[name='banner[link]']").val());
 			formData.append("file",$(".banner_main_input")[0].files[0]);
+			formData.append("banneralt",$("input:text[name='banner[alt]']").val());
 			
 			if(formData.get("file") == "undefined"){
 				formData.delete("file");
@@ -109,6 +110,12 @@
 												<div class="img_empty" style="display:block;"></div>
 												<div class="img_exist" style="display:none;"></div>
 												<input type="file" name="banner[url]" class="banner_main_input">
+											</td>
+										</tr>
+										<tr>
+											<th>배너 이미지 설명</th>
+											<td class="alt" colspan="3">
+												<input type="text" name="banner[alt]" value="" placeholder="배너에 대한 설명을 간단하게 적어주세요. ex)패션위크">
 											</td>
 										</tr>
 										<tr>

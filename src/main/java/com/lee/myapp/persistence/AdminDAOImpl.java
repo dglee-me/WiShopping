@@ -1,5 +1,7 @@
 package com.lee.myapp.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,5 +27,11 @@ public class AdminDAOImpl implements AdminDAO{
 	public int bannerRegist(BannerVO banner) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".bannerRegist",banner);
+	}
+
+	@Override
+	public List<BannerVO> bannerList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".bannerList");
 	}
 }

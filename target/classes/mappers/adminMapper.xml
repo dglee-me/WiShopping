@@ -12,8 +12,15 @@
 		VALUES(bno_seq.nextval,#{category},#{subject},#{content},#{author},0,sysdate,0)
 	</insert>
 	
+	<!-- Banner -->
 	<insert id="bannerRegist">
-		INSERT INTO TBL_BANNER
-		VALUES(TBL_BANNER_SEQ.NEXTVAL,#{area},#{bannerurl},#{bannerlink})
+		INSERT INTO TBL_BANNER(BNO,AREA,BANNER_ALT,BANNER_URL,BANNER_LINK)
+		VALUES(TBL_BANNER_SEQ.NEXTVAL,#{area},#{banneralt},#{bannerurl},#{bannerlink})
 	</insert>
+	
+	<select id="bannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBL_BANNER
+		 ORDER BY BNO DESC
+	</select>
 </mapper>
