@@ -839,7 +839,8 @@ section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[
 
 .banner-list_wrap .banner-list .banner-list_context .banner-list_use button{background-color:#dcdcdc; border-radius:4px; color:#fff; 
 	width:69px; height:29px; margin-right:12px; font-family:"Noto Sans KR",arial,"malgun gothic",sans-serif; font-weight:400;}
-.banner-list_wrap .banner-list .banner-list_context .banner-list_use .yes.active{background-color:#5FCAEC;}
+.banner-list_wrap .banner-list .banner-list_context .banner-list_use .yes.active,
+.banner-list_wrap .banner-list .banner-list_context .banner-list_use .no.active{background-color:#5FCAEC;}
 
 .banner-list_wrap .banner-list .banner-list_context dl{position:relative; margin-top:15px;}
 .banner-list_wrap .banner-list .banner-list_context dt{position:absolute; color:#444; font-weight:bold; width:60px;}

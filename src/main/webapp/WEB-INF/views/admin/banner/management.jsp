@@ -23,7 +23,62 @@
 		
 		//Banner status change to 'yes'
 		$(".yes").click(function(){
-			alert("헤이")
+			var confirm_val = confirm("배너를 사용하시겠습니까?");
+			
+			if(confirm_val){
+				var item = $(this);
+			
+				var bno = $(this).closest("li").children("em").attr("banner-number");
+				var status = 1;
+			
+				$.ajax({
+					url : "/myapp/admin/banner/updateStatus",
+					type : "post",
+					data : {
+						bno : bno,
+						status : status		
+					},
+					success : function(result){
+						if(result == 1){
+							item.siblings(".no").removeClass("active");
+							item.addClass("active");
+						}else{
+							alert("오류가 발생하였습니다. 다시 시도해주세요.");
+							location.href="/myapp";
+						}
+					}
+				});
+			}
+		});
+
+		//Banner status change to 'no'
+		$(".no").click(function(){
+			var confirm_val = confirm("배너 사용을 중지하시겠습니까?");
+
+			if(confirm_val){
+				var item = $(this);
+				
+				var bno = $(this).closest("li").children("em").attr("banner-number");
+				var status = 0;
+				
+				$.ajax({
+					url : "/myapp/admin/banner/updateStatus",
+					type : "post",
+					data : {
+						bno : bno,
+						status : status		
+					},
+					success : function(result){
+						if(result == 1){
+							item.siblings(".yes").removeClass("active");
+							item.addClass("active");
+						}else{
+							alert("오류가 발생하였습니다. 다시 시도해주세요.");
+							location.href="/myapp";
+						}
+					}
+				});
+			}
 		});
 	});
 </script>
@@ -70,7 +125,7 @@
 							<ul>
 								<c:forEach var="banner" items="${banners}" varStatus="status">
 								<li>
-									<em class="no">${status.count}</em>
+									<em class="no" banner-number="${banner.bno}">${status.count}</em>
 									<div class="banner-list_image">
 										<a href="${banner.bannerlink}">
 											<img src="${pageContext.request.contextPath}/${banner.bannerurl}" alt="${banner.banneralt}">
@@ -78,8 +133,8 @@
 									</div>
 									<div class="banner-list_context">
 										<div class="banner-list_use">
-											<button type="button" class="yes <c:if test="${banner.bannerstatus eq 1}">active</c:if>">사용</button>
-											<button type="button" class="no">종료</button> 
+											<button type="button" class="yes<c:if test="${banner.bannerstatus eq 1}"> active</c:if>">사용</button>
+											<button type="button" class="no<c:if test="${banner.bannerstatus eq 0}"> active</c:if>">종료</button> 
 										</div>
 										<dl>
 											<dt>배너영역</dt>

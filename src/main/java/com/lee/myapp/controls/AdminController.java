@@ -1,6 +1,7 @@
 package com.lee.myapp.controls;
 
 import java.io.File;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -106,13 +107,54 @@ public class AdminController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
-			model.addAttribute("banners",adminService.bannerList());
+			model.addAttribute("banners",adminService.bannerList("all"));
 			
 			path = "admin/banner/management";
 		}else {
-			path = "redirect:/error";
+			path = "redirect:/";
 		}
 		
 		return path;
+	}
+	
+	@RequestMapping(value="/banner/management", method=RequestMethod.POST)
+	public String bannerManagementPOST(HttpSession session, Model model) throws Exception{
+		logger.info("-------- ADMIN : BANNER MANAGETMENT METHOD=POST --------");
+		
+		String path = "";
+
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			model.addAttribute("banners",adminService.bannerList("use"));
+			
+			path = "redirect:/admin/banner/management";
+		}else {
+			path = "redirect:/";
+		}
+		return path;
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/banner/updateStatus", method=RequestMethod.POST)
+	public int bannerUpdateStatusPOST(HttpSession session, Model model, int bno, int status) throws Exception{
+		logger.info("-------- ADMIN : BANNER UPDATE STATUS METHOD=POST --------");
+		int result = 0;
+
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			HashMap<String,Object> map = new HashMap<String,Object>();
+			
+			map.put("bno", bno);
+			map.put("status", status);
+			
+			adminService.bannerStatusUpdate(map);
+			
+			result = 1;
+		}
+		
+		return result;
+		
 	}
  }

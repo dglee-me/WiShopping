@@ -21,6 +21,20 @@
 	<select id="bannerList" resultType="com.lee.myapp.domain.BannerVO">
 		SELECT *
 		  FROM TBL_BANNER
+	<if test='_parameter != null and _parameter != "all"'>
+		 WHERE BANNER_STATUS = 1
+	</if>
 		 ORDER BY BNO DESC
 	</select>
+	
+	<update id="updateStatus">
+		UPDATE TBL_BANNER
+		<if test='status != null and status != 1'>
+		   SET BANNER_STATUS = 0
+		</if>
+		<if test='status != null and status != 0'>
+		   SET BANNER_STATUS = 1
+		</if>
+		 WHERE BNO = #{bno}
+	</update>
 </mapper>
