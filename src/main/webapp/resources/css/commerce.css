@@ -822,7 +822,7 @@ section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[
 .banner-list_header .banner-list_sort .round-checkbox-input_icon{position:relative;}
 .banner-list_header .banner-list_sort label input[type="checkbox"]{position:absolute; left:-9999px; opacity:0;}
 
-.banner-list_header .btns{display:flex; flex:1; justify-content:flex-end;}
+.banner-list_header .banner_btns{display:flex; flex:1; justify-content:flex-end;}
 .bbtn{display:flex; align-items:center; justify-content:center; background-color:#5FCAEC; border:1px solid #5FCAEC; border-radius:4px; box-sizing:border-box;
 	font-size:15px; font-weight:700; height:40px; width:140px; color:#fff;}
 

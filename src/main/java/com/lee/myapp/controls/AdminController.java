@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,7 +100,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/banner/management", method=RequestMethod.GET)
-	public String bannerManagementGET(HttpSession session, Model model) throws Exception{
+	public String bannerManagementGET(HttpSession session, Model model,String status) throws Exception{
 		logger.info("-------- ADMIN : BANNER MANAGETMENT METHOD=GET --------");
 		
 		String path = "";
@@ -107,7 +108,11 @@ public class AdminController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
-			model.addAttribute("banners",adminService.bannerList("all"));
+			if(status.equals("all")) {
+				model.addAttribute("banners",adminService.bannerList("all"));
+			}else {
+				model.addAttribute("banners",adminService.bannerList("used"));
+			}
 			
 			path = "admin/banner/management";
 		}else {
@@ -117,24 +122,6 @@ public class AdminController {
 		return path;
 	}
 	
-	@RequestMapping(value="/banner/management", method=RequestMethod.POST)
-	public String bannerManagementPOST(HttpSession session, Model model) throws Exception{
-		logger.info("-------- ADMIN : BANNER MANAGETMENT METHOD=POST --------");
-		
-		String path = "";
-
-		MemberVO member = (MemberVO) session.getAttribute("login");
-		
-		if(member.getMlevel() == 2) {
-			model.addAttribute("banners",adminService.bannerList("use"));
-			
-			path = "redirect:/admin/banner/management";
-		}else {
-			path = "redirect:/";
-		}
-		return path;
-	}
-
 	@ResponseBody
 	@RequestMapping(value="/banner/updateStatus", method=RequestMethod.POST)
 	public int bannerUpdateStatusPOST(HttpSession session, Model model, int bno, int status) throws Exception{
@@ -155,6 +142,5 @@ public class AdminController {
 		}
 		
 		return result;
-		
 	}
  }

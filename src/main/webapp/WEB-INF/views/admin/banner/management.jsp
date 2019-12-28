@@ -11,13 +11,34 @@
 <html lang="ko">
 <head>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){		
+		//If status is use , checked checkbox
+		var url = location.href;
+		var status = url.slice(url.indexOf('=') + 1);
+
+		if(status == "use"){
+			$("input:checkbox[name='is_use']").prop("checked",true);
+		}
+		
 		//Show only banner in use if checkbox is selected
 		$("input:checkbox[name='is_use']").click(function(){
+			var checkbox = $(this);
 			if($("input:checkbox[name='is_use']").prop("checked")){
-				
+				$.ajax({
+					url : "/myapp/admin/banner/management?status=use",
+					type : "get",
+					success : function(){
+						location.href="/myapp/admin/banner/management?status=use";
+					}
+				});
 			}else{
-				
+				$.ajax({
+					url : "/myapp/admin/banner/management?status=all",
+					type : "get",
+					success : function(){
+						location.href="/myapp/admin/banner/management?status=all";
+					}
+				});
 			}
 		});
 		
@@ -115,7 +136,7 @@
 									사용 중인 배너만 보기
 								</label>
 							</div>
-							<div class="btns">
+							<div class="banner_btns">
 								<a href="${pageContext.request.contextPath}/admin/banner/regist" class="regist_btn bbtn add">
 									배너 추가
 								</a>
