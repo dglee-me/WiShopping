@@ -41,4 +41,16 @@ public class AdminDAOImpl implements AdminDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+".updateStatus",map);
 	}
+
+	@Override
+	public BannerVO bannerView(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".bannerView",bno);
+	}
+
+	@Override
+	public int bannerUpdate(BannerVO banner) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".bannerUpdate",banner);
+	}
 }

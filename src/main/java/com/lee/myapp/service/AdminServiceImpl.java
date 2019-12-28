@@ -40,4 +40,16 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return adminDAO.bannerStatusUpdate(map);
 	}
+
+	@Override
+	public BannerVO bannerView(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return adminDAO.bannerView(bno);
+	}
+
+	@Override
+	public int bannerUpdate(BannerVO banner) throws Exception {
+		// TODO Auto-generated method stub
+		return adminDAO.bannerUpdate(banner);
+	}
 }

@@ -37,4 +37,22 @@
 		</if>
 		 WHERE BNO = #{bno}
 	</update>
+	
+	<select id="bannerView" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBL_BANNER
+		 WHERE BNO = #{bno}
+	</select>
+	
+	<update id="bannerUpdate">
+		UPDATE TBL_BANNER
+		   SET AREA = #{area}, 
+	<if test="bannerurl != null">
+		   	   BANNER_URL = #{bannerurl},
+	</if>
+		   	   BANNER_LINK = #{bannerlink},
+		   	   BANNER_ALT = #{banneralt},
+		   	   BANNER_STATUS = #{bannerstatus}
+		 WHERE BNO = #{bno}
+	</update>
 </mapper>

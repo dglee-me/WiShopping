@@ -806,7 +806,7 @@ section[class*="admin-banner-"]>.btns button{font-size:16px; font-weight:700; he
 .btn_save,.btn_cancel{display:flex; align-items:center; justify-content:center; border:1px solid #dbdbdb; border-radius:4px; box-sizing:border-box; padding-bottom:1px;
 	text-align:center;}
 
-.img_exist{width:520px; height:207px; cursor:pointer; transition:transform .2s; background-size:contain; background-repeat:no-repeat;}
+.img_exist, .img_modify{width:520px; height:207px; cursor:pointer; transition:transform .2s; background-size:contain; background-repeat:no-repeat;}
 section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[class*="admin-banner-"] .table-block td.image .img_exsit:focus{transform:scale(1.05);}
 
 /* Banner management CSS*/

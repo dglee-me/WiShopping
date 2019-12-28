@@ -143,4 +143,44 @@ public class AdminController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/banner/modify", method=RequestMethod.GET)
+	public void bannerModifyGET(HttpSession session, Model model,int bno) throws Exception{
+		logger.info("-------- ADMIN : BANNER MODIFY METHOD=GET --------");
+		logger.info("-------- ACCESSOR : "+((MemberVO)session.getAttribute("login")).getName()+", NUMBER : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
+		logger.info("-------- ACCESS BANNER : "+bno+" --------");
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			model.addAttribute("banner",adminService.bannerView(bno));
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/banner/modify", method=RequestMethod.POST)
+	public int bannerModifyPOST(HttpSession session, Model model,BannerVO banner, MultipartFile file) throws Exception{
+		logger.info("-------- ADMIN : BANNER MODIFY METHOD=POST --------");
+		logger.info("-------- ACCESSOR : "+((MemberVO)session.getAttribute("login")).getName()+", NUMBER : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
+		logger.info("-------- ACCESS BANNER : "+banner.getBno()+" --------");
+		
+		int result = 0;
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			if(file != null ) {
+				String imgUploadPath = uploadPath + File.separator + "imgUpload";
+				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+				
+				//Set image name and upload image to server
+				banner.setBannerurl("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath));
+			}
+			adminService.bannerUpdate(banner);
+			
+			result = 1;
+		}
+		
+		return result;
+	}
  }

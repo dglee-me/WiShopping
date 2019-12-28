@@ -14,4 +14,6 @@ public interface AdminService {
 	public int bannerRegist(BannerVO banner) throws Exception;
 	public List<BannerVO> bannerList(String parameter) throws Exception;
 	public int bannerStatusUpdate(HashMap<String,Object> map) throws Exception;
+	public BannerVO bannerView(int bno) throws Exception;
+	public int bannerUpdate(BannerVO banner) throws Exception;
 }

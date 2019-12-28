@@ -172,8 +172,8 @@
 										</dl>
 									</div>
 									<div class="banner-list_admin">
-										<a href="javascript:void(0);" class="bbtn">수정하기</a>
-										<a href="javascript:void(0);" class="bbtn">삭제하기</a>
+										<a href="${pageContext.request.contextPath}/admin/banner/modify?bno=${banner.bno}" class="bbtn">수정하기</a>
+										<a href="${pageContext.request.contextPath}/admin/banner/delete?bno=${banner.bno}" class="bbtn">삭제하기</a>
 									</div>
 								</li>
 								</c:forEach>
