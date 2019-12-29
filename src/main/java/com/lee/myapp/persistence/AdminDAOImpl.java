@@ -53,4 +53,10 @@ public class AdminDAOImpl implements AdminDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+".bannerUpdate",banner);
 	}
+
+	@Override
+	public int bannerDelete(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".bannerDelete",bno);
+	}
 }

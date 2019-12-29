@@ -16,4 +16,5 @@ public interface AdminDAO {
 	public int bannerStatusUpdate(HashMap<String,Object> map) throws Exception;
 	public BannerVO bannerView(int bno) throws Exception;
 	public int bannerUpdate(BannerVO banner) throws Exception;
+	public int bannerDelete(int bno) throws Exception;
 }

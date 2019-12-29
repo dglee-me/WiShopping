@@ -101,6 +101,24 @@
 				});
 			}
 		});
+		
+		//Banner delete button click event
+		$(".delete_btn").click(function(){
+			var isUse = $(this).parent().siblings(".banner-list_context").children().children("button.yes");
+			
+			if(isUse.hasClass("active") == true){
+				alert("사용이 중지된 배너만 삭제 가능합니다.");
+			}else{
+				var confirm_val = confirm("배너를 삭제하시겠습니까?\n배너의 모든 정보가 삭제됩니다.");
+				if(confirm_val){
+					var bno = $(this).parent().siblings("em").attr("banner-number");
+					
+					alert("선택한 배너가 삭제되었습니다.");
+					
+					location.href = "/myapp/admin/banner/delete?bno="+bno;
+				}
+			}
+		});
 	});
 </script>
 <meta charset="UTF-8">
@@ -173,11 +191,14 @@
 									</div>
 									<div class="banner-list_admin">
 										<a href="${pageContext.request.contextPath}/admin/banner/modify?bno=${banner.bno}" class="bbtn">수정하기</a>
-										<a href="${pageContext.request.contextPath}/admin/banner/delete?bno=${banner.bno}" class="bbtn">삭제하기</a>
+										<a href="javascript:void(0);" class="bbtn delete_btn">삭제하기</a>
 									</div>
 								</li>
 								</c:forEach>
 							</ul>
+							<c:if test="${empty banners}">
+								<div class="banner-list_no-data">등록된 배너가 없습니다.</div>
+							</c:if>
 						</div>
 					</div>
 				</section>

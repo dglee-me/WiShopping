@@ -55,4 +55,10 @@
 		   	   BANNER_STATUS = #{bannerstatus}
 		 WHERE BNO = #{bno}
 	</update>
+	
+	<delete id="bannerDelete">
+		DELETE 
+		  FROM TBL_BANNER
+		 WHERE BNO = #{bno}
+	</delete>
 </mapper>

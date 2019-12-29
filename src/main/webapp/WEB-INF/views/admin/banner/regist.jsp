@@ -64,7 +64,7 @@
 				data : formData,
 				success : function(result){
 					if(result == 1){
-						location.href="/myapp/";
+						location.href="/myapp/admin/banner/management";
 					}else{
 						location.href="/myapp/error";
 					}

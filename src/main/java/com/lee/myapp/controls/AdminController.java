@@ -106,8 +106,12 @@ public class AdminController {
 		String path = "";
 		
 		MemberVO member = (MemberVO) session.getAttribute("login");
-		
+
 		if(member.getMlevel() == 2) {
+			if(status == null) {
+				status = "all";
+			}
+			
 			if(status.equals("all")) {
 				model.addAttribute("banners",adminService.bannerList("all"));
 			}else {
@@ -182,5 +186,25 @@ public class AdminController {
 		}
 		
 		return result;
+	}
+	
+
+	@RequestMapping(value="/banner/delete", method=RequestMethod.GET)
+	public String bannerDeleteGET(HttpSession session, Model model,int bno) throws Exception{
+		logger.info("-------- ADMIN : BANNER DELETE METHOD=GET --------");
+		logger.info("-------- ACCESSOR : "+((MemberVO)session.getAttribute("login")).getName()+", NUMBER : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
+		logger.info("-------- ACCESS BANNER : "+bno+" --------");
+		
+		String path = "";
+
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			adminService.bannerDelete(bno);
+			
+			path = "redirect:/admin/banner/management";
+		}
+		
+		return path;			
 	}
  }

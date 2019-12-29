@@ -851,3 +851,5 @@ section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[
 
 .banner-list_wrap .banner-list .banner-list_admin{padding-top:2px; width:160px;}
 .banner-list_wrap .banner-list .banner-list_admin a{margin:6px 0;}
+
+.banner-list_wrap .banner-list .banner-list_no-data{color:#222; font-size:16px; text-align:center;}
