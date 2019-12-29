@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.persistence.HomeDAO;
 
@@ -25,6 +26,12 @@ public class HomeServiceImpl implements HomeService{
 	public List<ProductVO> selectBest(String data) throws Exception {
 		// TODO Auto-generated method stub
 		return homeDAO.selectBest(data);
+	}
+
+	@Override
+	public List<BannerVO> mainBannerList() throws Exception {
+		// TODO Auto-generated method stub
+		return homeDAO.mainBannerList();
 	}
 
 }

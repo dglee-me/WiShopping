@@ -23,4 +23,12 @@
 			 ORDER BY SALES DESC
 		]]>
 	</select>
+	
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = '메인상단'
+		 ORDER BY BNO DESC
+	</select>
 </mapper>

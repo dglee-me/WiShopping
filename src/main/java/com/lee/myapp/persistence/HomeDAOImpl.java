@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductVO;
 
 @Repository
@@ -28,4 +29,9 @@ public class HomeDAOImpl implements HomeDAO{
 		return sqlSession.selectList(namespace+".selectBest",data);
 	}
 
+	@Override
+	public List<BannerVO> mainBannerList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mainBannerList");
+	}
 }

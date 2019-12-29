@@ -178,21 +178,18 @@
 						</button>
 					</div>
 					<ul class="carousel_content">
-						<li class="banner_show">
-							<div class="banner_inner">
-								<a href="javascript:void(0);"><img src="https://view01.wemep.co.kr/wmp-main/19/201912/23/pmb_ra4sulplwymq.jpg" alt="에어팟특가"></a>
-							</div>
-						</li>
-						<li class="banner_hide">
-							<div class="banner_inner">
-								<a href="javascript:void(0);"><img src="https://view01.wemep.co.kr/wmp-main/12/201912/21/pmb_fjusjebchl3l.jpg" alt="여행최저가"></a>
-							</div>
-						</li>
-						<li class="banner_hide">
-							<div class="banner_inner">
-								<a href="javascript:void(0);"><img src=https://view01.wemep.co.kr/wmp-main/06/201912/23/pmb_eejuusfw3vmg.jpg alt="패션위크"></a>
-							</div>
-						</li>
+						<c:forEach var="banner" items="${mainBanners}" varStatus="status">
+							<c:if test="${status.count eq 1}">
+								<li class="banner_show">
+							</c:if>
+							<c:if test="${status.count ne 1}">
+								<li class="banner_hide">
+							</c:if>
+								<div class="banner_inner">
+									<a href="${banner.bannerlink}"><img src="${pageContext.request.contextPath}${banner.bannerurl}" alt="${banner.banneralt}"></a>
+								</div>
+							</li>
+						</c:forEach>
 					</ul>
 					<div class="page_info full right big">
 						<button type="button">
