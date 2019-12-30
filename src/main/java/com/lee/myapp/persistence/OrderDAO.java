@@ -3,6 +3,7 @@ package com.lee.myapp.persistence;
 import java.util.List;
 import java.util.Map;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 
@@ -13,4 +14,7 @@ public interface OrderDAO {
 	public int cart_orderInfo_detail(Map<String,Object> map) throws Exception;
 	public int product_orderInfo_detail(Map<String,Object> map) throws Exception;
 	public void cartDelete(Map<String,Object> map) throws Exception;
+
+	//Header banner
+	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

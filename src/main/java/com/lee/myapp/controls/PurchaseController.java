@@ -34,6 +34,9 @@ public class PurchaseController {
 		if(member != null) {
 			List<PurchaseVO> orders = purchaseService.purchaseList(member.getMno());
 			List<OrderVO> ordernos = purchaseService.ordernoList(member.getMno());
+
+			//Setting
+			model.addAttribute("headerBanners", purchaseService.mainBannerList("헤더")); // Main banner list in this view
 			
 			model.addAttribute("orders",orders);
 			model.addAttribute("ordernos",ordernos);
@@ -51,6 +54,9 @@ public class PurchaseController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
+			//Setting
+			model.addAttribute("headerBanners", purchaseService.mainBannerList("헤더")); // Main banner list in this view
+			
 			model.addAttribute("order",purchaseService.viewOrderNo(orderno));
 			model.addAttribute("purchase",purchaseService.viewOrder(orderno));
 		}

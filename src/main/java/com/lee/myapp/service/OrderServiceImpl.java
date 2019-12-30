@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 import com.lee.myapp.persistence.OrderDAO;
@@ -52,5 +53,12 @@ public class OrderServiceImpl implements OrderService{
 	public void cartDelete(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		orderDAO.cartDelete(map);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.mainBannerList(area);
 	}
 }

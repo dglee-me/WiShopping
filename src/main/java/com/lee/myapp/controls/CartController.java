@@ -34,6 +34,9 @@ public class CartController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 
 		if(member != null) {
+			//Setting
+			model.addAttribute("headerBanners", cartService.mainBannerList("Çì´õ")); // Main banner list in this view
+			
 			model.addAttribute("cartList",cartService.cartList(member.getMno()));
 			model.addAttribute("cartOption",cartService.cartOption(member.getMno()));
 			

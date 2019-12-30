@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
 import com.lee.myapp.persistence.CartDAO;
@@ -62,5 +63,12 @@ public class CartServiceImpl implements CartService{
 	public int upInventory(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return cartDAO.upInventory(map);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return cartDAO.mainBannerList(area);
 	}
 }

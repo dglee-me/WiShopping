@@ -2,6 +2,7 @@ package com.lee.myapp.persistence;
 
 import java.util.List;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductVO;
 
 public interface SearchDAO {

@@ -32,6 +32,9 @@ public class CommerceController {
 		}else if(category.equals("4")) {
 			category = "가전·디지털";
 		}
+
+		//Setting
+		model.addAttribute("headerBanners", commerceService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("best",commerceService.bestList(category));
 	}

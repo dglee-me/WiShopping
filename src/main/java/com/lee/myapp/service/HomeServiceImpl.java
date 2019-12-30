@@ -29,9 +29,9 @@ public class HomeServiceImpl implements HomeService{
 	}
 
 	@Override
-	public List<BannerVO> mainBannerList() throws Exception {
+	public List<BannerVO> mainBannerList(String area) throws Exception {
 		// TODO Auto-generated method stub
-		return homeDAO.mainBannerList();
+		return homeDAO.mainBannerList(area);
 	}
 
 }

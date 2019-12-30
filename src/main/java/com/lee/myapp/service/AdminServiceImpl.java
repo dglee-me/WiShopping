@@ -58,4 +58,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return adminDAO.bannerDelete(bno);
 	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return adminDAO.mainBannerList(area);
+	}
 }

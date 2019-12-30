@@ -65,4 +65,12 @@
 		 </foreach>
 	</delete>
 	
+	<!-- Header banner -->
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = #{area}
+		 ORDER BY BNO DESC
+	</select>
 </mapper>

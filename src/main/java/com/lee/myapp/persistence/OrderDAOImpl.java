@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 
@@ -52,5 +53,12 @@ public class OrderDAOImpl implements OrderDAO{
 	public void cartDelete(Map<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".cartDelete",map);
+	}
+	
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mainBannerList",area);
 	}
 }

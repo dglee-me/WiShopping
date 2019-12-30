@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductVO;
 
 @Repository
@@ -20,5 +21,12 @@ public class CommerceDAOImpl implements CommerceDAO{
 	public List<ProductVO> bestList(String category) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".bestList",category);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mainBannerList",area);
 	}
 }

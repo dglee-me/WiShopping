@@ -85,6 +85,9 @@ public class OrderController {
 			logger.info("---------------- Object Null ----------------");
 			session.getAttribute("orderList");
 		}
+
+		//Setting
+		model.addAttribute("headerBanners", orderService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return "/order/preorder";
 	}
@@ -143,7 +146,10 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/result", method=RequestMethod.GET)
-	public void resultGET() throws Exception{
+	public void resultGET(Model model) throws Exception{
 		logger.info("-------- ORDER : RESULT METHOD=GET --------");
+		
+		//Setting
+		model.addAttribute("headerBanners", orderService.mainBannerList("헤더")); // Main banner list in this view
 	}
 }

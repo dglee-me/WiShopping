@@ -28,7 +28,7 @@
 		SELECT *
 		  FROM TBl_BANNER
 		 WHERE BANNER_STATUS = 1
-		   AND AREA = '메인상단'
+		   AND AREA = #{area}
 		 ORDER BY BNO DESC
 	</select>
 </mapper>

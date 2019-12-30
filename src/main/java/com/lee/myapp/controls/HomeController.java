@@ -36,7 +36,8 @@ public class HomeController {
 		
 		//Setting
 		model.addAttribute("allBest", homeService.selectAllBest()); // Best product list in home view
-		model.addAttribute("mainBanners", homeService.mainBannerList()); // Main banner list in home view
+		model.addAttribute("mainBanners", homeService.mainBannerList("메인상단")); // Main banner list in home view
+		model.addAttribute("headerBanners", homeService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return "home";
 	}

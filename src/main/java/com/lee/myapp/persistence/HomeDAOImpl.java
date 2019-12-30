@@ -30,8 +30,8 @@ public class HomeDAOImpl implements HomeDAO{
 	}
 
 	@Override
-	public List<BannerVO> mainBannerList() throws Exception {
+	public List<BannerVO> mainBannerList(String area) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".mainBannerList");
+		return sqlSession.selectList(namespace+".mainBannerList", area);
 	}
 }

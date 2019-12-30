@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
 
@@ -64,5 +65,12 @@ public class CartDAOImpl  implements CartDAO {
 	public int upInventory(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".upInventory",map);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mainBannerList",area);
 	}
 }

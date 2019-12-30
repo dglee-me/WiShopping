@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.OrderVO;
 import com.lee.myapp.domain.PurchaseVO;
 import com.lee.myapp.persistence.PurchaseDAO;
@@ -37,5 +38,12 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public List<PurchaseVO> viewOrder(String orderno) throws Exception {
 		// TODO Auto-generated method stub
 		return purchaseDAO.viewOrder(orderno);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return purchaseDAO.mainBannerList(area);
 	}
 }

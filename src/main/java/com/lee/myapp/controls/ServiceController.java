@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,7 @@ public class ServiceController {
 	BoardService boardService;
 	
 	@RequestMapping(value="/notice/list", method=RequestMethod.GET)
-	public void noticeMainGET(HttpServletRequest request, Criteria cri) throws Exception{
+	public void noticeMainGET(Model model, Criteria cri) throws Exception{
 		logger.info("-------- Service : NOTICE MAIN METHOD=GET --------");
 		
 		List<BoardVO> noticeList = new ArrayList<BoardVO>();
@@ -38,13 +39,16 @@ public class ServiceController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(boardService.listCount("공지사항"));
+
+		//Setting
+		model.addAttribute("headerBanners", boardService.mainBannerList("헤더")); // Main banner list in this view
 		
-		request.setAttribute("pageMaker", pageMaker);
-		request.setAttribute("noticeList", noticeList);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("noticeList", noticeList);
 	}
 	
 	@RequestMapping(value="/notice/view", method=RequestMethod.GET)
-	public void noticeViewGET(HttpServletRequest request, int bno) throws Exception{
+	public void noticeViewGET(Model model, int bno) throws Exception{
 		logger.info("-------- Service : NOTICE VIEW METHOD=GET --------");
 
 		//Increase Views by 1 
@@ -58,16 +62,22 @@ public class ServiceController {
 		}else {
 			board.setContent("<p>"+board.getContent()+"</P>");
 		}
+
+		//Setting
+		model.addAttribute("headerBanners", boardService.mainBannerList("헤더")); // Main banner list in this view
 		
-		request.setAttribute("view",board);
+		model.addAttribute("view",board);
 	}
 	
 	@RequestMapping(value="/notice/modify", method=RequestMethod.GET)
-	public void noticeModifyGET(HttpServletRequest request,int bno) throws Exception{
+	public void noticeModifyGET(Model model,int bno) throws Exception{
 		logger.info("-------- Service : NOTICE MODIFY METHOD=GET --------");
 		BoardVO board = boardService.view(bno);
+
+		//Setting
+		model.addAttribute("headerBanners", boardService.mainBannerList("헤더")); // Main banner list in this view
 		
-		request.setAttribute("board",board);
+		model.addAttribute("board",board);
 	}
 	
 	@RequestMapping(value="/notice/modify", method=RequestMethod.POST)

@@ -17,4 +17,7 @@ public interface AdminDAO {
 	public BannerVO bannerView(int bno) throws Exception;
 	public int bannerUpdate(BannerVO banner) throws Exception;
 	public int bannerDelete(int bno) throws Exception;
+	
+	//Header banner
+	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

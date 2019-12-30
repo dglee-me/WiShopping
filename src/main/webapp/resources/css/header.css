@@ -44,6 +44,8 @@
 
 .mix_banner{float:left; position:relative; margin-top:-7px; margin-left:20px;}
 .wrap_ad .list_ad{width:190px; height:79px;}
+.list_ad_show{display:list-item;}
+.list_ad_hide{display:none;}
 
 .wrap_ad .btn_page{position:absolute; top:12px; right:3px; float:left; width:30px; height:15px; background-position:-200px -42px;}	
 .spr_mix{display:inline-block; font-size:0; line-height:0; background-image:url('/myapp/resources/image/fusion_sprite.png');}

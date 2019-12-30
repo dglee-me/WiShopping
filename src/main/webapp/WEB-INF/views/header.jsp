@@ -23,6 +23,123 @@
 			}
 		});
 	});
+	
+	//Carousel rolling banner (header banner)
+	$(document).ready(function(){
+		var header_banner = $(".list_ad");
+		var header_banner_item = header_banner.children();
+		var header_banner_length = header_banner_item.length;
+		
+		var header_count = 0;
+		
+		var header_rollingId;
+		
+		header_auto();
+		
+		//Header_banner mouse over event
+		header_banner.mouseover(function(){
+			clearInterval(header_rollingId);
+		});
+		
+		//Header_banner mouse out event
+		header_banner.mouseout(function(){
+			header_auto();
+		});
+
+		$(".prev").mouseover(function(){
+			clearInterval(header_rollingId);
+		});
+		
+		$(".prev").mouseout(function(){
+			header_auto();
+		});
+
+		$(".next").mouseover(function(){
+			clearInterval(header_rollingId);
+		});
+		
+		$(".next").mouseout(function(){
+			header_auto();
+		});
+		
+		//Prev banner show
+		$(".prev").click(function(){
+			var header_li = $(".list_ad_show");
+			var header_li_alt = header_li.children().children().attr("alt");
+			
+			//Calculate the count to be shown next
+			for(var i=0;i<header_banner_length;i++){
+				var header_alt = $(header_banner_item[i]).children().children().attr("alt");
+				
+				if(header_li_alt == header_alt){
+					header_count = i-1;
+					
+					if(header_count < 0){
+						header_count = header_banner_length-1;
+					}
+					break;
+				}
+			}
+
+			//Setting banner
+			header_li.removeClass("list_ad_show").addClass("list_ad_hide");
+			$(header_banner_item[header_count]).removeClass("list_ad_hide").addClass("list_ad_show");
+		});
+		
+		//Next banner show
+		$(".next").click(function(){
+			var header_li = $(".list_ad_show");
+			var header_li_alt = header_li.children().children().attr("alt");
+
+			//Calculate the count to be shown next
+			for(var i=0;i<header_banner_length;i++){
+				var header_alt = $(header_banner_item[i]).children().children().attr("alt");
+
+				if(header_li_alt == header_alt){
+					header_count = i+1;
+					
+					if(header_count > (header_banner_length - 1)){
+						header_count = 0;
+					}
+					break;
+				}
+			}
+
+			//Setting banner
+			header_li.removeClass("list_ad_show").addClass("list_ad_hide");
+			$(header_banner_item[header_count]).removeClass("list_ad_hide").addClass("list_ad_show");
+		});
+		
+		function header_auto(){
+			//Call start event 2sec
+			header_rollingId = setInterval(function(){
+				start();
+			}, 3000);
+		};
+
+		function start(header_count){
+			var header_li = $(".list_ad_show");
+			var header_li_alt = header_li.children().children().attr("alt");
+			var header_count = 0;
+
+			//Calculate the count to be shown next
+			for(var i=0;i<header_banner_length;i++){
+				var header_alt = $(header_banner_item[i]).children().children().attr("alt");
+				
+				if(header_li_alt == header_alt){
+					header_count = i+1;
+					
+					if(header_count >= header_banner_length){
+						header_count = 0;
+					}
+				}
+			} 
+			
+			//Setting banner
+			header_li.removeClass("list_ad_show").addClass("list_ad_hide");
+			$(header_banner_item[header_count]).removeClass("list_ad_hide").addClass("list_ad_show");
+		};
+	});
 </script>
 
 <div class="header">
@@ -61,7 +178,16 @@
 				<div class="mix_banner">
 					<div class="wrap_ad">
 						<ul class="list_ad">
-							<li><a href="#"><img src="/myapp/resources/image/mix_banner_no_interest.png"></a></li>
+							<c:forEach var="banner" items="${headerBanners}" varStatus="status">
+							<c:if test="${status.count eq 1}">
+								<li class="list_ad_show">
+							</c:if>
+							<c:if test="${status.count ne 1}">
+								<li class="list_ad_hide">
+							</c:if>
+									<a href="${banner.bannerlink}"><img src="${pageContext.request.contextPath}${banner.bannerurl}" alt="${banner.banneralt}"></a>	
+								</li>
+							</c:forEach>
 						</ul>
 						<div class="btn_page spr_mix">
 							<button type="button" class="prev" data-wrapper="prev">이전보기</button>

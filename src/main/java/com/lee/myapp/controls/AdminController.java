@@ -35,14 +35,19 @@ public class AdminController {
 	AdminService adminService;
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public void adminHome() throws Exception{
+	public void adminHome(Model model) throws Exception{
 		logger.info("-------- ADMIN : ADMIN HOME METHOD=GET --------");
 		
+		//Setting
+		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public void serviceWriteGet() throws Exception{
+	public void serviceWriteGet(Model model) throws Exception{
 		logger.info("-------- Service : ADMIN WRITE METHOD=GET --------");
+		
+		//Setting
+		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -57,7 +62,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/banner/regist", method=RequestMethod.GET)
-	public String bannerRegistGET(HttpSession session) throws Exception{
+	public String bannerRegistGET(HttpSession session,Model model) throws Exception{
 		logger.info("-------- ADMIN : BANNER REGIST METHOD=GET --------");
 		
 		String path = "";
@@ -69,6 +74,9 @@ public class AdminController {
 		}else {
 			path = "redirect:/";
 		}
+
+		//Setting
+		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return path;
 	}
@@ -122,6 +130,9 @@ public class AdminController {
 		}else {
 			path = "redirect:/";
 		}
+
+		//Setting
+		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return path;
 	}

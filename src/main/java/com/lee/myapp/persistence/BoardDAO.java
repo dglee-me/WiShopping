@@ -3,6 +3,7 @@ package com.lee.myapp.persistence;
 import java.util.List;
 import java.util.Map;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.Criteria;
 
@@ -15,4 +16,7 @@ public interface BoardDAO {
 	
 	public int listCount(String category) throws Exception;
 	public List<BoardVO> listPaging(Criteria cri) throws Exception;
+
+	//Header banner
+	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

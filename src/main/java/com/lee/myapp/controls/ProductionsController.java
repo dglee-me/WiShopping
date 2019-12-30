@@ -34,9 +34,11 @@ public class ProductionsController {
 	ProductService productService;
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
-	public void productionRegistGET() throws Exception{
+	public void productionRegistGET(Model model) throws Exception{
 		logger.info("-------- CREATE : PRODUCTIONS METHOD=GET --------");
 		
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
@@ -118,6 +120,9 @@ public class ProductionsController {
 		for(int i=0;i<detailUrl.length;i++) {
 			imageList.add(detailUrl[i]);
 		}
+
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("product",product);
 		model.addAttribute("option",productService.view_option(pno));

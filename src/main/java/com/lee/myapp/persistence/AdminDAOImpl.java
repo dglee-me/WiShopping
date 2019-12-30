@@ -59,4 +59,11 @@ public class AdminDAOImpl implements AdminDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".bannerDelete",bno);
 	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mainBannerList",area);
+	}
 }

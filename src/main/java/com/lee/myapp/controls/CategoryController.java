@@ -25,6 +25,9 @@ public class CategoryController {
 	@RequestMapping(value="/group/fashion", method=RequestMethod.GET)
 	public void fashionCategoryGET(Model model) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
+
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("list", productService.list("패션"));
 	}
@@ -32,6 +35,9 @@ public class CategoryController {
 	@RequestMapping(value="/group/accessories", method=RequestMethod.GET)
 	public void accessoriesCategoryGET(Model model) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (ACCESSORIES) METHOD=GET --------");	
+
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("list", productService.list("잡화"));
 	}
@@ -39,6 +45,9 @@ public class CategoryController {
 	@RequestMapping(value="/group/interior", method=RequestMethod.GET)
 	public void interiorCategoryGET(Model model) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (INTERIOR) METHOD=GET --------");	
+
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("list", productService.list("잡화"));
 	}
@@ -46,6 +55,9 @@ public class CategoryController {
 	@RequestMapping(value="/group/digital", method=RequestMethod.GET)
 	public void digitalCategoryGET(Model model) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (DIGITAL) METHOD=GET --------");	
+
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("list", productService.list("잡화"));
 	}

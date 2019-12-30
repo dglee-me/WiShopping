@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.persistence.ProductDAO;
@@ -49,5 +50,12 @@ public class ProductServiceImpl implements ProductService{
 	public int checkInventory(int ono) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.checkInventory(ono);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.mainBannerList(area);
 	}
 }
