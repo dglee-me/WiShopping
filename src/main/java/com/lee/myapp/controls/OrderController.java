@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
-import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.service.OrderService;
 import com.lee.myapp.utils.CommonUtils;
 
@@ -92,6 +92,7 @@ public class OrderController {
 		return "/order/preorder";
 	}
 	
+	@Transactional
 	@RequestMapping(value="/pre_order", method=RequestMethod.POST)
 	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, String[] ono, int[] inventory) throws Exception{
 		logger.info("-------- ORDER : PRE_ORDER METHOD=POST --------");
@@ -101,23 +102,39 @@ public class OrderController {
 		if(member != null) {
 			String orderNo = CommonUtils.CreateRandomNumber();
 			
-			//To order
-			order.setMno(member.getMno());
-			orderService.orderInfo(order.setOrderno(orderNo));
-
 			//If product to order case, flag is false, and cart to order case, flag is true;
 			boolean flag = true;
 			if(cartno[0].equals("0")) flag = false;
 			
 			if(flag == true) {
-				//If cart to order case
+				logger.info("-------- ORDER TYPE : CART TO ORDER --------");
+				// Order failed If the products in the cart are out of stock
+				for(int i=0;i<ono.length;i++) {
+					if(orderService.cartCheckInventory(cartno[i]) >= orderService.checkInventory(ono[i])) {
+						return "redirect:orderFail";
+					}
+				}
+				//To order
+				order.setMno(member.getMno());
+				orderService.orderInfo(order.setOrderno(orderNo));
+
 				HashMap<String,Object> map = new HashMap<String,Object>();
 				
+				//Reflect inventory on successful order
+				for(int i=0;i<ono.length;i++) {
+					map.put("ono", ono[i]);
+					map.put("inventory", inventory[i]);
+					
+					orderService.updateInventory(map);
+					map.clear();
+				}
+
+				//If cart to order case
 				map.put("cartno", cartno);
 				map.put("orderno", orderNo);
 			
 				int result = orderService.cart_orderInfo_detail(map);
-
+				
 				//When the number of insert is more than 1
 				if(result >= 1) {
 					//Delete cart if order succeeds
@@ -125,10 +142,19 @@ public class OrderController {
 					orderService.cartDelete(map);
 				}else {
 					//If order failed
-					return "redirect:/error";
+					return "redirect:orderFail";
 				}
-			}else {
-				//If product to order case
+			}else {//If product to order case
+				logger.info("-------- ORDER TYPE : PRODUCT TO ORDER --------");
+				for(int i=0;i<ono.length;i++) {
+					if(inventory[i] >= orderService.checkInventory(ono[i])) {
+						return "redirect:orderFail";
+					}
+				}
+				//To order
+				order.setMno(member.getMno());
+				orderService.orderInfo(order.setOrderno(orderNo));
+				
 				HashMap<String,Object> map = new HashMap<String,Object>();
 				
 				for(int i=0;i<ono.length;i++) {
@@ -137,19 +163,25 @@ public class OrderController {
 					map.put("inventory", inventory[i]);
 					
 					orderService.product_orderInfo_detail(map);
-					
+					orderService.updateInventory(map);
+
 					map.clear();
 				}
 			}
 		}
 		return "redirect:/order/result";
 	}
-	
+
 	@RequestMapping(value="/result", method=RequestMethod.GET)
 	public void resultGET(Model model) throws Exception{
 		logger.info("-------- ORDER : RESULT METHOD=GET --------");
 		
 		//Setting
 		model.addAttribute("headerBanners", orderService.mainBannerList("Çì´õ")); // Main banner list in this view
+	}
+	
+	@RequestMapping(value="/orderFail", method=RequestMethod.GET)
+	public void orderFailGET() throws Exception{
+		logger.info("-------- FAIL : ORDER FAIL METHOD=GET --------");
 	}
 }

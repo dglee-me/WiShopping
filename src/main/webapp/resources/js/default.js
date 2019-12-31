@@ -80,7 +80,7 @@ function direct_productionOptionCheck(input){
 	});
 }
 
-function productionOptionCheck(input,now){
+function productionOptionCheck(input){
 	var ono = input.closest("article").children("h1").attr("data-number");
 	var inventory;
 	

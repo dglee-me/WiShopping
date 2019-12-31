@@ -54,6 +54,24 @@ public class OrderDAOImpl implements OrderDAO{
 		// TODO Auto-generated method stub
 		sqlSession.delete(namespace+".cartDelete",map);
 	}
+
+	@Override
+	public void updateInventory(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".updateInventory",map);
+	}
+
+	@Override
+	public int checkInventory(String ono) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".checkInventory",ono);
+	}
+
+	@Override
+	public int cartCheckInventory(String cartno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".cartCheckInventory",cartno);
+	}
 	
 	//Header banner
 	@Override

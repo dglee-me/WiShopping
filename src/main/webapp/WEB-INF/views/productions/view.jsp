@@ -81,7 +81,7 @@
 				var optPrice = parseInt(uncomma($('#price').text()),10);
 									
 				
-				var flag = productionOptionCheck($(this).parent().children(".ipt_count_chk"),count);
+				var flag = productionOptionCheck($(this).parent().children(".ipt_count_chk"));
 				
 				if(flag > count){
 					$(this).parent().children(".ipt_count_chk").val(++count);
@@ -173,65 +173,7 @@
 
 			$(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text(comma(price*count));
 		})
-		/*
-		//Add to cart
-		$(document).on("click",".cart",function(){
-			var selected = $(".selling-option-item_name").text().split(" ");
-			
-			if(selected.length == 1 && selected[0] == ""){
-				alert("상품을 선택하여 주세요.");
-			}else{
-				var url = location.href;
-				var pno = url.slice(url.indexOf('=') + 1);
-				
-				var optioncolor = "";
-				var optionsize = "";
-				var inventory = "";
-				
-				//Store in inventory string of input
-				var input = $(".ipt_count_chk");
-				for(var i=0;i<input.length;i++){
-					inventory = inventory + input[i].value +";";
-				}
-				
-				//Split color and size
-				var temp_selected;
-				for(var i=0;i<selected.length;i++){
-					if(selected[i] == "") continue;
-					
-					temp_selected = selected[i].split("/");
-
-					optioncolor = optioncolor + temp_selected[0] + ";";
-					optionsize = optionsize + temp_selected[1] + ";";
-				}
-				/
-				
-				var data = {
-						optioncolor : optioncolor,
-						optionsize : optionsize,
-						inventory : inventory,
-						pno : pno
-						ono : ono
-				}; 
-				
-				$.ajax({
-					url : "/myapp/cart/addCart",
-					type : "post",
-					data : data,
-					success : function(result){
-						if(result == 1){
-							alert("장바구니에 상품을 담았습니다.");
-						}else{
-							alert("회원만 담을 수 있습니다.");
-						}
-					},
-					error : function(){
-						alert("삐이");
-					}
-				});
-			}
-		});*/
-
+		
 		//add to cart
 		$(document).on("click",".cart",function(){
 			var selected = $(".selling-option-item_name").text().split(" ");
@@ -393,7 +335,12 @@
 											<select class="form-control empty">
 												<option selected value disabled>옵션 선택</option>
 												<c:forEach items="${option}" var="option">
-													<option data-number ="${option.ono}" value="${option.sequence}">${option.optioncolor}/${option.optionsize}</option>
+													<c:if test="${option.inventory ne 0}">
+														<option data-number ="${option.ono}" value="${option.sequence}">${option.optioncolor}/${option.optionsize}</option>
+													</c:if>
+													<c:if test="${option.inventory eq 0}">
+														<option data-number ="${option.ono}" value="${option.sequence}" disabled>${option.optioncolor}/${option.optionsize}(품절)</option>
+													</c:if>
 												</c:forEach>
 											</select>
 											<span class="select-input_icon">

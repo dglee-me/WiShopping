@@ -54,6 +54,24 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		orderDAO.cartDelete(map);
 	}
+	
+	@Override
+	public void updateInventory(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		orderDAO.updateInventory(map);
+	}
+
+	@Override
+	public int checkInventory(String ono) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.checkInventory(ono);
+	}
+
+	@Override
+	public int cartCheckInventory(String cartno) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.cartCheckInventory(cartno);
+	}
 
 	//Header banner
 	@Override

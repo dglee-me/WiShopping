@@ -145,36 +145,73 @@
 				/* A product option price modify */
 				var inventory = $(this).val();
 				var price = $(this).closest("ul").closest("li").attr("data-value");
+				
+				var flag = productionOptionCheck($(this));
+				
+				if(flag >= inventory){
+					var modify_price = comma(inventory * price);
+					
+					$(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text(modify_price);
+					
+					//A product total price modfiy
+					var total = $(this).closest("ul").children("li").children("article").children("div").children("p").text();
+					total = total.split("원");
+					
+					var total_price = 0;
+					for(var i=0;i<total.length-1;i++){
+						total_price += parseInt(uncomma(total[i]),10);
+					}
+					
+					$(this).closest("ul").closest("article").children("div").children(".carted-product_subtotal").children("span").text(comma(total_price));
+					
+					//payment price modify
+					total = $(".carted-product_subtotal").text();
+					total = total.split("원");
+					
+					total_price = 0;
+					for(var i=0;i<total.length-1;i++){
+						total_price += parseInt(uncomma(total[i]),10);
+					}
+					var delivery = $(".summary_delivery").text();
+					delivery = parseInt(uncomma(delivery.slice(0,-1)),10);
 
-				var modify_price = comma(inventory * price);
-				
-				$(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text(modify_price);
-				
-				/* A product total price modfiy */
-				var total = $(this).closest("ul").children("li").children("article").children("div").children("p").text();
-				total = total.split("원");
-				
-				var total_price = 0;
-				for(var i=0;i<total.length-1;i++){
-					total_price += parseInt(uncomma(total[i]),10);
-				}
-				
-				$(this).closest("ul").closest("article").children("div").children(".carted-product_subtotal").children("span").text(comma(total_price));
-				
-				/* payment price modify */
-				total = $(".carted-product_subtotal").text();
-				total = total.split("원");
-				
-				total_price = 0;
-				for(var i=0;i<total.length-1;i++){
-					total_price += parseInt(uncomma(total[i]),10);
-				}
-				var delivery = $(".summary_delivery").text();
-				delivery = parseInt(uncomma(delivery.slice(0,-1)),10);
+					//Setting
+					$(".summary_total-price").text(comma(total_price)+"원");
+					$(".summary_payment").text(comma(total_price + delivery)+"원");
+				}else{
+					$(this).val(flag);
 
-				//Setting
-				$(".summary_total-price").text(comma(total_price)+"원");
-				$(".summary_payment").text(comma(total_price + delivery)+"원");
+					var modify_price = comma(flag * price);
+					$(this).parent().parent().parent().children(".selling-option-item_price").children(".selling-option-item_price_number").text(modify_price);
+					
+					//A product total price modfiy
+					var total = $(this).closest("ul").children("li").children("article").children("div").children("p").text();
+					total = total.split("원");
+					
+					var total_price = 0;
+					for(var i=0;i<total.length-1;i++){
+						total_price += parseInt(uncomma(total[i]),10);
+					}
+					
+					$(this).closest("ul").closest("article").children("div").children(".carted-product_subtotal").children("span").text(comma(total_price));
+					
+					//payment price modify
+					total = $(".carted-product_subtotal").text();
+					total = total.split("원");
+					
+					total_price = 0;
+					for(var i=0;i<total.length-1;i++){
+						total_price += parseInt(uncomma(total[i]),10);
+					}
+					var delivery = $(".summary_delivery").text();
+					delivery = parseInt(uncomma(delivery.slice(0,-1)),10);
+
+					//Setting
+					$(".summary_total-price").text(comma(total_price)+"원");
+					$(".summary_payment").text(comma(total_price + delivery)+"원");
+					
+					alert("선택한 수량이 재고보다 많습니다.");
+				}
 			});
 		});
 		
@@ -383,7 +420,7 @@
 																				<c:if test="${option.pno eq cart.pno}">
 																					<li class="carted-product_option-list_item" data-number="${option.ono}" cart-data="${option.cartno}">
 																						<article class="selling-option-item">
-																							<h1 class="selling-option-item_name">${option.optioncolor}/${option.optionsize}</h1>
+																							<h1 class="selling-option-item_name" data-number="${option.ono}">${option.optioncolor}/${option.optionsize}</h1>
 																							<button class="selling-option-item_delete" type="button" aria-label="삭제">
 																								<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" preserveAspectRatio="xMidYMid meet">
 																									<path fill-rule="nonzero" d="M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z"></path>

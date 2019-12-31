@@ -73,4 +73,23 @@
 		   AND AREA = #{area}
 		 ORDER BY BNO DESC
 	</select>
+	
+	<!-- If you order, reflect this inventory to db -->
+	<update id="updateInventory">
+		UPDATE TBL_PRODUCT_OPTION
+		   SET INVENTORY = INVENTORY - #{inventory}
+		 WHERE ONO = #{ono}
+	</update>
+	
+	<select id="checkInventory" resultType="Integer">
+		SELECT INVENTORY
+		  FROM TBL_PRODUCT_OPTION
+		 WHERE ONO = #{ono}
+	</select>
+	
+	<select id="cartCheckInventory" resultType="Integer">
+		SELECT B.INVENTORY
+		  FROM TBL_PRODUCT_OPTION A INNER JOIN TBL_CART B ON A.ONO = B.ONO
+		 WHERE B.CARTNO = #{cartno}
+	</select>
 </mapper>
