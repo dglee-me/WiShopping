@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.service.ProductService;
@@ -43,8 +45,9 @@ public class ProductionsController {
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
 	public String productionRegistPOST(@RequestParam("product_thumurl") MultipartFile file1, @RequestParam("product_url") MultipartFile[] file2,
-			ProductVO product, char has_option, ProductOptionVO option, int[] inventory) throws Exception{
+			ProductVO product, char has_option, ProductOptionVO option, int[] inventory,HttpSession session) throws Exception{
 		logger.info("-------- CREATE : PRODUCTIONS METHOD=POST --------");
+		logger.info("-------- SELLER : "+((MemberVO)session.getAttribute("login")).getName()+" --------");
 
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -52,6 +55,7 @@ public class ProductionsController {
 		
 		//Thumbnail image upload to server
 		thumbUrl = UploadFileUtils.fileUpload(imgUploadPath, file1.getOriginalFilename(), file1.getBytes(), ymdPath);
+		product.setProductthumurl("/" + "imgUpload" + ymdPath + "/" + thumbUrl);	
 			
 		//Detail images upload to server
 		String detailUrl = "";
@@ -77,28 +81,24 @@ public class ProductionsController {
 			}
 			detailUrl += ";" + url[i];
 		}
-		
-		product.setProductthumurl("/" + "imgUpload" + ymdPath + "/" + thumbUrl);		
 		product.setProducturl(detailUrl);
-		
+				
 		//Insert product into database
 		productService.register(product);
 		
 		//Create options for a product and insert into database
-		if(has_option == 'T') { // if checked the option checkbox in the register view
-			String[] color = option.getOptioncolor().split(",");
-			String[] size = option.getOptionsize().split(",");
+		if(has_option == 'T') {
 			int inventory_count = 0;
-			
-			for(int i=0;i<color.length;i++) {
-				for(int j=0;j<size.length;j++) {
-					option = new ProductOptionVO()
-							.setOptioncolor(color[i])
-							.setOptionsize(size[j])
-							.setInventory(inventory[inventory_count++]);
-					
-					productService.register_option(option);
-				}
+			String[] array_option = option.getOptioncolor().split(",");
+
+			for(int i=0;i<array_option.length;i++) {
+				String[] temp = array_option[i].split("\\#\\$\\%");
+				
+				option.setOptioncolor(temp[0])
+					.setOptionsize(temp[1])
+					.setInventory(inventory[inventory_count++]);
+
+				productService.register_option(option);
 			}
 		}else {
 			productService.register_option(option);
