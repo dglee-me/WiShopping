@@ -48,7 +48,7 @@
 							"<div class='list-thumb-small image-small'>"
 							+"<div class='info_box btn_add'>등록"
 							+"</div>"
-							+"<input type='file' name='product_url' class='product-register-image'"
+							+"<input type='file' name='product_url' class='product-register-image'>"
 							+"</div>";
 						
 						listParent.append(listChildren);

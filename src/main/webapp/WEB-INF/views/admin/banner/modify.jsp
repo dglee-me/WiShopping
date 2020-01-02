@@ -123,6 +123,17 @@
 											</td>
 										</tr>
 										<tr>
+											<th>사용여부</th>
+											<td class="isuse" colspan="3">
+												<label>
+													<input type="radio" name="bannerstatus" value="1"<c:if test="${banner.bannerstatus eq 1 }"> checked=""</c:if>><span>사용함</span>
+												</label>
+												<label>
+													<input type="radio" name="bannerstatus" value="0"<c:if test="${banner.bannerstatus eq 0 }"> checked=""</c:if>><span>사용안함</span>
+												</label>
+											</td>
+										</tr>
+										<tr>
 											<th>이미지 등록</th>
 											<td class="image" colspan="3">
 												<div class="img_exist" style="display:block; background-image:url('${pageContext.request.contextPath}${banner.bannerurl}')"></div>

@@ -62,25 +62,12 @@ public class ProductionsController {
 		
 		for(int i=0;i<file2.length-1;i++) {
 			if(i == 0) {
-				detailUrl = UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath);
+				detailUrl = "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath);
 				continue;
 			}
-			detailUrl = detailUrl+";"+UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath);
+			detailUrl = detailUrl + ";"+ "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath);
 		}
-
-		//Detail image set path
-		String[] url = detailUrl.split(";");
-		detailUrl = "";
 		
-		for(int i=0;i<url.length;i++) {
-			url[i] = "/" + "imgUpload" + ymdPath + "/" + url[i];
-			
-			if(i == 0) {
-				detailUrl = url[i];
-				continue;
-			}
-			detailUrl += ";" + url[i];
-		}
 		product.setProducturl(detailUrl);
 				
 		//Insert product into database

@@ -6,14 +6,23 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commerce.css?after">
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/default.js" async></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <script type="text/javascript">
 	var previous;
+	
+	//If this product is a single option, reflect total price
+	$(document).ready(function(){
+		var price = parseInt($(".selling-option-item_price_number").text(),10);
+		
+		if(!isNaN(price)){
+			$(".selling-option-form-content_price_number").text(comma(price));
+		}
+	});
 	
 	$(document).ready(function(){
 		//If you select option, present this
@@ -113,8 +122,11 @@
 			$(document).on("click",".down_count",function(){
 				var count = parseInt($(this).parent().children(".ipt_count_chk").val(),10);
 				var optPrice = parseInt(uncomma($('#price').text()),10);
-	
-				if(count == 1){
+				
+				if(count == 0){
+					alert("품절된 상품입니다.");
+					count = 1;
+				}else if(count == 1){
 					alert("수량을 더 내릴 수 없습니다.");
 					count = 2;
 				}
@@ -357,18 +369,34 @@
 										<li>
 											<article class="selling-option-item">
 												<c:forEach items="${option}" var="option">
-													<h1 class="selling-option-item_name" data-number="${option.ono}">${option.optioncolor}/${option.optionsize}</h1>
-													<div class="selling-option-item_controls">
-														<div class="selling-option-item_inventory">
-															<div class="input-group select-input option-count-input">
-																<a href="javascript:void(0);" class="ico down_count on">-감소</a>
-																<input type="text" class="ipt_count_chk" value="1">
-																<a href="javascript:void(0);" class="ico up_count on">+증가</a></div>
-															</div>
-														<p class="selling-option-item_price">
-															<span class="selling-option-item_price_number">${product.price}</span>원
-														</p>
-													</div>
+													<c:if test="${option.inventory > 0}">
+														<h1 class="selling-option-item_name" data-number="${option.ono}">${option.optioncolor}/${option.optionsize}</h1>
+														<div class="selling-option-item_controls">
+															<div class="selling-option-item_inventory">
+																<div class="input-group select-input option-count-input">
+																	<a href="javascript:void(0);" class="ico down_count on">-감소</a>
+																	<input type="text" class="ipt_count_chk" value="1">
+																	<a href="javascript:void(0);" class="ico up_count on">+증가</a></div>
+																</div>
+															<p class="selling-option-item_price">
+																<span class="selling-option-item_price_number">${product.price}</span>원
+															</p>
+														</div>
+													</c:if>
+													<c:if test="${option.inventory <= 0}">
+														<h1 class="selling-option-item_name" data-number="${option.ono}">${option.optioncolor}/${option.optionsize}</h1>
+														<div class="selling-option-item_controls">
+															<div class="selling-option-item_inventory">
+																<div class="input-group select-input option-count-input">
+																	<a href="javascript:void(0);" class="ico down_count on">-감소</a>
+																	<input type="text" class="ipt_count_chk" value="0">
+																	<a href="javascript:void(0);" class="ico up_count on">+증가</a></div>
+																</div>
+															<p class="selling-option-item_price">
+																<span class="selling-option-item_price_number">0 </span>원
+															</p>
+														</div>
+													</c:if>
 												</c:forEach>
 											</article>
 										</li>

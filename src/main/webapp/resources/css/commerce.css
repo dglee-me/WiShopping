@@ -155,7 +155,7 @@ table{table-layout:fixed; width:auto; border:0; border-spacing:0;}
 .content_main .headerTitle{padding-bottom:30px;}
 .headerTitle h1{position:relative; font-size:30px; line-height:30px; font-weight:bold; vertical-align:middle; color:#333; }
 
-.content_main .info_box{position:relative; float:left; display:block; margin-left:10px;}
+.content_main .info_box, .admin-promotions-area .info_box{position:relative; float:left; display:block; margin-left:10px;}
 .image-large{width:460px; height:460px;}
 .image-small{width:100px; height:100px;}
 .btn_add{overflow:hidden; text-indent:-150%; white-space:nowrap; font-size:1px; line-height:0; color:transparent; width:100%; height:100%; 
@@ -225,7 +225,7 @@ input[type="radio"]:checked{background-image:url('/myapp/resources/image/bg_radi
 .btnApply .icoDel:after{content:""; position:absolute; top:50%; left:50%; margin:-7px 0 0 -1px; width:1px; height:13px;
 	background:#fff; transform:rotate(-45deg); -webkit-transform:rotate(-45deg);}
 
-.product-register-image{display:none;}
+.product-register-image, .promotions-register-image, .promotions-register-thumb{display:none;}
 
 .thumbs{display:flex; flex-wrap:wrap; margin-left:-20px;}
 .thumbs li{float:left; cursor:pointer;}
@@ -233,12 +233,12 @@ input[type="radio"]:checked{background-image:url('/myapp/resources/image/bg_radi
 
 .list-thumb-small .thumb-image{width:100%; height:100%; text-align:center; border:1px solid #ededed; background:#fff; box-sizing:border-box; transition:.5s ease-out;}
 
-.product-register-add-image-tag{max-width:100%; max-height:100%;}
+.product-register-add-image-tag, .promotions-register-add-image-tag{max-width:100%; max-height:100%;}
 .border{border:1px solid #ededed;}
 
 span.txt_byte{margin-left:5px;}
 .txt_byte{vertical-align:bottom; color:#97989b;}
-#product-register-detail-image-count{color:#5FCAEC; vertical-align:bottom;}
+#product-register-detail-image-count,#promotions-register_image-count{color:#5FCAEC; vertical-align:bottom;}
 
 .info_product.wrap_button{position:absolute; top:527px; left:500px; min-height:auto;}
 .wrap_button{margin-top:23px;}
@@ -737,6 +737,7 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .sales-form_section_title{font-size:20px; color:#000; margin-bottom:40px; font-weight:700;}
 .sales-form_form-group{margin-bottom:20px;}
 .col-2{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 16.6666666667%; max-width:16.6666666667%; padding-left:10px; padding-right:10px; }
+.col-6{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 50%; max-width:50%; padding-left:10px; padding-right:10px;}
 .col-8{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 66.6666666667%; max-width:66.6666666667%; padding-left:10px; padding-right:10px;}
 .col-10{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 83.3333333333%; padding-left:10px; padding-right:10px;
 	max-width:83.3333333333%;}
@@ -766,11 +767,12 @@ textarea.form-control{resize:none; line-height:20px; padding-top:9px; padding-bo
 	
 /* Admin banner regist CSS */
 .banner-regist, .banner-management{position:relative;}
-.banner-regist_title, .banner-management_title{background-color:#f7f8fa; text-align:center; padding:17px 0; font-size:20px; font-weight:600; color:#000;}
+.banner-regist_title, .banner-management_title, .promotions-feed-regist_title{background-color:#f7f8fa; text-align:center; padding:17px 0;
+	font-size:20px; font-weight:600; color:#000;}
 
-.banner-register{margin-left:1px;}
+.banner-register,.promotions-feed-register{margin-left:1px;}
 
-section[class*="admin-banner-"]{padding-top:20px; padding-bottom:57px;}
+section[class*="admin-banner-"], section[class*="admin-promotions-"]{padding-top:20px; padding-bottom:57px;}
 .table-block{border:1px solid #ededed; border-top:1px solid #dbdbdb; border-radius:6px; overflow:hidden;}
 
 .table-block table tr:first-child th, .table-block table tr:first-child td{border-top:0;}
@@ -778,7 +780,7 @@ section[class*="admin-banner-"]{padding-top:20px; padding-bottom:57px;}
 
 .table-block table th + th, .table-block table td + th, .table-block table td + td{border-left:1px solid #cdd2d7;}
 
-.admin-banner-area .table-block td.area{width:391px;}
+.admin-banner-area .table-block td.area, .admin-promotions-area .table-block td.subject{width:391px;}
 .table-block table td{border-left:1px solid #bdbdbd; font-size:15px; padding-left:18px; text-align:left;}
 .table-block table td{padding:10px 18px 11px; border-top:1px solid #cdd2d7;}
 
@@ -799,15 +801,19 @@ section[class*="admin-banner-"] .table-block td.image .img_empty:empty:hover, se
 section[class*="admin-banner-"] .table-block td.link input[type="text"], section[class*="admin-banner-"] .table-block td.alt input[type="text"]{width:615px;
 	background-color:#fff; border:1px solid #a9a9a9; box-sizing:border-box; height:24px; outline:none; padding-bottom:1px; text-indent:8px;}
 
-section[class*="admin-banner-"]>.btns{position:relative; display:flex; margin-top:37px; justify-content:center;}
-section[class*="admin-banner-"]>.btns .btn_save{background-color:#5FCAEC; border-color:transparent; color:#fff;}
+section[class*="admin-banner-"]>.btns, section[class*="admin-promotions-"]>.btns{position:relative; display:flex; margin-top:37px; justify-content:center;}
+section[class*="admin-banner-"]>.btns .btn_save, section[class*="admin-promotions-"]>.btns .btn_save{background-color:#5FCAEC; border-color:transparent; color:#fff;}
 
-section[class*="admin-banner-"]>.btns button{font-size:16px; font-weight:700; height:40px; margin:0 9px; width:140px;}
+section[class*="admin-banner-"]>.btns button, section[class*="admin-promotions-"]>.btns button{font-size:16px; font-weight:700; height:40px; margin:0 9px; width:140px;}
 .btn_save,.btn_cancel{display:flex; align-items:center; justify-content:center; border:1px solid #dbdbdb; border-radius:4px; box-sizing:border-box; padding-bottom:1px;
 	text-align:center;}
 
 .img_exist, .img_modify{width:520px; height:207px; cursor:pointer; transition:transform .2s; background-size:contain; background-repeat:no-repeat;}
 section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[class*="admin-banner-"] .table-block td.image .img_exsit:focus{transform:scale(1.05);}
+
+section[class*="admin-banner-"] .table-block td label + label{margin-left:68px;}
+section[class*="admin-banner-"] .table-block td label span{color:#8c8c8c;}
+section[class*="admin-banner-"] .table-block td label input:checked + span{color:#000;}
 
 /* Banner management CSS*/
 .banner-list_header{position:relative; display:flex; align-items:center; height:40px; margin-top:20px; margin-bottom:20px;}
@@ -853,3 +859,44 @@ section[class*="admin-banner-"] .table-block td.image .img_exist:hover, section[
 .banner-list_wrap .banner-list .banner-list_admin a{margin:6px 0;}
 
 .banner-list_wrap .banner-list .banner-list_no-data{color:#222; font-size:16px; text-align:center;}
+
+/* Promotions regist CSS */
+.table-block td.subject>input{width:100%; height:100%;}
+section[class*="admin-promotions-"] .table-block td.date{width:341px; padding-top:20px; padding-bottom:18px;}
+section[class*="admin-promotions-"] .table-block td.date .tbl_row{display:flex;}
+section[class*="admin-promotions-"] .table-block td.date .tbl_row>div{align-items:center;}
+section[class*="admin-promotions-"] .table-block td.date input[type="text"]{border:1px solid #a9a9a9; box-sizing:border-box; height:24px; text-indent:8px; 
+	width:138px; text-align:center; }
+
+.promotions-item_image-thumbnail{width:552px; height:157px; transition:transform .2s;}
+
+.promotions-item_image-thumbnail .btn_add, {overflow:hidden; text-indent:-150%; white-space:nowrap; font-size:1px; line-height:0; color:transparent; width:100%; height:100%; 
+	box-sizing:border-box; border:1px solid #ededed; transition: .3s ease-out;}
+.promotions-item_image-thumbnail .btn_add:before{content:""; position:absolute; top:50%; left:50%; margin:-1px 0 0 -8px; width:16px; height:2px; background-color:#565656; background-image:none; }
+.promotions-item_image-thumbnail .btn_add:after{content:""; position:absolute; top:50%; left:50%; margin:-8px 0 0 -1px;  width:2px; height:16px;
+	background-color:#565656; transform:rotate(180deg); -webkit-transform:rotate(180deg); background-image:none;}
+.promotions-item_image-thumbnail .btn_add:hover{background-color:#f5f6f8;}
+
+.thumb_info_box{position:relative;}
+.thumb_info_box-exist{display:none; overflow:hidden; white-space:nowrap; font-size:1px; line-height:0; color:transparent; width:100%; height:100%; 
+	box-sizing:border-box; border:1px solid #ededed; transition: .3s ease-out;}
+
+/* Promotions CSS */
+.promotions-feed{padding-top:40px;}
+.promotions-feed .promotions-item{display:block; margin-bottom:20px;}
+
+.promotions-item_image-wrap{border-radius:6px; overflow:hidden;}
+.promotions-item_image{display:block; width:100%; transition:transform .2s;}
+
+.promotions-item:active .promotions-item_image, .promotions-item:focus .promotions-item_image, .promotions-item:hover .promotions-item_image{transform:scale(1.05);}
+
+.promotions-item_footer{display:flex; padding:20px 15px;}
+
+.promotions-item_footer_date{flex:1 0 auto; order:1; text-align:right; font-size:13px; color:#bdbdbd;}
+
+.promotions-item_footer_state{font-weight:700; font-size:15px; color:#bdbdbd;}
+.promotions-item_footer_state-doing{color:#5FCAEC;}
+
+
+
+

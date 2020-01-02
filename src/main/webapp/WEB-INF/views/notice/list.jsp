@@ -61,10 +61,10 @@
 				</div>
 				<div class="write_btn">
 					<div class="fr">
-						<c:if test="${login.mlevel eq 1}">
+						<c:if test="${login.mlevel eq 2}">
 							<a href="${pageContext.request.contextPath }/admin/write" class="btn_type1 post_write">글쓰기</a>
 						</c:if>
-						<c:if test="${login.mlevel ne 1}">
+						<c:if test="${login.mlevel ne 2}">
 						</c:if>
 					</div>
 				</div>
