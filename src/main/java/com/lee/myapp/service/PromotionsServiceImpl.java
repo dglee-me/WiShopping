@@ -24,7 +24,7 @@ public class PromotionsServiceImpl implements PromotionsService{
 	}
 
 	@Override
-	public List<BannerVO> promotionList() throws Exception {
+	public List<PromotionsVO> promotionList() throws Exception {
 		// TODO Auto-generated method stub
 		return promotionsDAO.promotionList();
 	}

@@ -25,7 +25,7 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 	}
 
 	@Override
-	public List<BannerVO> promotionList() throws Exception {
+	public List<PromotionsVO> promotionList() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".promotionList");
 	}

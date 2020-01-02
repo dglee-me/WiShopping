@@ -1,6 +1,7 @@
 package com.lee.myapp.controls;
 
 import java.io.File;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -30,6 +31,17 @@ public class PromotionsController {
 	
 	@Inject
 	PromotionsService promotionsService;
+	
+	@RequestMapping(value="/main", method=RequestMethod.GET)
+	public void promotionsMainGET(HttpSession session, Model model) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS MAIN METHOD=GET --------");
+		logger.info("-------- ACCESSOR NAME ="+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() 
+				+" METHOD=GET --------");
+
+		//Setting
+		model.addAttribute("headerBanners", promotionsService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("promotions", promotionsService.promotionList());
+	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public void promotionsRegisterGET(HttpSession session, Model model) throws Exception{

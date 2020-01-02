@@ -15,7 +15,7 @@
 		 ORDER BY BNO DESC
 	</select>
 	
-	<select id="promotionList" resultType="com.lee.myapp.domain.BannerVO">
+	<select id="promotionList" resultType="com.lee.myapp.domain.PromotionsVO">
 		SELECT *
 		  FROM TBL_PROMOTIONS
 		 ORDER BY PNO DESC
