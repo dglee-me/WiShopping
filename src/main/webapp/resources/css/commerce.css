@@ -741,6 +741,7 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .col-8{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 66.6666666667%; max-width:66.6666666667%; padding-left:10px; padding-right:10px;}
 .col-10{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 83.3333333333%; padding-left:10px; padding-right:10px;
 	max-width:83.3333333333%;}
+.col-12{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 100%; max-width:100%; padding-left:10px; padding-right:10px;}
 .form-label{flex-basis:100%;}
 .sales-form_form-label{font-weight:700; line-height:40px; font-size:15px; color:#424242;}
 .sales-form_form-group_required{color:#f77; font-size:15px; }
@@ -897,6 +898,7 @@ section[class*="admin-promotions-"] .table-block td.date input[type="text"]{bord
 .promotions-item_footer_state{font-weight:700; font-size:15px; color:#bdbdbd;}
 .promotions-item_footer_state-doing{color:#5FCAEC;}
 
-
-
+/* Promotion view CSS */
+.promotion-page{width:100%; padding-top:40px; max-width:800px; margin:0 auto 100px;}
+.promotion-page_image{display:block; width:100%;}
 

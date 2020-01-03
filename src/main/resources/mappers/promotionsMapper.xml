@@ -39,4 +39,10 @@
 			)
 		]]>
 	</update>
+	
+	<select id="promotionView" resultType="com.lee.myapp.domain.PromotionsVO">
+		SELECT *
+		  FROM TBL_PROMOTIONS
+		 WHERE PNO = #{pno}
+	</select>
 </mapper>

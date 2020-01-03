@@ -42,4 +42,10 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+".endPromotion");
 	}
+
+	@Override
+	public PromotionsVO promotionView(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".promotionView",pno);
+	}
 }

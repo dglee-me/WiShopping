@@ -1,6 +1,8 @@
 package com.lee.myapp.controls;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -99,4 +101,25 @@ public class PromotionsController {
 		return path;
 	}
 	
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public void promotionViewGET(HttpSession session, Model model,int pno) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS VIEW METHOD=GET --------");
+		logger.info("-------- VIEW PNO = " + pno + " --------");
+		
+		PromotionsVO promotion = promotionsService.promotionView(pno);
+		
+		//Images_url split to show
+		String[] images_url = promotion.getImagesurl().split(";");		
+		
+		List<String> imageList = new ArrayList<String>();
+		
+		for(int i=0;i<images_url.length;i++) {
+			imageList.add(images_url[i]);
+		}
+		
+		//Settings
+		model.addAttribute("headerBanners", promotionsService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("promotion", promotion);
+		model.addAttribute("images", imageList);
+	}
 }

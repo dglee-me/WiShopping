@@ -42,4 +42,10 @@ public class PromotionsServiceImpl implements PromotionsService{
 		return promotionsDAO.endPromotion();
 	}
 
+	@Override
+	public PromotionsVO promotionView(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.promotionView(pno);
+	}
+
 }

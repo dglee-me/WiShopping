@@ -11,4 +11,5 @@ public interface PromotionsDAO {
 	public List<PromotionsVO> promotionList() throws Exception;
 	public int promotionRegist(PromotionsVO promotion) throws Exception;
 	public int endPromotion() throws Exception;
+	public PromotionsVO promotionView(int pno) throws Exception;
 }
