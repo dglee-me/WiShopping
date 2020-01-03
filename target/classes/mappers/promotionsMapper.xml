@@ -25,4 +25,18 @@
 		INSERT INTO TBL_PROMOTIONS(PNO, SUBJECT, THUMBNAIL_URL, IMAGES_URL, STARTDATE, ENDDATE)
 		VALUES(TBL_PROMOTIONS_PNO_SEQ.NEXTVAL,#{subject},#{thumbnailurl},#{imagesurl},#{startdate},#{enddate})
 	</insert>
+	
+	<!-- End of promotion if promotion period is over -->
+	<update id="endPromotion">
+		<![CDATA[
+			UPDATE TBL_PROMOTIONS
+			   SET STATUS = 0
+			 WHERE PNO IN (
+			    SELECT PNO
+			      FROM TBL_PROMOTIONS
+			     WHERE ENDDATE < TO_CHAR(SYSDATE,'YYYY-MM-DD') 
+			       AND STATUS = 1
+			)
+		]]>
+	</update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.lee.myapp.persistence;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,5 +35,11 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 	public int promotionRegist(PromotionsVO promotion) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".promotionRegist",promotion);
+	}
+
+	@Override
+	public int endPromotion() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".endPromotion");
 	}
 }

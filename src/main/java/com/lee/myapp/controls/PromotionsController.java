@@ -1,7 +1,6 @@
 package com.lee.myapp.controls;
 
 import java.io.File;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +31,13 @@ public class PromotionsController {
 	
 	@Inject
 	PromotionsService promotionsService;
+	
+	//Update promotion status every 00:00 a.m.
+	@Scheduled(cron="0 0 00 * * *")
+	public void endPromotions() throws Exception{
+		logger.info("-------- PROMOTION STATUS UPDATE --------");
+		promotionsService.endPromotion();
+	}
 	
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public void promotionsMainGET(HttpSession session, Model model) throws Exception{

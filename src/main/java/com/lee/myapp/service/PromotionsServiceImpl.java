@@ -1,5 +1,6 @@
 package com.lee.myapp.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,6 +34,12 @@ public class PromotionsServiceImpl implements PromotionsService{
 	public int promotionRegist(PromotionsVO promotion) throws Exception {
 		// TODO Auto-generated method stub
 		return promotionsDAO.promotionRegist(promotion);
+	}
+
+	@Override
+	public int endPromotion() throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.endPromotion();
 	}
 
 }
