@@ -45,4 +45,16 @@
 		  FROM TBL_PROMOTIONS
 		 WHERE PNO = #{pno}
 	</select>
+	
+	<!-- Reply -->
+	<insert id="commentRegist">
+		INSERT INTO TBL_PROMOTIONS_COMMENT(RNO,PNO,MNO,CONTENT,REPLY_TIME)
+		VALUES(TBL_PROMOTIONS_REPLY_SEQ.NEXTVAL,#{pno},#{mno},#{content},SYSDATE)
+	</insert>
+	
+	<select id="commentList" resultType="com.lee.myapp.domain.PromotionsCommentVO">
+		SELECT B.RNO,B.PNO,A.MNO,A.NAME,B.CONTENT,TO_CHAR(B.REPLY_TIME,'YYYY-MM-DD HH24:MI:SS') AS REPLY_TIME
+		  FROM MEMBER A INNER JOIN TBL_PROMOTIONS_COMMENT B ON A.MNO = B.MNO
+		 ORDER BY B.REPLY_TIME DESC
+	</select>
 </mapper>

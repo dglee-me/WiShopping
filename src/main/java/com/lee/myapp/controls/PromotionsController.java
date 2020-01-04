@@ -16,9 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.service.PromotionsService;
 import com.lee.myapp.utils.UploadFileUtils;
@@ -121,5 +123,26 @@ public class PromotionsController {
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("Çì´õ")); // Main banner list in this view
 		model.addAttribute("promotion", promotion);
 		model.addAttribute("images", imageList);
+		model.addAttribute("comments",promotionsService.commentList());
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/commentRegist", method=RequestMethod.POST)
+	public List<PromotionsCommentVO> promotionCommentRegistPOST(HttpSession session, PromotionsCommentVO comment) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS COMMENT REGIST METHOD=GET --------");
+		logger.info("-------- THIS PNO = " + comment.getPno() + " --------");
+		logger.info("-------- REGISTER MNO = " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
+
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		List<PromotionsCommentVO> list = new ArrayList<PromotionsCommentVO>();
+		
+		if(member != null) {
+			comment.setMno(member.getMno());
+			
+			promotionsService.commentRegist(comment);
+			list = promotionsService.commentList();	
+		}
+
+		return list;
 	}
 }

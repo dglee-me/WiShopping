@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.persistence.PromotionsDAO;
 
@@ -46,6 +47,18 @@ public class PromotionsServiceImpl implements PromotionsService{
 	public PromotionsVO promotionView(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return promotionsDAO.promotionView(pno);
+	}
+
+	@Override
+	public int commentRegist(PromotionsCommentVO comment) throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.commentRegist(comment);
+	}
+
+	@Override
+	public List<PromotionsCommentVO> commentList() throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.commentList();
 	}
 
 }
