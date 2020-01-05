@@ -5,12 +5,20 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commerce.css?after">
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/default.js" async></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <script type="text/javascript">
+	//Change the comment creation time format
+	$(document).ready(function(){
+		$.each($(".comment-feed_item_footer_time"), function(){
+			$(this).text(dateTimeToFormat($(this).text()));
+		});
+	});
+	
 	$(document).ready(function(){
 		//Component when inputting the registration button disabled
 		$("body").on("focus","[contenteditable]",function(){
@@ -47,6 +55,30 @@
 					content : content
 				},
 				success : function(list){
+					$(".comment-feed_list_item").remove(); //Delete an existing oul
+					
+					
+					$.each(list, function(){
+						var comment = document.createElement("li");
+
+						comment.className = "comment-feed_list_item";
+						comment.innerHTML = 
+							"<article class='comment-feed_item'>"
+							+"<p class='comment-feed_item_content'>"
+							+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
+							+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+							+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
+							+"</a>"
+							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
+							+"</p>"
+							+"<footer class='comment-feed_item_footer'>"
+							+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
+							+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+							+"</footer>"
+							+"</article>";
+							
+						$(".comment-feed_list").append(comment);
+					});
 				}
 			});
 		});
@@ -95,7 +127,7 @@
 										<span class="comment-feed_item_content_content">${comment.content}</span>
 									</p>
 									<footer class="comment-feed_item_footer">
-										<time class="comment-feed_item_footer_time">1시간 전</time>
+										<time class="comment-feed_item_footer_time">${comment.replytime}</time>
 										<button class="comment-feed_item_footer_report-btn" type="button">신고</button>
 									</footer>
 								</article>
