@@ -78,10 +78,17 @@
 							
 						$(".comment-feed_list").append(comment);
 						$(".comment-feed_form_content_text").text("");
-						
-						$(".selected").removeClass("selected");
-						$(".list-paginator li:first-child").next().children().addClass("selected");
 					});
+
+					//Initializing the paging number
+					var count = 1;
+					$.each($(".list-paginator_page"), function(){
+						$(this).text(count++);
+					});
+					
+					//Setting selected class
+					$(".selected").removeClass("selected");
+					$(".list-paginator li:first-child").next().children().addClass("selected");
 				}
 			});
 			
@@ -223,51 +230,92 @@
 				}
 			});
 		});
-
+		
 		//Reflect when selecting comment page
 		$(document).on("click",".list-paginator_page",function(){
 			var $this = $(this);
-			
-			var url = decodeURI(location.href);
-		
-			var pno = url.slice(url.indexOf('=') + 1);
 			var page = $(this).text();
-			
-			$.ajax({
-				url : "/myapp/promotions/commentListUpdate",
-				type : "post",
-				data : {
-					page : page,
-					pno : pno	
-				},success : function(comments){
-					$(".comment-feed_list_item").remove(); //Delete an existing oul
-					
-					var count = 0;
-					
-					$.each(comments, function(){
-						count += 1;
-						var comment = document.createElement("li");
+			var idx = $(".list-paginator_page");
 
-						comment.className = "comment-feed_list_item";
-						comment.innerHTML = 
-							"<article class='comment-feed_item'>"
-							+"<p class='comment-feed_item_content'>"
-							+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-							+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
-							+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
-							+"</a>"
-							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
-							+"</p>"
-							+"<footer class='comment-feed_item_footer'>"
-							+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
-							+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
-							+"</footer>"
-							+"</article>";
-							
-						$(".comment-feed_list").append(comment);
+			$(".selected").removeClass("selected");
+
+			var url = decodeURI(location.href);
+			var pno = url.slice(url.indexOf('=') + 1);
+			
+			//ajax to know page list count
+			$.ajax({
+				url : "/myapp/promotions/commentListCount",
+				type : "post",
+				data : {pno : pno},
+				success : function(count){
+					var max = parseInt((count/5),10) + 1;
+					
+					if((max - page) <= 4){ 
+						var min = max - 8;
 						
-						$(".selected").removeClass("selected");
-						$this.addClass("selected");
+						$.each(idx, function(){
+							$(this).text(min++);
+							
+							if($(this).text() == page){
+								$(this).addClass("selected");
+							}
+						});
+					}else{
+						if(page > 5){
+							var min = parseInt(page,10) - 4;
+							
+							$.each(idx, function(){
+								if(min == page){
+									$(this).addClass("selected");
+								}
+								$(this).text(min++);
+							});
+						}else{
+							var min = 1;
+							
+							$.each(idx, function(){
+								if(min == page){
+									$(this).addClass("selected");
+								}
+								
+								$(this).text(min++);
+							});
+						}
+					}
+					
+					//Reflect composition to match selected page
+					$.ajax({
+						url : "/myapp/promotions/commentListUpdate",
+						type : "post",
+						async: false,
+						data : {
+							page : page,
+							pno : pno	
+						},success : function(comments){
+							$(".comment-feed_list_item").remove(); //Delete an existing oul
+							
+							$.each(comments, function(){
+								var comment = document.createElement("li");
+		
+								comment.className = "comment-feed_list_item";
+								comment.innerHTML = 
+									"<article class='comment-feed_item'>"
+									+"<p class='comment-feed_item_content'>"
+									+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
+									+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+									+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
+									+"</a>"
+									+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
+									+"</p>"
+									+"<footer class='comment-feed_item_footer'>"
+									+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
+									+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+									+"</footer>"
+									+"</article>";
+									
+								$(".comment-feed_list").append(comment);
+							});
+						}
 					});
 				}
 			});
