@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 
@@ -60,5 +61,17 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 	public List<PromotionsCommentVO> commentList() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".commentList");
+	}
+
+	@Override
+	public List<PromotionsCommentVO> listPaging(CommentCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".commentListPaging", cri);
+	}
+
+	@Override
+	public int listCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".CommentlistCount", pno);
 	}
 }

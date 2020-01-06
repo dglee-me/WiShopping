@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lee.myapp.domain.CommentCriteria;
+import com.lee.myapp.domain.CommentPageMaker;
 import com.lee.myapp.domain.MemberVO;
+import com.lee.myapp.domain.PageMaker;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.service.PromotionsService;
@@ -104,11 +107,11 @@ public class PromotionsController {
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public void promotionViewGET(HttpSession session, Model model,int pno) throws Exception{
+	public void promotionViewGET(HttpSession session, Model model, CommentCriteria cri) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS VIEW METHOD=GET --------");
-		logger.info("-------- VIEW PNO = " + pno + " --------");
+		logger.info("-------- VIEW PNO = " + cri.getPno() + " --------");
 		
-		PromotionsVO promotion = promotionsService.promotionView(pno);
+		PromotionsVO promotion = promotionsService.promotionView(cri.getPno());
 		
 		//Images_url split to show
 		String[] images_url = promotion.getImagesurl().split(";");		
@@ -119,17 +122,25 @@ public class PromotionsController {
 			imageList.add(images_url[i]);
 		}
 		
+		//Comment paging setting
+		CommentPageMaker pageMaker = new CommentPageMaker();
+		pageMaker.setCri(cri);
+		int count = promotionsService.listCount(cri.getPno());
+		pageMaker.setTotalCount(count);
+		
 		//Settings
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("Çì´õ")); // Main banner list in this view
 		model.addAttribute("promotion", promotion);
 		model.addAttribute("images", imageList);
-		model.addAttribute("comments",promotionsService.commentList());
+		model.addAttribute("comment_count",count);
+		model.addAttribute("comments",promotionsService.listPaging(cri));
+		model.addAttribute("pageMaker",pageMaker);
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/commentRegist", method=RequestMethod.POST)
-	public List<PromotionsCommentVO> promotionCommentRegistPOST(HttpSession session, PromotionsCommentVO comment) throws Exception{
-		logger.info("-------- PROMOTIONS : ACCESS COMMENT REGIST METHOD=GET --------");
+	public List<PromotionsCommentVO> promotionCommentRegistPOST(HttpSession session, PromotionsCommentVO comment, CommentCriteria cri) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS COMMENT REGIST METHOD=POST --------");
 		logger.info("-------- THIS PNO = " + comment.getPno() + " --------");
 		logger.info("-------- REGISTER MNO = " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
 
@@ -140,9 +151,33 @@ public class PromotionsController {
 			comment.setMno(member.getMno());
 			
 			promotionsService.commentRegist(comment);
-			list = promotionsService.commentList();	
+			list = promotionsService.listPaging(cri);	
 		}
 
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/commentListUpdate")
+	public List<PromotionsCommentVO> commentListUpdatePOST(CommentCriteria cri) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS COMMENT LIST UPDATE METHOD=POST --------");
+		logger.info("-------- THIS PNO = " + cri.getPno() + " --------");
+		logger.info("-------- CRITERIA INFO = " + cri.toString() + " --------");
+		
+		List<PromotionsCommentVO> comments = new ArrayList<PromotionsCommentVO>();
+		comments = promotionsService.listPaging(cri);		
+		
+		return comments;
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/commentListCount")
+	public int commentListCountPOST(int pno) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS COMMENT LIST UPDATE METHOD=POST --------");
+		logger.info("-------- THIS PNO = " + pno + " --------");
+		
+		int count = promotionsService.listCount(pno);
+		
+		return count;
 	}
 }

@@ -57,4 +57,27 @@
 		  FROM MEMBER A INNER JOIN TBL_PROMOTIONS_COMMENT B ON A.MNO = B.MNO
 		 ORDER BY B.REPLY_TIME DESC
 	</select>
+	
+	<select id="commentListPaging" resultType="com.lee.myapp.domain.PromotionsCommentVO" parameterType="com.lee.myapp.domain.Criteria">
+		<![CDATA[
+			SELECT *
+			  FROM(
+			       SELECT ROWNUM AS RNUM, A.*
+			         FROM(    
+			              SELECT B.RNO,B.PNO,A.MNO,A.NAME,B.CONTENT,TO_CHAR(B.REPLY_TIME,'YYYY-MM-DD HH24:MI:SS') AS REPLY_TIME
+			                FROM MEMBER A INNER JOIN TBL_PROMOTIONS_COMMENT B ON A.MNO = B.MNO
+			               WHERE B.PNO = #{pno}
+			               ORDER BY B.REPLY_TIME DESC
+			         ) A
+			        WHERE ROWNUM <= #{rowEnd}
+			      )
+			 WHERE RNUM >= #{rowStart}
+		]]>
+	</select>
+	
+	<select id="CommentlistCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM TBL_PROMOTIONS_COMMENT
+		 WHERE PNO = #{pno}
+	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.lee.myapp.persistence;
 import java.util.List;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 
@@ -16,4 +17,6 @@ public interface PromotionsDAO {
 	//Reply
 	public int commentRegist(PromotionsCommentVO comment) throws Exception;
 	public List<PromotionsCommentVO> commentList() throws Exception;
+	public List<PromotionsCommentVO> listPaging(CommentCriteria cri) throws Exception;
+	public int listCount(int pno) throws Exception;
 }

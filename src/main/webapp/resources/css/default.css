@@ -25,6 +25,19 @@ select::-ms-expand{opacity:0;}
 .clear {clear:both;}
 .clear:after {content:""; display:block; clear:both;}
 
+/* Paging CSS */
+.list-paginator{text-align:center;}
+.list-paginator>li{display:inline-block; vertical-align:bottom; font-size:0;}
+
+.list-paginator_page{display:block; min-width:26px; margin:0 2px; padding:5.5px 5px; box-sizing:border-box; border:none; background-color:transparent; border-radius:4px;
+	font-family:inherit; font-size:15px; font-weight:700; line-height:1; color:#424242; transition:background-color .1s,color .1s;}
+.list-paginator_page.selected{background-color:#5FCAEC; color:#fff; text-decoration:none;}
+.list-paginator_page:hover{color:#5FCAEC;}
+
+.list-paginator_next, .list-paginator_prev{marign:0; padding:0; border:none; font-size:0; transition:opacity .1s;}
+.list-paginator_prev{margin-right:26px;}
+.list-paginator_next{margin-left:26px;}
+
 /*footer CSS*/
 .home-footer{display:block; background-color:#fafafa; padding:20px 0 40px; padding-top:20px; font-family:dotum,sans-serif; font-size:12px; line-height:1.6; color:#555;}
 .layout-footer_content{display:block; max-width:1084px; margin:0 auto; box-sizing:border-box;}
