@@ -3,7 +3,7 @@
 
 .member-header{position:relative;}
 .member-logo{margin:0 auto; padding:10.27% 0 0; text-align:center;}
-.member-logo_link{background-image:url('/myapp/resources/image/logo_158_61.png'); position:relative; display:block; 
+.member-logo_link{background-image:url('/WiShopping/resources/image/logo_158_61.png'); position:relative; display:block; 
 	width:33.83%; height:61px; max-width:158px; max-height:61px; margin:0 auto; color:transparent;}
 
 .member-main{position:relative;}
@@ -17,7 +17,7 @@
 	
 .member_input-wrap{display:block; position:relative; height:46px; padding:0; border:1px solid #ccc; background-color:#fff; transition:border-color .25s ease;}
 .member_input-group-icon-label{position:relative; float:left; display:inline; min-width:44px; height:100%; border-right:1px solid #ccc; background-color:#fafafa;}
-.member_sprite-email{background-image:url('/myapp/resources/image/sprite-member.20171115.svg'), none; background-size:148px 148px; display:inline-block; width:1px; 
+.member_sprite-email{background-image:url('/WiShopping/resources/image/sprite-member.20171115.svg'), none; background-size:148px 148px; display:inline-block; width:1px; 
 	vertical-align:middle; text-indent:1px; height:18px; padding-left:21px; background-position:1px 1px; position:absolute; 
 	top:50%; left:50%; margin-left:-12px; margin-top:-8px;}
 	
@@ -25,7 +25,7 @@
 .member_input{margin:0; height:46px; box-sizing:border-box; width:90%; padding:14px 0 12px; border:0 none; font-family:dotum,sans-serif; font-size:14px;
 	line-height:20px; color:#111; font-weight:700; text-indent:12px;}
 	
-.member_sprite-pw{background-image:url('/myapp/resources/image/sprite-member.20171115.svg'), none; background-size:148px 148px; display:inline-block; width:1px; 
+.member_sprite-pw{background-image:url('/WiShopping/resources/image/sprite-member.20171115.svg'), none; background-size:148px 148px; display:inline-block; width:1px; 
 	vertical-align:middle; text-indent:1px; height:20px; padding-left:19px; background-position:-22px -1px; position:absolute; 
 	top:50%; left:50%; margin-left:-10px; margin-top:-10px;}
 	
@@ -39,7 +39,7 @@ input[type="checkbox"].member_checkbox_input{position:relative; width:24px; heig
 input[type="checkbox"].member_checkbox_input:before{content:''; display:block; position:absolute; top:0; right:0; bottom:0; left:0; border:1px solid #ccc; border-radius:1px;
 	background-color:#fff; box-shadow:inset 0 3px 0 rgba(0,0,0,0.05); transition: all 0.3s;}
 input[type="checkbox"]:checked.member_checkbox_input:before{background:#5FCAEC; border-color:#5FCAEC;}
-input[type="checkbox"]:checked.member_checkbox_input:after{content:""; background:url('/myapp/resources/image/ico_check.png') no-repeat center; 
+input[type="checkbox"]:checked.member_checkbox_input:after{content:""; background:url('/WiShopping/resources/image/ico_check.png') no-repeat center; 
 	position:absolute; left:0; top:0; width:24px; height:24px; background-size:32px auto;}
 	
 .member_checkbox_label{display:inline; vertical-align:middle; color:#555; font-size:14px; line-height:24px;}
@@ -47,7 +47,7 @@ input[type="checkbox"]:checked.member_checkbox_input:after{content:""; backgroun
 .login_link-find-email-pw{float:right; position:relative; padding-right:12px;}
 .login_link{text-decoration:none; color:#5FCAEC; font-size:14px; line-height:24px; font-weight:700;}
 
-.member_sprite-right-arrow{position:absolute; top:50%; right:0; margin-top:-7px; background-image:url('/myapp/resources/image/sprite-member_20171115.png'),none;
+.member_sprite-right-arrow{position:absolute; top:50%; right:0; margin-top:-7px; background-image:url('/WiShopping/resources/image/sprite-member_20171115.png'),none;
 	background-size:148px 148px; display:inline-block; width:1px; vertical-align:middle; text-indent:1px; height:14px; padding-left:7px; background-position:-102px -22px;}
 	
 .login_content-trigger{margin:14px 0 0;}

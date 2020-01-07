@@ -20,7 +20,7 @@
 			var data = $(this).text();
 			
 			$.ajax({
-				url : "/myapp/",
+				url : "/WiShopping/",
 				type : "post",
 				data : {data : data},
 				success : function(best){
@@ -33,7 +33,7 @@
 							
 							//Product reflect for selected tab
 							$(item).children().children().attr("href","${pageContext.request.contextPath}/productions/view?pno="+this.pno);
-							$(item).children().children().children().children().attr("src","/myapp"+this.productthumurl);
+							$(item).children().children().children().children().attr("src","/WiShopping"+this.productthumurl);
 							$(item).children().children().children(".info").children(".product-name").text(this.pname);
 							$(item).children().children().children(".info").children(".price").children(".selling-price").text(comma(this.price));
 						});

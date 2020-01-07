@@ -1,5 +1,5 @@
 em{font-style:normal;}
-.product_selling_category ul li:before{background-image:url('/myapp/resources/image/common.png');}
+.product_selling_category ul li:before{background-image:url('/WiShopping/resources/image/common.png');}
 .product_selling_category ul li:first-child:before{background:none;}
 
 .product_selling{position:relative; min-height:1px; -webkit-flex:0 0 auto;}
@@ -40,7 +40,7 @@ em{font-style:normal;}
 .shipping_select{width:60px; border:2px solid #E2E2E2; border-radius:5px;}
 .shipping_select select{width:60px; padding:5px 7px;}
 .info_price_wrap dl.info_price.shipping .ico{margin-top:4px; float:left; width:20px; height:14px;
-background-image:url('/myapp/resources/image/deals.png'); background-position:-243px -218px; color:transparent; font-size:0px;}
+background-image:url('/WiShopping/resources/image/deals.png'); background-position:-243px -218px; color:transparent; font-size:0px;}
 .info_price_wrap dl.info_price dd{padding-left:40px; color:#666;}
 .color_blue{color:#00a8d1;}
 .info_price_wrap dl.info_price .line{display:inline-block; width:1px; height:11px; margin:-3px 8px 0; text-indent:-9999px; vertical-align:middle; background:#c3c3c3;}
@@ -87,7 +87,7 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .input-group .ico{float:left; width:26px; height:26px; text-indent:-9999px; display:inline-block;}
 .input-group .ipt_count_chk{float:left; width:34px; padding:1px 0 0; border:solid 1px #c3c3c3; line-height:23px; 
 	font-size:14px; text-align:center; font-family:'tahoma';}
-.ico, .selling_price .btn.close{background-image:url('/myapp/resources/image/common.png');}
+.ico, .selling_price .btn.close{background-image:url('/WiShopping/resources/image/common.png');}
 .down_count{background-position:-326px -198px;}
 .up_count{background-position:-202px -198px;}
 

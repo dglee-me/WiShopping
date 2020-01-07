@@ -92,4 +92,10 @@
 		  FROM TBL_PRODUCT_OPTION A INNER JOIN TBL_CART B ON A.ONO = B.ONO
 		 WHERE B.CARTNO = #{cartno}
 	</select>
+	
+	<update id="updateSalesVolume">
+		UPDATE TBL_SALES_VOLUME
+		   SET SALES = SALES + #{sales}
+		 WHERE PNO = #{pno}
+	</update>
 </mapper>

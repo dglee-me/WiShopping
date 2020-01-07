@@ -313,8 +313,8 @@
 							<div class="inner">
 								<div class="nav">
 									<ul>
-										<li><a href="/myapp">홈</a></li>
-										<li><a href="/myapp/admin/main">관리자 홈</a></li>
+										<li><a href="${pageContext.request.contextPath}">홈</a></li>
+										<li><a href="${pageContext.request.contextPath}/admin/main">관리자 홈</a></li>
 										<li><a href="javascript:void(0);">상품관리</a></li>
 										<li class="now"><a href="javascript:void(0);">상품 등록</a></li>
 									</ul>

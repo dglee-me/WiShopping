@@ -2,7 +2,7 @@
 .member-wrapper-flex{min-width:290px; max-width:460px; padding:0 4.35%; }
 .member-header{position:relative;}
 .member-logo{margin:0 auto; padding:10.27% 0 0; text-align:center;}
-.member-logo_link{background-image:url('/myapp/resources/image/logo_158_61.png'); position:relative; display:block; 
+.member-logo_link{background-image:url('/WiShopping/resources/image/logo_158_61.png'); position:relative; display:block; 
 	width:33.83%; height:15px; max-width:158px; max-height:61px; margin:0 auto; padding-top:10%; color:transparent;}
 
 .member-main{position:relative;}
@@ -23,7 +23,7 @@
 
 .join_sprite_email{position:absolute; top:50%; left:50%; width:1px; height:16px; margin:-8px 0 0 -10px; 
 	padding-left:19px; background-position:-1px -1px;}	
-.join_sprite{background-image:url('/myapp/resources/image/sprite-join.20160902.svg'); no-reapet; background-size:86px 86px;
+.join_sprite{background-image:url('/WiShopping/resources/image/sprite-join.20160902.svg'); no-reapet; background-size:86px 86px;
 	text-indent:1px; font-size:1px; line-height:1px; color:transparent; vertical-align:middle; display:inline-block;}	
 	
 .member_input-group{position:relative; display:block; margin:0;}

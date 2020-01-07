@@ -25,6 +25,29 @@ select::-ms-expand{opacity:0;}
 .clear {clear:both;}
 .clear:after {content:""; display:block; clear:both;}
 
+/* Admin main CSS */
+.admin-feed_title{background-color:#f7f8fa; text-align:center; padding:17px 0; font-size:20px; font-weight:600; color:#000;}
+.admin-feed-container{position:relative;}
+
+.category-feed-wrap{margin-top:40px;}
+.container{margin-right:auto; margin-left:auto; width:1084px; max-width:100%; box-sizing:border-box; min-height:1px;}
+
+.row{display:flex; flex-wrap:wrap; box-sizing:border-box; margin-right:-10px; margin-left:-10px;}
+.category-feed_side-bar{display:block; position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 25%; max-width:25%; 
+	padding-left:10px; padding-right:10px;}
+
+.admin-category-list{max-width:160px;}
+
+.admin-category-list_title{margin:0 0 27px; font-size:20px; font-weight:700; color:#000; cursor:pointer;}
+
+.admin-category-tree_entry_header{display:flex; align-items:center; min-width:0; height:23px; padding:0 0 10px; color:#000;}
+.admin-category-tree_entry_title{flex:1 0 0px; min-width:0; font-size:13px; line-height:23px; white-space:nowrap; overflow:hidden; transition:opacity .1s;}
+
+.admin-category-tree{margin:15px 0 40px; border-bottom:1px solid #dbdbdb;}
+
+.list_show{display:block;}
+.list_hide{display:none;}
+
 /* Paging CSS */
 .list-paginator{text-align:center;}
 .list-paginator>li{display:inline-block; vertical-align:bottom; font-size:0;}

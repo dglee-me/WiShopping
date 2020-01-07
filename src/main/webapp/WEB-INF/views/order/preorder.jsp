@@ -22,7 +22,7 @@
 		
 		if(session == ""){
 			alert("로그인 후 이용하여 주세요.");
-			location.href="/myapp/auth/login";
+			location.href="/WiShopping/auth/login";
 		}
 	});
 	

@@ -11,115 +11,7 @@
 <html lang="ko">
 <head>
 <script type="text/javascript">
-	$(document).ready(function(){		
-		//If status is use , checked checkbox
-		var url = location.href;
-		var status = url.slice(url.indexOf('=') + 1);
-
-		if(status == "use"){
-			$("input:checkbox[name='is_use']").prop("checked",true);
-		}
-		
-		//Show only banner in use if checkbox is selected
-		$("input:checkbox[name='is_use']").click(function(){
-			var checkbox = $(this);
-			if($("input:checkbox[name='is_use']").prop("checked")){
-				$.ajax({
-					url : "/WiShopping/admin/banner/management?status=use",
-					type : "get",
-					success : function(){
-						location.href="/WiShopping/admin/banner/management?status=use";
-					}
-				});
-			}else{
-				$.ajax({
-					url : "/WiShopping/admin/banner/management?status=all",
-					type : "get",
-					success : function(){
-						location.href="/WiShopping/admin/banner/management?status=all";
-					}
-				});
-			}
-		});
-		
-		//Banner status change to 'yes'
-		$(".yes").click(function(){
-			var confirm_val = confirm("배너를 사용하시겠습니까?");
-			
-			if(confirm_val){
-				var item = $(this);
-			
-				var bno = $(this).closest("li").children("em").attr("banner-number");
-				var status = 1;
-			
-				$.ajax({
-					url : "/WiShopping/admin/banner/updateStatus",
-					type : "post",
-					data : {
-						bno : bno,
-						status : status		
-					},
-					success : function(result){
-						if(result == 1){
-							item.siblings(".no").removeClass("active");
-							item.addClass("active");
-						}else{
-							alert("오류가 발생하였습니다. 다시 시도해주세요.");
-							location.href="/WiShopping";
-						}
-					}
-				});
-			}
-		});
-
-		//Banner status change to 'no'
-		$(".no").click(function(){
-			var confirm_val = confirm("배너 사용을 중지하시겠습니까?");
-
-			if(confirm_val){
-				var item = $(this);
-				
-				var bno = $(this).closest("li").children("em").attr("banner-number");
-				var status = 0;
-				
-				$.ajax({
-					url : "/WiShopping/admin/banner/updateStatus",
-					type : "post",
-					data : {
-						bno : bno,
-						status : status		
-					},
-					success : function(result){
-						if(result == 1){
-							item.siblings(".yes").removeClass("active");
-							item.addClass("active");
-						}else{
-							alert("오류가 발생하였습니다. 다시 시도해주세요.");
-							location.href="/WiShopping";
-						}
-					}
-				});
-			}
-		});
-		
-		//Banner delete button click event
-		$(".delete_btn").click(function(){
-			var isUse = $(this).parent().siblings(".banner-list_context").children().children("button.yes");
-			
-			if(isUse.hasClass("active") == true){
-				alert("사용이 중지된 배너만 삭제 가능합니다.");
-			}else{
-				var confirm_val = confirm("배너를 삭제하시겠습니까?\n배너의 모든 정보가 삭제됩니다.");
-				if(confirm_val){
-					var bno = $(this).parent().siblings("em").attr("banner-number");
-					
-					alert("선택한 배너가 삭제되었습니다.");
-					
-					location.href = "/WiShopping/admin/banner/delete?bno="+bno;
-				}
-			}
-		});
-	});
+	
 </script>
 <meta charset="UTF-8">
 <title>위쇼핑 ! - 배너 관리</title>
@@ -128,12 +20,12 @@
 	<div class="layout">
 		<jsp:include page="/WEB-INF/views/header.jsp"/>
 		<div class="banner-management">
-			<h2 class="banner-management_title">배너 관리</h2>
+			<h2 class="promotions-management_title">프로모션 관리</h2>
 			<div class="container">
 				<section class="banner-list_section">
 					<div class="banner-list_wrap">
 						<div class="banner-list_header">
-							<h3>배너 목록</h3>
+							<h3>프로모션 목록</h3>
 							<div class="banner-list_sort">
 								<select name="order" class="form-control">
 									<option value="desc">최근 등록순</option>

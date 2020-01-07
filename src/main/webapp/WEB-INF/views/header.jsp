@@ -148,7 +148,7 @@
 			<h2 class="hide">유틸메뉴</h2>
 			<ul class="top_bar_util">
 				<li><a href="javascript:void(0);" onclick="bookmarksite(); return false;">즐겨찾기</a></li>
-				<li><a href="/myapp/promotions/main">기획전</a></li>
+				<li><a href="${pageContext.request.contextPath}/promotions/main">기획전</a></li>
 			</ul>
 			<h2 class="hide">로그인메뉴</h2>
 			<ul class="top_bar_login">

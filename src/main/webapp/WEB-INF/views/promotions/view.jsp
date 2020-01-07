@@ -47,7 +47,7 @@
 			var content = $("[contenteditable]").text();
 			
 			$.ajax({
-				url : "/myapp/promotions/commentRegist",
+				url : "/WiShopping/promotions/commentRegist",
 				type : "post",
 				data : {
 					pno : pno,
@@ -65,7 +65,7 @@
 							"<article class='comment-feed_item'>"
 							+"<p class='comment-feed_item_content'>"
 							+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-							+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+							+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 							+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 							+"</a>"
 							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
@@ -93,7 +93,7 @@
 			});
 			
 			$.ajax({
-				url : "/myapp/promotions/commentListCount",
+				url : "/WiShopping/promotions/commentListCount",
 				type : "post",
 				data : {pno : pno},
 				success : function(count){
@@ -123,7 +123,7 @@
 				}
 				
 				$.ajax({
-					url : "/myapp/promotions/commentListUpdate",
+					url : "/WiShopping/promotions/commentListUpdate",
 					type : "post",
 					data : {
 						page : page,
@@ -139,7 +139,7 @@
 								"<article class='comment-feed_item'>"
 								+"<p class='comment-feed_item_content'>"
 								+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-								+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+								+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 								+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 								+"</a>"
 								+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
@@ -168,7 +168,7 @@
 			var page = parseInt($(".list-paginator_page.selected").text(),10) + 1;
 			
 			$.ajax({
-				url : "/myapp/promotions/commentListCount",
+				url : "/WiShopping/promotions/commentListCount",
 				type : "post",
 				data : {pno : pno},
 				success : function(count){
@@ -191,7 +191,7 @@
 						var next_page = $(".list-paginator_page.selected").parent().next().children();
 						
 						$.ajax({
-							url : "/myapp/promotions/commentListUpdate",
+							url : "/WiShopping/promotions/commentListUpdate",
 							type : "post",
 							async: false,
 							data : {
@@ -208,7 +208,7 @@
 										"<article class='comment-feed_item'>"
 										+"<p class='comment-feed_item_content'>"
 										+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-										+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+										+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 										+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 										+"</a>"
 										+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
@@ -244,7 +244,7 @@
 			
 			//ajax to know page list count
 			$.ajax({
-				url : "/myapp/promotions/commentListCount",
+				url : "/WiShopping/promotions/commentListCount",
 				type : "post",
 				data : {pno : pno},
 				success : function(count){
@@ -285,7 +285,7 @@
 					
 					//Reflect composition to match selected page
 					$.ajax({
-						url : "/myapp/promotions/commentListUpdate",
+						url : "/WiShopping/promotions/commentListUpdate",
 						type : "post",
 						async: false,
 						data : {
@@ -302,7 +302,7 @@
 									"<article class='comment-feed_item'>"
 									+"<p class='comment-feed_item_content'>"
 									+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-									+"<img src='/myapp/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+									+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 									+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 									+"</a>"
 									+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
@@ -337,7 +337,7 @@
 					<h1 class="comment-feed_header">답글 <span class="comment-feed_header_count">${comment_count}</span></h1>
 					<form class="comment-feed_form">
 						<div class="comment-feed_form_user">
-							<img src="/myapp/resources/image/none_user.png">
+							<img src="/WiShopping/resources/image/none_user.png">
 						</div>
 						<div class="comment-feed_form_input">
 							<div class="comment-feed_form_content">
@@ -356,7 +356,7 @@
 								<article class="comment-feed_item">
 									<p class="comment-feed_item_content">
 										<a href="javascript:void(0);" class="comment-feed_item_content_author">
-											<img src="/myapp/resources/image/none_user.png" class="comment-feed_item_content_author_image" alt="${comment.name}">
+											<img src="/WiShopping/resources/image/none_user.png" class="comment-feed_item_content_author_image" alt="${comment.name}">
 											<span class="comment-feed_item_content_author_name">${comment.name}</span>
 										</a>
 										<span class="comment-feed_item_content_content">${comment.content}</span>

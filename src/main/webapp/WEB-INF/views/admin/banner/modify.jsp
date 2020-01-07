@@ -59,16 +59,16 @@
 			}
 
 			$.ajax({
-				url : "/myapp/admin/banner/modify",
+				url : "/WiShopping/admin/banner/modify",
 				type : "post",
 				contentType: false,
 				processData: false,
 				data : formData,
 				success : function(result){
 					if(result == 1){
-						location.href="/myapp/admin/banner/management?status=all";
+						location.href="/WiShopping/admin/banner/management?status=all";
 					}else{
-						location.href="/myapp/error";
+						location.href="/WiShopping/error";
 					}
 				}
 			});

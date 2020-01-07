@@ -1,4 +1,4 @@
-.category_nav .nav ul li:before{background-image:url('/myapp/resources/image/common.png');}
+.category_nav .nav ul li:before{background-image:url('/WiShopping/resources/image/common.png');}
 .category_nav .nav ul li:first-child:before{background:none;}
 
 .container{min-height:100%; display:flex;}

@@ -3,9 +3,9 @@
 .board{position:relative; width:100%;}
 
 .title_notice{display:block; width:65px; height:17px; margin:29px 0 10px; font-size:0; line-height:0; 
-	background-image:url('/myapp/resources/image/title_customer.gif')}
+	background-image:url('/WiShopping/resources/image/title_customer.gif')}
 .wrap_tbl{float:none; width:100%; padding:0; border-top:2px solid #e11e22; border-bottom:1px solid #333; border-right:1px solid #ddd;}
-.wrap_tbl th{height:32px; background-image:url('/myapp/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; font-size:11px; color:#333; text-align:center;}
+.wrap_tbl th{height:32px; background-image:url('/WiShopping/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; font-size:11px; color:#333; text-align:center;}
 .wrap_tbl .view{width:100%; border-collapse:collapse; border-spacing:0;}
 
 .wrap_view th{height:38px; border:0 none;}

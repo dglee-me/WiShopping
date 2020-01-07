@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="5; url=/myapp">
+<meta http-equiv="refresh" content="5; url=/WiShopping">
 <title>위쇼핑 회원가입 완료 :)</title>
 </head>
 <body>

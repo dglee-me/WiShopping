@@ -208,7 +208,7 @@
 				}
 				
 				$.ajax({
-					url : "/myapp/cart/addCart",
+					url : "/WiShopping/cart/addCart",
 					type : "post",
 					data : {ono : ono,
 							number : number
@@ -220,7 +220,7 @@
 						}
 					},error : function(){
 						alert("다시 시도해주세요.");
-						location.href="/myapp/error";
+						location.href="/WiShopping/error";
 					}
 				});
 			}
@@ -247,18 +247,18 @@
 				}
 				
 				$.ajax({
-					url : "/myapp/order/order_request",
+					url : "/WiShopping/order/order_request",
 					type : "post",
 					data : {ono : ono,
 							number : number
 					},success : function(result){
 						if(result == 1){
-							location.href="/myapp/order/pre_order";
+							location.href="/WiShopping/order/pre_order";
 						}else if(result == 2){
 							alert("로그인 후 이용해주세요!");
-							location.href="/myapp/auth/login";
+							location.href="/WiShopping/auth/login";
 						}else{
-							location.href="/myapp/error";
+							location.href="/WiShopping/error";
 						}
 					}
 				});

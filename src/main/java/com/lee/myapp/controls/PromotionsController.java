@@ -136,7 +136,20 @@ public class PromotionsController {
 		model.addAttribute("comments",promotionsService.listPaging(cri));
 		model.addAttribute("pageMaker",pageMaker);
 	}
+	
+	@RequestMapping(value="/management", method=RequestMethod.GET)
+	public void promotionModifyGET(HttpSession session, PromotionsVO promotion) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS PROMOTION MANAGEMENT METHOD=GET --------");
+		logger.info("-------- ACCESSOR MNO = " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			
+		}
 
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/commentRegist", method=RequestMethod.POST)
 	public List<PromotionsCommentVO> promotionCommentRegistPOST(HttpSession session, PromotionsCommentVO comment, CommentCriteria cri) throws Exception{

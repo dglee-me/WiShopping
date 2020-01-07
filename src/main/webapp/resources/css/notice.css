@@ -2,13 +2,13 @@
 
 .contents{float:left; width:1084px;}
 
-.title_main{display:block; width:1084px; height:76px; margin-top:20px; background-image:url('/myapp/resources/image/customer_center.gif'); color:transparent;}
-.tab_cs{width:100%; height:43px; border-bottom:2px solid #e6484a; background-image:url('/myapp/resources/image/tab_custom.png');}
+.title_main{display:block; width:1084px; height:76px; margin-top:20px; background-image:url('/WiShopping/resources/image/customer_center.gif'); color:transparent;}
+.tab_cs{width:100%; height:43px; border-bottom:2px solid #e6484a; background-image:url('/WiShopping/resources/image/tab_custom.png');}
 .tab_cs li{float:left;}
 
 .tab_cs a{float:left; height:43px; font-size:0; line-height:0;}
 
-.tab_cs a.on, tab1:hover, tab2:hover, tab3:hover, tab4:hover{background-image:url('/myapp/resources/image/tab_custom.png');}
+.tab_cs a.on, tab1:hover, tab2:hover, tab3:hover, tab4:hover{background-image:url('/WiShopping/resources/image/tab_custom.png');}
 
 .tab_cs .tab1{background-position:0 -55px; width:271px;}
 .tab_cs .tab2{background-position:-270px -55px; width:271px;}
@@ -17,10 +17,10 @@
 
 #board{position:relative; width:100%;}
 .title_notice{display:block; width:65px; height:17px; margin:29px 0 10px; font-size:0; line-height:0; 
-	background-image:url('/myapp/resources/image/title_customer.gif')}
+	background-image:url('/WiShopping/resources/image/title_customer.gif')}
 .wrap_tbl{width:100%; border-top:2px solid #e6484a; border-bottom:1px solid #333; border-right:1px solid #ddd;}
-.wrap_tbl th{height:32px; background-image:url('/myapp/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; font-size:11px; color:#333; text-align:center; }
-.wrap_tbl td{padding:12px 0 10px; background-image:url('/myapp/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; 
+.wrap_tbl th{height:32px; background-image:url('/WiShopping/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; font-size:11px; color:#333; text-align:center; }
+.wrap_tbl td{padding:12px 0 10px; background-image:url('/WiShopping/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y; 
 	color:#666; line-height:15px; text-align:center; border-top:1px solid #ddd;}
 	
 .wrap_tbl .list{width:100%;}

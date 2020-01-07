@@ -9,7 +9,7 @@
 .regist_edit ul.subject div{padding:0 0 0 68px;}
 
 .title_main{display:blcok; width:1084px; height:76px; margin-top:20px; padding-bottom:30px; 
-	background-image:url('/myapp/resources/image/modify_banner.gif'); color:transparent;}
+	background-image:url('/WiShopping/resources/image/modify_banner.gif'); color:transparent;}
 
 .subject{padding:0 30px 0; }
 .category{min-width:100px; padding:5px 10px; border:1px solid #E2E2E2; border-radius:2px; text-align:left; color:#666;}
@@ -19,5 +19,5 @@
 .warning_message{padding:5px 0 16px 28px; color:#6D6D6D; font-size:11px; font-family:'µ¸¿ò',dotum,Helvetica,sans-serif; letter-spacing:-1px; text-algin:left; line-height:1.4em;}
 
 .btn_post{position:relative; width:100%; text-align:center; margin-top:10px;}
-.btn_post .btn_write{width:57px; height:27px; margin-top:-1px; background-image:url('/myapp/resources/image/btn_bconfirm.gif'); }
+.btn_post .btn_write{width:57px; height:27px; margin-top:-1px; background-image:url('/WiShopping/resources/image/btn_bconfirm.gif'); }
 .btn_post button{display:inline-block; min-width:auto; margin:0; padding:0; border:0; color:transparent; font-size:1px;}

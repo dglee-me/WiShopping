@@ -8,8 +8,11 @@
 <mapper namespace="productMapper">
 	<!-- Category Register -->
 	<insert id="register">
-		INSERT INTO PRODUCT(PNO,CATEGORY1,CATEGORY2,PNAME,BRAND,PRICE,PRODUCT_URL,PRODUCT_THUMURL,SHIPPING_FEE,SHIPPING_DAY) 
+		INSERT ALL
+		INTO PRODUCT(PNO,CATEGORY1,CATEGORY2,PNAME,BRAND,PRICE,PRODUCT_URL,PRODUCT_THUMURL,SHIPPING_FEE,SHIPPING_DAY) 
 			VALUES(pno_seq.nextval,#{category1},#{category2},#{pname},#{brand},#{price},#{producturl},#{productthumurl},#{shippingfee},#{shippingday})
+		INTO TBL_SALES_VOLUME VALUES(TBL_SALES_VOLUME_SEQ.NEXTVAL,PNO_SEQ.CURRVAL,0)
+		SELECT * FROM DUAL
 	</insert>
 	
 	<insert id="register_option">

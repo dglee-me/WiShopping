@@ -18,7 +18,7 @@ public class OrderVO {
 		    payer_phone varchar2(11) not null,
 		    amount int not null,
 		    orderdate date default sysdate,
-		    delivery_state int default 0
+		    delivery_status int default 0
 		); 
 		
 		ALTER TABLE TBL_ORDER ADD CONSTRAINT TBL_ORDER_MNO FOREIGN KEY(MNO) REFERENCES MEMBER(MNO);

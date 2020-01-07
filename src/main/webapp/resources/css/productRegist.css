@@ -1,5 +1,5 @@
 em{font-style:normal;}
-.product_selling_category ul li:before{background-image:url('/myapp/resources/image/common.png');}
+.product_selling_category ul li:before{background-image:url('/WiShopping/resources/image/common.png');}
 .product_selling_category ul li:first-child:before{background:none;}
 
 .product_selling{position:relative; min-height:1px; -webkit-flex:0 0 auto;}
@@ -33,7 +33,7 @@ em{font-style:normal;}
 .shipping_select{width:60px; border:2px solid #E2E2E2; border-radius:5px;}
 .shipping_select select{width:60px; padding:5px 7px;}
 .info_price_wrap dl.info_price.shipping .ico{float:left; width:20px; height:14px; margin-top:5px;
-background-image:url('/myapp/resources/image/deals.png'); background-position:-243px -218px; color:transparent;}
+background-image:url('/WiShopping/resources/image/deals.png'); background-position:-243px -218px; color:transparent;}
 .info_price_wrap dl.info_price dd{padding-left:40px; color:#666;}
 .color_blue{color:#00a8d1;}
 .info_price_wrap dl.info_price .line{display:inline-block; width:1px; height:11px; margin:-3px 8px 0; text-indent:-9999px; vertical-align:middle; background:#c3c3c3;}
@@ -49,8 +49,8 @@ background-image:url('/myapp/resources/image/deals.png'); background-position:-2
 .box_optarea tbody td{border:1px solid #dedede;}
 
 .flabel input.fcheck{position:absolute; height:0; width:0; opacity:0; cursor:pointer;}
-input[type="radio"]{background-image:url('/myapp/resources/image/bg_radio.png'); background-size:20px 20px;}
-input[type="radio"]:checked{background-image:url('/myapp/resources/image/bg_radio_checked.png'); transition: .2s ease-out;}
+input[type="radio"]{background-image:url('/WiShopping/resources/image/bg_radio.png'); background-size:20px 20px;}
+input[type="radio"]:checked{background-image:url('/WiShopping/resources/image/bg_radio_checked.png'); transition: .2s ease-out;}
 .flabel .checkMark{position:absolute; top:0; left:5; height:18px; width:18px; border:1px solid #d4d4d4; background:#fff; transition:all .2s ease-out;}
 
 .flabel input.fcheck:checked ~ .checkMark:after{display:block;}

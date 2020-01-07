@@ -223,7 +223,7 @@
 				var inventory = $(this).val();
 				
 				$.ajax({
-					url : "/myapp/cart/cartUpdate",
+					url : "/WiShopping/cart/cartUpdate",
 					type : "post",
 					data : {
 						cartno : cartno,
@@ -231,7 +231,7 @@
 						inventory : inventory
 					},success : function(result){
 						if(result == 0){
-							location.href="/myapp/error";
+							location.href="/WiShopping/error";
 						}
 					}
 				});
@@ -249,14 +249,14 @@
 					checkArray.push($(this).closest("article").children("a").attr("data-number"));
 					
 					$.ajax({
-						url : "/myapp/cart/cartRemove",
+						url : "/WiShopping/cart/cartRemove",
 						type : "post",
 						data : {checkArray : checkArray},
 						success : function(result){
 							if(result==1){
-								location.href="/myapp/cart/main";	
+								location.href="/WiShopping/cart/main";	
 							}else{
-								location.href="/myapp/error";
+								location.href="/WiShopping/error";
 							}
 						}
 					});
@@ -277,14 +277,14 @@
 					});
 					
 					$.ajax({
-						url : "/myapp/cart/cartRemove",
+						url : "/WiShopping/cart/cartRemove",
 						type : "post",
 						data : {checkArray : checkArray},
 						success : function(result){
 							if(result==1){
-								location.href="/myapp/cart/main";	
+								location.href="/WiShopping/cart/main";	
 							}else{
-								location.href="/myapp/error";
+								location.href="/WiShopping/error";
 							}
 						}
 					});
@@ -297,12 +297,12 @@
 			var cartno = $(this).closest("li").attr("cart-data");
 						
 			$.ajax({
-				url : "/myapp/cart/cartOptionRemove",
+				url : "/WiShopping/cart/cartOptionRemove",
 				type : "post",
 				data : {cartno : cartno},
 				success : function(result){
-					if(result == 0)	location.href = "/myapp/error";
-					if(result == 1) location.href = "/myapp/cart/main";
+					if(result == 0)	location.href = "/WiShopping/error";
+					if(result == 1) location.href = "/WiShopping/cart/main";
 				}
 			});
 		});
@@ -326,13 +326,13 @@
 				}
 				
 				$.ajax({
-					url : "/myapp/order/order_request",
+					url : "/WiShopping/order/order_request",
 					type : "post",
 					data : {ono : ono,
 							number : number		
 					},success : function(result){
-						if(result == 1)	location.href="/myapp/order/pre_order"; 
-						else location.href="/myapp/error";
+						if(result == 1)	location.href="/WiShopping/order/pre_order"; 
+						else location.href="/WiShopping/error";
 					}
 				});
 			});

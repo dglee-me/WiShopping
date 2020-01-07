@@ -14,8 +14,8 @@
 	
 	<!-- Banner -->
 	<insert id="bannerRegist">
-		INSERT INTO TBL_BANNER(BNO,AREA,BANNER_ALT,BANNER_URL,BANNER_LINK)
-		VALUES(TBL_BANNER_SEQ.NEXTVAL,#{area},#{banneralt},#{bannerurl},#{bannerlink})
+		INSERT INTO TBL_BANNER(BNO,AREA,BANNER_ALT,BANNER_URL,BANNER_LINK,BANNER_STATUS)
+		VALUES(TBL_BANNER_SEQ.NEXTVAL,#{area},#{banneralt},#{bannerurl},#{bannerlink},0)
 	</insert>
 	
 	<select id="bannerList" resultType="com.lee.myapp.domain.BannerVO">

@@ -92,7 +92,7 @@ public class AdminController {
 		
 		//If access member level is 2(Admin) over
 		if(member.getMlevel() == 2) {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String imgUploadPath = uploadPath + "/" + "imgUpload";
 			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 			
 			//Set image name and upload image to server
