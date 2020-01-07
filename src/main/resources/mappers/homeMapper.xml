@@ -8,19 +8,24 @@
 <mapper namespace="homeMapper">
 	<select id="selectAllBest" resultType="com.lee.myapp.domain.ProductVO">
 		<![CDATA[
-			SELECT A.PNO, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
-			  FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
+			SELECT ROWNUM,X.*
+			  FROM ( SELECT A.PNO, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.SALES
+			           FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
+			          ORDER BY B.SALES DESC
+			        ) X
 			 WHERE ROWNUM <= 4
-			 ORDER BY SALES DESC
 		]]>
 	</select>
 	
 	<select id="selectBest" resultType="com.lee.myapp.domain.ProductVO">
 		<![CDATA[
-			SELECT A.PNO, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
-			  FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
-			 WHERE ROWNUM <= 4 AND A.CATEGORY1 = #{data}
-			 ORDER BY SALES DESC
+			SELECT ROWNUM,X.*
+			  FROM ( SELECT A.PNO, A.PNAME, A.PRICE, A.PRODUCT_THUMURL, B.SALES
+			           FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
+			          WHERE A.CATEGORY1 = #{data}
+			          ORDER BY B.SALES DESC
+			        ) X
+			 WHERE ROWNUM <= 4
 		]]>
 	</select>
 	

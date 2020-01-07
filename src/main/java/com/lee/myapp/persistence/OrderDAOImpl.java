@@ -72,6 +72,18 @@ public class OrderDAOImpl implements OrderDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".cartCheckInventory",cartno);
 	}
+
+	@Override
+	public int cartUpdateSalesVolume(String cartno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".cartUpdateSalesVolume", cartno);
+	}
+
+	@Override
+	public int productToUpdateSalesVolume(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".productToUpdateSalesVolume", map);
+	}
 	
 	//Header banner
 	@Override

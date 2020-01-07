@@ -46,7 +46,7 @@ public class OrderController {
 			String[] inventory = number.split(";");
 			
 			String referer = request.getHeader("referer");
-			if(referer.equals("http://localhost:8081/myapp/cart/main")) {
+			if(referer.equals("http://localhost:8081/WiShopping/cart/main")) {
 				//If order from a cart
 				HashMap<String,Object> map = new HashMap<String,Object>();
 				
@@ -110,7 +110,7 @@ public class OrderController {
 				logger.info("-------- ORDER TYPE : CART TO ORDER --------");
 				// Order failed If the products in the cart are out of stock
 				for(int i=0;i<ono.length;i++) {
-					if(orderService.cartCheckInventory(cartno[i]) >= orderService.checkInventory(ono[i])) {
+					if(orderService.cartCheckInventory(cartno[i]) > orderService.checkInventory(ono[i])) {
 						return "redirect:orderFail";
 					}
 				}
@@ -134,6 +134,10 @@ public class OrderController {
 				map.put("orderno", orderNo);
 			
 				int result = orderService.cart_orderInfo_detail(map);
+				
+				for(int i=0;i<cartno.length;i++) {
+					orderService.cartUpdateSalesVolume(cartno[i]);
+				}
 				
 				//When the number of insert is more than 1
 				if(result >= 1) {
@@ -164,6 +168,7 @@ public class OrderController {
 					
 					orderService.product_orderInfo_detail(map);
 					orderService.updateInventory(map);
+					orderService.productToUpdateSalesVolume(map);
 
 					map.clear();
 				}

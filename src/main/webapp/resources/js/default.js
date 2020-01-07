@@ -4,7 +4,7 @@ function bookmarksite(){
 	//IE
 	var agent = navigator.userAgent.toLowerCase();
 	if((navigator.appName == "Netscape" && agent.indexOf("trident") != -1) || (agent.indexOf("msie") != -1)){
-		window.external.AddFavorite("http://localhost:8081/myapp","위쇼핑");
+		window.external.AddFavorite("http://localhost:8081/WiShopping","위쇼핑");
 	}
 	//Google Chrome
 	else if(window.chrome){
@@ -65,7 +65,7 @@ function direct_productionOptionCheck(input){
 	var price = parseInt(uncomma($('#price').text()),10);
 		
 	$.ajax({
-		url : "/myapp/productions/view/checkOption",
+		url : "/WiShopping/productions/view/checkOption",
 		type : "post",
 		data : {ono : ono},
 		success : function(result){
@@ -85,7 +85,7 @@ function productionOptionCheck(input){
 	var inventory;
 	
 	$.ajax({
-		url : "/myapp/productions/view/checkOption",
+		url : "/WiShopping/productions/view/checkOption",
 		type : "post",
 		async : false,
 		data : {ono : ono},

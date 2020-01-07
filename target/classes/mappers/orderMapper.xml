@@ -93,9 +93,15 @@
 		 WHERE B.CARTNO = #{cartno}
 	</select>
 	
-	<update id="updateSalesVolume">
+	<update id="cartUpdateSalesVolume">
 		UPDATE TBL_SALES_VOLUME
-		   SET SALES = SALES + #{sales}
-		 WHERE PNO = #{pno}
+		   SET SALES = SALES + (SELECT INVENTORY FROM TBL_CART WHERE CARTNO = #{cartno})
+		 WHERE PNO = (SELECT PNO FROM TBL_CART WHERE CARTNO = #{cartno})
+	</update>
+	
+	<update id="productToUpdateSalesVolume">
+		UPDATE TBL_SALES_VOLUME
+		   SET SALES = SALES + #{inventory}
+		 WHERE PNO = (SELECT PNO FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono})
 	</update>
 </mapper>

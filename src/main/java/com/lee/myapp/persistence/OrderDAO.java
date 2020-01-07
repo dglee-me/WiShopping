@@ -17,6 +17,9 @@ public interface OrderDAO {
 	public void updateInventory(Map<String,Object> map) throws Exception;
 	public int checkInventory(String ono) throws Exception;
 	public int cartCheckInventory(String cartno) throws Exception;
+	
+	public int cartUpdateSalesVolume(String cartno) throws Exception;
+	public int productToUpdateSalesVolume(Map<String,Object> map) throws Exception;
 
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;

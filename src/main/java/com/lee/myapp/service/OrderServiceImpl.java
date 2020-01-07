@@ -73,6 +73,18 @@ public class OrderServiceImpl implements OrderService{
 		return orderDAO.cartCheckInventory(cartno);
 	}
 
+	@Override
+	public int cartUpdateSalesVolume(String cartno) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.cartUpdateSalesVolume(cartno);
+	}
+
+	@Override
+	public int productToUpdateSalesVolume(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.productToUpdateSalesVolume(map);
+	}
+
 	//Header banner
 	@Override
 	public List<BannerVO> mainBannerList(String area) throws Exception {
