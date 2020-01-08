@@ -22,6 +22,7 @@ public class PromotionsVO {
 	private Date startdate;
 	private Date enddate;
 	private int status;
+	private int commentcount;
 	
 	public int getPno() {
 		return pno;
@@ -73,8 +74,15 @@ public class PromotionsVO {
 		return this;
 	}
 	
+	public int getCommentcount() {
+		return commentcount;
+	}
+	public PromotionsVO setCommentcount(int commentcount) {
+		this.commentcount = commentcount;
+		return this;
+	}
 	public String toString() {
 		return "PromotionsVO = [pno = "+pno+", subject = "+subject+", thumbnailurl = "+thumbnailurl+", imagesurl = "+imagesurl
-				+", startdate = "+startdate+", enddate = "+enddate+", status = "+status+" ]";
+				+", startdate = "+startdate+", enddate = "+enddate+", status = "+status+", commentcount = "+commentcount+" ]";
 	}
 }

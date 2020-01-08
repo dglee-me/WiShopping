@@ -1,6 +1,5 @@
 package com.lee.myapp.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,9 +26,9 @@ public class PromotionsServiceImpl implements PromotionsService{
 	}
 
 	@Override
-	public List<PromotionsVO> promotionList() throws Exception {
+	public List<PromotionsVO> promotionList(String parameter) throws Exception {
 		// TODO Auto-generated method stub
-		return promotionsDAO.promotionList();
+		return promotionsDAO.promotionList(parameter);
 	}
 
 	@Override
@@ -48,6 +47,18 @@ public class PromotionsServiceImpl implements PromotionsService{
 	public PromotionsVO promotionView(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return promotionsDAO.promotionView(pno);
+	}
+
+	@Override
+	public int updateStatus(PromotionsVO promotion) throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.updateStatus(promotion);
+	}
+
+	@Override
+	public int deletePromotion(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.deletePromotion(pno);
 	}
 
 	@Override
@@ -73,5 +84,4 @@ public class PromotionsServiceImpl implements PromotionsService{
 		// TODO Auto-generated method stub
 		return promotionsDAO.listCount(pno);
 	}
-
 }

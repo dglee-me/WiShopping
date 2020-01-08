@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.CommentPageMaker;
 import com.lee.myapp.domain.MemberVO;
-import com.lee.myapp.domain.PageMaker;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.service.PromotionsService;
@@ -54,7 +53,7 @@ public class PromotionsController {
 
 		//Setting
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("Çì´õ")); // Main banner list in this view
-		model.addAttribute("promotions", promotionsService.promotionList());
+		model.addAttribute("promotions", promotionsService.promotionList("all"));
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -138,14 +137,22 @@ public class PromotionsController {
 	}
 	
 	@RequestMapping(value="/management", method=RequestMethod.GET)
-	public void promotionModifyGET(HttpSession session, PromotionsVO promotion) throws Exception{
+	public void promotionModifyGET(HttpSession session, Model model, String status) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS PROMOTION MANAGEMENT METHOD=GET --------");
 		logger.info("-------- ACCESSOR MNO = " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
 		
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
+			if(status == null){
+				status = "all";
+			}
 			
+			if(status.equals("all")) {
+				model.addAttribute("promotions", promotionsService.promotionList("all"));
+			}else {
+				model.addAttribute("promotions", promotionsService.promotionList("used"));
+			}
 		}
 
 	}
@@ -192,5 +199,42 @@ public class PromotionsController {
 		int count = promotionsService.listCount(pno);
 		
 		return count;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateStatus", method=RequestMethod.POST)
+	public int promotionsStatusUpdate(HttpSession session, PromotionsVO promotion) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS UPDATE STATUS METHOD=POST --------");
+		logger.info("-------- PNO : "+promotion.getPno()+"ACCESSOR : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
+		
+		int result = 0;
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			promotionsService.updateStatus(promotion);
+			
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String promotionDeleteGET(HttpSession session, Model model,int pno) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS DELETE METHOD=GET --------");
+		logger.info("-------- PNO : "+pno+"ACCESSOR : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
+		
+		String path ="redirect:/error";
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			promotionsService.deletePromotion(pno);
+			
+			path = "redirect:/promotions/management";
+		}
+		
+		return path;
 	}
 }

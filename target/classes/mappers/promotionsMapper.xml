@@ -16,9 +16,15 @@
 	</select>
 	
 	<select id="promotionList" resultType="com.lee.myapp.domain.PromotionsVO">
-		SELECT *
-		  FROM TBL_PROMOTIONS
+		SELECT A.PNO, A.SUBJECT, A.THUMBNAIL_URL, A.IMAGES_URL, A.STARTDATE, A.ENDDATE, A.STATUS ,COUNT(B.PNO) AS COMMENT_COUNT
+		  FROM TBL_PROMOTIONS A LEFT OUTER JOIN TBL_PROMOTIONS_COMMENT B ON A.PNO = B.PNO
+		<if test='_parameter != null and _parameter != "all"'>
+			 WHERE STATUS = 1
+		</if>
+		 GROUP BY A.PNO, A.SUBJECT, A.THUMBNAIL_URL, A.IMAGES_URL, A.STARTDATE, A.ENDDATE, A.STATUS
 		 ORDER BY PNO DESC
+		 
+		 
 	</select>
 	
 	<insert id="promotionRegist">
@@ -45,6 +51,18 @@
 		  FROM TBL_PROMOTIONS
 		 WHERE PNO = #{pno}
 	</select>
+	
+	<update id="updateStatus">
+		UPDATE TBL_PROMOTIONS
+		   SET STATUS = #{status}
+		 WHERE PNO = #{pno}
+	</update>
+	
+	<delete id="deletePromotion">
+		DELETE
+		  FROM TBL_PROMOTIONS
+		 WHERE PNO = #{pno}
+	</delete>
 	
 	<!-- Reply -->
 	<insert id="commentRegist">
