@@ -85,8 +85,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int sellerUpdate(String email) throws Exception {
+	public int sellerUpdate(int mno) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.update(namespace+".sellerUpdate",email);
+		return sqlSession.update(namespace+".sellerUpdate",mno);
 	}
 }

@@ -27,5 +27,5 @@ public interface MemberDAO {
 	public MemberVO loginInfo(MemberVO member) throws Exception;
 	
 	public int sellerRegist(SellerVO seller) throws Exception;
-	public int sellerUpdate(String email) throws Exception;
+	public int sellerUpdate(int mno) throws Exception;
 }

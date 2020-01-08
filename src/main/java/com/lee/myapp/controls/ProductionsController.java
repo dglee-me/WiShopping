@@ -48,7 +48,7 @@ public class ProductionsController {
 			ProductVO product, char has_option, ProductOptionVO option, int[] inventory,HttpSession session) throws Exception{
 		logger.info("-------- CREATE : PRODUCTIONS METHOD=POST --------");
 		logger.info("-------- SELLER : "+((MemberVO)session.getAttribute("login")).getName()+" --------");
-
+		
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String thumbUrl = null;
@@ -71,6 +71,7 @@ public class ProductionsController {
 		product.setProducturl(detailUrl);
 				
 		//Insert product into database
+		product.setMno(((MemberVO)session.getAttribute("login")).getMno());
 		productService.register(product);
 		
 		//Create options for a product and insert into database

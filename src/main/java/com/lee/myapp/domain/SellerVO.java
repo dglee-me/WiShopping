@@ -2,8 +2,9 @@ package com.lee.myapp.domain;
 
 public class SellerVO {
 	/*
-	    CREATE TABLE SELLER(
+	   CREATE TABLE TBL_SELLER(
 		    SNO INT NOT NULL,
+		    MNO INT NOT NULL,
 		    COMPANY VARCHAR2(50) NOT NULL,
 		    LICENSE1 VARCHAR2(10) NOT NULL,
 		    LICENSE2 VARCHAR2(10) NOT NULL,
@@ -16,10 +17,12 @@ public class SellerVO {
 		    BRAND VARCHAR2(50) NOT NULL,
 		    CATEGORY VARCHAR2(30) NOT NULL,
 		    ABOUT_PRODUCT CLOB NOT NULL,
-		    PRIMARY KEY(SNO)
+		    PRIMARY KEY(SNO),
+		    FOREIGN KEY(MNO) REFERENCES MEMBER(MNO)
 		);
 	*/
 	private int sno;
+	private int mno;
 	private String company;
 	private String license1;
 	private String license2;
@@ -38,6 +41,13 @@ public class SellerVO {
 	}
 	public SellerVO setSno(int sno) {
 		this.sno = sno;
+		return this;
+	}
+	public int getMno() {
+		return mno;
+	}
+	public SellerVO setMno(int mno) {
+		this.mno = mno;
 		return this;
 	}
 	public String getCompany() {
@@ -126,7 +136,7 @@ public class SellerVO {
 	}
 	
 	public String toString() {
-		return "SellerVO = [sno="+sno+", company="+company+", license1= "+license1+", license2="+license2+", license3="+license3+", salesname="+salesname
+		return "SellerVO = [sno="+sno+", mno="+mno+", company="+company+", license1= "+license1+", license2="+license2+", license3="+license3+", salesname="+salesname
 				+", salesphone1="+salesphone1+", salesphone2="+salesphone2+", salesphone3="+salesphone3+", salesemail="+salesemail+", brand="+brand+", category="
 				+category+", aboutproduct="+aboutproduct+"]";
 	}

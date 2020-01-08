@@ -108,9 +108,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int sellerUpdate(String email) throws Exception {
+	public int sellerUpdate(int mno) throws Exception {
 		// TODO Auto-generated method stub
-		return memberDao.sellerUpdate(email);
+		return memberDao.sellerUpdate(mno);
 	}
 
 }

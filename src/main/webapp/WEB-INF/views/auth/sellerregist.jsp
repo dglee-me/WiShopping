@@ -129,6 +129,7 @@
 						<div class="row">
 							<div class="offset-1 col-10">
 								<p class="sales-form_section_title">담당자 정보</p>
+								<input type="hidden" name="mno" value="${login.mno}">
 							</div>
 						</div>
 						<div class="row sales-form_form-group">

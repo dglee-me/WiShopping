@@ -165,7 +165,7 @@ public class AuthController {
 		
 		if(member != null) {
 			memberService.sellerRegist(seller);
-			memberService.sellerUpdate(seller.getSalesemail());
+			memberService.sellerUpdate(seller.getMno());
 			
 			return "redirect:/";
 		}else {

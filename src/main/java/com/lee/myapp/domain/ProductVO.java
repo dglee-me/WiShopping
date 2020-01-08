@@ -28,6 +28,7 @@ public class ProductVO {
 		CREATE SEQUENCE TBL_SALES_VOLUME_SEQ START WITH 1;
 	 */
 	private int pno;
+	private int mno; // Use only for product regist (brand)
 	private String category1; //대분류
 	private String category2; //중분류
 	private String pname; //제품명
@@ -44,6 +45,16 @@ public class ProductVO {
 	public ProductVO setPno(int pno) {
 		this.pno = pno;
 		return this;
+	}
+	public int getMno() {
+		return mno;
+	}
+	public ProductVO setMno(int mno) {
+		this.mno = mno;
+		return this;
+	}
+	public void setShippingfee(int shippingfee) {
+		this.shippingfee = shippingfee;
 	}
 	public String getCategory1() {
 		return category1;

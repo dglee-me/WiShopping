@@ -126,74 +126,6 @@
 	        }
 	     });
 		
-		/*
-		//상품 옵션 생성
-		$(document).ready(function(){
-			$("#option_btn").click(function(){
-				var option_color = $("#option_color").val().split(";");
-				var option_size = $("#option_size").val().split(";");
-
-				//Create option color input for sending to the controller
-				for(var i=0;i<option_color.length;i++){
-					if(option_color[i] == "") continue;
-					
-					var input_option = document.createElement("input");
-
-					input_option.type = "hidden";
-					input_option.name = "optioncolor";
-					input_option.value = option_color[i];
-					
-					$(".option-row_color").append(input_option);
-				}
-				
-				//Create option size input for sending to the controller
-				for(var i=0;i<option_size.length;i++){
-					if(option_size[i] == "") continue;
-					
-					var input_option = document.createElement("input");
-
-					input_option.type = "hidden";
-					input_option.name = "optionsize";
-					input_option.value = option_size[i];
-					
-					$(".option-row_color").append(input_option);
-				}
-				
-				//Create options by combining color and size
-				if(option_color == "" || option_size == ""){
-					alert("색상 및 사이즈를 모두 입력하여주세요.");
-					
-					if(option_color == ""){
-						$("#option_color").focus();
-					}else{
-						$("#option_size").focus();
-					}
-				}else{
-					for(var i=0;i<option_color.length;i++){// color x size value 
-						if(option_color[i] == "") continue;
-						for(var j=0;j<option_size.length;j++){
-							if(option_size[j] == "") continue;
-							
-							var createRow = document.createElement("tr");
-							createRow.className = "product-register-item-rows";
-							createRow.setAttribute("data-item-value",option_color[i]+"/"+option_size[j]);
-							
-							createRow.innerHTML = "<td><span class='product-register-item-list-option_name'>"+option_color[i]+"/"+option_size[j]+"</span></td>"
-								+"<td></td>"
-								+"<td><input type='text' class='ftext right' style='width:100%;' name='inventory' value='0'></td>"
-								+"<td><a href='javascript:void(0);' class='btnApply btn_delete product-register-item-list-delete'><em class='icoDel'></em>삭제</a></td>";
-
-							$("#product-register-item-list").append(createRow);
-							
-							$("#option_color").val("");
-							$("#option_size").val("");
-						}	
-					}
-				}
-			});
-		});
-		*/
-		
 		//상품 옵션 생성
 		$(document).ready(function(){
 			$("#option_btn").click(function(){
@@ -242,7 +174,6 @@
 				}
 			});
 		});
-		
 		
 		$(document).ready(function(){
 			$("#delivery-fee-type").change(function(){
@@ -334,7 +265,6 @@
 									<div class="btn_add">등록</div>
 									<!-- 이미지 업로드 -->
 									<input type="file" name="product_thumurl" class="product-register-image" id="product-register-thumb-image">
-									<input type="hidden" name="brand" value="${login.name}">
 								</div>
 								<!-- 이미지 등록 후 -->
 								<div class="info_box image-large" id="product-register-image-exist" style="display:none;">

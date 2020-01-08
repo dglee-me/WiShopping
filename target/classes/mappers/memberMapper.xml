@@ -36,8 +36,8 @@
 	</select>
 
 	<insert id="create" parameterType="com.lee.myapp.domain.MemberVO">	
-		INSERT INTO MEMBER(mno,email,auth,pw,name,tel,createdate)
-		VALUES(mno_seq.nextval,#{email},#{auth},#{pw},#{name},#{tel},sysdate)
+		INSERT INTO MEMBER(mno,email,auth,pw,name,tel,createdate,mlevel)
+		VALUES(mno_seq.nextval,#{email},#{auth},#{pw},#{name},#{tel},sysdate,2)
 	</insert>
 
 	<select id="list" resultType="com.lee.myapp.domain.MemberVO">
@@ -63,13 +63,13 @@
 	</delete>
 	
 	<insert id="sellerRegist" parameterType="com.lee.myapp.domain.SellerVO">
-		INSERT INTO SELLER
-		VALUES(SELLER_SEQ.NEXTVAL,#{company},#{license1},#{license2},#{license3},#{salesname},#{salesphone1},#{salesphone2},#{salesphone3},#{salesemail},#{brand},#{category},#{aboutproduct})		
+		INSERT INTO TBL_SELLER
+		VALUES(SELLER_SEQ.NEXTVAL,#{mno},#{company},#{license1},#{license2},#{license3},#{salesname},#{salesphone1},#{salesphone2},#{salesphone3},#{salesemail},#{brand},#{category},#{aboutproduct})		
 	</insert>
 	
 	<update id="sellerUpdate">
 		UPDATE MEMBER
-		   SET MLEVEL=1
-		 WHERE EMAIL=#{email}
+		   SET MLEVEL=2
+		 WHERE MNO=#{mno}
 	</update>
 </mapper>
