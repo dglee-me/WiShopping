@@ -64,6 +64,18 @@
 		 WHERE PNO = #{pno}
 	</delete>
 	
+	<update id="modifyPromotion">
+		UPDATE TBL_PROMOTIONS
+		   SET SUBJECT = #{subject},
+		<if test="thumbnailurl != null">
+			   THUMBNAIL_URL = #{thumbnailurl},
+		</if>
+			   IMAGES_URL = #{imagesurl},
+			   STARTDATE = #{startdate},
+			   ENDDATE = #{enddate},
+			   STATUS = #{status}
+	</update>
+	
 	<!-- Reply -->
 	<insert id="commentRegist">
 		INSERT INTO TBL_PROMOTIONS_COMMENT(RNO,PNO,MNO,CONTENT,REPLY_TIME)

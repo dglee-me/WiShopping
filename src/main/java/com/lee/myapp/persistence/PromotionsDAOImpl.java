@@ -63,6 +63,13 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 	}
 
 	@Override
+	public int modifyPromotion(PromotionsVO promotion) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".modifyPromotion",promotion);
+	}
+
+	/* Comment */
+	@Override
 	public int commentRegist(PromotionsCommentVO comment) throws Exception{
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".commentRegist",comment);

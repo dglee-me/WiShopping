@@ -227,7 +227,7 @@ input[type="radio"]:checked{background-image:url('/WiShopping/resources/image/bg
 .btnApply .icoDel:after{content:""; position:absolute; top:50%; left:50%; margin:-7px 0 0 -1px; width:1px; height:13px;
 	background:#fff; transform:rotate(-45deg); -webkit-transform:rotate(-45deg);}
 
-.product-register-image, .promotions-register-image, .promotions-register-thumb{display:none;}
+.product-register-image, .promotions-register-image, .promotions-register-thumb, .promotion-modify_add-image{display:none;}
 
 .thumbs{display:flex; flex-wrap:wrap; margin-left:-20px;}
 .thumbs li{float:left; cursor:pointer;}
@@ -956,6 +956,37 @@ button:disabled{cursor:default;}
 .comment-feed_item_footer_report-btn{font-weight:400; color:#bdbdbd;}
 
 .comment-feed_item_footer>a, .comment-feed_item_footer>button{background:none; border:none; padding:0; font-size:13px; font-family:inherit;}
+
+/* Promotions modify CSS */
+section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
+,section[class*="admin-promotions-"] .table-block td.image .img_exist:focus
+,section[class*="admin-promotions-"] .table-block td.image .img_modify:hover
+,section[class*="admin-promotions-"] .table-block td.image .img_modify:focus{transform:scale(1.05);}
+
+.promotions-item_image-thumbnail .img_exist, .promotions-item_image-thumbnail .img_modify{height:155px;}
+
+.mthumb .thumb{width:100%; height:100%; text-align:center; border:1px solid #dedede; background:#fff; box-sizing:border-box; transition:.5s ease-out;}
+.mthumb:hover .thumb{border-color:#a5a5a5;}
+.mthumb .thumb img{max-width:100%; max-height:100%;}
+
+.txt_image_modify{display:inline-block; padding-left:10px; cursor:pointer;}
+
+.mthumb .buttons{position:absolute; display:flex; bottom:-1px; width:100%; opacity:0; transition:.2s ease-out;}
+.mthumb:hover .buttons{opacity:1;}
+
+.mthumb .buttons .btn-edit, .mthumb .buttons .btn-delete{display:inline-block; flex:1; height:32px; text-align:center; text-indent:-150%; font-size:1px; 
+	line-height:0; color:transparent; white-space:nowrap; background:rgba(0,0,0,0.6); transition:.3s ease-out; overflow:hidden;}
+
+.mthumb .buttons .ico_edit{position:relative; width:12px; height:12px;}
+.mthumb .buttons .ico_edit:before{content:""; position:absolute; top:0; right:3px; width:4px; height:10px; border:1px solid #fefefe; border-bottom:0; transform:rotate(45deg);}
+.mthumb .buttons .ico_edit:after{content:""; position:absolute; bottom:0; left:0; width:3px; height:3px; border-bottom:1px solid #fefefe; border-left:1px solid #fefefe;}
+
+.mthumb .buttons .ico_delete{position:relative; width:10px; height:10px;}
+.mthumb .buttons .ico_delete:before{content:""; position:absolute; top:4px; left:-2px; width:15px; height:1px; background:#fefefe; transform:rotate(135deg);}
+.mthumb .buttons .ico_delete:after{content:""; position:absolute; top:-3px; left:4px; width:1px; height:15px; background:#fefefe; transform:rotate(-45deg);}
+
+.mthumb .buttons [class*="ico"]{display:block; margin:0 auto; overflow:hidden;}
+.mthumb .buttons [class*="btn"] + [class*="btn"]{border-left:1px solid #949494;}
 
 
 

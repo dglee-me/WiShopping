@@ -62,6 +62,13 @@ public class PromotionsServiceImpl implements PromotionsService{
 	}
 
 	@Override
+	public int modifyPromotion(PromotionsVO promotion) throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.modifyPromotion(promotion);
+	}
+
+	/* Comment */
+	@Override
 	public int commentRegist(PromotionsCommentVO comment) throws Exception {
 		// TODO Auto-generated method stub
 		return promotionsDAO.commentRegist(comment);

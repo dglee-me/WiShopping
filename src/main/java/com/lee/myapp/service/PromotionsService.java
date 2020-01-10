@@ -15,8 +15,9 @@ public interface PromotionsService {
 	public PromotionsVO promotionView(int pno) throws Exception;
 	public int updateStatus(PromotionsVO promotion) throws Exception;
 	public int deletePromotion(int pno) throws Exception;
-	
-	//Reply
+	public int modifyPromotion(PromotionsVO promotion) throws Exception;
+
+	/* Comment */
 	public int commentRegist(PromotionsCommentVO comment) throws Exception;
 	public List<PromotionsCommentVO> commentList() throws Exception;
 	public List<PromotionsCommentVO> listPaging(CommentCriteria cri) throws Exception;

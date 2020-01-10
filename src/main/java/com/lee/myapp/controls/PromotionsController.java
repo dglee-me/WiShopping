@@ -25,6 +25,7 @@ import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.service.PromotionsService;
+import com.lee.myapp.utils.FileDelete;
 import com.lee.myapp.utils.UploadFileUtils;
 
 @Controller
@@ -153,6 +154,9 @@ public class PromotionsController {
 			}else {
 				model.addAttribute("promotions", promotionsService.promotionList("used"));
 			}
+
+			//Settings
+			model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
 		}
 
 	}
@@ -220,6 +224,90 @@ public class PromotionsController {
 		return result;
 	}
 	
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public void promotionModifyGET(HttpSession session, Model model,int pno) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS MODIFY METHOD=GET --------");
+		logger.info("-------- PNO : "+pno+" --------");
+		logger.info("-------- ACCESSOR : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			PromotionsVO promotion = promotionsService.promotionView(pno);
+			
+			String[] images = promotion.getImagesurl().split(";");
+			
+			//Settings
+			model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
+			model.addAttribute("promotion", promotion);
+			model.addAttribute("images", images);
+		}
+	}
+
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String promotionModifyPOST(HttpSession session, PromotionsVO promotion,
+			@RequestParam("promotions[images_url]") MultipartFile[] images, @RequestParam("promotions[thumbnail_url]") MultipartFile thumb) throws Exception{
+		logger.info("-------- PROMOTIONS : ACCESS MODIFY METHOD=POST --------");
+		logger.info("-------- ACCESSOR NAME = "+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() 
+				+" --------");
+		
+		PromotionsVO exist_promotion = promotionsService.promotionView(promotion.getPno());
+		String[] exist_images = exist_promotion.getImagesurl().split(";");
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			String imgUploadPath = uploadPath + "/" + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			
+			//If change thumbnail image, change this path and upload image to server
+			if(!thumb.getOriginalFilename().equals("")) {
+				//Delete exist thumbnail image file
+				FileDelete.deleteFile(exist_promotion.getThumbnailurl());
+				
+				//Upload new thumbnail image file and setting to object
+				promotion.setThumbnailurl("/" + "imgUpload" + ymdPath + "/" 
+						+ UploadFileUtils.fileUpload(imgUploadPath, thumb.getOriginalFilename(), thumb.getBytes(), ymdPath));
+			}
+
+			//Confirm image change
+			boolean images_change = false;
+			
+			for(int i=0;i<images.length;i++) {
+				if(images[i].getOriginalFilename().equals("")) continue;
+				
+				images_change = true;
+			}
+			
+			//If the image has been changed, delete existing saved images
+			if(images_change) {
+				for(int i=0;i<exist_images.length;i++) {
+					FileDelete.deleteFile(exist_images[i]);
+				}
+			}
+
+			//If change inner images, change this path and upload images to server
+			String imagesUrl = "";
+			for(int i=0;i<images.length;i++) {
+				if(images[i].getOriginalFilename().equals("")) break; //Exception of input file inside btn_add div
+				
+				if(i == 0) {// When if i is 0
+					imagesUrl = "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
+				}else {//When if not i is 0
+					imagesUrl += ";" + "/" + "imgUpload" + ymdPath + "/" +UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
+				}
+			}
+			
+			//Set imageurl on the promotion object and run modify query
+			promotion.setImagesurl(imagesUrl);
+			promotionsService.modifyPromotion(promotion);
+			
+			return "redirect:/promotions/management";
+		}
+		
+		return "redirect:/error";
+	}
+
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String promotionDeleteGET(HttpSession session, Model model,int pno) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS DELETE METHOD=GET --------");
