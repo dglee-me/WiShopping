@@ -88,13 +88,29 @@
 	
 	$(document).ready(function(){
 		$("#do_payment").click(function(){
-			var checked = $("#check_agree_policy");
+			var orderrec = $("input:text[name='orderrec']").val();
+			var zipcode = $("input:text[name='zipcode']").val();
+			var received_at = $("input:text[name='receivedat']").val();
+			var received_at_detail = $("input:text[name='receivedatdetail']").val();
+			var received_phone = $("input:text[name='receivedphone']").val();
 			
-			if(checked[0].checked == true){	
-				document.order_frm.submit();
+			var payer_name = $("input:text[name='payername']").val();
+			var payer_email = $("input:text[name='payeremail']").val();
+			var payer_phone = $("input:text[name='payerphone']").val();
+			
+			if(orderrec == "" || zipcode == "" || received_at == "" || received_at_detail == "" || received_phone == "" 
+					|| payer_name == "" || payer_email == "" || payer_phone == ""){
+				alert("입력 사항을 모두 입력하여주세요.");
 			}else{
-				alert("결제 진행 필수사항에 동의해주세요.");
+				var checked = $("#check_agree_policy");
+				
+				if(checked[0].checked == true){	
+					document.order_frm.submit();
+				}else{
+					alert("결제 진행 필수사항에 동의해주세요.");
+				}
 			}
+			
 		});
 	});
 </script>

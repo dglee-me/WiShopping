@@ -8,7 +8,7 @@
 .regist_edit ul.subject li{position:relative; width:100%; margin:0 0 9px 0;}
 .regist_edit ul.subject div{padding:0 0 0 68px;}
 
-.title_main{display:blcok; width:1084px; height:76px; margin-top:20px; padding-bottom:30px; 
+.title_main{display:blcok; width:1082px; height:76px; margin-top:20px; padding-bottom:30px; border-right:#ccc;
 	background-image:url('/WiShopping/resources/image/write_banner.gif'); color:transparent;}
 
 .subject{padding:0 30px 0; }

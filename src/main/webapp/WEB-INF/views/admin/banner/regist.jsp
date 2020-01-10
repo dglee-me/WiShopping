@@ -45,31 +45,39 @@
 		})
 		
 		$(".btn_save").click(function(){
-			var formData = new FormData($("#frm")[0]);
+			var image = $("input:file[name='banner[url]']").val();
+			var alt = $("input:text[name='banner[alt]']").val();
+			var link = $("input:text[name='banner[link]']").val();
 			
-			formData.append("area",$(".form-control option:checked").text());
-			formData.append("bannerlink",$("input:text[name='banner[link]']").val());
-			formData.append("file",$(".banner_main_input")[0].files[0]);
-			formData.append("banneralt",$("input:text[name='banner[alt]']").val());
-			
-			if(formData.get("file") == "undefined"){
-				formData.delete("file");
-			}
-
-			$.ajax({
-				url : "/WiShopping/admin/banner/regist",
-				type : "post",
-				contentType: false,
-				processData: false,
-				data : formData,
-				success : function(result){
-					if(result == 1){
-						location.href="/WiShopping/admin/banner/management";
-					}else{
-						location.href="/WiShopping/error";
-					}
+			if(image == "" || alt == "" || link == ""){
+				alert("입력란을 확인해주세요.");
+			}else{
+				var formData = new FormData($("#frm")[0]);
+				
+				formData.append("area",$(".form-control option:checked").text());
+				formData.append("bannerlink",$("input:text[name='banner[link]']").val());
+				formData.append("file",$(".banner_main_input")[0].files[0]);
+				formData.append("banneralt",$("input:text[name='banner[alt]']").val());
+				
+				if(formData.get("file") == "undefined"){
+					formData.delete("file");
 				}
-			});
+
+				$.ajax({
+					url : "/WiShopping/admin/banner/regist",
+					type : "post",
+					contentType: false,
+					processData: false,
+					data : formData,
+					success : function(result){
+						if(result == 1){
+							location.href="/WiShopping/admin/banner/management";
+						}else{
+							location.href="/WiShopping/error";
+						}
+					}
+				});
+			}
 		});
 		
 		$(".btn_cancel").click(function(){

@@ -70,7 +70,9 @@
 		<if test="thumbnailurl != null">
 			   THUMBNAIL_URL = #{thumbnailurl},
 		</if>
+		<if test="imagesurl != null">
 			   IMAGES_URL = #{imagesurl},
+		</if>
 			   STARTDATE = #{startdate},
 			   ENDDATE = #{enddate},
 			   STATUS = #{status}

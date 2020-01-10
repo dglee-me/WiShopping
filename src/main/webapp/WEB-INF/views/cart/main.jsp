@@ -310,31 +310,37 @@
 		//Checkout product to order
 		$(document).ready(function(){
 			$(".commerce-cart_side-bar_order_btn").click(function(){
-				var option = $("input:checkbox[name='product_check']:checked").closest("article")
+				var check_count = $("input:checkbox[name='product_check']:checked").length;
+				
+				if(check_count == 0 ){
+					alert("선택한 상품이 없습니다.");
+				}else{
+					var option = $("input:checkbox[name='product_check']:checked").closest("article")
 					.children(".carted-product_option-list").children(".carted-product_option-list_item");
 
-				var ono = new Array();
-				
-				$.each(option,function(){
-					ono.push($(this).attr("data-number"));
-				});
-				
-				var number = "";
-				var input = $(".form-control");
-				for(var i=0;i<input.length;i++){
-					number = number + input[i].value +";";
-				}
-				
-				$.ajax({
-					url : "/WiShopping/order/order_request",
-					type : "post",
-					data : {ono : ono,
-							number : number		
-					},success : function(result){
-						if(result == 1)	location.href="/WiShopping/order/pre_order"; 
-						else location.href="/WiShopping/error";
+					var ono = new Array();
+					
+					$.each(option,function(){
+						ono.push($(this).attr("data-number"));
+					});
+					
+					var number = "";
+					var input = $(".form-control");
+					for(var i=0;i<input.length;i++){
+						number = number + input[i].value +";";
 					}
-				});
+					
+					$.ajax({
+						url : "/WiShopping/order/order_request",
+						type : "post",
+						data : {ono : ono,
+								number : number		
+						},success : function(result){
+							if(result == 1)	location.href="/WiShopping/order/pre_order"; 
+							else location.href="/WiShopping/error";
+						}
+					});
+				}
 			});
 		});
 	</script>

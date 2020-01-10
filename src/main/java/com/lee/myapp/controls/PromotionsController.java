@@ -297,9 +297,13 @@ public class PromotionsController {
 					imagesUrl += ";" + "/" + "imgUpload" + ymdPath + "/" +UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
 				}
 			}
+
+			//Save to object if image changes
+			if(!imagesUrl.equals("")) {
+				promotion.setImagesurl(imagesUrl);
+			}
 			
-			//Set imageurl on the promotion object and run modify query
-			promotion.setImagesurl(imagesUrl);
+			//Run modify query
 			promotionsService.modifyPromotion(promotion);
 			
 			return "redirect:/promotions/management";
@@ -318,6 +322,18 @@ public class PromotionsController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
+			PromotionsVO promotion = promotionsService.promotionView(pno);
+			
+			//Image file delete
+			String thumbnail = promotion.getThumbnailurl();
+			FileDelete.deleteFile(thumbnail);
+			
+			String[] images = promotion.getImagesurl().split(";");
+			for(int i=0;i<images.length;i++) {
+				FileDelete.deleteFile(images[i]);
+			}
+			
+			//Delete db
 			promotionsService.deletePromotion(pno);
 			
 			path = "redirect:/promotions/management";

@@ -62,7 +62,15 @@
 		
 		//When save btn clicked
 		$(".btn_save").click(function(){
-			document.getElementById("frm").submit();
+			var subject= $("input:text[name='subject']").val();
+			var startdate= $("input:text[name='startdate']").val();
+			var enddate= $("input:text[name='enddate']").val();
+			
+			if(subject == "" || startdate == "" || enddate == ""){
+				alert("이미지 외 입력값을 확인해주세요 ! ")
+			}else{
+				document.getElementById("frm").submit();
+			}
 		});
 		
 		//When cancel btn clicked

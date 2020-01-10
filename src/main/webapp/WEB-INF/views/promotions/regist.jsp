@@ -83,7 +83,17 @@
 	
 	$(document).ready(function(){
 		$(".btn_save").click(function(){
-			document.getElementById("frm").submit();
+			var subject= $("input:text[name='subject']").val();
+			var startdate= $("input:text[name='startdate']").val();
+			var enddate= $("input:text[name='enddate']").val();
+			var thumbnail = $("input:file[name='promotions[thumbnail_url]']").val();
+			var images = $("input:file[name='promotions[images_url]']").val();
+
+			if(subject == "" || startdate == "" || enddate == "" || thumbnail == "" || images == ""){
+				alert("이미지 외 입력값을 확인해주세요 ! ")
+			}else{
+				document.getElementById("frm").submit();
+			}
 		});
 	});
 </script>
