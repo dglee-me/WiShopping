@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,27 +24,40 @@ import org.springframework.web.util.WebUtils;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 import com.lee.myapp.service.MemberService;
+import com.lee.myapp.utils.MailUtils;
+import com.lee.myapp.utils.TempKey;
 
 @Controller
-@RequestMapping("/auth/*")
+@RequestMapping("/auth/")
 public class AuthController {
 	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
 	@Inject
 	MemberService memberService;
 	
-	@RequestMapping(value="/auth/emailCheck", method=RequestMethod.GET)
+	@Inject
+	private JavaMailSender mailSender;
+
+
+	//Reset token value at 00:00 a.m. daily
+	@Scheduled(cron="0 0 00 * * *")
+	public void endPromotions() throws Exception{
+		logger.info("-------- RESET MEMBER TOKEN VALUE UPDATE --------");
+		memberService.resetToken();
+	}
+	
+	@RequestMapping(value="/emailCheck", method=RequestMethod.GET)
 	@ResponseBody
 	public int emailCheck(@RequestParam("join_email") String join_email) throws Exception{
 		return memberService.emailCheck(join_email);
 	}
 	
-	@RequestMapping(value="/auth/join", method=RequestMethod.GET)
+	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public void joinMemberGET() throws Exception{
 		logger.info("-------- AUTH : MEMBER JOIN METHOD=GET --------");
 	}
 	
-	@RequestMapping(value="/auth/join", method=RequestMethod.POST)
+	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinMemberPOST(MemberVO member) throws Exception{
 		logger.info("-------- AUTH : MEMBER JOIN METHOD=POST --------");
 		if(memberService.create(member) == 1) {
@@ -55,7 +70,7 @@ public class AuthController {
 		}
 	}
 
-	@RequestMapping(value="/auth/joinConfirm", method=RequestMethod.GET)
+	@RequestMapping(value="/joinConfirm", method=RequestMethod.GET)
 	public String joinConfirm(@ModelAttribute("member") MemberVO member) throws Exception{
 		logger.info(member.getEmail() + " : AUTH Confirmed");
 		
@@ -64,12 +79,12 @@ public class AuthController {
 		return "/auth/joinConfirm";
 	}
 	
-	@RequestMapping(value="/auth/login", method=RequestMethod.GET)
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public void loginGET() throws Exception{
 		logger.info("-------- AUTH : MEMBER LOGIN METHOD=GET --------");
 	}
 	
-	@RequestMapping(value="/auth/login", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginPOST(HttpServletRequest request, HttpServletResponse response, MemberVO member, RedirectAttributes rttr) throws Exception{
 		logger.info("-------- AUTH : MEMBER LOGIN METHOD=POST --------");
 
@@ -113,7 +128,7 @@ public class AuthController {
 		}
 	}
 	
-	@RequestMapping(value="/auth/logout", method=RequestMethod.GET)
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logoutGET(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		logger.info("-------- AUTH : MEMBER LOGOUT --------");
 		
@@ -143,7 +158,7 @@ public class AuthController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value="/auth/seller_regist", method=RequestMethod.GET)
+	@RequestMapping(value="/seller_regist", method=RequestMethod.GET)
 	public String seller_registGET(HttpSession session) throws Exception{
 		logger.info("-------- AUTH : SELLER REGIST : GET --------");
 		
@@ -157,7 +172,7 @@ public class AuthController {
 		
 	}
 	
-	@RequestMapping(value="/auth/seller_regist", method=RequestMethod.POST)
+	@RequestMapping(value="/seller_regist", method=RequestMethod.POST)
 	public String seller_registPOST(HttpSession session, SellerVO seller) throws Exception{
 		logger.info("-------- AUTH : SELLER REGIST : POST --------");
 
@@ -172,5 +187,80 @@ public class AuthController {
 			return "redirect:/auth/login";
 		}
 		
+	}
+	
+	@RequestMapping(value="/password/new", method=RequestMethod.GET)
+	public void passwordNewGET() throws Exception{
+		logger.info("-------- AUTH : PASSWORD NEW : GET --------");
+		logger.info("-------- AUTH : I FORGOT MY PASSWORD. --------");
+		logger.info("-------- AUTH : I NEED TO CHANGE MY PASSWORD. --------");
+	}
+	
+	@RequestMapping(value="/password/new", method=RequestMethod.POST)
+	public String passwordNewPOST(@RequestParam(value="user[email]") String email) throws Exception{
+		logger.info("-------- AUTH : PASSWORD NEW : POST --------");
+		
+		MemberVO member = memberService.newPassword(email);
+		
+		//Authentication Key create
+		String token = new TempKey().getKey(36,false);
+		
+		member.setToken(token);
+		
+		memberService.newPasswordTokenSet(member);
+		
+		// Mail Send 부분
+		MailUtils sendMail = new MailUtils(mailSender);
+
+		sendMail.setSubject("[위쇼핑] 비밀번호 재설정 안내");
+		sendMail.setText(new StringBuffer().append("<h1>[비밀번호 재설정]</h1>")
+				.append("<p>안녕하세요, " + member.getName()  + " 님. 비밀번호를 재설정 하시려면 하단의 링크를 클릭하여주세요.</p>")
+				.append("<a href='http://localhost:8081/WiShopping/auth/password/modify?token="+token+"'>")
+				.append("[비밀번호 재설정]")
+				.append("</a>")
+				.append("<br/>")
+				.append("<p>*만약 본인이 재설정 신청을 한게 아니라면, 본 메일을 무시해도 좋습니다.<p>").toString());
+
+		sendMail.setFrom("dglee.dev@gmail.com ", "WiSHopping");
+		sendMail.setTo(member.getEmail());
+		sendMail.send();
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/password/modify", method=RequestMethod.GET)
+	public void passwordModifyGET(String token) throws Exception{
+		logger.info("-------- AUTH : PASSWORD MODIFY : GET --------");
+	}
+	
+	@RequestMapping(value="/password/modify", method=RequestMethod.POST)
+	public String passwordModifyPOST(HttpServletRequest request, HttpServletResponse response, String token
+			, @RequestParam(value="user[password]") String password) throws Exception{
+		logger.info("-------- AUTH : PASSWORD MODIFY : POST --------");
+		
+		String path = "";
+		
+		String referer = request.getHeader("referer");
+		if(token.equals(referer)) {
+			logger.info("-------- !!ACCESS! TOKEN IS NULL --------");
+
+			path = "redirect:/error";
+		}else {
+			MemberVO member = new MemberVO().setToken(token).setPw(password);
+			int result = memberService.resetPassword(member);
+			
+			if(result == 0) { //If the token value has expired
+				path = "redirect:/auth/password/tokenExpire";
+			}else {
+				path = "redirect:/";
+			}
+		}
+		
+		return path;
+	}
+	
+	@RequestMapping(value="/password/tokenExpire", method=RequestMethod.GET)
+	public void tokenExpireGET() throws Exception{
+		logger.info("-------- ! TOKEN EXPIRE ! --------");
 	}
 }

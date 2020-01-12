@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	MemberDAO memberDao;
 
-	@Autowired
+	@Inject
 	private JavaMailSender mailSender;
 
 	@Override
@@ -102,6 +101,30 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberVO newPassword(String email) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.newPassword(email);
+	}
+
+	@Override
+	public int newPasswordTokenSet(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.newPasswordTokenSet(member);
+	}
+
+	@Override
+	public int resetPassword(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.resetPassword(member);
+	}
+
+	@Override
+	public int resetToken() throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.resetToken();
+	}
+
+	@Override
 	public int sellerRegist(SellerVO seller) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.sellerRegist(seller);
@@ -112,5 +135,4 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.sellerUpdate(mno);
 	}
-
 }

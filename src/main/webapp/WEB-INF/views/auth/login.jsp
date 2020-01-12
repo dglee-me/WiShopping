@@ -66,8 +66,8 @@
 							<input type="checkbox" class="member_checkbox_input member_sprite-checkbox _loginRememberInput" id="login-keep-state" name="useCookie">
 							<span class="member_checkbox_label">자동로그인</span>
 						</label>
-						<a href="/auth/accountFind" class="login_link login_link-find-email-pw _loginFindEmailPwLink">
-							이메일/비밀번호 찾기
+						<a href="${pageContext.request.contextPath}/auth/password/new" class="login_link login_link-find-email-pw _loginFindEmailPwLink">
+							비밀번호 재설정
 							<i class="member_sprite member_sprite-right-arrow"></i>
 						</a>
 					</div>

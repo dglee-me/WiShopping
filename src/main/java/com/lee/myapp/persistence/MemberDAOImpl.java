@@ -79,6 +79,30 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public MemberVO newPassword(String email) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".newPassword",email);
+	}
+
+	@Override
+	public int newPasswordTokenSet(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".setToken",member);
+	}
+
+	@Override
+	public int resetPassword(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".resetPassword", member);
+	}
+
+	@Override
+	public int resetToken() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".resetToken");
+	}
+
+	@Override
 	public int sellerRegist(SellerVO seller) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".sellerRegist",seller);

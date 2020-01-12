@@ -26,6 +26,12 @@ public interface MemberDAO {
 	public MemberVO read(int mno) throws Exception;
 	public MemberVO loginInfo(MemberVO member) throws Exception;
 	
+	//Reset Password
+	public MemberVO newPassword(String email) throws Exception;
+	public int newPasswordTokenSet(MemberVO member) throws Exception;
+	public int resetPassword(MemberVO member) throws Exception;
+	public int resetToken() throws Exception;
+	
 	public int sellerRegist(SellerVO seller) throws Exception;
 	public int sellerUpdate(int mno) throws Exception;
 }
