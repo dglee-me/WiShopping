@@ -85,6 +85,12 @@
 		   SET TOKEN = '-'
 	</update>
 	
+	<update id="modifyUserInfo">
+		UPDATE MEMBER
+		   SET PW=#{pw}, TEL=#{tel}
+		 WHERE EMAIL=#{email}
+	</update>
+	
 	<insert id="sellerRegist" parameterType="com.lee.myapp.domain.SellerVO">
 		INSERT INTO TBL_SELLER
 		VALUES(SELLER_SEQ.NEXTVAL,#{mno},#{company},#{license1},#{license2},#{license3},#{salesname},#{salesphone1},#{salesphone2},#{salesphone3},#{salesemail},#{brand},#{category},#{aboutproduct})		
@@ -96,4 +102,12 @@
 		 WHERE MNO=#{mno}
 	</update>
 
+	<!-- Header banner -->
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = #{area}
+		 ORDER BY BNO DESC
+	</select>
 </mapper>

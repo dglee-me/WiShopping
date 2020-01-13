@@ -153,12 +153,12 @@
 			<h2 class="hide">로그인메뉴</h2>
 			<ul class="top_bar_login">
 				<c:if test="${login.name eq null}">
-					<li><a href="${pageContext.request.contextPath }/auth/login">로그인</a></li>
-					<li><a href="${pageContext.request.contextPath }/auth/join">회원가입</a></li>
-					<li><a href="${pageContext.request.contextPath }/notice/list">고객센터</a></li>
+					<li><a href="${pageContext.request.contextPath}/auth/login">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath}/auth/join">회원가입</a></li>
+					<li><a href="${pageContext.request.contextPath}/notice/list">고객센터</a></li>
 				</c:if>
 				<c:if test="${login.name ne null }">
-					<li><c:out value="${login.name }"/>님, <a href="<%=request.getContextPath() %>/auth/logout">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}/mypage/request"><c:out value="${login.name }"/></a>님, <a href="<%=request.getContextPath() %>/auth/logout">로그아웃</a></li>
 					<li><a href="${pageContext.request.contextPath }/notice/list">고객센터</a></li>
 				</c:if>
 			</ul>

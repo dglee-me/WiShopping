@@ -3,6 +3,7 @@ package com.lee.myapp.persistence;
 import java.sql.Date;
 import java.util.List;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 
@@ -32,6 +33,12 @@ public interface MemberDAO {
 	public int resetPassword(MemberVO member) throws Exception;
 	public int resetToken() throws Exception;
 	
+	//Modify user info
+	public int modifyUserInfo(MemberVO member) throws Exception;
+	
 	public int sellerRegist(SellerVO seller) throws Exception;
 	public int sellerUpdate(int mno) throws Exception;
+
+	//Header banner
+	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

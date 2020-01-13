@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 import com.lee.myapp.persistence.MemberDAO;
@@ -125,6 +126,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int modifyUserInfo(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.modifyUserInfo(member);
+	}
+
+	@Override
 	public int sellerRegist(SellerVO seller) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.sellerRegist(seller);
@@ -134,5 +141,12 @@ public class MemberServiceImpl implements MemberService {
 	public int sellerUpdate(int mno) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.sellerUpdate(mno);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.mainBannerList(area);
 	}
 }

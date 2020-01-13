@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 
@@ -103,6 +104,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public int modifyUserInfo(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".modifyUserInfo",member);
+	}
+
+	@Override
 	public int sellerRegist(SellerVO seller) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".sellerRegist",seller);
@@ -112,5 +119,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public int sellerUpdate(int mno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+".sellerUpdate",mno);
+	}
+
+	//Header banner
+	@Override
+	public List<BannerVO> mainBannerList(String area) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".mainBannerList", area);
 	}
 }
