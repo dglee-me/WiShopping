@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
 		sendMail.setSubject("위쇼핑 회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
 				.append("<p>안녕하세요, " + member.getName() + " 님. 이메일 인증을 하시려면 하단의 링크를 클릭하여주세요.</p>")
-				.append("<a href='http://15.165.6.133:8080/WiShopping/auth/joinConfirm?email=").append(member.getEmail())
+				.append("<a href='http://15.165.119.77:8080/WiShopping/auth/joinConfirm?email=").append(member.getEmail())
 				.append("&auth=").append(authKey).append("' target='_blenk'>이메일 인증하기</a>").toString());
 
 		sendMail.setFrom("dglee.dev@gmail.com ", "WiSHopping");
@@ -129,6 +129,12 @@ public class MemberServiceImpl implements MemberService {
 	public int modifyUserInfo(MemberVO member) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.modifyUserInfo(member);
+	}
+
+	@Override
+	public int withdrawalUser(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.withdrawalUser(member);
 	}
 
 	@Override

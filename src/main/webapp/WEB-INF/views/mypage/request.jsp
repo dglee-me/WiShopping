@@ -41,6 +41,36 @@
 		$("input:password[name='user[password]']").focus(function(){
 			$(".mypage-request-form_password-error").text("");
 		});
+		
+		$("input:password").keyup(function(e){
+			if(e.keyCode == 13){
+				var email = $("input:text[name='user[email]']").val();
+				var pw = $("input:password[name='user[password]']").val();
+				
+				if(pw == ""){// Password validation
+					$(".mypage-request-form_password-error").text("비밀번호를 입력하세요.");
+					$(".mypage-request-form_password-error").css("color","red");
+				}else{
+					$.ajax({
+						url : "/WiShopping/mypage/request",
+						type : "post",
+						data : { 
+							email : email,
+							pw : pw
+						},success : function(result){
+							if(result == 1){ // If correct email and pw
+								location.href="/WiShopping/mypage/modify";
+							}else if(result == 2){ // If pw is wrong
+								$(".mypage-request-form_password-error").text("비밀번호가 정확하지 않습니다.");
+								$(".mypage-request-form_password-error").css("color","red");
+							}else{
+								location.href="/WiShopping/auth/login";
+							}
+						}
+					});
+				}
+			}
+		});
 	});
 </script>
 <meta charset="UTF-8">

@@ -63,7 +63,7 @@
 				<div class="edit-user-info_wrap container">
 					<div class="edit-user-info_header">
 						<h1 class="edit-user-info_header_title">회원정보수정</h1>
-						<a class="edit-user-info_header_withdrawal" href="/mypage/withdrawal">탈퇴하기</a>
+						<a class="edit-user-info_header_withdrawal" href="${pageContext.request.contextPath}/mypage/withdrawal">탈퇴하기</a>
 					</div>
 					<form id="frm" action="modify" method="post">
 						<div class="edit-user-info_form-item">

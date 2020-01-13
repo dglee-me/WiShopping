@@ -16,6 +16,7 @@ public class MemberVO {
 	 		SESSIONKEY VARCHAR2(50) DEFAULT 'NONE',
 	 		SESSIONLIMIT TIMESTAMP,
 	 		TOKEN VARCHAR2(50) DEFAULT '-',
+	 		STATUS VARCHAR2(10) DEFAULT 'Y',
 	 		PRIMARY KEY(MNO)
 	 	);
 	 */
@@ -32,6 +33,7 @@ public class MemberVO {
 	private Date sessionlimit;
 	
 	private String token; // Auth key used to reset password
+	private String status; // N is withdrawal user, else Y
 	
 	private boolean useCookie;
 	
@@ -114,6 +116,14 @@ public class MemberVO {
 		return this;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	public MemberVO setStatus(String status) {
+		this.status = status;
+		return this;
+	}
+	
 	public void setUseCookie(boolean useCookie) {
         this.useCookie = useCookie;
     }
@@ -124,7 +134,7 @@ public class MemberVO {
 	
 	public String toString() {
 		return "MemberVO = [mno= "+mno+", email= "+email+", auth= "+auth+", pw= "+pw+", name= "+name+", tel= "+tel+", createdate= "+createdate+", mlevel= "+mlevel+
-				", sessionkey= "+sessionkey+", sessionlimit= "+sessionlimit+", token = "+token+" ]";
+				", sessionkey= "+sessionkey+", sessionlimit= "+sessionlimit+", token = "+token+", status = "+status+" ]";
 	}
 
 }

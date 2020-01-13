@@ -73,7 +73,6 @@ public class MypageController {
 	public void mypageModifyGET(HttpSession session, Model model) throws Exception{
 		logger.info("-------- MYPAGE : MODIFY METHOD = GET --------");
 		
-		
 		//Setting
 		model.addAttribute("headerBanners", memberService.mainBannerList("헤더")); // Main banner list in this view
 		model.addAttribute("member", (MemberVO)session.getAttribute("login")); // Main banner list in this view
@@ -93,6 +92,25 @@ public class MypageController {
 		}
 		
 		memberService.modifyUserInfo(member);
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="withdrawal", method=RequestMethod.GET)
+	public void mypageWithdrawalGET(Model model) throws Exception{
+		logger.info("-------- MYPAGE : WITHDRAWAL METHOD = GET --------");
+		
+		//Setting
+		model.addAttribute("headerBanners", memberService.mainBannerList("헤더")); // Main banner list in this view
+	}
+	
+	@RequestMapping(value="withdrawal", method=RequestMethod.POST)
+	public String mypageWithdrawalPOST(HttpSession session) throws Exception{
+		logger.info("-------- MYPAGE : WITHDRAWAL METHOD = POST --------");
+		
+		memberService.withdrawalUser((MemberVO)session.getAttribute("login"));
+		
+		session.invalidate();
 		
 		return "redirect:/";
 	}

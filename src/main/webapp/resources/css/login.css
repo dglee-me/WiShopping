@@ -150,13 +150,33 @@ input[type="checkbox"]:checked.member_checkbox_input:after{content:""; backgroun
 	text-align:center; transition:color .1s,background-color .1s,border-color .1s; border-radius:4px; cursor:pointer;
 	font-family:"Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif;}
 
+/* Modify withdrawal CSS */
+#wrapper{display:flex; flex-direction:column; min-height:1px; height:100%; flex:1 0 auto;}
+#body{display:flex; flex-direction:column; flex:1 0 auto; min-height:1px;}
+#content{width:90%; margin:20px auto; padding:50px; max-width:1030px; box-sizing:border-box; overflow:hidden; font-size:24px;}
+#content .title{font-weight:bold; font-size:24px; color:#424242;} 
 
+#withdrawal{font-size:18px; overflow:hidden;}
 
+#content form>.field{padding:50px 0 20px; overflow:hidden;}
+#content form>.field>.title{font-size:18px;}
+#content form>.field>.box{margin-top:20px; padding:10px 20px; border:1px solid #dcdcdc; font-size:15px; line-height:21px; word-break:keep-all; overflow:hidden;}
 
+#content form>.field>.box>.title{padding:10px 0; font-size:15px;}
+#content form>.field>.box>.text{padding-left:20px; padding-bottom:10px; font-size:15px;}
+#content form>.field>.box>.text li{font-size:15px; margin-left:15px; margin-top:5px; list-style:inherit;}
 
+#content form>.field>.box ul{list-style:inherit;}
 
+#content form>.field>.confirm{margin-top:20px; position:relative;}
 
+.view_confirm{position:relative; font-size:16px; color:#424242; padding:2px 0; z-index:1; line-height:initial;}
+.confirm>.round-checkbox-input_label{display:inline-block; vertical-align:middle;}
+#content span.alert{font-weight:bold; color:#ff7777;}
 
+#content form .button{display:block; float:left; margin-top:30px; margin-right:10px; width:150px; height:40px; border:none; border-radius:4px;
+	background-color:#5FCAEC; font-weight:bold; font-size:16px; color:#ffffff; line-height:41px; text-align:center;}
+#content form input[type=button]{background-color:#bdbdbd;}
 
 
 

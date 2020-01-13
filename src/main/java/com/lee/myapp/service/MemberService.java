@@ -33,6 +33,9 @@ public interface MemberService {
 
 	//Modify user info
 	public int modifyUserInfo(MemberVO member) throws Exception;
+
+	//Withdrawal user
+	public int withdrawalUser(MemberVO member) throws Exception;
 	
 	public int sellerRegist(SellerVO seller) throws Exception;
 	public int sellerUpdate(int mno) throws Exception;

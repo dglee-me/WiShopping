@@ -215,7 +215,7 @@ public class AuthController {
 		sendMail.setSubject("[위쇼핑] 비밀번호 재설정 안내");
 		sendMail.setText(new StringBuffer().append("<h1>[비밀번호 재설정]</h1>")
 				.append("<p>안녕하세요, " + member.getName()  + " 님. 비밀번호를 재설정 하시려면 하단의 링크를 클릭하여주세요.</p>")
-				.append("<a href='http://localhost:8081/WiShopping/auth/password/modify?token="+token+"'>")
+				.append("<a href='http://15.165.119.77:8080/WiShopping/auth/password/modify?token="+token+"'>")
 				.append("[비밀번호 재설정]")
 				.append("</a>")
 				.append("<br/>")

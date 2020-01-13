@@ -110,6 +110,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public int withdrawalUser(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".withdrawalUser",member);
+	}
+
+	@Override
 	public int sellerRegist(SellerVO seller) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".sellerRegist",seller);

@@ -49,8 +49,6 @@ public class PromotionsController {
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public void promotionsMainGET(HttpSession session, Model model) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS MAIN METHOD=GET --------");
-		logger.info("-------- ACCESSOR NAME ="+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() 
-				+" METHOD=GET --------");
 
 		//Setting
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("Çì´õ")); // Main banner list in this view
