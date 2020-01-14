@@ -91,4 +91,10 @@ public class PromotionsServiceImpl implements PromotionsService{
 		// TODO Auto-generated method stub
 		return promotionsDAO.listCount(pno);
 	}
+
+	@Override
+	public int deleteComment(int rno) throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.deleteComment(rno);
+	}
 }

@@ -97,20 +97,34 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="withdrawal", method=RequestMethod.GET)
-	public void mypageWithdrawalGET(Model model) throws Exception{
+	public String mypageWithdrawalGET(HttpSession session, Model model) throws Exception{
 		logger.info("-------- MYPAGE : WITHDRAWAL METHOD = GET --------");
 		
-		//Setting
-		model.addAttribute("headerBanners", memberService.mainBannerList("헤더")); // Main banner list in this view
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		if(member != null) {
+			//Setting
+			model.addAttribute("headerBanners", memberService.mainBannerList("헤더")); // Main banner list in this view
+			
+			return "/mypage/withdrawal";
+		}else {
+			return "redirect:/";
+		}
+		
 	}
 	
 	@RequestMapping(value="withdrawal", method=RequestMethod.POST)
 	public String mypageWithdrawalPOST(HttpSession session) throws Exception{
 		logger.info("-------- MYPAGE : WITHDRAWAL METHOD = POST --------");
 		
-		memberService.withdrawalUser((MemberVO)session.getAttribute("login"));
+
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		if(member != null) {
+			memberService.withdrawalUser((MemberVO)session.getAttribute("login"));
+			session.invalidate();
+		}else {
+			return "redirect:/error";
+		}
 		
-		session.invalidate();
 		
 		return "redirect:/";
 	}

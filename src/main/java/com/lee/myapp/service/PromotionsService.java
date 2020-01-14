@@ -22,4 +22,5 @@ public interface PromotionsService {
 	public List<PromotionsCommentVO> commentList() throws Exception;
 	public List<PromotionsCommentVO> listPaging(CommentCriteria cri) throws Exception;
 	public int listCount(int pno) throws Exception;
+	public int deleteComment(int rno) throws Exception;
 }

@@ -57,7 +57,7 @@
 						</li>
 					</ul>
 					<div class="content">
-						<textarea id="content" name="content" cols="126" rows="28" placeholder="게시글 내용을 입력하세요."></textarea>
+						<textarea id="content" name="content" cols="126" rows="23" placeholder="게시글 내용을 입력하세요."></textarea>
 					</div>
 				</div>
 				<div class="warning_message">  저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를 받으실 수 있습니다.</div>

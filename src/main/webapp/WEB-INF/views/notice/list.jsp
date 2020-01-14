@@ -68,17 +68,17 @@
 						</c:if>
 					</div>
 				</div>
+				<c:if test="${!empty noticeList}">
 				<div class="notice_paging">
 				    <ul class="inner_paging">
-				       <li><a href="${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-				  
-				      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				       <li><a href="${pageMaker.makeQuery(idx)}">${idx}</a></li>
-				      </c:forEach>
-				  
+			        	<li><a href="${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+				    	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				        	<li><a href="${pageMaker.makeQuery(idx)}">${idx}</a></li>
+				        </c:forEach>
 				       <li><a href="${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 				    </ul>
 		  		</div>
+				</c:if>
 			</div>
 		</div>
 				

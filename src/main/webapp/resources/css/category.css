@@ -3,7 +3,7 @@
 
 .container{min-height:100%; display:flex;}
 .container_inner{position:relative; width:100%; min-width:1084px;}
-.container .container_inner .contents_wrap{width:100%; min-height:auto; padding-bottom:100px;}
+.container .container_inner .contents_wrap{width:100%; min-height:auto; margin-bottom:100px;}
 
 .category_nav{padding-top:14px; height:25px; background:#fafafa; border-bottom:1px solid #ededed;}
 .category_nav .inner{width:1084px; margin-left:auto; margin-right:auto;}

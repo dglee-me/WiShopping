@@ -46,7 +46,7 @@ public class OrderController {
 			String[] inventory = number.split(";");
 			
 			String referer = request.getHeader("referer");
-			if(referer.equals("http://localhost:8081/WiShopping/cart/main")) {
+			if(referer.equals("http://15.165.119.77:8080/WiShopping/cart/main")) {
 				//If order from a cart
 				HashMap<String,Object> map = new HashMap<String,Object>();
 				

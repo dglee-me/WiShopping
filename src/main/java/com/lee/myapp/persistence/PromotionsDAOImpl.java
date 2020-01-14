@@ -92,4 +92,10 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".CommentlistCount", pno);
 	}
+
+	@Override
+	public int deleteComment(int rno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".deleteComment",rno);
+	}
 }

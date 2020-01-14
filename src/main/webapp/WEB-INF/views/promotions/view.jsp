@@ -70,9 +70,10 @@
 							+"</a>"
 							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
 							+"</p>"
-							+"<footer class='comment-feed_item_footer'>"
+							+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
 							+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
 							+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+							+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
 							+"</footer>"
 							+"</article>";
 							
@@ -144,9 +145,10 @@
 								+"</a>"
 								+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
 								+"</p>"
-								+"<footer class='comment-feed_item_footer'>"
+								+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
 								+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
 								+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+								+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
 								+"</footer>"
 								+"</article>";
 								
@@ -213,9 +215,10 @@
 										+"</a>"
 										+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
 										+"</p>"
-										+"<footer class='comment-feed_item_footer'>"
+										+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
 										+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
 										+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+										+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
 										+"</footer>"
 										+"</article>";
 										
@@ -307,9 +310,10 @@
 									+"</a>"
 									+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
 									+"</p>"
-									+"<footer class='comment-feed_item_footer'>"
+									+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
 									+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
 									+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+									+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
 									+"</footer>"
 									+"</article>";
 									
@@ -320,6 +324,50 @@
 				}
 			});
 		});
+	});
+	$(document).on("click",".comment-feed_item_footer_delete-btn",function(){
+		var var_confirm = confirm("정말로 삭제하시겠습니까?");
+		
+		if(var_confirm){
+			var url = decodeURI(location.href);
+			
+			var pno = url.slice(url.indexOf('=') + 1);
+			var data_number = $(this).parent().attr("data-number");
+			
+			$.ajax({
+				url : "/WiShopping/promotions/commentDelete",
+				type : "post",
+				data : {
+					pno : pno,
+					data_number : data_number
+				},success : function(comments){
+					$(".comment-feed_list_item").remove();
+					
+					$.each(comments, function(){
+						var comment = document.createElement("li");
+
+						comment.className = "comment-feed_list_item";
+						comment.innerHTML = 
+							"<article class='comment-feed_item'>"
+							+"<p class='comment-feed_item_content'>"
+							+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
+							+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
+							+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
+							+"</a>"
+							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
+							+"</p>"
+							+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
+							+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
+							+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
+							+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
+							+"</footer>"
+							+"</article>";
+							
+						$(".comment-feed_list").append(comment);
+					});
+				}
+			});
+		}
 	});
 </script>
 <meta charset="UTF-8">
@@ -361,14 +409,20 @@
 										</a>
 										<span class="comment-feed_item_content_content">${comment.content}</span>
 									</p>
-									<footer class="comment-feed_item_footer">
+									<footer class="comment-feed_item_footer" data-number="${comment.rno}">
 										<time class="comment-feed_item_footer_time">${comment.replytime}</time>
-										<button class="comment-feed_item_footer_report-btn" type="button">신고</button>
+										<c:if test="${comment.name ne login.name}">
+											<button class="comment-feed_item_footer_report-btn" type="button">신고</button>
+										</c:if>
+										<c:if test="${comment.name eq login.name}">
+											<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>
+										</c:if>
 									</footer>
 								</article>
 							</li>
 						</c:forEach>
 					</ul>
+					<c:if test="${!empty comments}">
 					<ul class="list-paginator">
 						<li>
 							<button class="list-paginator_prev" type="button">
@@ -401,6 +455,7 @@
 							</button>
 						</li>
 					</ul>
+					</c:if>
 				</section>
 			</div>
 		</div>

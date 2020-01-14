@@ -339,4 +339,21 @@ public class PromotionsController {
 		
 		return path;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/commentDelete", method=RequestMethod.POST)
+	public List<PromotionsCommentVO> promotionCommentDeletePOST(HttpSession session, CommentCriteria cri, @RequestParam(value="data_number") int rno) throws Exception{
+		logger.info("-------- PROMOTIONS : COMMENT DELETE METHOD=GET --------");
+
+		List<PromotionsCommentVO> comments = new ArrayList<PromotionsCommentVO>();
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		if(member.getMlevel() == 2) {
+			promotionsService.deleteComment(rno);
+			
+			comments = promotionsService.listPaging(cri);		
+		}
+
+		return comments;
+	}
 }

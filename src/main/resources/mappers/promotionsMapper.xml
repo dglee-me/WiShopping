@@ -76,6 +76,7 @@
 			   STARTDATE = #{startdate},
 			   ENDDATE = #{enddate},
 			   STATUS = #{status}
+		 WHERE PNO=#{pno}
 	</update>
 	
 	<!-- Reply -->
@@ -112,4 +113,10 @@
 		  FROM TBL_PROMOTIONS_COMMENT
 		 WHERE PNO = #{pno}
 	</select>
+	
+	<delete id="deleteComment">
+		DELETE
+		  FROM TBL_PROMOTIONS_COMMENT
+		 WHERE RNO = #{rno}
+	</delete>
 </mapper>

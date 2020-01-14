@@ -57,6 +57,8 @@ public class CartController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
+			logger.info("-------- ACCESSOR : " + member.getMno() + " --------");
+			
 			String[] inventory = number.split(";");
 
 			for(int i=0;i<ono.length;i++) {
@@ -65,10 +67,10 @@ public class CartController {
 				map.put("mno", member.getMno());
 				map.put("ono", Integer.parseInt(ono[i]));
 				map.put("inventory", Integer.parseInt(inventory[i]));
-				
+
 				//If there is already a product and option in the cart
 				String cartno = cartService.existCart(map);
-				
+
 				if(cartno == null) {
 					cartService.addCart(map);
 				}else {
@@ -76,7 +78,6 @@ public class CartController {
 					cartService.upInventory(map);
 				}
 			}
-			
 			result = 1;
 		}
 		
