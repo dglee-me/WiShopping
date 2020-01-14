@@ -8,16 +8,16 @@ import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 
 public interface MemberDAO {
-	//ÀÌ¸ŞÀÏ Ajax ÅëÇØ À¯È¿¼º °Ë»ç
+	//ì´ë©”ì¼ Ajax í†µí•´ ìœ íš¨ì„± ê²€ì‚¬
 	public int emailCheck(String email) throws Exception;
 	
-	//È¸¿ø°¡ÀÔ Confirm
+	//íšŒì›ê°€ì… Confirm
 	public int authConfirm(MemberVO member) throws Exception;
 
-    // ÀÚµ¿·Î±×ÀÎ Ã¼Å©ÇÑ °æ¿ì, Member Å×ÀÌºí¿¡ ¼¼¼Ç°ú À¯È¿½Ã°£À» ÀúÀåÇÏ±â À§ÇÑ ¸Ş¼­µå
+    // ìë™ë¡œê·¸ì¸ ì²´í¬í•œ ê²½ìš°, Member í…Œì´ë¸”ì— ì„¸ì…˜ê³¼ ìœ íš¨ì‹œê°„ì„ ì €ì¥í•˜ê¸° ìœ„í•œ ë©”ì„œë“œ
 	public void keepLogin(String email, String sessionId, Date next) throws Exception;
 	
-	// ÀÌÀü¿¡ ·Î±×ÀÎÇÑ ÀûÀÌ ÀÖ´ÂÁö, À¯È¿½Ã°£ÀÌ ³ÑÁö ¾ÊÀº ¼¼¼ÇÀ» °¡Áö°í ÀÖ´ÂÁö Ã¼Å©
+	// ì´ì „ì— ë¡œê·¸ì¸í•œ ì ì´ ìˆëŠ”ì§€, ìœ íš¨ì‹œê°„ì´ ë„˜ì§€ ì•Šì€ ì„¸ì…˜ì„ ê°€ì§€ê³  ìˆëŠ”ì§€ ì²´í¬
 	public MemberVO checkUserWithSessionKey(String value);
 	
 	public int create(MemberVO member) throws Exception;

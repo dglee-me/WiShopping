@@ -29,9 +29,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public List<ProductVO> list(String category) throws Exception {
+	public List<ProductVO> list(ProductVO product) throws Exception {
 		// TODO Auto-generated method stub
-		return productDAO.list(category);
+		return productDAO.list(product);
 	}
 
 	@Override
@@ -50,6 +50,12 @@ public class ProductServiceImpl implements ProductService{
 	public int checkInventory(int ono) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.checkInventory(ono);
+	}
+
+	@Override
+	public int isSeller(int mno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.isSeller(mno);
 	}
 
 	//Header banner

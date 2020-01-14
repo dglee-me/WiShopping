@@ -26,7 +26,7 @@
 								<div class="nav">
 									<ul>
 										<li><a href="${pageContext.request.contextPath}/">홈</a></li>
-										<li><a href="${pageContext.request.contextPath}/category/group/interior">인테리어</a></li>
+										<li><a href="${pageContext.request.contextPath}/category/group/interior?category2=all">인테리어</a></li>
 									</ul>
 								</div>
 							</div>
@@ -38,17 +38,22 @@
 									<div class="category_list">
 										<ul class="group">
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/interior?category2=all">
+													<span class="category_title">전체</span>
+												</a>
+											</li>
+											<li>
+												<a href="${pageContext.request.contextPath}/category/group/interior?category2=가구">
 													<span class="category_title">가구</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/interior?category2=침구">
 													<span class="category_title">침구</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/interior?category2=조명·인테리어">
 													<span class="category_title">조명·인테리어</span>
 												</a>
 											</li>

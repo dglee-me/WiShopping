@@ -92,7 +92,7 @@ public class AuthController {
 		
 		MemberVO loginMember = memberService.loginInfo(member);
 		
-		//±âÁ¸¿¡ login SessionÀÌ Á¸ÀçÇÒ °æ¿ì ±âÁ¸ °ª Á¦°Å
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ login Sessionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if(session.getAttribute("login") != null) {
 			session.removeAttribute("login");
 		}
@@ -110,9 +110,9 @@ public class AuthController {
 					cookie.setPath("/");
 					
 					int amount = 60*60*24*7; 
-					cookie.setMaxAge(amount);//7ÀÏ·Î À¯È¿½Ã°£ ¼³Á¤
+					cookie.setMaxAge(amount);//Set the effective time to 7 days
 					
-					//Cookie Àû¿ë
+					//Cookie Enabled
 					response.addCookie(cookie);
 					
 					Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
@@ -208,18 +208,18 @@ public class AuthController {
 		member.setToken(token);
 		
 		memberService.newPasswordTokenSet(member);
-		
-		// Mail Send ºÎºĞ
+
+		// Mail send method
 		MailUtils sendMail = new MailUtils(mailSender);
 
-		sendMail.setSubject("[À§¼îÇÎ] ºñ¹Ğ¹øÈ£ Àç¼³Á¤ ¾È³»");
-		sendMail.setText(new StringBuffer().append("<h1>[ºñ¹Ğ¹øÈ£ Àç¼³Á¤]</h1>")
-				.append("<p>¾È³çÇÏ¼¼¿ä, " + member.getName()  + " ´Ô. ºñ¹Ğ¹øÈ£¸¦ Àç¼³Á¤ ÇÏ½Ã·Á¸é ÇÏ´ÜÀÇ ¸µÅ©¸¦ Å¬¸¯ÇÏ¿©ÁÖ¼¼¿ä.</p>")
+		sendMail.setSubject("[ìœ„ì‡¼í•‘] ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì • ì•ˆë‚´");
+		sendMail.setText(new StringBuffer().append("<h1>[ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •]</h1>")
+				.append("<p>ì•ˆë…•í•˜ì„¸ìš”, " + member.getName()  + " ë‹˜. ë¹„ë°€ë²ˆí˜¸ë¥¼ ì¬ì„¤ì • í•˜ì‹œë ¤ë©´ í•˜ë‹¨ì˜ ë§í¬ë¥¼ í´ë¦­í•˜ì—¬ì£¼ì„¸ìš”.</p>")
 				.append("<a href='http://15.165.119.77:8080/WiShopping/auth/password/modify?token="+token+"'>")
-				.append("[ºñ¹Ğ¹øÈ£ Àç¼³Á¤]")
+				.append("[ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •]")
 				.append("</a>")
 				.append("<br/>")
-				.append("<p>*¸¸¾à º»ÀÎÀÌ Àç¼³Á¤ ½ÅÃ»À» ÇÑ°Ô ¾Æ´Ï¶ó¸é, º» ¸ŞÀÏÀ» ¹«½ÃÇØµµ ÁÁ½À´Ï´Ù.<p>").toString());
+				.append("<p>*ë§Œì•½ ë³¸ì¸ì´ ì¬ì„¤ì • ì‹ ì²­ì„ í•œê²Œ ì•„ë‹ˆë¼ë©´, ë³¸ ë©”ì¼ì„ ë¬´ì‹œí•´ë„ ì¢‹ìŠµë‹ˆë‹¤.<p>").toString());
 
 		sendMail.setFrom("dglee.dev@gmail.com ", "WiSHopping");
 		sendMail.setTo(member.getEmail());
@@ -258,9 +258,14 @@ public class AuthController {
 		
 		return path;
 	}
-	
+
 	@RequestMapping(value="/password/tokenExpire", method=RequestMethod.GET)
 	public void tokenExpireGET() throws Exception{
 		logger.info("-------- ! TOKEN EXPIRE ! --------");
+	}
+	
+	@RequestMapping(value="/notseller", method=RequestMethod.GET)
+	public void notSellerGET() throws Exception{
+		logger.info("-------- ! NOT SELLER ! --------");
 	}
 }

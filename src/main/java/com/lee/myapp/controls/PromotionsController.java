@@ -51,7 +51,7 @@ public class PromotionsController {
 		logger.info("-------- PROMOTIONS : ACCESS MAIN METHOD=GET --------");
 
 		//Setting
-		model.addAttribute("headerBanners", promotionsService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", promotionsService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		model.addAttribute("promotions", promotionsService.promotionList("all"));
 	}
 	
@@ -62,7 +62,7 @@ public class PromotionsController {
 				+" METHOD=GET --------");
 
 		//Setting
-		model.addAttribute("headerBanners", promotionsService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", promotionsService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
@@ -127,7 +127,7 @@ public class PromotionsController {
 		pageMaker.setTotalCount(count);
 		
 		//Settings
-		model.addAttribute("headerBanners", promotionsService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", promotionsService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		model.addAttribute("promotion", promotion);
 		model.addAttribute("images", imageList);
 		model.addAttribute("comment_count",count);
@@ -154,7 +154,7 @@ public class PromotionsController {
 			}
 
 			//Settings
-			model.addAttribute("headerBanners", promotionsService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+			model.addAttribute("headerBanners", promotionsService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		}
 
 	}
@@ -236,7 +236,7 @@ public class PromotionsController {
 			String[] images = promotion.getImagesurl().split(";");
 			
 			//Settings
-			model.addAttribute("headerBanners", promotionsService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+			model.addAttribute("headerBanners", promotionsService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 			model.addAttribute("promotion", promotion);
 			model.addAttribute("images", images);
 		}

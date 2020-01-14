@@ -26,7 +26,7 @@
 								<div class="nav">
 									<ul>
 										<li><a href="${pageContext.request.contextPath}/">홈</a></li>
-										<li><a href="${pageContext.request.contextPath}/category/group/digital">가전·디지털</a></li>
+										<li><a href="${pageContext.request.contextPath}/category/group/digital?category2=all">가전·디지털</a></li>
 									</ul>
 								</div>
 							</div>
@@ -38,27 +38,32 @@
 									<div class="category_list">
 										<ul class="group">
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/digital?category2=all">
+													<span class="category_title">전체</span>
+												</a>
+											</li>
+											<li>
+												<a href="${pageContext.request.contextPath}/category/group/digital?category2=대형가전">
 													<span class="category_title">대형가전</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/digital?category2=주방가전">
 													<span class="category_title">주방가전</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/digital?category2=컴퓨터·태블릿">
 													<span class="category_title">컴퓨터·태블릿</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/digital?category2=음향가전">
 													<span class="category_title">음향가전</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/digital?category2=디지털·휴대폰·카메라">
 													<span class="category_title">디지털·휴대폰·카메라</span>
 												</a>
 											</li>

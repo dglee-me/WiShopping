@@ -227,7 +227,7 @@
 					<div class="category_list_wrap">
 						<ul>
 							<li class="m_category">
-								<a href="${pageContext.request.contextPath}/category/group/fashion">
+								<a href="${pageContext.request.contextPath}/category/group/fashion?category2=all">
 									<strong class="category_title">
 										<span class="thum">
 											<img src="${pageContext.request.contextPath}/resources/image/fashion.png" alt="패션">
@@ -237,7 +237,7 @@
 								</a>
 							</li>
 							<li class="m_category">
-								<a href="${pageContext.request.contextPath}/category/group/accessories">
+								<a href="${pageContext.request.contextPath}/category/group/accessories?category2=all">
 									<strong class="category_title">
 										<span class="thum">
 											<img src="${pageContext.request.contextPath}/resources/image/accessories.png" alt="잡화">
@@ -247,7 +247,7 @@
 								</a>
 							</li>
 							<li class="m_category">
-								<a href="${pageContext.request.contextPath }/category/group/interior">
+								<a href="${pageContext.request.contextPath }/category/group/interior?category2=all">
 									<strong class="category_title">
 										<span class="thum">
 											<img src="${pageContext.request.contextPath}/resources/image/interior.png" alt="인테리어">
@@ -257,7 +257,7 @@
 								</a>
 							</li>
 							<li class="m_category">
-								<a href="${pageContext.request.contextPath }/category/group/digital">
+								<a href="${pageContext.request.contextPath }/category/group/digital?category2=all">
 									<strong class="category_title">
 										<span class="thum">
 											<img src="${pageContext.request.contextPath}/resources/image/appliances.png" alt="가전·디지털">

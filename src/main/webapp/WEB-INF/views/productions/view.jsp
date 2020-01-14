@@ -15,6 +15,23 @@
 <script type="text/javascript">
 	var previous;
 	
+	$(document).ready(function(){
+		$(".product_selling_nav_content-list li").click(function(e){
+			e.preventDefault();
+			
+			var nav = $(this).children().text();
+			
+			if(nav == "상품정보"){
+				var href = $("#production-selling-information").offset();
+				href.top -= 80;
+			}else if(nav == "리뷰"){
+				var href = $("#production-selling-review").offset();
+			}
+			
+			$("html, body").animate({scrollTop : href.top},300);
+		});
+	});
+	
 	//If this product is a single option, reflect total price
 	$(document).ready(function(){
 		var price = parseInt($(".selling-option-item_price_number").text(),10);
@@ -421,8 +438,8 @@
 				<div class="sticky-child product_selling_nav">
 					<nav class="product_selling_nav_content">
 						<ol class="product_selling_nav_content-list">
-							<li><a href="javascript:void(0);" class="product_selling_nav_item product_selling_nav_item-active">상품정보</a></li>
-							<li><a href="javascript:void(0);" class="product_selling_nav_item">리뷰</a></li>
+							<li><a href="#production-selling-information" class="product_selling_nav_item product_selling_nav_item-active">상품정보</a></li>
+							<li><a href="#production-selling-review" class="product_selling_nav_item">리뷰</a></li>
 							<li><a href="javascript:void(0);" class="product_selling_nav_item">문의</a></li>
 							<li><a href="javascript:void(0);" class="product_selling_nav_item">배송/환불</a></li>
 						</ol>
@@ -432,6 +449,7 @@
 			<div class="production-selling_detail-wrap container">
 				<div class="item_desc">
 					<div class="prd_detail cut view">
+						<a id="production-selling-information"></a>
 						<div id="productdetails" class="tab_conts">
 							<div class="deal_detailimg">
 								<p>
@@ -441,6 +459,7 @@
 								</p>
 							</div>
 						</div>
+						<a id="production-selling-review"></a>
 						<div class="product_selling_section">
 							<header class="product_selling_section-header">
 								<h1 class="product_selling_section-header-title">리뷰<span class="count">0</span></h1>

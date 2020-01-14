@@ -26,7 +26,7 @@
 								<div class="nav">
 									<ul>
 										<li><a href="${pageContext.request.contextPath}/">홈</a></li>
-										<li><a href="${pageContext.request.contextPath}/category/group/accessories">잡화</a></li>
+										<li><a href="${pageContext.request.contextPath}/category/group/accessories?category2=all">잡화</a></li>
 									</ul>
 								</div>
 							</div>
@@ -38,32 +38,37 @@
 									<div class="category_list">
 										<ul class="group">
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=all">
+													<span class="category_title">전체</span>
+												</a>
+											</li>
+											<li>
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=가방">
 													<span class="category_title">가방</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=지갑">
 													<span class="category_title">지갑</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=벨트">
 													<span class="category_title">벨트</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=안경테/선글라스">
 													<span class="category_title">안경테/선글라스</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=양말/스타킹">
 													<span class="category_title">양말/스타킹</span>
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="${pageContext.request.contextPath}/category/group/accessories?category2=패션 잡화/소품">
 													<span class="category_title">패션 잡화/소품</span>
 												</a>
 											</li>

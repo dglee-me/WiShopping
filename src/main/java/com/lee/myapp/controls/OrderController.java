@@ -87,7 +87,7 @@ public class OrderController {
 		}
 
 		//Setting
-		model.addAttribute("headerBanners", orderService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", orderService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		
 		return "/order/preorder";
 	}
@@ -182,7 +182,7 @@ public class OrderController {
 		logger.info("-------- ORDER : RESULT METHOD=GET --------");
 		
 		//Setting
-		model.addAttribute("headerBanners", orderService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", orderService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/orderFail", method=RequestMethod.GET)

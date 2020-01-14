@@ -24,17 +24,17 @@ public class CommerceController {
 		logger.info("-------- COMMERCE : BEST MAIN METHOD=GET --------");
 		
 		if(category.equals("1")) {
-			category = "ÆĞ¼Ç";
+			category = "íŒ¨ì…˜";
 		}else if(category.equals("2")) {
-			category = "ÀâÈ­";
+			category = "ì¡í™”";
 		}else if(category.equals("3")) {
-			category = "ÀÎÅ×¸®¾î";
+			category = "ì¸í…Œë¦¬ì–´";
 		}else if(category.equals("4")) {
-			category = "°¡Àü¡¤µğÁöÅĞ";
+			category = "ê°€ì „Â·ë””ì§€í„¸";
 		}
 
 		//Setting
-		model.addAttribute("headerBanners", commerceService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("headerBanners", commerceService.mainBannerList("í—¤ë”")); // Main banner list in this view
 		
 		model.addAttribute("best",commerceService.bestList(category));
 	}

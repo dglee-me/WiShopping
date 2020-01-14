@@ -25,7 +25,7 @@
 								<div class="nav">
 									<ul>
 										<li><a href="${pageContext.request.contextPath}/">홈</a></li>
-										<li><a href="${pageContext.request.contextPath}/category/group/fashion">패션</a></li>
+										<li><a href="${pageContext.request.contextPath}/category/group/fashion?category2=all">패션</a></li>
 									</ul>
 								</div>
 							</div>
@@ -37,32 +37,37 @@
 									<div class="category_list">
 										<ul class="group">
 											<li>
-												<a href="javascript:void(0);">
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=all">
+													<span class="category_title">전체</span>
+												</a>
+											</li>
+											<li>
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=아우터">
 													<span class="category_title">아우터</span>
 												</a>
 											</li>
 											<li>
-												<a href="javascript:void(0);">
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=상의">
 													<span class="category_title">상의</span>
 												</a>
 											</li>
 											<li>
-												<a href="javascript:void(0);">
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=하의">
 													<span class="category_title">하의</span>
 												</a>
 											</li>
 											<li>
-												<a href="javascript:void(0);">
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=신발">
 													<span class="category_title">신발</span>
 												</a>
 											</li>
 											<li>
-												<a href="javascript:void(0);">
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=가방">
 													<span class="category_title">가방</span>
 												</a>
 											</li>
 											<li>
-												<a href="javascript:void(0);">
+												<a href="${pageContext.request.contextPath}/category/group/fashion?category2=잡화">
 													<span class="category_title">잡화</span>
 												</a>
 											</li>

@@ -39,7 +39,7 @@ public class AdminController {
 		logger.info("-------- ADMIN : ADMIN HOME METHOD=GET --------");
 		
 		//Setting
-		model.addAttribute("headerBanners", adminService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", adminService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
@@ -47,7 +47,7 @@ public class AdminController {
 		logger.info("-------- Service : ADMIN WRITE METHOD=GET --------");
 		
 		//Setting
-		model.addAttribute("headerBanners", adminService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", adminService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -55,7 +55,7 @@ public class AdminController {
 		logger.info("-------- Service : ADMIN WRITE METHOD=POST --------");
 
 		adminService.write(board);		
-		if(board.getCategory().equals("∞¯¡ˆªÁ«◊")) {
+		if(board.getCategory().equals("Í≥µÏßÄÏÇ¨Ìï≠")) {
 			return "redirect:/notice/list";
 		}
 		return "redirect:/";
@@ -76,7 +76,7 @@ public class AdminController {
 		}
 
 		//Setting
-		model.addAttribute("headerBanners", adminService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", adminService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		
 		return path;
 	}
@@ -132,7 +132,7 @@ public class AdminController {
 		}
 
 		//Setting
-		model.addAttribute("headerBanners", adminService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", adminService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		
 		return path;
 	}

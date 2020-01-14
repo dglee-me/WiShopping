@@ -19,25 +19,25 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	
 	@Inject
 	MemberService memberService;
-	
-	//ÄÁÆ®·Ñ·¯°¡ ½ÇÇàµÇ±â ÀÌÀü¿¡ ¸ÕÀú ¼öÇà µÊ
+
+	//ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì‹¤í–‰ë˜ê¸° ì´ì „ì— ë¨¼ì € ìˆ˜í–‰ ë¨
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		// TODO Auto-generated method stub
 		logger.info("-------- INTERCEPTOR ACCESS!!! --------");
 		
 		HttpSession session = request.getSession();
-		//Login Ã³¸®¸¦ ´ã´çÇÏ´Â »ç¿ëÀÚ Á¤º¸ÀÇ °´Ã¼¸¦ °¡Á®¿Â´Ù
+		//Login ì²˜ë¦¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” ì‚¬ìš©ì ì •ë³´ì˜ ê°ì²´ë¥¼ ê°€ì ¸ì˜¨ë‹¤
 		Object obj = session.getAttribute("login");
-		
-		//·Î±×ÀÎ »óÅÂ ¿©ºÎ È®ÀÎ
+
+		//ë¡œê·¸ì¸ ìƒíƒœ ì—¬ë¶€ í™•ì¸
 		if(obj == null) {
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-			//SessionÁ¤º¸°¡ ¾øÀ» ½Ã Cookie Á¤º¸¸¦ È®ÀÎ
+			//Sessionì •ë³´ê°€ ì—†ì„ ì‹œ Cookie ì •ë³´ë¥¼ í™•ì¸
 			if(loginCookie != null) {
-				//Cookie¿¡¼­ SessionID ÃßÃâ
+				//Cookieì—ì„œ SessionID ì¶”ì¶œ
 				String sessionId = loginCookie.getValue();
-				//SessionId °ªÀ¸·Î ·Î±×ÀÎ Á¤º¸ ÃßÃâ
+				//SessionId ê°’ìœ¼ë¡œ ë¡œê·¸ì¸ ì •ë³´ ì¶”ì¶œ
 				MemberVO memberVO = memberService.checkUserWithSessionKey(sessionId);
 				
 				if(memberVO != null) {
@@ -51,7 +51,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		}
 		return true;
 	}
-	//ÄÁÆ®·Ñ·¯°¡ ½ÇÇàµÇ°í ³­ ÈÄ È­¸éÀÌ º¸¿©Áö±â Á÷Àü¿¡ ¼öÇàµÊ
+	//ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì‹¤í–‰ë˜ê³  ë‚œ í›„ í™”ë©´ì´ ë³´ì—¬ì§€ê¸° ì§ì „ì— ìˆ˜í–‰ë¨
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception{
 		// TODO Auto-generated method stub

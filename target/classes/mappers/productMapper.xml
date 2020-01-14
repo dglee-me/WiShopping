@@ -24,7 +24,12 @@
 	<select id="list" resultType="com.lee.myapp.domain.ProductVO">
 		SELECT *
 		  FROM PRODUCT
-		 WHERE CATEGORY1=#{category} 
+		 <if test='category2 != "all"'>
+			 WHERE CATEGORY1=#{category1} AND CATEGORY2=#{category2}
+		 </if>
+		 <if test='category2 == "all"'>
+		 	 WHERE CATEGORY1=#{category1}
+		 </if>
 		 ORDER BY PNO DESC
 	</select>
 	
@@ -45,6 +50,12 @@
 		SELECT INVENTORY 
 		  FROM TBL_PRODUCT_OPTION
 		 WHERE ONO = #{ono}
+	</select>
+	
+	<select id="isSeller" resultType="Integer">
+		SELECT COUNT(SNO) 
+		  FROM TBL_SELLER
+		 WHERE MNO = (SELECT MNO FROM MEMBER WHERE MNO = #{mno})
 	</select>
 	
 	<!-- Header banner -->

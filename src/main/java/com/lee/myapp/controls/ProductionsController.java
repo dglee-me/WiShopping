@@ -36,11 +36,25 @@ public class ProductionsController {
 	ProductService productService;
 	
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
-	public void productionRegistGET(Model model) throws Exception{
+	public String productionRegistGET(HttpSession session, Model model) throws Exception{
 		logger.info("-------- CREATE : PRODUCTIONS METHOD=GET --------");
 		
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		String path = "redirect:/auth/login";
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		if(member != null) {
+			int seller = productService.isSeller(member.getMno());
+			
+			if(seller == 0) {
+				path = "redirect:/auth/notseller";
+			}else {
+				//Setting
+				model.addAttribute("headerBanners", productService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
+				path = "/productions/regist";
+			}
+		}
+		
+		return path;
 	}
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
@@ -110,7 +124,7 @@ public class ProductionsController {
 		}
 
 		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", productService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		
 		model.addAttribute("product",product);
 		model.addAttribute("option",productService.view_option(pno));

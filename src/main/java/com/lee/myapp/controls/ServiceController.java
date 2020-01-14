@@ -33,15 +33,15 @@ public class ServiceController {
 		logger.info("-------- Service : NOTICE MAIN METHOD=GET --------");
 		
 		List<BoardVO> noticeList = new ArrayList<BoardVO>();
-		cri.setCategory("°øÁö»çÇ×");
+		cri.setCategory("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		noticeList = boardService.listPaging(cri);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.listCount("°øÁö»çÇ×"));
+		pageMaker.setTotalCount(boardService.listCount("ê³µì§€ì‚¬í•­"));
 
 		//Setting
-		model.addAttribute("headerBanners", boardService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("headerBanners", boardService.mainBannerList("í—¤ë”")); // Main banner list in this view
 		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("noticeList", noticeList);
@@ -64,7 +64,7 @@ public class ServiceController {
 		}
 
 		//Setting
-		model.addAttribute("headerBanners", boardService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("headerBanners", boardService.mainBannerList("í—¤ë”")); // Main banner list in this view
 		
 		model.addAttribute("view",board);
 	}
@@ -75,7 +75,7 @@ public class ServiceController {
 		BoardVO board = boardService.view(bno);
 
 		//Setting
-		model.addAttribute("headerBanners", boardService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("headerBanners", boardService.mainBannerList("í—¤ë”")); // Main banner list in this view
 		
 		model.addAttribute("board",board);
 	}

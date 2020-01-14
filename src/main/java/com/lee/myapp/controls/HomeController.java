@@ -36,8 +36,8 @@ public class HomeController {
 		
 		//Setting
 		model.addAttribute("allBest", homeService.selectAllBest()); // Best product list in home view
-		model.addAttribute("mainBanners", homeService.mainBannerList("¸ŞÀÎ»ó´Ü")); // Main banner list in home view
-		model.addAttribute("headerBanners", homeService.mainBannerList("Çì´õ")); // Main banner list in this view
+		model.addAttribute("mainBanners", homeService.mainBannerList("ë©”ì¸ìƒë‹¨")); // Main banner list in home view
+		model.addAttribute("headerBanners", homeService.mainBannerList("í—¤ë”")); // Main banner list in this view
 		
 		return "home";
 	}
@@ -49,7 +49,7 @@ public class HomeController {
 
 		List<ProductVO> best = new ArrayList<ProductVO>();
 		
-		if(data.equals("ÀüÃ¼")) {
+		if(data.equals("ì „ì²´")) {
 			best = homeService.selectAllBest();
 		}else {
 			best = homeService.selectBest(data);

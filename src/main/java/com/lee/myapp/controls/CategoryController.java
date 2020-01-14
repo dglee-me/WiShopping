@@ -1,7 +1,5 @@
 package com.lee.myapp.controls;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -23,42 +21,46 @@ public class CategoryController {
 	ProductService productService;
 
 	@RequestMapping(value="/group/fashion", method=RequestMethod.GET)
-	public void fashionCategoryGET(Model model) throws Exception{
+	public void fashionCategoryGET(Model model, ProductVO product) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
 
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		product.setCategory1("Ìå®ÏÖò");
 		
-		model.addAttribute("list", productService.list("∆–º«"));
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
+		model.addAttribute("list", productService.list(product));
 	}
 	
 	@RequestMapping(value="/group/accessories", method=RequestMethod.GET)
-	public void accessoriesCategoryGET(Model model) throws Exception{
+	public void accessoriesCategoryGET(Model model, ProductVO product) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (ACCESSORIES) METHOD=GET --------");	
 
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		product.setCategory1("Ïû°Ìôî");
 		
-		model.addAttribute("list", productService.list("¿‚»≠"));
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
+		model.addAttribute("list", productService.list(product));
 	}
 	
 	@RequestMapping(value="/group/interior", method=RequestMethod.GET)
-	public void interiorCategoryGET(Model model) throws Exception{
+	public void interiorCategoryGET(Model model, ProductVO product) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (INTERIOR) METHOD=GET --------");	
 
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		product.setCategory1("Ïù∏ÌÖåÎ¶¨Ïñ¥");
 		
-		model.addAttribute("list", productService.list("¿‚»≠"));
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
+		model.addAttribute("list", productService.list(product));
 	}
 
 	@RequestMapping(value="/group/digital", method=RequestMethod.GET)
-	public void digitalCategoryGET(Model model) throws Exception{
+	public void digitalCategoryGET(Model model, ProductVO product) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (DIGITAL) METHOD=GET --------");	
 
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		product.setCategory1("Í∞ÄÏ†Ñ¬∑ÎîîÏßÄÌÑ∏");
 		
-		model.addAttribute("list", productService.list("¿‚»≠"));
+		//Setting
+		model.addAttribute("headerBanners", productService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
+		model.addAttribute("list", productService.list(product));
 	}
 }

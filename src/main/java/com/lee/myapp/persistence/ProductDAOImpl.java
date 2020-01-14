@@ -31,9 +31,9 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 	
 	@Override
-	public List<ProductVO> list(String category) throws Exception {
+	public List<ProductVO> list(ProductVO product) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".list",category);
+		return sqlSession.selectList(namespace+".list",product);
 	}
 
 	@Override
@@ -54,11 +54,16 @@ public class ProductDAOImpl implements ProductDAO{
 		return sqlSession.selectOne(namespace+".checkInventory",ono);
 	}
 
+	@Override
+	public int isSeller(int mno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".isSeller",mno);
+	}
+
 	//Header banner
 	@Override
 	public List<BannerVO> mainBannerList(String area) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".mainBannerList",area);
 	}
-
 }

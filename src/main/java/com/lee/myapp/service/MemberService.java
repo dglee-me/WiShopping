@@ -8,13 +8,13 @@ import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 
 public interface MemberService {
-	//ÀÌ¸ŞÀÏ Ajax ÅëÇØ À¯È¿¼º °Ë»ç
+	//ì´ë©”ì¼ Ajax í†µí•´ ìœ íš¨ì„± ê²€ì‚¬
 	public int emailCheck(String email) throws Exception;
 	
-	//È¸¿ø°¡ÀÔ Confirm
+	//íšŒì›ê°€ì… Confirm
 	public int authConfirm(MemberVO member) throws Exception;
 
-	//ÀÚµ¿·Î±×ÀÎ °ü·Ã
+	//ìë™ë¡œê·¸ì¸ ê´€ë ¨
 	public void keepLogin(String email, String sessionId, Date next) throws Exception;
 	public MemberVO checkUserWithSessionKey(String value);
 	

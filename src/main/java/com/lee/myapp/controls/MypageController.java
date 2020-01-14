@@ -74,7 +74,7 @@ public class MypageController {
 		logger.info("-------- MYPAGE : MODIFY METHOD = GET --------");
 		
 		//Setting
-		model.addAttribute("headerBanners", memberService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+		model.addAttribute("headerBanners", memberService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 		model.addAttribute("member", (MemberVO)session.getAttribute("login")); // Main banner list in this view
 	}
 	
@@ -103,7 +103,7 @@ public class MypageController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		if(member != null) {
 			//Setting
-			model.addAttribute("headerBanners", memberService.mainBannerList("«Ï¥ı")); // Main banner list in this view
+			model.addAttribute("headerBanners", memberService.mainBannerList("Ìó§Îçî")); // Main banner list in this view
 			
 			return "/mypage/withdrawal";
 		}else {
