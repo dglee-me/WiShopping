@@ -19,6 +19,7 @@ public interface ProductService {
 	
 	//Review
 	public int reviewRegist(ReviewVO review) throws Exception;
+	public List<ReviewVO> reviewList(int pno) throws Exception;
 	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;

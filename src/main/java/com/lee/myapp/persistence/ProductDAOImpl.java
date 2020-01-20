@@ -68,6 +68,12 @@ public class ProductDAOImpl implements ProductDAO{
 		return sqlSession.insert(namespace+".reviewRegist", review);
 	}
 
+	@Override
+	public List<ReviewVO> reviewList(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".reviewList",pno);
+	}
+
 	//Header banner
 	@Override
 	public List<BannerVO> mainBannerList(String area) throws Exception {

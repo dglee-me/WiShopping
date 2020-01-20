@@ -66,6 +66,12 @@ public class ProductServiceImpl implements ProductService{
 		return productDAO.reviewRegist(review);
 	}
 
+	@Override
+	public List<ReviewVO> reviewList(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.reviewList(pno);
+	}
+	
 	//Header banner
 	@Override
 	public List<BannerVO> mainBannerList(String area) throws Exception {

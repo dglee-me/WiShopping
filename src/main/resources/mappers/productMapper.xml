@@ -73,6 +73,13 @@
 		)
 	</insert>
 	
+	<select id="reviewList" resultType="com.lee.myapp.domain.ReviewVO">
+		SELECT A.RNO, A.PNO, A.MNO, (SELECT NAME FROM MEMBER WHERE MNO = B.MNO) AS NAME, A.ONO, A.OPTION_COLOR, A.OPTION_SIZE, A.CONTENT, A.WRITEDATE, A.CONTENT_IMG 
+		  FROM TBL_PRODUCT_REVIEW A INNER JOIN MEMBER B ON A.MNO = B.MNO
+		 WHERE A.PNO = #{pno}
+		 ORDER BY A.WRITEDATE DESC
+	</select>
+	
 	<!-- Header banner -->
 	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
 		SELECT *

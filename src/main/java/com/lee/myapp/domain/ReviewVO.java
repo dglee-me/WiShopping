@@ -25,6 +25,7 @@ public class ReviewVO {
 	private int rno;
 	private int pno;
 	private int mno;
+	private String name; // insert not , only select
 	private int ono;
 	private String optioncolor;
 	private String optionsize;
@@ -51,6 +52,13 @@ public class ReviewVO {
 	}
 	public ReviewVO setMno(int mno) {
 		this.mno = mno;
+		return this;
+	}
+	public String getName() {
+		return name;
+	}
+	public ReviewVO setName(String name) {
+		this.name = name;
 		return this;
 	}
 	public int getOno() {
@@ -97,7 +105,7 @@ public class ReviewVO {
 	}
 	
 	public String toString() {
-		return "ReviewVO = [rno = "+rno+", pno = "+pno+", mno = "+mno+", ono = "+ono+", optioncolor = "+optioncolor+", optionsize = "+optionsize+", content = "
+		return "ReviewVO = [rno = "+rno+", pno = "+pno+", mno = "+mno+", name = "+name+", ono = "+ono+", optioncolor = "+optioncolor+", optionsize = "+optionsize+", content = "
 				+content+", writedate = "+writedate+", contentimg = "+contentimg+" ]";
 	}
 }

@@ -131,6 +131,7 @@ public class ProductionsController {
 		model.addAttribute("option",productService.view_option(pno));
 		model.addAttribute("max",productService.view_option(pno).size());
 		model.addAttribute("image",imageList);
+		model.addAttribute("reviews", productService.reviewList(pno));
 	}
 	
 	@ResponseBody

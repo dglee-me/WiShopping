@@ -15,6 +15,13 @@
 <script type="text/javascript">
 	var previous;
 	
+	//Review counting
+	$(document).ready(function(){
+		var count = $(".production-review-feed-item_container").length;
+		
+		$(".product_selling_section-header-title .count").text(count);
+	});
+	
 	$(document).ready(function(){
 		$(".product_selling_nav_content-list li").click(function(e){
 			e.preventDefault();
@@ -465,6 +472,39 @@
 								<h1 class="product_selling_section-header-title">리뷰<span class="count">0</span></h1>
 								<div class="product_selling_section-right"><button type="button">리뷰쓰기</button></div>
 							</header>
+							<div class="production-review-feed">
+								<div class="filter">
+									<div class="production-review-feed_filter-wrap">
+										<div class="production-review-feed_filter">
+											<div class="production-review-feed_filter_order-list">
+												<button class="production-review-feed_filter_order production-review-feed_filter_order-active" type="button">최신순</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="production-review-feed_list">
+									<c:forEach var="review" items="${reviews}">
+									<div class="production-review-feed-item_container">
+										<article class="production-review-item">
+											<div class="production-review-item_writer">
+												<a href="javascript:void(0);">
+													<img src="${pageContext.request.contextPath}/resources/image/none_user.png" class="production-review-item_writer_img">
+												</a>
+												<div class="production-review-item_writer_info">
+													<p class="production-review-item_writer_info_name">${review.name}</p>
+													<span class="production-review-item_writer_info_date">${review.writedate}</span>
+												</div>
+											</div>
+											<p class="production-review-item_name">색상: ${review.optioncolor} / 옵션: ${review.optionsize}</p>
+											<button type="button" class="production-review-item__img__btn">
+												<img class="production-review-item_img" src="${pageContext.request.contextPath}${review.contentimg}">
+											</button>
+											<p class="production-review-item_description">${review.content}</p>
+										</article>
+									</div>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 					</div>	
 				</div>
