@@ -208,7 +208,7 @@
 						<li class="production-best-feed_category_item">패션</li>
 						<li class="production-best-feed_category_item">잡화</li>
 						<li class="production-best-feed_category_item">인테리어</li>
-						<li class="production-best-feed_category_item">디지털·가전</li>
+						<li class="production-best-feed_category_item">가전·디지털</li>
 					</ul>
 					<div class="row production-best-feed_group">
 						<div class="col production-best-feed_list-wrap">

@@ -58,6 +58,21 @@
 		 WHERE MNO = (SELECT MNO FROM MEMBER WHERE MNO = #{mno})
 	</select>
 	
+	<insert id="reviewRegist">
+		INSERT INTO TBL_PRODUCT_REVIEW(RNO,PNO,MNO,ONO,OPTION_COLOR,OPTION_SIZE,CONTENT,WRITEDATE,CONTENT_IMG)
+		VALUES(
+			TBL_PRODUCT_REVIEW_RNO_SEQ.NEXTVAL, 
+			#{pno}, 
+			#{mno},
+			#{ono},
+			(SELECT OPTION_COLOR FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}),
+			(SELECT OPTION_SIZE FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}),
+			#{content},
+			SYSDATE,
+			#{contentimg}
+		)
+	</insert>
+	
 	<!-- Header banner -->
 	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
 		SELECT *

@@ -6,6 +6,7 @@ public class PurchaseVO {
 	private int num;
 	private String orderno;
 	private int pno;
+	private int ono;
 	private Date orderdate;
 	private String brand;
 	private String pname;
@@ -36,6 +37,13 @@ public class PurchaseVO {
 	}
 	public PurchaseVO setPno(int pno) {
 		this.pno = pno;
+		return this;
+	}
+	public int getOno() {
+		return ono;
+	}
+	public PurchaseVO setOno(int ono) {
+		this.ono = ono;
 		return this;
 	}
 	public Date getOrderdate() {
@@ -110,7 +118,7 @@ public class PurchaseVO {
 	}
 
 	public String toString() {
-		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", productthumurl= "
+		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", ono = "+ono+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", productthumurl= "
 				+productthumurl+", optioncolor= "+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+", price= "+price+", shippingfee= "+shippingfee
 				+", deliverystatus= "+deliverystatus+"] ";
 	}

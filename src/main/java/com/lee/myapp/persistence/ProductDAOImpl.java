@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewVO;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO{
@@ -58,6 +59,13 @@ public class ProductDAOImpl implements ProductDAO{
 	public int isSeller(int mno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".isSeller",mno);
+	}
+
+	//Reivew
+	@Override
+	public int reviewRegist(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+".reviewRegist", review);
 	}
 
 	//Header banner

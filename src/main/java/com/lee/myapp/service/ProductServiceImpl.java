@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewVO;
 import com.lee.myapp.persistence.ProductDAO;
 
 @Service
@@ -56,6 +57,13 @@ public class ProductServiceImpl implements ProductService{
 	public int isSeller(int mno) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.isSeller(mno);
+	}
+
+	//Review
+	@Override
+	public int reviewRegist(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.reviewRegist(review);
 	}
 
 	//Header banner

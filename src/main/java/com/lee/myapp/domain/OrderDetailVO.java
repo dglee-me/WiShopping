@@ -6,11 +6,13 @@ public class OrderDetailVO {
 		    orderDetailno int primary key,
 		    orderno varchar2(50) not null,
 		    pno int not null,
+		    ONO INT NOT NULL,
 		    optioncolor varchar2(50) not null,
             optionsize varchar2(50) not null,
             inventory int not null
 		);
 		
+		ALTER TABLE TBL_ORDER_DETAIL ADD CONSTRAINT TBL_ORDER_DETAIL_ONO FOREIGN KEY(ONO) REFERENCES TBL_PRODUCT_OPTION(ONO);
 		ALTER TABLE TBL_ORDER_DETAIL ADD CONSTRAINT TBL_ORDER_DETAIL_ORDERNO FOREIGN KEY(ORDERNO) REFERENCES TBL_ORDER(ORDERNO);
 	 */
 	private int orderdetailno;

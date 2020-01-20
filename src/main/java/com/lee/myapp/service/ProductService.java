@@ -5,6 +5,7 @@ import java.util.List;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewVO;
 
 public interface ProductService {
 	public int register(ProductVO product) throws Exception;
@@ -15,6 +16,9 @@ public interface ProductService {
 	public int checkInventory(int ono) throws Exception;
 
 	public int isSeller(int mno) throws Exception;
+	
+	//Review
+	public int reviewRegist(ReviewVO review) throws Exception;
 	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;

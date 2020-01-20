@@ -33,7 +33,7 @@ public class ServiceController {
 		logger.info("-------- Service : NOTICE MAIN METHOD=GET --------");
 		
 		List<BoardVO> noticeList = new ArrayList<BoardVO>();
-		cri.setCategory("��������");
+		cri.setCategory("공지사항");
 		noticeList = boardService.listPaging(cri);
 		
 		PageMaker pageMaker = new PageMaker();

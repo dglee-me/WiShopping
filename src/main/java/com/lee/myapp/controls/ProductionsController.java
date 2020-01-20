@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewVO;
 import com.lee.myapp.service.ProductService;
 import com.lee.myapp.utils.UploadFileUtils;
 
@@ -138,6 +139,32 @@ public class ProductionsController {
 		logger.info("-------- VIEW : PRODUCTIONS CHECK OPTION METHOD=POST --------");
 		
 		int result = productService.checkInventory(ono);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/review", method=RequestMethod.POST)
+	public int productionReviewPOST(HttpSession session, ReviewVO review, MultipartFile image) throws Exception{
+		logger.info("-------- REGIST : PRODUCTION REVIEW REGIST METHOD=POST --------");
+
+		int result = 0;
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		if(member != null) {
+			review.setMno(member.getMno());
+			
+			if(image != null) {
+				String imgUploadPath = uploadPath + "/" + "imgUpload";
+				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+
+				review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
+			}
+			
+			productService.reviewRegist(review);
+			
+			result = 1;
+		}
 		
 		return result;
 	}
