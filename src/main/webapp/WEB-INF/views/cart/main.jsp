@@ -343,6 +343,34 @@
 				}
 			});
 		});
+		
+		//When Direct order btn clicked
+		$(document).ready(function(){
+			$(".carted-product_order-btn").click(function(){
+				var option = $(this).closest("article").children(".carted-product_option-list").children("li");
+				
+				var ono = new Array();
+				var number = "";
+				
+				$.each(option, function(){
+					ono.push($(this).attr("data-number"));
+					
+					var input = $(this).children().children(".selling-option-item_controls").children(".selling-option-item_quantity").children().children("select");
+					number += input.val() + ";";
+				});
+				
+				$.ajax({
+					url : "/WiShopping/order/order_request",
+					type : "post",
+					data : {ono : ono,
+							number : number		
+					},success : function(result){
+						if(result == 1)	location.href="/WiShopping/order/pre_order"; 
+						else location.href="/WiShopping/error";
+					}
+				});
+			});
+		});
 	</script>
 </head>
 <body>
@@ -351,7 +379,7 @@
 		<div class="commerce-cart-empty">
 			<div class="commerce-cart-empty_content">
 				<img class="commerce-cart-empty_content_image" src="${pageContext.request.contextPath}/resources/image/cart-empty-placeholder.png" alt="장바구니가 비었습니다.">
-				<a class="button button-color-blue commerce-cart-empty_content_button" href="${pageContext.request.contextPath}/category/group/fashion">상품 담으러 가기</a>
+				<a class="button button-color-blue commerce-cart-empty_content_button" href="${pageContext.request.contextPath}/category/group/fashion?category2=all">상품 담으러 가기</a>
 			</div>
 		</div>
 	</c:if>

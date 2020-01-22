@@ -317,6 +317,7 @@
 	});
 	
 	$(document).on("click",".modal_large-close_button",function(){
+		$("body").css("overflow-y","scroll");
 		$("#modal-image-modal_modal").remove();
 	})
 	
@@ -414,6 +415,25 @@
 			}
 		})
 	});
+	
+	//Change the active state to the corresponding Nav when scrolling
+	$(window).scroll(function(){
+		var $window = $(window);
+		var $body = $("body");
+		
+		var scroll = $window.scrollTop() + ($window.height() / 3);
+		
+		var info = $("#production-selling-information").offset().top;
+		var review = $("#production-selling-review").offset().top;
+
+		if(scroll >= info &&scroll <= review){
+			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
+			$($(".product_selling_nav_item")[0]).addClass("product_selling_nav_item-active");
+		}else if(scroll >= review){
+			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
+			$($(".product_selling_nav_item")[1]).addClass("product_selling_nav_item-active");
+		}
+	});
 </script>
 <meta charset="UTF-8">
 <title>위쇼핑! - ${product.pname}</title>
@@ -428,12 +448,23 @@
 					<ul class="product-selling-category_breadcrumb">
 						<li class="commerce-category-list"><a href="${pageContext.request.contextPath}/">홈</a></li>
 						<li class="commerce-category-list">
-							<c:if test="${product.category1 eq '패션'}"><a href="${pageContext.request.contextPath}/category/group/fashion">${product.category1}</a></c:if>
-							<c:if test="${product.category1 eq '잡화'}"><a href="${pageContext.request.contextPath}/category/group/accessories">${product.category1}</a></c:if>
-							<c:if test="${product.category1 eq '인테리어'}"><a href="${pageContext.request.contextPath}/category/group/interior">${product.category1}</a></c:if>
-							<c:if test="${product.category1 eq '가전·디지털'}"><a href="${pageContext.request.contextPath}/category/group/digital">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '패션'}"><a href="${pageContext.request.contextPath}/category/group/fashion?category2=all">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '잡화'}"><a href="${pageContext.request.contextPath}/category/group/accessories?category2=all">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '인테리어'}"><a href="${pageContext.request.contextPath}/category/group/interior?category2=all">${product.category1}</a></c:if>
+							<c:if test="${product.category1 eq '가전·디지털'}"><a href="${pageContext.request.contextPath}/category/group/digital?category2=all">${product.category1}</a></c:if>
 						</li>
-						<li class="commerce-category-list"><a href="javascript:void(0);">${product.category2}</a></li>
+						<c:if test="${product.category1 eq '패션'}">
+							<li class="commerce-category-list"><a href="${pageContext.request.contextPath}/category/group/fashion?category2=${product.category2}">${product.category2}</a></li>
+						</c:if>
+						<c:if test="${product.category1 eq '잡화'}">
+							<li class="commerce-category-list"><a href="${pageContext.request.contextPath}/category/group/accessories?category2=${product.category2}">${product.category2}</a></li>
+						</c:if>
+						<c:if test="${product.category1 eq '인테리어'}">
+							<li class="commerce-category-list"><a href="${pageContext.request.contextPath}/category/group/interior?category2=${product.category2}">${product.category2}</a></li>
+						</c:if>
+						<c:if test="${product.category1 eq '가전·디지털'}">
+							<li class="commerce-category-list"><a href="${pageContext.request.contextPath}/category/group/digital?category2=${product.category2}">${product.category2}</a></li>
+						</c:if>
 					</ul>
 				</nav>
 				<div class="product-selling-overview_container row">
