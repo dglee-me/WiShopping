@@ -80,6 +80,42 @@
 		 ORDER BY A.WRITEDATE DESC
 	</select>
 	
+	<select id="reviewLike" resultType="com.lee.myapp.domain.ReviewLikeVO">
+		SELECT A.RNO, B.LIKE_CHECK
+		  FROM TBL_PRODUCT_REVIEW A INNER JOIN TBL_PRODUCT_REVIEW_LIKE B ON A.RNO = B.RNO
+		 WHERE A.PNO = #{pno} AND B.MNO = #{mno}
+	</select>
+	
+	<select id="reviewLikeCount" resultType="com.lee.myapp.domain.ReviewLikeVO">
+		SELECT B.RNO, COUNT(*) AS COUNT
+		  FROM TBL_PRODUCT_REVIEW A INNER JOIN TBL_PRODUCT_REVIEW_LIKE B ON A.RNO = B.RNO
+		 WHERE A.PNO = #{pno}
+		 GROUP BY B.RNO
+         ORDER BY B.RNO DESC
+	</select>
+	
+	<update id="updateReviewStatus">
+		 UPDATE TBL_ORDER
+		    SET REVIEW_STATUS = 1
+		  WHERE MNO = #{mno} AND ONO = (SELECT ONO FROM TBL_ORDER WHERE MNO = #{mno} AND ORDERNO = (SELECT ORDERNO FROM TBL_ORDER_DETAIL WHERE ONO = #{ono}))
+	</update>
+	
+	<select id="checkLike" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM TBL_PRODUCT_REVIEW_LIKE
+		 WHERE MNO = #{mno} AND RNO = #{rno}
+	</select>
+	
+	<insert id="registLike">
+		INSERT INTO TBL_PRODUCT_REVIEW_LIKE VALUES(TBL_PRODUCT_REVIEW_LIKE_SEQ.NEXTVAL,#{rno},#{mno},1)
+	</insert>
+	
+	<delete id="deleteLike">
+		DELETE 
+		  FROM TBL_PRODUCT_REVIEW_LIKE
+		 WHERE MNO = #{mno} AND RNO = #{rno}
+	</delete>
+	
 	<!-- Header banner -->
 	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
 		SELECT *

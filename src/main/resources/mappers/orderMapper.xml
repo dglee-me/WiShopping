@@ -26,8 +26,8 @@
 	</select>
 
 	<insert id="orderInfo">
-		INSERT INTO TBL_ORDER(ORDERNO,MNO,ORDER_REC,ZIPCODE,RECEIVED_AT,RECEIVED_AT_DETAIL,RECEIVED_PHONE,DELIVERY_MESSAGE,PAYER_NAME,PAYER_EMAIL,PAYER_PHONE,AMOUNT)
-		VALUES(#{orderno},#{mno},#{orderrec},#{zipcode},#{receivedat},#{receivedatdetail},#{receivedphone},#{deliverymessage},#{payername},#{payeremail},#{payerphone},#{amount})
+		INSERT INTO TBL_ORDER(ONO,ORDERNO,MNO,ORDER_REC,ZIPCODE,RECEIVED_AT,RECEIVED_AT_DETAIL,RECEIVED_PHONE,DELIVERY_MESSAGE,PAYER_NAME,PAYER_EMAIL,PAYER_PHONE,AMOUNT)
+		VALUES(TBL_ORDER_ONO_SEQ.NEXTVAL,#{orderno},#{mno},#{orderrec},#{zipcode},#{receivedat},#{receivedatdetail},#{receivedphone},#{deliverymessage},#{payername},#{payeremail},#{payerphone},#{amount})
 	</insert>
 	
 	<!-- Cart To order case -->

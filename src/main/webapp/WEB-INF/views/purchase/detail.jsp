@@ -147,7 +147,7 @@
 						</div>
 						<div class="field">
 							<div class="title">배송메모</div>
-							<div class="content">${order.delivery_message}</div>
+							<div class="content">${order.deliverymessage}</div>
 						</div>
 					</div>
 				</div>

@@ -32,6 +32,7 @@ public class ReviewVO {
 	private String content;
 	private Date writedate;
 	private String contentimg;
+	private int likecheck;
 	
 	public int getRno() {
 		return rno;
@@ -103,9 +104,16 @@ public class ReviewVO {
 		this.contentimg = contentimg;
 		return this;
 	}
+	public int getLikecheck() {
+		return likecheck;
+	}
+	public ReviewVO setLikecheck(int likecheck) {
+		this.likecheck = likecheck;
+		return this;
+	}
 	
 	public String toString() {
 		return "ReviewVO = [rno = "+rno+", pno = "+pno+", mno = "+mno+", name = "+name+", ono = "+ono+", optioncolor = "+optioncolor+", optionsize = "+optionsize+", content = "
-				+content+", writedate = "+writedate+", contentimg = "+contentimg+" ]";
+				+content+", writedate = "+writedate+", contentimg = "+contentimg+", likeCheck = "+likecheck+" ]";
 	}
 }

@@ -124,6 +124,7 @@
 		});
 	});
 	
+	//Regist review
 	$(document).on("click",".submit",function(){
 		var formData = new FormData($("#production_review_form")[0]);
 		
@@ -309,7 +310,9 @@
 							</div>
 							<div class="product_button">
 								<div class="button">
-									<button type="button" class="write_comments">리뷰쓰기</button>
+									<c:if test="${order.reviewstatus eq 0}">
+										<button type="button" class="write_comments">리뷰쓰기</button>
+									</c:if>
 								</div>
 							</div>
 						</div>

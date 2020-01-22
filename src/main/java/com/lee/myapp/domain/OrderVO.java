@@ -5,7 +5,8 @@ import java.sql.Date;
 public class OrderVO {
 	/* 
 		CREATE TABLE TBL_ORDER(
-		    ORDERNO VARCHAR2(50) PRIMARY KEY,
+		    ONO INT NOT NULL,
+		    ORDERNO VARCHAR2(50),
 		    MNO INT NOT NULL,
 		    ORDER_REC VARCHAR2(50) NOT NULL,
 		    ZIPCODE VARCHAR2(20) NOT NULL,
@@ -18,11 +19,13 @@ public class OrderVO {
 		    payer_phone varchar2(11) not null,
 		    amount int not null,
 		    orderdate date default sysdate,
-		    delivery_status int default 0
-		); 
-		
-		ALTER TABLE TBL_ORDER ADD CONSTRAINT TBL_ORDER_MNO FOREIGN KEY(MNO) REFERENCES MEMBER(MNO);
+		    delivery_status int default 0,
+		    REVIEW_STATUS INT DEFAULT 0,
+		    PRIMARY KEY(ONO),
+		    FOREIGN KEY(MNO) REFERENCES MEMBER(MNO)
+		);
 	 */
+	private int ono;
 	private String orderno;
 	private int mno;
 	private String orderrec;
@@ -37,7 +40,15 @@ public class OrderVO {
 	private int amount;
 	private Date orderdate;
 	private int deliverystatus;
+	private int reviewstatus;
 	
+	public int getOno() {
+		return ono;
+	}
+	public OrderVO setOno(int ono) {
+		this.ono = ono;
+		return this;
+	}
 	public String getOrderno() {
 		return orderno;
 	}
@@ -87,7 +98,7 @@ public class OrderVO {
 		this.receivedphone = receivedphone;
 		return this;
 	}
-	public String getDelivery_message() {
+	public String getDeliverymessage() {
 		return deliverymessage;
 	}
 	public OrderVO setDeliverymessage(String deliverymessage) {
@@ -136,10 +147,17 @@ public class OrderVO {
 		this.deliverystatus = deliverystatus;
 		return this;
 	}
+	public int getReviewstatus() {
+		return reviewstatus;
+	}
+	public OrderVO setReviewstatus(int reviewstatus) {
+		this.reviewstatus = reviewstatus;
+		return this;
+	}
 	
 	public String toString() {
-		return "OrderVO = [orderno= "+orderno+", mno= "+mno+", orderrec= "+orderrec+", zipcode= "+zipcode+", receivedat= "+receivedat+", receivedatdetail= "
+		return "OrderVO = [ono = "+ono+", orderno= "+orderno+", mno= "+mno+", orderrec= "+orderrec+", zipcode= "+zipcode+", receivedat= "+receivedat+", receivedatdetail= "
 				+receivedatdetail+", receivedphone= "+receivedphone+", deliverymessage= "+deliverymessage+", payername= "+payername+", payeremail= "+payeremail
-				+", payerphone= "+payerphone+", amount= "+amount+", orderdate= "+orderdate+", deliverystatus= "+deliverystatus+"]";
+				+", payerphone= "+payerphone+", amount= "+amount+", orderdate= "+orderdate+", deliverystatus= "+deliverystatus+", reviewstatus = "+reviewstatus+"]";
 	}
 }

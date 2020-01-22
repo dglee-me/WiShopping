@@ -33,6 +33,7 @@
 				href.top -= 80;
 			}else if(nav == "리뷰"){
 				var href = $("#production-selling-review").offset();
+				href.top -= 40;
 			}
 			
 			$("html, body").animate({scrollTop : href.top},300);
@@ -289,6 +290,130 @@
 			}
 		});
 	});
+	
+	//image layer pop-up open when review image clicked
+	$(document).ready(function(){
+		$(".production-review-item_img").click(function(){
+			$("body").css("overflow-y","hidden");
+			
+			var img = $(this).attr("src");
+			
+			var div = document.createElement("div");
+			div.className = "modal-root";
+			div.innerHTML =
+				"<div id='modal-image-modal_modal' class='modal modal-image-modal_modal'>"+
+				"<div class='modal_dialog image-modal_modal_dialog'>"+
+				"<img src='"+img+"'"+
+				"</div>"+
+				"</div>"+
+				"<div class='modal_larg-close modal-image-modal_modal_large-close'>"+
+				"<button class='modal_large-close_button' type='button'>"+
+				"<svg width='20' height='20' viewBox='0 0 20 20' fill='currentColor' preserveAspectRatio='xMidYMid meet'>"+
+				"<path fill-rule='nonzero' d='M11.6 10l7.1 7.1-1.6 1.6-7.1-7.1-7.1 7.1-1.6-1.6L8.4 10 1.3 2.9l1.6-1.6L10 8.4l7.1-7.1 1.6 1.6z'></path>"+
+				"</svg></button></div>"
+				
+			$("body").append(div);
+		});
+	});
+	
+	$(document).on("click",".modal_large-close_button",function(){
+		$("#modal-image-modal_modal").remove();
+	})
+	
+	//Delete review layer pop-up when click outside review area
+	$(document).on("click","html",function(e){
+		if($(e.target).hasClass("modal-image-modal_modal")){
+			$("body").css("overflow-y","scroll");
+			$("#modal-image-modal_modal").remove();
+		}
+	});
+	
+	$(document).ready(function(){
+		$(".product_selling_section-right button").click(function(){
+			location.href="/WiShopping/purchase/list";			
+		});
+	});
+	
+	//When review like btn clicked
+	$(document).ready(function(){
+		$(".production-review-item_like_btn").click(function(){
+			var button = $(this);
+			
+			var rno = $(this).closest("article").attr("data-number");
+			
+			$.ajax({
+				url : "/WiShopping/productions/review_like",
+				type : "post",
+				data : {rno : rno},
+				success : function(result){
+					if(result == 0) location.href = "/WiShopping/auth/login";
+					else if(result == 1){
+						//When like complete
+						button.addClass("production-review-item_like_btn-active");
+					}else if(result == 2){
+						//When like cancel
+						button.removeClass("production-review-item_like_btn-active");
+					}
+				}
+			});
+		});
+	});
+	
+	//Check if the like btn when entering the view
+	$(document).ready(function(){
+		var url = location.href;
+		var pno = url.slice(url.indexOf("=") + 1);
+		
+		$.ajax({
+			url : "/WiShopping/productions/likecheck",
+			type : "post",
+			data : {pno : pno},
+			success : function(list){
+				var review = $(".production-review-item");
+				
+				$.each(list, function(){
+					var rno = this.rno;
+					
+					for(var i=0;i<review.length;i++){
+						var temp = $(review[i]);
+						
+						if(temp.attr("data-number") == rno){
+							temp.children(".production-review-item_like").children("button").addClass("production-review-item_like_btn-active");
+						}
+					}
+				});
+			}
+		});
+	});
+	
+	//review like count setting when entering the view
+	$(document).ready(function(){
+		var url = location.href;
+		var pno = url.slice(url.indexOf("=") + 1);
+		
+		$.ajax({
+			url : "/WiShopping/productions/likecount",
+			type : "post",
+			data : {pno : pno},
+			success : function(list){
+				var review = $(".production-review-item");
+				
+				$.each(list, function(){
+					var rno = this.rno;
+					var count = this.count;
+					
+					for(var i=0;i<review.length;i++){
+						var temp = $(review[i]);
+						
+						if(temp.attr("data-number") == rno){
+							temp.children(".production-review-item_like")
+								.children(".production-review-item_like_text").children(".production-review-item_help_like_number").text(count);
+						}
+					}
+				});
+			}
+		})
+	});
 </script>
 <meta charset="UTF-8">
 <title>위쇼핑! - ${product.pname}</title>
@@ -485,7 +610,7 @@
 								<div class="production-review-feed_list">
 									<c:forEach var="review" items="${reviews}">
 									<div class="production-review-feed-item_container">
-										<article class="production-review-item">
+										<article class="production-review-item" data-number="${review.rno}">
 											<div class="production-review-item_writer">
 												<a href="javascript:void(0);">
 													<img src="${pageContext.request.contextPath}/resources/image/none_user.png" class="production-review-item_writer_img">
@@ -496,10 +621,16 @@
 												</div>
 											</div>
 											<p class="production-review-item_name">색상: ${review.optioncolor} / 옵션: ${review.optionsize}</p>
-											<button type="button" class="production-review-item__img__btn">
+											<button type="button" class="production-review-item_img_btn">
 												<img class="production-review-item_img" src="${pageContext.request.contextPath}${review.contentimg}">
 											</button>
 											<p class="production-review-item_description">${review.content}</p>
+											<div class="production-review-item_like">
+												<button type="button" class="production-review-item_like_btn">좋아요</button>
+												<div class="production-review-item_like_text">
+													<span class="production-review-item_help_like_number">0</span>명이 좋아했습니다.
+												</div>
+											</div>
 										</article>
 									</div>
 									</c:forEach>

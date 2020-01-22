@@ -5,6 +5,7 @@ import java.util.List;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 
 public interface ProductDAO {
@@ -20,6 +21,15 @@ public interface ProductDAO {
 	//Review
 	public int reviewRegist(ReviewVO review) throws Exception;
 	public List<ReviewVO> reviewList(int pno) throws Exception;
+	public int updateReviewStatus(ReviewVO review) throws Exception;
+	
+	//Review like
+	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception;
+	public List<ReviewLikeVO> reviewLikeCount(int pno) throws Exception;
+	
+	public int checkLike(ReviewLikeVO like) throws Exception;
+	public int registLike(ReviewLikeVO like) throws Exception;
+	public int deleteLike(ReviewLikeVO like) throws Exception;
 	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;

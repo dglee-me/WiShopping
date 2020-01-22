@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 import com.lee.myapp.persistence.ProductDAO;
 
@@ -70,6 +71,42 @@ public class ProductServiceImpl implements ProductService{
 	public List<ReviewVO> reviewList(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.reviewList(pno);
+	}
+
+	@Override
+	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.reviewLike(review);
+	}
+
+	@Override
+	public List<ReviewLikeVO> reviewLikeCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.reviewLikeCount(pno);
+	}
+
+	@Override
+	public int updateReviewStatus(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.updateReviewStatus(review);
+	}
+
+	@Override
+	public int checkLike(ReviewLikeVO like) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.checkLike(like);
+	}
+
+	@Override
+	public int registLike(ReviewLikeVO like) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.registLike(like);
+	}
+
+	@Override
+	public int deleteLike(ReviewLikeVO like) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.deleteLike(like);
 	}
 	
 	//Header banner

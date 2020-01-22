@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 
 @Repository
@@ -71,9 +72,45 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public List<ReviewVO> reviewList(int pno) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".reviewList",pno);
+		return sqlSession.selectList(namespace+".reviewList", pno);
 	}
 
+	@Override
+	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".reviewLike", review);
+	}
+
+	@Override
+	public List<ReviewLikeVO> reviewLikeCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".reviewLikeCount", pno);
+	}
+
+	@Override
+	public int updateReviewStatus(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".updateReviewStatus", review);
+	}
+
+	@Override
+	public int checkLike(ReviewLikeVO like) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".checkLike", like);
+	}
+
+	@Override
+	public int registLike(ReviewLikeVO like) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(namespace+".registLike", like);
+	}
+
+	@Override
+	public int deleteLike(ReviewLikeVO like) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".deleteLike", like);
+	}
+	
 	//Header banner
 	@Override
 	public List<BannerVO> mainBannerList(String area) throws Exception {

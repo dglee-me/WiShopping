@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
+import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 import com.lee.myapp.service.ProductService;
 import com.lee.myapp.utils.UploadFileUtils;
@@ -111,7 +112,7 @@ public class ProductionsController {
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public void productionViewGET(Model model,int pno) throws Exception{
+	public void productionViewGET(HttpSession session, Model model,int pno) throws Exception{
 		logger.info("-------- VIEW : PRODUCTIONS METHOD=GET --------");
 		ProductVO product = productService.view(pno);
 		
@@ -123,7 +124,7 @@ public class ProductionsController {
 		for(int i=0;i<detailUrl.length;i++) {
 			imageList.add(detailUrl[i]);
 		}
-
+		
 		//Setting
 		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
@@ -162,11 +163,66 @@ public class ProductionsController {
 				review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
 			}
 			
+			System.out.println(review.toString());
+			
 			productService.reviewRegist(review);
+			productService.updateReviewStatus(review);
 			
 			result = 1;
 		}
 		
 		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/review_like", method=RequestMethod.POST)
+	public int reviewLikePOST(HttpSession session, ReviewLikeVO like) throws Exception{
+		logger.info("-------- UPDATE : REVIEW LIKE UPDATE METHOD=POST --------");
+		
+		int result = 0;
+		
+		MemberVO member = (MemberVO)session.getAttribute("login");
+		if(member != null) {
+			like.setMno(member.getMno());
+			
+			int check = productService.checkLike(like);
+			
+			if(check == 0) {
+				result = 1;
+				productService.registLike(like);
+			}else {
+				result = 2;
+				productService.deleteLike(like);
+			}
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/likecheck", method=RequestMethod.POST)
+	public List<ReviewLikeVO> likeCheckPOST(HttpSession session, ReviewVO review) throws Exception{
+		logger.info("-------- SETTING : REVIEW LIKE CHECK METHOD = POST --------");
+		
+		List<ReviewLikeVO> list = new ArrayList<ReviewLikeVO>();
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		if(member != null) {
+			review.setMno(member.getMno());
+			
+			list = productService.reviewLike(review);
+		}
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/likecount", method=RequestMethod.POST)
+	public List<ReviewLikeVO> likeCountPOST(int pno) throws Exception{
+		logger.info("-------- SETTING : REVIEW LIKE COUNT METHOD = POST --------");
+		
+		List<ReviewLikeVO> list = productService.reviewLikeCount(pno);
+		
+		return list;
 	}
 }
