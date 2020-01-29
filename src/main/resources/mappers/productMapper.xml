@@ -80,6 +80,29 @@
 		 ORDER BY A.WRITEDATE DESC
 	</select>
 	
+	<select id="reviewListPaging" resultType="com.lee.myapp.domain.ReviewVO">
+		<![CDATA[
+		SELECT *
+		  FROM(
+		       SELECT ROWNUM AS RNUM, A.*
+		         FROM(    
+		              SELECT A.RNO, A.PNO, A.MNO, (SELECT NAME FROM MEMBER WHERE MNO = B.MNO) AS NAME, A.ONO, A.OPTION_COLOR, A.OPTION_SIZE, A.CONTENT, A.WRITEDATE, A.CONTENT_IMG 
+		                FROM TBL_PRODUCT_REVIEW A INNER JOIN MEMBER B ON A.MNO = B.MNO
+		               WHERE A.PNO = #{pno}
+		               ORDER BY A.WRITEDATE DESC
+		         ) A
+		        WHERE ROWNUM <= #{rowEnd}
+		      )
+		 WHERE RNUM >= #{rowStart}
+		 ]]>
+	</select>
+	
+	<select id="reviewListCount" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM TBL_PRODUCT_REVIEW
+		 WHERE PNO = #{pno}
+	</select>
+	
 	<select id="reviewLike" resultType="com.lee.myapp.domain.ReviewLikeVO">
 		SELECT A.RNO, B.LIKE_CHECK
 		  FROM TBL_PRODUCT_REVIEW A INNER JOIN TBL_PRODUCT_REVIEW_LIKE B ON A.RNO = B.RNO

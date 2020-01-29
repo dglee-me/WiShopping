@@ -493,7 +493,6 @@
 																			</ul>
 																			<div class="carted-product_footer">
 																				<span class="carted-product_footer_left">
-																					<button class="carted-product_edit-btn" type="button">옵션변경</button>
 																					<button class="carted-product_order-btn" type="button">바로구매</button>
 																				</span>
 																				<span class="carted-product_subtotal">

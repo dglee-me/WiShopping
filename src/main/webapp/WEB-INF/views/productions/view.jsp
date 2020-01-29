@@ -34,6 +34,9 @@
 			}else if(nav == "리뷰"){
 				var href = $("#production-selling-review").offset();
 				href.top -= 40;
+			}else if(nav == "문의"){
+				var href = $("#production-selling-question").offset();
+				href.top -= 40;
 			}
 			
 			$("html, body").animate({scrollTop : href.top},300);
@@ -292,28 +295,26 @@
 	});
 	
 	//image layer pop-up open when review image clicked
-	$(document).ready(function(){
-		$(".production-review-item_img").click(function(){
-			$("body").css("overflow-y","hidden");
+	$(document).on("click", ".production-review-item_img", function(){
+		$("body").css("overflow-y","hidden");
+		
+		var img = $(this).attr("src");
+		
+		var div = document.createElement("div");
+		div.className = "modal-root";
+		div.innerHTML =
+			"<div id='modal-image-modal_modal' class='modal modal-image-modal_modal'>"+
+			"<div class='modal_dialog image-modal_modal_dialog'>"+
+			"<img src='"+img+"'"+
+			"</div>"+
+			"</div>"+
+			"<div class='modal_larg-close modal-image-modal_modal_large-close'>"+
+			"<button class='modal_large-close_button' type='button'>"+
+			"<svg width='20' height='20' viewBox='0 0 20 20' fill='currentColor' preserveAspectRatio='xMidYMid meet'>"+
+			"<path fill-rule='nonzero' d='M11.6 10l7.1 7.1-1.6 1.6-7.1-7.1-7.1 7.1-1.6-1.6L8.4 10 1.3 2.9l1.6-1.6L10 8.4l7.1-7.1 1.6 1.6z'></path>"+
+			"</svg></button></div>"
 			
-			var img = $(this).attr("src");
-			
-			var div = document.createElement("div");
-			div.className = "modal-root";
-			div.innerHTML =
-				"<div id='modal-image-modal_modal' class='modal modal-image-modal_modal'>"+
-				"<div class='modal_dialog image-modal_modal_dialog'>"+
-				"<img src='"+img+"'"+
-				"</div>"+
-				"</div>"+
-				"<div class='modal_larg-close modal-image-modal_modal_large-close'>"+
-				"<button class='modal_large-close_button' type='button'>"+
-				"<svg width='20' height='20' viewBox='0 0 20 20' fill='currentColor' preserveAspectRatio='xMidYMid meet'>"+
-				"<path fill-rule='nonzero' d='M11.6 10l7.1 7.1-1.6 1.6-7.1-7.1-7.1 7.1-1.6-1.6L8.4 10 1.3 2.9l1.6-1.6L10 8.4l7.1-7.1 1.6 1.6z'></path>"+
-				"</svg></button></div>"
-				
-			$("body").append(div);
-		});
+		$("body").append(div);
 	});
 	
 	$(document).on("click",".modal_large-close_button",function(){
@@ -336,27 +337,29 @@
 	});
 	
 	//When review like btn clicked
-	$(document).ready(function(){
-		$(".production-review-item_like_btn").click(function(){
-			var button = $(this);
-			
-			var rno = $(this).closest("article").attr("data-number");
-			
-			$.ajax({
-				url : "/WiShopping/productions/review_like",
-				type : "post",
-				data : {rno : rno},
-				success : function(result){
-					if(result == 0) location.href = "/WiShopping/auth/login";
-					else if(result == 1){
-						//When like complete
-						button.addClass("production-review-item_like_btn-active");
-					}else if(result == 2){
-						//When like cancel
-						button.removeClass("production-review-item_like_btn-active");
-					}
+	$(document).on("click",".production-review-item_like_btn",function(){
+		var button = $(this);
+		
+		var like = $(this).siblings().children("span");
+		
+		var rno = $(this).closest("article").attr("data-number");
+
+		$.ajax({
+			url : "/WiShopping/productions/review_like",
+			type : "post",
+			data : {rno : rno},
+			success : function(result){
+				if(result == 0) location.href = "/WiShopping/auth/login";
+				else if(result == 1){
+					//When like complete
+					button.addClass("production-review-item_like_btn-active");
+					like.text(parseInt(like.text(),10)+1);
+				}else if(result == 2){
+					//When like cancel
+					button.removeClass("production-review-item_like_btn-active");
+					like.text(like.text()-1);
 				}
-			});
+			}
 		});
 	});
 	
@@ -433,6 +436,449 @@
 			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
 			$($(".product_selling_nav_item")[1]).addClass("product_selling_nav_item-active");
 		}
+	});
+	
+
+	$(document).ready(function(){
+		//Prev button click event
+		$(".list-paginator_prev").click(function(){
+			var url = decodeURI(location.href);
+			var pno = url.slice(url.indexOf('=') + 1);
+			
+			var page = parseInt($(".list-paginator_page.selected").text(),10) - 1;
+			var prev_page = $(".list-paginator_page.selected").parent().prev().children();
+
+			if(page > 0){
+				if(page >= 9){
+					var ul = $(".list-paginator li:first-child");
+					
+					var li = document.createElement("li");
+					li.innerHTML = "<button class='list-paginator_page'>" + (parseInt(page,10) - 8) + "</button>";
+
+					$(".selected").parent().remove();
+					ul.after(li);
+				}
+				
+				$.ajax({
+					url : "/WiShopping/productions/reviewListUpdate",
+					type : "post",
+					data : {
+						page : page,
+						pno : pno	
+					},success : function(map){
+						$(".production-review-feed-item_container").remove(); //Delete an existing oul
+
+						var reviews = map.reviews;
+						var likecheck = map.likecheck;
+						var count = map.count;
+						
+						$.each(reviews, function(){
+							//date fomrat init
+							var date = new Date(this.writedate);
+							
+							var year = date.getFullYear();
+							var month = (1 + date.getMonth());
+							month = month >= 10 ? month : "0" + month;
+							var day = date.getDate();
+							
+							date = year + "-" + month + "-" +day;
+
+							var check = false;
+							
+							for(var i=0;i<likecheck.length;i++){
+								if(this.rno == likecheck[i].rno){
+									check = true;
+								}
+							}
+							
+							var likeCount = 0;
+							
+							if(check == true){
+								//Setting like count
+								for(var i=0;i<count.length;i++){
+									if(this.rno == count[i].rno){
+										likeCount = count[i].count;
+									}
+								}
+								
+								var div = document.createElement("div");
+								div.className = "production-review-feed-item_container";
+								div.innerHTML =
+									"<article class='production-review-item' data-number="+this.rno+">"+
+									"<div class='production-review-item_writer'>"+
+									"<a href='javascript:void(0);'>"+
+									"<img src='${pageContext.request.contextPath}/resources/image/none_user.png' class='production-review-item_writer_img'>"+
+									"</a>"+
+									"<div class='production-review-item_writer_info'>"+
+									"<p class='production-review-item_writer_info_name'>"+this.name+"</p>"+
+									"<span class='production-review-item_writer_info_date'>"+date+"</span>"+
+									"</div>"+
+									"</div>"+
+									"<p class='production-review-item_name'>색상: "+this.optioncolor+" / 옵션: "+this.optionsize+"</p>"+
+									"<button type='button' class='production-review-item_img_btn'>"+
+									"<img class='production-review-item_img' src='${pageContext.request.contextPath}"+this.contentimg+"'>"+
+									"</button>"+
+									"<p class='production-review-item_description'>"+this.content+"</p>"+
+									"<div class='production-review-item_like'>"+
+									"<button type='button' class='production-review-item_like_btn production-review-item_like_btn-active'>좋아요</button>"+
+									"<div class='production-review-item_like_text'>"+
+									"<span class='production-review-item_help_like_number'>"+likeCount+"</span>명이 좋아했습니다."+
+									"</div>"+
+									"</div>"+
+									"</article>"
+							}else{
+								//Setting like count
+								for(var i=0;i<count.length;i++){
+									if(this.rno == count[i].rno){
+										likeCount = count[i].count;
+									}
+								}
+
+								var div = document.createElement("div");
+								div.className = "production-review-feed-item_container";
+								div.innerHTML =
+									"<article class='production-review-item' data-number="+this.rno+">"+
+									"<div class='production-review-item_writer'>"+
+									"<a href='javascript:void(0);'>"+
+									"<img src='${pageContext.request.contextPath}/resources/image/none_user.png' class='production-review-item_writer_img'>"+
+									"</a>"+
+									"<div class='production-review-item_writer_info'>"+
+									"<p class='production-review-item_writer_info_name'>"+this.name+"</p>"+
+									"<span class='production-review-item_writer_info_date'>"+date+"</span>"+
+									"</div>"+
+									"</div>"+
+									"<p class='production-review-item_name'>색상: "+this.optioncolor+" / 옵션: "+this.optionsize+"</p>"+
+									"<button type='button' class='production-review-item_img_btn'>"+
+									"<img class='production-review-item_img' src='${pageContext.request.contextPath}"+this.contentimg+"'>"+
+									"</button>"+
+									"<p class='production-review-item_description'>"+this.content+"</p>"+
+									"<div class='production-review-item_like'>"+
+									"<button type='button' class='production-review-item_like_btn'>좋아요</button>"+
+									"<div class='production-review-item_like_text'>"+
+									"<span class='production-review-item_help_like_number'>"+likeCount+"</span>명이 좋아했습니다."+
+									"</div>"+
+									"</div>"+
+									"</div>"+
+									"</article>"+
+									"</div>";
+							}
+							
+							$(".production-review-feed_list").append(div);
+							$(".selected").removeClass("selected");
+							prev_page.addClass("selected");
+						});
+					}
+				});
+			}
+		});
+		
+		//Next button click event
+		$(".list-paginator_next").click(function(){
+			var url = decodeURI(location.href);
+			var pno = url.slice(url.indexOf('=') + 1);
+			
+			var page = parseInt($(".list-paginator_page.selected").text(),10) + 1;
+			
+			$.ajax({
+				url : "/WiShopping/productions/reviewListCount",
+				type : "post",
+				data : {pno : pno},
+				success : function(count){
+					var page_nav = parseInt(count / 5,10) + 1;
+					
+					//Only run when the next page is less than or equal to the navigator
+					if(page <= page_nav){
+						//Create page button
+						if(page > 9){
+							$(".list-paginator li:first-child").next().remove();
+							
+							var ul = $(".list-paginator li:last-child");
+							
+							var li = document.createElement("li");
+							li.innerHTML = "<button class='list-paginator_page'>" + page + "</button>";
+								
+							ul.before(li);
+						}
+
+						var next_page = $(".list-paginator_page.selected").parent().next().children();
+						
+						$.ajax({
+							url : "/WiShopping/productions/reviewListUpdate",
+							type : "post",
+							async: false,
+							data : {
+								page : page,
+								pno : pno	
+							},success : function(map){
+								$(".production-review-feed-item_container").remove(); //Delete an existing review
+
+								var reviews = map.reviews;
+								var likecheck = map.likecheck;
+								var count = map.count;
+								
+								$.each(reviews, function(){
+									//date fomrat init
+									var date = new Date(this.writedate);
+									
+									var year = date.getFullYear();
+									var month = (1 + date.getMonth());
+									month = month >= 10 ? month : "0" + month;
+									var day = date.getDate();
+									
+									date = year + "-" + month + "-" +day;
+
+									var check = false;
+									
+									for(var i=0;i<likecheck.length;i++){
+										if(this.rno == likecheck[i].rno){
+											check = true;
+										}
+									}
+									
+									var likeCount = 0;
+									
+									if(check == true){
+										//Setting like count
+										for(var i=0;i<count.length;i++){
+											if(this.rno == count[i].rno){
+												likeCount = count[i].count;
+											}
+										}
+										
+										var div = document.createElement("div");
+										div.className = "production-review-feed-item_container";
+										div.innerHTML =
+											"<article class='production-review-item' data-number="+this.rno+">"+
+											"<div class='production-review-item_writer'>"+
+											"<a href='javascript:void(0);'>"+
+											"<img src='${pageContext.request.contextPath}/resources/image/none_user.png' class='production-review-item_writer_img'>"+
+											"</a>"+
+											"<div class='production-review-item_writer_info'>"+
+											"<p class='production-review-item_writer_info_name'>"+this.name+"</p>"+
+											"<span class='production-review-item_writer_info_date'>"+date+"</span>"+
+											"</div>"+
+											"</div>"+
+											"<p class='production-review-item_name'>색상: "+this.optioncolor+" / 옵션: "+this.optionsize+"</p>"+
+											"<button type='button' class='production-review-item_img_btn'>"+
+											"<img class='production-review-item_img' src='${pageContext.request.contextPath}"+this.contentimg+"'>"+
+											"</button>"+
+											"<p class='production-review-item_description'>"+this.content+"</p>"+
+											"<div class='production-review-item_like'>"+
+											"<button type='button' class='production-review-item_like_btn production-review-item_like_btn-active'>좋아요</button>"+
+											"<div class='production-review-item_like_text'>"+
+											"<span class='production-review-item_help_like_number'>"+likeCount+"</span>명이 좋아했습니다."+
+											"</div>"+
+											"</div>"+
+											"</div>"+
+											"</article>"+
+											"</div>";
+									}else{
+										//Setting like count
+										for(var i=0;i<count.length;i++){
+											if(this.rno == count[i].rno){
+												likeCount = count[i].count;
+											}
+										}
+
+										var div = document.createElement("div");
+										div.className = "production-review-feed-item_container";
+										div.innerHTML =
+											"<article class='production-review-item' data-number="+this.rno+">"+
+											"<div class='production-review-item_writer'>"+
+											"<a href='javascript:void(0);'>"+
+											"<img src='${pageContext.request.contextPath}/resources/image/none_user.png' class='production-review-item_writer_img'>"+
+											"</a>"+
+											"<div class='production-review-item_writer_info'>"+
+											"<p class='production-review-item_writer_info_name'>"+this.name+"</p>"+
+											"<span class='production-review-item_writer_info_date'>"+date+"</span>"+
+											"</div>"+
+											"</div>"+
+											"<p class='production-review-item_name'>색상: "+this.optioncolor+" / 옵션: "+this.optionsize+"</p>"+
+											"<button type='button' class='production-review-item_img_btn'>"+
+											"<img class='production-review-item_img' src='${pageContext.request.contextPath}"+this.contentimg+"'>"+
+											"</button>"+
+											"<p class='production-review-item_description'>"+this.content+"</p>"+
+											"<div class='production-review-item_like'>"+
+											"<button type='button' class='production-review-item_like_btn'>좋아요</button>"+
+											"<div class='production-review-item_like_text'>"+
+											"<span class='production-review-item_help_like_number'>"+likeCount+"</span>명이 좋아했습니다."+
+											"</div>"+
+											"</div>"+
+											"</div>"+
+											"</article>"+
+											"</div>";
+									}
+									
+									$(".production-review-feed_list").append(div);
+									$(".selected").removeClass("selected");
+									next_page.addClass("selected");
+								});
+							}
+						});
+					}
+				}
+			});
+		});
+	});
+
+
+	//Reflect when selecting comment page
+	$(document).on("click",".list-paginator_page",function(){
+		var curPage = $(this);
+		
+		var page = $(this).text();
+		var idx = $(".list-paginator_page");
+
+		$(".selected").removeClass("selected");
+
+		var url = decodeURI(location.href);
+		var pno = url.slice(url.indexOf('=') + 1);
+		
+		//ajax to know page list count
+		$.ajax({
+			url : "/WiShopping/productions/reviewListCount",
+			type : "post",
+			data : {pno : pno},
+			success : function(count){
+				var max = parseInt((count/5),10) + 1;
+				var min = page - 4;
+
+				if(min <= 0){
+					min = 1;
+
+					$.each(idx, function(){
+						$(this).text(min++);
+
+						if($(this).text() == page){
+							$(this).addClass("selected");
+						}
+					});
+				}else{
+					if((max - page) <= 4){
+						var min = max - 8;
+					}
+					
+					$.each(idx, function(){
+						$(this).text(min++);
+
+						if($(this).text() == page){
+							$(this).addClass("selected");
+						}
+					});
+				}
+				
+				//Reflect composition to match selected page
+				$.ajax({
+					url : "/WiShopping/productions/reviewListUpdate",
+					type : "post",
+					async: false,
+					data : {
+						page : page,
+						pno : pno	
+					},success : function(map){
+						$(".production-review-feed-item_container").remove(); //Delete an existing review
+
+						var reviews = map.reviews;
+						var likecheck = map.likecheck;
+						var count = map.count;
+						
+						$.each(reviews, function(){
+							//date fomrat init
+							var date = new Date(this.writedate);
+							
+							var year = date.getFullYear();
+							var month = (1 + date.getMonth());
+							month = month >= 10 ? month : "0" + month;
+							var day = date.getDate();
+							
+							date = year + "-" + month + "-" +day;
+
+							var check = false;
+							
+							for(var i=0;i<likecheck.length;i++){
+								if(this.rno == likecheck[i].rno){
+									check = true;
+								}
+							}
+							
+							var likeCount = 0;
+							
+							if(check == true){
+								//Setting like count
+								for(var i=0;i<count.length;i++){
+									if(this.rno == count[i].rno){
+										likeCount = count[i].count;
+									}
+								}
+								
+								var div = document.createElement("div");
+								div.className = "production-review-feed-item_container";
+								div.innerHTML =
+									"<article class='production-review-item' data-number="+this.rno+">"+
+									"<div class='production-review-item_writer'>"+
+									"<a href='javascript:void(0);'>"+
+									"<img src='${pageContext.request.contextPath}/resources/image/none_user.png' class='production-review-item_writer_img'>"+
+									"</a>"+
+									"<div class='production-review-item_writer_info'>"+
+									"<p class='production-review-item_writer_info_name'>"+this.name+"</p>"+
+									"<span class='production-review-item_writer_info_date'>"+date+"</span>"+
+									"</div>"+
+									"</div>"+
+									"<p class='production-review-item_name'>색상: "+this.optioncolor+" / 옵션: "+this.optionsize+"</p>"+
+									"<button type='button' class='production-review-item_img_btn'>"+
+									"<img class='production-review-item_img' src='${pageContext.request.contextPath}"+this.contentimg+"'>"+
+									"</button>"+
+									"<p class='production-review-item_description'>"+this.content+"</p>"+
+									"<div class='production-review-item_like'>"+
+									"<button type='button' class='production-review-item_like_btn production-review-item_like_btn-active'>좋아요</button>"+
+									"<div class='production-review-item_like_text'>"+
+									"<span class='production-review-item_help_like_number'>"+likeCount+"</span>명이 좋아했습니다."+
+									"</div>"+
+									"</div>"+
+									"</article>"
+							}else{
+								//Setting like count
+								for(var i=0;i<count.length;i++){
+									if(this.rno == count[i].rno){
+										likeCount = count[i].count;
+									}
+								}
+
+								var div = document.createElement("div");
+								div.className = "production-review-feed-item_container";
+								div.innerHTML =
+									"<article class='production-review-item' data-number="+this.rno+">"+
+									"<div class='production-review-item_writer'>"+
+									"<a href='javascript:void(0);'>"+
+									"<img src='${pageContext.request.contextPath}/resources/image/none_user.png' class='production-review-item_writer_img'>"+
+									"</a>"+
+									"<div class='production-review-item_writer_info'>"+
+									"<p class='production-review-item_writer_info_name'>"+this.name+"</p>"+
+									"<span class='production-review-item_writer_info_date'>"+date+"</span>"+
+									"</div>"+
+									"</div>"+
+									"<p class='production-review-item_name'>색상: "+this.optioncolor+" / 옵션: "+this.optionsize+"</p>"+
+									"<button type='button' class='production-review-item_img_btn'>"+
+									"<img class='production-review-item_img' src='${pageContext.request.contextPath}"+this.contentimg+"'>"+
+									"</button>"+
+									"<p class='production-review-item_description'>"+this.content+"</p>"+
+									"<div class='production-review-item_like'>"+
+									"<button type='button' class='production-review-item_like_btn'>좋아요</button>"+
+									"<div class='production-review-item_like_text'>"+
+									"<span class='production-review-item_help_like_number'>"+likeCount+"</span>명이 좋아했습니다."+
+									"</div>"+
+									"</div>"+
+									"</article>"
+							}
+							
+							$(".production-review-feed_list").append(div);
+							$(".selected").removeClass("selected");
+							curPage.addClass("selected");
+						});
+					}
+				});
+			}
+		});
 	});
 </script>
 <meta charset="UTF-8">
@@ -666,7 +1112,49 @@
 									</div>
 									</c:forEach>
 								</div>
+								<ul class="list-paginator production-review_paginator">
+									<li>
+										<button class="list-paginator_prev" type="button">
+											<svg width="26" height="26" viewBox="0 0 26 26" preserveAspectRatio="xMidYMid meet">
+												<g fill="none" fill-rule="evenodd">
+													<rect width="25" height="25" x=".5" y=".5" stroke="#DCDCDC" rx="4"></rect>
+												<g stroke="#424242" stroke-linecap="square" stroke-width="2">
+												<path d="M14.75 8.263L10.25 13M10.25 13l4.5 4.737"></path></g></g>
+											</svg>
+										</button>
+									</li>
+									<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+										<li>
+											<c:if test="${idx eq 1}">
+												<button class="list-paginator_page selected">${idx}</button>
+											</c:if>
+											<c:if test="${idx ne 1}">
+												<button class="list-paginator_page">${idx}</button>
+											</c:if>
+										</li>
+									</c:forEach>
+									<li>
+										<button class="list-paginator_next" type="button">
+											<svg width="26" height="26" viewBox="0 0 26 26" preserveAspectRatio="xMidYMid meet">
+												<g fill="none" fill-rule="evenodd" transform="matrix(-1 0 0 1 26 0)">
+													<rect width="25" height="25" x=".5" y=".5" stroke="#DCDCDC" rx="4"></rect>
+												<g stroke="#424242" stroke-linecap="square" stroke-width="2">
+												<path d="M14.75 8.263L10.25 13M10.25 13l4.5 4.737"></path></g></g>
+											</svg>
+										</button>
+									</li>
+								</ul>
 							</div>
+						</div>
+						<a id="production-selling-question"></a>
+						<div class="product_selling_section">
+							<header class="product_selling_section-header">
+								<h1 class="product_selling_section-header-title">문의 <span class="count">0</span>
+								</h1>
+								<div class="product_selling_section-right">
+									<button>문의하기</button>
+								</div>
+							</header>
 						</div>
 					</div>	
 				</div>

@@ -236,7 +236,6 @@
 		
 		//Reflect when selecting comment page
 		$(document).on("click",".list-paginator_page",function(){
-			var $this = $(this);
 			var page = $(this).text();
 			var idx = $(".list-paginator_page");
 
@@ -252,38 +251,30 @@
 				data : {pno : pno},
 				success : function(count){
 					var max = parseInt((count/5),10) + 1;
+					var min = page - 4;
 					
-					if((max - page) <= 4){ 
-						var min = max - 8;
-						
+					if(min <= 0){
+						min = 1;
+
 						$.each(idx, function(){
 							$(this).text(min++);
-							
+
 							if($(this).text() == page){
 								$(this).addClass("selected");
 							}
 						});
 					}else{
-						if(page > 5){
-							var min = parseInt(page,10) - 4;
-							
-							$.each(idx, function(){
-								if(min == page){
-									$(this).addClass("selected");
-								}
-								$(this).text(min++);
-							});
-						}else{
-							var min = 1;
-							
-							$.each(idx, function(){
-								if(min == page){
-									$(this).addClass("selected");
-								}
-								
-								$(this).text(min++);
-							});
+						if((max - page) <= 4){
+							var min = max - 8;
 						}
+						
+						$.each(idx, function(){
+							$(this).text(min++);
+
+							if($(this).text() == page){
+								$(this).addClass("selected");
+							}
+						});
 					}
 					
 					//Reflect composition to match selected page

@@ -195,7 +195,7 @@ public class PromotionsController {
 	@ResponseBody
 	@RequestMapping(value="/commentListCount")
 	public int commentListCountPOST(int pno) throws Exception{
-		logger.info("-------- PROMOTIONS : ACCESS COMMENT LIST UPDATE METHOD=POST --------");
+		logger.info("-------- PROMOTIONS : ACCESS COMMENT LIST COUNT UPDATE METHOD=POST --------");
 		logger.info("-------- THIS PNO = " + pno + " --------");
 		
 		int count = promotionsService.listCount(pno);

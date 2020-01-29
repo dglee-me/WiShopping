@@ -2,7 +2,9 @@ package com.lee.myapp.controls;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lee.myapp.domain.CommentCriteria;
+import com.lee.myapp.domain.CommentPageMaker;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
@@ -112,9 +116,9 @@ public class ProductionsController {
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public void productionViewGET(HttpSession session, Model model,int pno) throws Exception{
+	public void productionViewGET(HttpSession session, Model model, CommentCriteria cri) throws Exception{
 		logger.info("-------- VIEW : PRODUCTIONS METHOD=GET --------");
-		ProductVO product = productService.view(pno);
+		ProductVO product = productService.view(cri.getPno());
 		
 		//Detail image url split to show
 		String[] detailUrl = product.getProducturl().split(";");		
@@ -125,14 +129,20 @@ public class ProductionsController {
 			imageList.add(detailUrl[i]);
 		}
 		
+		CommentPageMaker pageMaker = new CommentPageMaker();
+		pageMaker.setCri(cri);
+		int count = productService.listCount(cri.getPno());
+		pageMaker.setTotalCount(count);
+				
 		//Setting
 		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("product",product);
-		model.addAttribute("option",productService.view_option(pno));
-		model.addAttribute("max",productService.view_option(pno).size());
+		model.addAttribute("option",productService.view_option(cri.getPno()));
+		model.addAttribute("max",productService.view_option(cri.getPno()).size());
 		model.addAttribute("image",imageList);
-		model.addAttribute("reviews", productService.reviewList(pno));
+		model.addAttribute("reviews", productService.listPaging(cri));
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	@ResponseBody
@@ -224,5 +234,50 @@ public class ProductionsController {
 		List<ReviewLikeVO> list = productService.reviewLikeCount(pno);
 		
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reviewListUpdate", method=RequestMethod.POST)
+	public Map<String,Object> reviewListUpdate(HttpSession session, CommentCriteria cri) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS REVIEW LIST UPDATE METHOD=POST --------");
+		logger.info("-------- THIS PNO = " + cri.getPno() + " --------");
+		logger.info("-------- CRITERIA INFO = " + cri.toString() + " --------");
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+
+		//List init
+		List<ReviewLikeVO> list = new ArrayList<ReviewLikeVO>();
+		
+		//Reviews like. Check.
+		if(member != null) {
+			ReviewVO review = new ReviewVO().setMno(((MemberVO)session.getAttribute("login")).getMno()).setPno(cri.getPno());
+			list = productService.reviewLike(review);
+		}
+
+		//Insert Paged Reviews
+		List<ReviewVO> reviews = new ArrayList<ReviewVO>();
+		reviews = productService.listPaging(cri);		
+		
+		//Reviews like. Counts.
+		List<ReviewLikeVO> count = productService.reviewLikeCount(cri.getPno());
+		
+		map.put("reviews", reviews);
+		map.put("likecheck", list);
+		map.put("count", count);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reviewListCount")
+	public int reviewListCountPOST(int pno) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS REVIEW LIST COUNT METHOD=POST --------");
+		logger.info("-------- THIS PNO = " + pno + " --------");
+		
+		int count = productService.listCount(pno);
+		
+		return count;
 	}
 }

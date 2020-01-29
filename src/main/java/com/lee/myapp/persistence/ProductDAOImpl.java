@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
@@ -73,6 +74,18 @@ public class ProductDAOImpl implements ProductDAO{
 	public List<ReviewVO> reviewList(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".reviewList", pno);
+	}
+
+	@Override
+	public List<ReviewVO> listPaging(CommentCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".reviewListPaging", cri);
+	}
+
+	@Override
+	public int listCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".reviewListCount", pno);
 	}
 
 	@Override

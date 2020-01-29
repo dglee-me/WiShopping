@@ -3,6 +3,7 @@ package com.lee.myapp.persistence;
 import java.util.List;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
@@ -21,6 +22,8 @@ public interface ProductDAO {
 	//Review
 	public int reviewRegist(ReviewVO review) throws Exception;
 	public List<ReviewVO> reviewList(int pno) throws Exception;
+	public List<ReviewVO> listPaging(CommentCriteria cri) throws Exception;
+	public int listCount(int pno) throws Exception;
 	public int updateReviewStatus(ReviewVO review) throws Exception;
 	
 	//Review like

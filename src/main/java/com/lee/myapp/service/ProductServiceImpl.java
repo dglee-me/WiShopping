@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
@@ -71,6 +72,18 @@ public class ProductServiceImpl implements ProductService{
 	public List<ReviewVO> reviewList(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.reviewList(pno);
+	}
+
+	@Override
+	public List<ReviewVO> listPaging(CommentCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.listPaging(cri);
+	}
+
+	@Override
+	public int listCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.listCount(pno);
 	}
 
 	@Override
