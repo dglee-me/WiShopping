@@ -133,7 +133,19 @@ public class ProductionsController {
 		pageMaker.setCri(cri);
 		int count = productService.listCount(cri.getPno());
 		pageMaker.setTotalCount(count);
-				
+
+		
+		//Check member login when review paging
+		MemberVO member = (MemberVO) session.getAttribute("login");
+
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		
+		if(member != null) {
+			list = productService.listPaging(cri.setMno(member.getMno()));
+		}else {
+			list = productService.listPaging(cri.setMno(0));
+		}
+		
 		//Setting
 		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
@@ -141,8 +153,9 @@ public class ProductionsController {
 		model.addAttribute("option",productService.view_option(cri.getPno()));
 		model.addAttribute("max",productService.view_option(cri.getPno()).size());
 		model.addAttribute("image",imageList);
-		model.addAttribute("reviews", productService.listPaging(cri));
+		model.addAttribute("reviews", list);
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("reviewCount", productService.listCount(cri.getPno()));
 	}
 	
 	@ResponseBody
@@ -172,8 +185,6 @@ public class ProductionsController {
 
 				review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
 			}
-			
-			System.out.println(review.toString());
 			
 			productService.reviewRegist(review);
 			productService.updateReviewStatus(review);
@@ -210,68 +221,27 @@ public class ProductionsController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/likecheck", method=RequestMethod.POST)
-	public List<ReviewLikeVO> likeCheckPOST(HttpSession session, ReviewVO review) throws Exception{
-		logger.info("-------- SETTING : REVIEW LIKE CHECK METHOD = POST --------");
-		
-		List<ReviewLikeVO> list = new ArrayList<ReviewLikeVO>();
-		
-		MemberVO member = (MemberVO) session.getAttribute("login");
-		if(member != null) {
-			review.setMno(member.getMno());
-			
-			list = productService.reviewLike(review);
-		}
-		
-		return list;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/likecount", method=RequestMethod.POST)
-	public List<ReviewLikeVO> likeCountPOST(int pno) throws Exception{
-		logger.info("-------- SETTING : REVIEW LIKE COUNT METHOD = POST --------");
-		
-		List<ReviewLikeVO> list = productService.reviewLikeCount(pno);
-		
-		return list;
-	}
-	
-	@ResponseBody
 	@RequestMapping(value="/reviewListUpdate", method=RequestMethod.POST)
-	public Map<String,Object> reviewListUpdate(HttpSession session, CommentCriteria cri) throws Exception{
+	public List<ReviewVO> reviewListUpdate(HttpSession session, CommentCriteria cri) throws Exception{
 		logger.info("-------- PRODUCTIONS : ACCESS REVIEW LIST UPDATE METHOD=POST --------");
 		logger.info("-------- THIS PNO = " + cri.getPno() + " --------");
 		logger.info("-------- CRITERIA INFO = " + cri.toString() + " --------");
 		
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		
 		MemberVO member = (MemberVO) session.getAttribute("login");
-
-		//List init
-		List<ReviewLikeVO> list = new ArrayList<ReviewLikeVO>();
-		
-		//Reviews like. Check.
-		if(member != null) {
-			ReviewVO review = new ReviewVO().setMno(((MemberVO)session.getAttribute("login")).getMno()).setPno(cri.getPno());
-			list = productService.reviewLike(review);
-		}
 
 		//Insert Paged Reviews
 		List<ReviewVO> reviews = new ArrayList<ReviewVO>();
-		reviews = productService.listPaging(cri);		
-		
-		//Reviews like. Counts.
-		List<ReviewLikeVO> count = productService.reviewLikeCount(cri.getPno());
-		
-		map.put("reviews", reviews);
-		map.put("likecheck", list);
-		map.put("count", count);
-		
-		return map;
+		if(member != null) {
+			reviews = productService.listPaging(cri.setMno(member.getMno()));	
+		}else {
+			reviews = productService.listPaging(cri.setMno(0));
+		}
+
+		return reviews;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/reviewListCount")
+	@RequestMapping(value="/reviewListCount", method=RequestMethod.POST)
 	public int reviewListCountPOST(int pno) throws Exception{
 		logger.info("-------- PRODUCTIONS : ACCESS REVIEW LIST COUNT METHOD=POST --------");
 		logger.info("-------- THIS PNO = " + pno + " --------");
@@ -279,5 +249,23 @@ public class ProductionsController {
 		int count = productService.listCount(pno);
 		
 		return count;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reviewOrder", method=RequestMethod.POST)
+	public List<ReviewVO> reviewOrder(HttpSession session, CommentCriteria cri) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS REVIEW LIST ORDER MODIFY METHOD=POST --------");
+		
+		List<ReviewVO> reviews = new ArrayList<ReviewVO>();
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null ) {
+			reviews = productService.listPaging(cri.setMno(member.getMno()));
+		}else {
+			reviews = productService.listPaging(cri.setMno(0));
+		}
+		
+		return reviews;
 	}
 }

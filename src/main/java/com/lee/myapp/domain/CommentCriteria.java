@@ -6,6 +6,8 @@ public class CommentCriteria {
 	private int rowStart;
 	private int rowEnd;
 	private int pno;
+	private int mno;
+	private String order;
 	
 	public CommentCriteria() {
 		this.page=1;
@@ -49,18 +51,31 @@ public class CommentCriteria {
 		rowEnd = rowStart +perPageNum -1;
 		return rowEnd;
 	}
-
 	public CommentCriteria setPno(int pno) {
 		this.pno = pno;
 		return this;
 	}
-	
 	public int getPno() {
 		return pno;
 	}
-	
+	public int getMno() {
+		return mno;
+	}
+	public CommentCriteria setMno(int mno) {
+		this.mno = mno;
+		return this;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public CommentCriteria setOrder(String order) {
+		this.order = order;
+		return this;
+	}
+
 	@Override
 	public String toString() {
-		return "CommentCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd+ ", pno = " + pno + "]";
+		return "CommentCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
+				+ ", pno = " + pno +", mno = "+mno+", order = "+order+"]";
 	}
 }

@@ -56,7 +56,6 @@
 				success : function(list){
 					$(".comment-feed_list_item").remove(); //Delete an existing oul
 					
-					
 					$.each(list, function(){
 						var comment = document.createElement("li");
 
@@ -90,6 +89,10 @@
 					//Setting selected class
 					$(".selected").removeClass("selected");
 					$(".list-paginator li:first-child").next().children().addClass("selected");
+				},error : function(){
+					alert("로그인 후 이용 가능합니다.");
+					
+					location.href = "/WiShopping/auth/login";
 				}
 			});
 			
