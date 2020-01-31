@@ -32,6 +32,7 @@ public class ProductQuestionVO {
 		);
 		
 		CREATE SEQUENCE TBL_PRODUCT_QUESTION_QNO_SEQ START WITH 1;
+		CREATE SEQUENCE TBL_PRODUCT_ANSWER_ANO_SEQ START WITH 1;
 	*/
 	//Question
 	private int qno;
@@ -146,6 +147,7 @@ public class ProductQuestionVO {
 	
 	public String toString() {
 		return "ProductQuestionVO = [ qno = "+qno+", pno = "+pno+", mno = "+mno+", name = "+name+", category = "+category+", content = "+content
-				+", writedate = "+writedate+", status = "+status+", issecret = "+issecret+" ]";
+				+", writedate = "+writedate+", status = "+status+", issecret = "+issecret+", ano = "+ano+", brand = "+brand+", answer = "+answer
+				+", answerdate = "+answerdate+" ]";
 	}
 }

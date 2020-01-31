@@ -282,6 +282,24 @@ public class ProductionsController {
 
 		productService.questionRegist(question);
 	}
+
+	@ResponseBody
+	@RequestMapping(value="/answerRegist", method=RequestMethod.POST)
+	public int answerRegistPOST(HttpSession session, ProductQuestionVO question) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS ANSWER REGIST METHOD=POST --------");
+		
+		int result = 0;
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(question.getMno() != 0 && member != null) {
+			productService.answerRegist(question);
+			productService.questionStatusUpdate(question.getQno());
+			result = 1;
+		}
+		
+		return result;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/questionDelete", method=RequestMethod.POST)

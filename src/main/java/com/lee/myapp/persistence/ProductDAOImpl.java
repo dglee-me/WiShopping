@@ -133,9 +133,21 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
+	public void answerRegist(ProductQuestionVO question) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".answerRegist", question);
+	}
+
+	@Override
 	public List<ProductQuestionVO> questionList(CommentCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".questionList", cri);
+	}
+
+	@Override
+	public int questionStatusUpdate(int qno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".questionStatusUpdate", qno);
 	}
 
 	@Override

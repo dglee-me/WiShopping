@@ -131,9 +131,21 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public void answerRegist(ProductQuestionVO question) throws Exception {
+		// TODO Auto-generated method stub
+		productDAO.answerRegist(question);
+	}
+
+	@Override
 	public List<ProductQuestionVO> questionList(CommentCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.questionList(cri);
+	}
+
+	@Override
+	public int questionStatusUpdate(int qno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.questionStatusUpdate(qno);
 	}
 
 	@Override

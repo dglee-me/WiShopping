@@ -349,7 +349,7 @@
 			
 			if(var_confirm){
 				$("body").css("overflow-y","scroll");
-				$(".product-question_modal.open").remove();
+				$(".popup-modal.open").remove();
 			}
 		}
 	});
@@ -413,6 +413,9 @@
 	
 	//Expand textarea size by number of characters
 	$(document).on("keydown keyup", ".product-question_wrap_question",function(){
+		$(this).height(1).height($(this).prop("scrollHeight"));
+	});
+	$(document).on("keydown keyup", ".product-question_wrap_question_answer_content",function(){
 		$(this).height(1).height($(this).prop("scrollHeight"));
 	});
 	
@@ -1030,6 +1033,7 @@
 	});
 
 	$(document).ready(function(){
+		//Product Question delete button clicked event
 		$(".product-question-feed_item_header_delete").on("click", function(){
 			if(mno == ""){
 				location.href = "/WiShopping/auth/login";
@@ -1037,7 +1041,7 @@
 				var var_confirm = confirm("해당 문의를 삭제하시겠습니까?");
 				
 				if(var_confirm){
-					var qno = $(this).closest("article").attr("qnanumber");
+					var qno = $(this).closest("article").attr("qna-number");
 					
 					$.ajax({
 						url : "/WiShopping/productions/questionDelete",
@@ -1057,6 +1061,68 @@
 						}
 					});
 				}
+			}
+		});
+		
+		//Product question answer button clicked event
+		$(".product-question-feed_item_header_answer").on("click", function(){
+			var content = $(".product-question-feed_item_content").text();
+			var qno = $(this).closest("article").attr("qna-number");
+			
+			var div = document.createElement("div");
+			div.className = "popup-modal product-question-answer_modal open";
+			
+			div.innerHTML =
+				"<div class='popup-modal_content-wrap'>"+
+					"<div class='popup-modal_content product-question'>"+
+						"<form class='product-question-answer_wrap'>"+
+							"<input type='hidden' value='"+qno+"' name='qna[number]'>"+
+							"<div class='product-question_wrap_close'>"+
+								"<svg class='product-question_wrap_close_icon' width='20' height='20' viewBox='0 0 20 20' fill='currentColor' preserveAspectRatio='xMidYMid meet'>"+
+								"<path fill-rule='nonzero' d='M11.6 10l7.1 7.1-1.6 1.6-7.1-7.1-7.1 7.1-1.6-1.6L8.4 10 1.3 2.9l1.6-1.6L10 8.4l7.1-7.1 1.6 1.6z'></path>"+
+								"</svg>"+
+							"</div>"+
+							"<div class='product-question_wrap_title'>문의하기</div>"+
+							"<div class='product-question_wrap_sub-title'>문의내용</div>"+
+							"<textarea maxlength='1000' class='form-control product-question_wrap_question_answer' readonly='readonly' style='height:auto;'>"+content+"</textarea>"+
+							"<div class='product-question_wrap_sub-title'>답변내용</div>"+
+							"<textarea maxlength='1000' class='form-control product-question_wrap_question_answer_content' style='height:auto;'></textarea>"+
+							"<div class='product-question_wrap_buttons'>"+
+								"<button class='button button-color-blue product-answer_wrap_buttons_submit' type='button'>완료</button>"+
+							"</div>"+
+						"</form>"+
+					"</div>"+
+				"</div>"
+
+				$("body").append(div);
+		});
+	});
+
+	//Product question answer submit button clicked event
+	$(document).on("click", ".product-answer_wrap_buttons_submit", function(){
+		var answer = $(".product-question_wrap_question_answer_content").val();
+		var qno = $("input[name='qna[number]']").val();
+		
+		$.ajax({
+			url : "/WiShopping/productions/answerRegist",
+			type : "post",
+			data : {
+				mno : mno,
+				qno : qno,
+				answer : answer
+			},success : function(result){
+				if(result == 0){
+					location.href = "/WiShopping/auth/login";
+				}else if(result == 1){
+					location.reload();
+
+					var href = $("#production-selling-question").offset();
+					href.top -= 40;
+					
+					$("html, body").animate({scrollTop : href.top},300);
+				}
+			},error : function(){
+				location.href = "/WiShopping/error";
 			}
 		});
 	});
@@ -1344,7 +1410,7 @@
 							<div class="product-question-feed">
 								<div class="product-question-feed_list">
 									<c:forEach var="question" items="${questions}">
-									<article class="product-question-feed_item" qnanumber="${question.qno}">
+									<article class="product-question-feed_item" qna-number="${question.qno}">
 										<header class="product-question-feed_item_header">${question.category} | 
 											<c:if test="${question.status eq 0}">
 												<span class="unanswered">답변대기</span>
@@ -1356,7 +1422,9 @@
 												<button class="product-question-feed_item_header_delete" type="button">삭제</button>
 											</c:if>
 											<c:if test="${product.isseller eq 1}">
-												<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
+												<c:if test="${question.status eq 0}">
+													<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
+												</c:if>
 											</c:if>
 										</header>
 										<p class="product-question-feed_item_author">${question.name} | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>

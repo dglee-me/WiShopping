@@ -154,12 +154,23 @@
 		VALUES(TBL_PRODUCT_QUESTION_QNO_SEQ.NEXTVAL, #{pno}, #{mno}, #{category}, #{content}, sysdate, #{issecret}, 0)
 	</insert>
 	
+	<insert id="answerRegist">
+		INSERT INTO TBL_PRODUCT_ANSWER(ANO, QNO, SNO, BRAND, ANSWER, ANSWERDATE)
+		VALUES(TBL_PRODUCT_ANSWER_ANO_SEQ.NEXTVAL, #{qno}, (SELECT SNO FROM TBL_SELLER WHERE MNO = #{mno}), (SELECT BRAND FROM TBL_SELLER WHERE MNO = #{mno}), #{answer}, SYSDATE)
+	</insert>
+	
 	<select id="questionList" resultType="com.lee.myapp.domain.ProductQuestionVO">
 		SELECT A.QNO, A.MNO, (SELECT NAME FROM MEMBER WHERE MNO = A.MNO) AS NAME ,A.CATEGORY, A.CONTENT, A.WRITEDATE, A.ISSECRET, A.STATUS, B.BRAND, B.ANSWERDATE, B.ANSWER
  		  FROM TBL_PRODUCT_QUESTION A LEFT OUTER JOIN TBL_PRODUCT_ANSWER B ON A.QNO = B.QNO
  		 WHERE A.PNO = 421
  		 ORDER BY QNO DESC
 	</select>
+	
+	<update id="questionStatusUpdate">
+		UPDATE TBL_PRODUCT_QUESTION
+		   SET STATUS = 1
+		 WHERE QNO = #{qno}
+	</update>
 	
 	<delete id="questionDelete">
 		DELETE
