@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
+import com.lee.myapp.domain.ProductQuestionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
@@ -40,9 +41,9 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public ProductVO view(int pno) throws Exception {
+	public ProductVO view(CommentCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace+".view",pno);
+		return sqlSession.selectOne(namespace+".view", cri);
 	}
 
 	@Override
@@ -122,6 +123,25 @@ public class ProductDAOImpl implements ProductDAO{
 	public int deleteLike(ReviewLikeVO like) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".deleteLike", like);
+	}
+
+	//Product question and answer
+	@Override
+	public void questionRegist(ProductQuestionVO question) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".questionRegist", question);
+	}
+
+	@Override
+	public List<ProductQuestionVO> questionList(CommentCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".questionList", cri);
+	}
+
+	@Override
+	public int questionDelete(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".questionDelete", pno);
 	}
 	
 	//Header banner

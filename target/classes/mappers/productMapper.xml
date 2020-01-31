@@ -34,8 +34,8 @@
 	</select>
 	
 	<select id="view" resultType="com.lee.myapp.domain.ProductVO">
-		SELECT PNO, CATEGORY1, CATEGORY2, PNAME, BRAND, PRICE, PRODUCT_THUMURL, PRODUCT_URL, SHIPPING_FEE, SHIPPING_DAY
-		  FROM PRODUCT
+		SELECT A.PNO, A.CATEGORY1, A.CATEGORY2, A.PNAME, A.BRAND, A.PRICE, A.PRODUCT_THUMURL, A.PRODUCT_URL, A.SHIPPING_FEE, A.SHIPPING_DAY, NVL(B.IS_SELLER,0) AS IS_SELLER
+		  FROM PRODUCT A LEFT OUTER JOIN (SELECT BRAND, COUNT(BRAND) AS IS_SELLER FROM TBL_SELLER WHERE MNO = #{mno} GROUP BY BRAND) B ON A.BRAND = B.BRAND
 		 WHERE PNO = #{pno}
 	</select>
 	
@@ -146,6 +146,25 @@
 		DELETE 
 		  FROM TBL_PRODUCT_REVIEW_LIKE
 		 WHERE MNO = #{mno} AND RNO = #{rno}
+	</delete>
+	
+	<!-- Product Question and answer -->
+	<insert id="questionRegist">
+		INSERT INTO TBL_PRODUCT_QUESTION(QNO, PNO, MNO, CATEGORY, CONTENT, WRITEDATE, ISSECRET, STATUS)
+		VALUES(TBL_PRODUCT_QUESTION_QNO_SEQ.NEXTVAL, #{pno}, #{mno}, #{category}, #{content}, sysdate, #{issecret}, 0)
+	</insert>
+	
+	<select id="questionList" resultType="com.lee.myapp.domain.ProductQuestionVO">
+		SELECT A.QNO, A.MNO, (SELECT NAME FROM MEMBER WHERE MNO = A.MNO) AS NAME ,A.CATEGORY, A.CONTENT, A.WRITEDATE, A.ISSECRET, A.STATUS, B.BRAND, B.ANSWERDATE, B.ANSWER
+ 		  FROM TBL_PRODUCT_QUESTION A LEFT OUTER JOIN TBL_PRODUCT_ANSWER B ON A.QNO = B.QNO
+ 		 WHERE A.PNO = 421
+ 		 ORDER BY QNO DESC
+	</select>
+	
+	<delete id="questionDelete">
+		DELETE
+  		  FROM TBL_PRODUCT_QUESTION
+  		 WHERE QNO = #{qno}
 	</delete>
 	
 	<!-- Header banner -->

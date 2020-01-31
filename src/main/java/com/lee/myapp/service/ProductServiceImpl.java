@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
+import com.lee.myapp.domain.ProductQuestionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
@@ -38,9 +39,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public ProductVO view(int pno) throws Exception {
+	public ProductVO view(CommentCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return productDAO.view(pno);
+		return productDAO.view(cri);
 	}
 
 	@Override
@@ -120,6 +121,25 @@ public class ProductServiceImpl implements ProductService{
 	public int deleteLike(ReviewLikeVO like) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.deleteLike(like);
+	}
+
+	//Product question
+	@Override
+	public void questionRegist(ProductQuestionVO question) throws Exception {
+		// TODO Auto-generated method stub
+		productDAO.questionRegist(question);
+	}
+
+	@Override
+	public List<ProductQuestionVO> questionList(CommentCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.questionList(cri);
+	}
+
+	@Override
+	public int questionDelete(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.questionDelete(pno);
 	}
 	
 	//Header banner

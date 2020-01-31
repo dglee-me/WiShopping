@@ -2,9 +2,7 @@ package com.lee.myapp.controls;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -24,6 +22,7 @@ import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.CommentPageMaker;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.ProductOptionVO;
+import com.lee.myapp.domain.ProductQuestionVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
@@ -118,7 +117,29 @@ public class ProductionsController {
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void productionViewGET(HttpSession session, Model model, CommentCriteria cri) throws Exception{
 		logger.info("-------- VIEW : PRODUCTIONS METHOD=GET --------");
-		ProductVO product = productService.view(cri.getPno());
+
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		ProductVO product = new ProductVO();
+		
+		CommentPageMaker pageMaker = new CommentPageMaker();
+		pageMaker.setCri(cri);
+		int count = productService.listCount(cri.getPno());
+		pageMaker.setTotalCount(count);
+
+		//Check member login when review paging and question paging
+		List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
+		List<ProductQuestionVO> question_list = new ArrayList<ProductQuestionVO>();
+		
+		if(member != null) {
+			reviewlist = productService.listPaging(cri.setMno(member.getMno()));
+			question_list = productService.questionList(cri.setMno(member.getMno()));
+			product = productService.view(cri.setMno(member.getMno()));
+		}else {
+			reviewlist = productService.listPaging(cri.setMno(0));
+			question_list = productService.questionList(cri.setMno(0));
+			product = productService.view(cri.setMno(0));
+		}
+		
 		
 		//Detail image url split to show
 		String[] detailUrl = product.getProducturl().split(";");		
@@ -129,23 +150,6 @@ public class ProductionsController {
 			imageList.add(detailUrl[i]);
 		}
 		
-		CommentPageMaker pageMaker = new CommentPageMaker();
-		pageMaker.setCri(cri);
-		int count = productService.listCount(cri.getPno());
-		pageMaker.setTotalCount(count);
-
-		
-		//Check member login when review paging
-		MemberVO member = (MemberVO) session.getAttribute("login");
-
-		List<ReviewVO> list = new ArrayList<ReviewVO>();
-		
-		if(member != null) {
-			list = productService.listPaging(cri.setMno(member.getMno()));
-		}else {
-			list = productService.listPaging(cri.setMno(0));
-		}
-		
 		//Setting
 		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
@@ -153,9 +157,11 @@ public class ProductionsController {
 		model.addAttribute("option",productService.view_option(cri.getPno()));
 		model.addAttribute("max",productService.view_option(cri.getPno()).size());
 		model.addAttribute("image",imageList);
-		model.addAttribute("reviews", list);
+		model.addAttribute("reviews", reviewlist);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("reviewCount", productService.listCount(cri.getPno()));
+
+		model.addAttribute("questions", question_list);
 	}
 	
 	@ResponseBody
@@ -267,5 +273,30 @@ public class ProductionsController {
 		}
 		
 		return reviews;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/questionRegist", method=RequestMethod.POST)
+	public void questionRegistPOST(ProductQuestionVO question) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS QUESTION REGIST METHOD=POST --------");
+
+		productService.questionRegist(question);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/questionDelete", method=RequestMethod.POST)
+	public int questionDeletePOST(HttpSession session, int qno) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS QUESTION DELETE METHOD=POST --------");
+		
+		int result = 0;
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			productService.questionDelete(qno);
+			result = 1;
+		}
+		
+		return result;
 	}
 }

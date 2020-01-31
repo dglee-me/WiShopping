@@ -29,15 +29,17 @@ public class ProductVO {
 	 */
 	private int pno;
 	private int mno; // Use only for product regist (brand)
-	private String category1; //´ëºÐ·ù
-	private String category2; //ÁßºÐ·ù
-	private String pname; //Á¦Ç°¸í
-	private String brand; //Á¦Á¶»ç
-	private int price; //°¡°Ý
+	private String category1; //ï¿½ï¿½Ð·ï¿½
+	private String category2; //ï¿½ßºÐ·ï¿½
+	private String pname; //ï¿½ï¿½Ç°ï¿½ï¿½
+	private String brand; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int price; //ï¿½ï¿½ï¿½ï¿½
 	private String producturl; //product detail description url
 	private String productthumurl; //product thumnail image url
 	private int shippingfee;
 	private int shippingday;
+	
+	private int isseller;
 	
 	public int getPno() {
 		return pno;
@@ -118,11 +120,18 @@ public class ProductVO {
 	public ProductVO setShippingday(int shippingday) {
 		this.shippingday = shippingday;
 		return this;
+	}	
+	public int getIsseller() {
+		return isseller;
+	}
+	public ProductVO setIsseller(int isseller) {
+		this.isseller = isseller;
+		return this;
 	}
 	
 	public String toString() {
 		return "ProductVO = [pno= "+pno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
-				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday
+				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday+", isseller = "+isseller
 				+"]";
 	}
 }

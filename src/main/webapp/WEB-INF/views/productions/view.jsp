@@ -14,6 +14,7 @@
 <head>
 <script type="text/javascript">
 	var previous;
+	var mno = "${login.mno}";
 	
 	$(document).ready(function(){
 		$(".product_selling_nav_content-list li").click(function(e){
@@ -34,6 +35,29 @@
 			
 			$("html, body").animate({scrollTop : href.top},300);
 		});
+	});
+	
+	//Change the active state to the corresponding Nav when scrolling
+	$(window).scroll(function(){
+		var $window = $(window);
+		var $body = $("body");
+		
+		var scroll = $window.scrollTop() + ($window.height() / 3);
+		
+		var info = $("#production-selling-information").offset().top;
+		var review = $("#production-selling-review").offset().top;
+		var qna = $("#production-selling-question").offset().top;
+
+		if(scroll >= info &&scroll <= review){
+			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
+			$($(".product_selling_nav_item")[0]).addClass("product_selling_nav_item-active");
+		}else if(scroll >= review && scroll <= qna){
+			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
+			$($(".product_selling_nav_item")[1]).addClass("product_selling_nav_item-active");
+		}else if( scroll >= qna ){
+			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
+			$($(".product_selling_nav_item")[2]).addClass("product_selling_nav_item-active");
+		}
 	});
 	
 	//If this product is a single option, reflect total price
@@ -317,18 +341,127 @@
 	
 	//Delete review layer pop-up when click outside review area
 	$(document).on("click","html",function(e){
-		if($(e.target).hasClass("modal-image-modal_modal")){
+		if($(e.target).hasClass("modal-image-modal_modal")){ // Image modal popup exit
 			$("body").css("overflow-y","scroll");
 			$("#modal-image-modal_modal").remove();
+		}else if($(e.target).hasClass("popup-modal_content-wrap")){ // question modal popup exit
+			var var_confirm = confirm("작성된 내용이 모두 유실됩니다.\n그래도 나가시겠습니까?");
+			
+			if(var_confirm){
+				$("body").css("overflow-y","scroll");
+				$(".product-question_modal.open").remove();
+			}
 		}
 	});
 	
+	//Right button clicked event
 	$(document).ready(function(){
 		$(".product_selling_section-right button").click(function(){
-			alert("주문 목록에서 작성할 수 있습니다.");
+			var text = $(this).text();
 			
-			location.href="/WiShopping/purchase/list";
+			if(text == "리뷰쓰기"){//Review case
+				alert("주문 목록에서 작성할 수 있습니다.");
+				
+				location.href="/WiShopping/purchase/list";
+			}else if(text == "문의하기"){ // About case
+				if(mno == ""){
+					location.href = "/WiShopping/auth/login";
+				}else{
+					$("body").css("overflow-y","hidden");
+					
+					var div = document.createElement("div");
+					div.className = "popup-modal product-question_modal open";
+					
+					div.innerHTML =
+						"<div class='popup-modal_content-wrap'>"+
+							"<div class='popup-modal_content product-question'>"+
+								"<form class='product-question_wrap'>"+
+									"<input type='hidden' name='member[number]' value='"+mno+"'>"+
+									"<div class='product-question_wrap_close'>"+
+										"<svg class='product-question_wrap_close_icon' width='20' height='20' viewBox='0 0 20 20' fill='currentColor' preserveAspectRatio='xMidYMid meet'>"+
+										"<path fill-rule='nonzero' d='M11.6 10l7.1 7.1-1.6 1.6-7.1-7.1-7.1 7.1-1.6-1.6L8.4 10 1.3 2.9l1.6-1.6L10 8.4l7.1-7.1 1.6 1.6z'></path>"+
+										"</svg>"+
+									"</div>"+
+									"<div class='product-question_wrap_title'>문의하기</div>"+
+										"<div class='product-question_wrap_sub-title'>문의유형</div>"+
+										"<div class='product-question_wrap_category-select'>"+
+										"<div class='product-question_wrap_type-select_box product-question_wrap_type-select_box-select'>상품</div>"+
+										"<div class='product-question_wrap_type-select_box'>배송</div>"+
+										"<div class='product-question_wrap_type-select_box'>반품</div>"+
+										"<div class='product-question_wrap_type-select_box'>교환</div>"+
+										"<div class='product-question_wrap_type-select_box'>환불</div>"+
+										"<div class='product-question_wrap_type-select_box'>기타</div>"+
+									"</div>"+
+									"<div class='product-question_wrap_sub-title'>문의내용</div>"+
+									"<textarea placeholder='문의 내용을 입력하세요' maxlength='1000' class='form-control product-question_wrap_question' style='height:auto;'></textarea>"+
+									"<div class='form-check checkbox-input product-question_checkbox'>"+
+										"<label class='form-check-label'><input class='form-check' type='checkbox'><span class='check-img'></span>비밀글로 문의하기</label>"+
+									"</div>"+
+									"<div class='product-question_wrap_explain'>문의내용에 대한 답변은 ‘상품 상세페이지’에서 확인 가능합니다.</div>"+
+									"<div class='product-question_wrap_buttons'>"+
+										"<button class='button button-color-blue product-question_wrap_buttons_submit' type='button'>완료</button>"+
+									"</div>"+
+								"</form>"+
+							"</div>"+
+						"</div>"
+
+					$("body").append(div);
+				}
+			}
 		});
+	});
+	
+	//Expand textarea size by number of characters
+	$(document).on("keydown keyup", ".product-question_wrap_question",function(){
+		$(this).height(1).height($(this).prop("scrollHeight"));
+	});
+	
+	//Events when selecting select box from question popup-modal
+	$(document).on("click", ".product-question_wrap_type-select_box", function(){
+		$(".product-question_wrap_type-select_box-select").removeClass("product-question_wrap_type-select_box-select");
+		$(this).addClass("product-question_wrap_type-select_box-select");
+	});
+	
+	//Events when clicked question modal layer pop-up exit button
+	$(document).on("click", ".product-question_wrap_close", function(){
+		var var_confirm = confirm("작성된 내용이 모두 유실됩니다.\n그래도 나가시겠습니까?");
+		
+		if(var_confirm){
+			$("body").css("overflow-y","scroll");
+			$(".product-question_modal.open").remove();
+		}
+	});
+	
+	//Question submit button clicked event
+	$(document).on("click", ".product-question_wrap_buttons_submit", function(){
+		var url = decodeURI(location.href);
+		var pno = url.slice(url.indexOf('=') + 1);
+		
+		var category = $(".product-question_wrap_type-select_box-select").text();
+		var content = $(".product-question_wrap_question").val();
+		var issecret = $(".form-check").is(":checked");
+		
+		if(issecret) issecret = 1;
+		else issecret = 0;
+		
+		$.ajax({
+			url : "/WiShopping/productions/questionRegist",
+			type : "post",
+			data : {
+				pno : pno,
+				mno : mno,
+				category : category,
+				content : content,
+				issecret : issecret
+			},success : function(){
+				location.reload();
+
+				var href = $("#production-selling-question").offset();
+				href.top -= 40;
+				
+				$("html, body").animate({scrollTop : href.top},300);
+			}
+		})
 	});
 	
 	//When review like btn clicked
@@ -356,25 +489,6 @@
 				}
 			}
 		});
-	});
-	
-	//Change the active state to the corresponding Nav when scrolling
-	$(window).scroll(function(){
-		var $window = $(window);
-		var $body = $("body");
-		
-		var scroll = $window.scrollTop() + ($window.height() / 3);
-		
-		var info = $("#production-selling-information").offset().top;
-		var review = $("#production-selling-review").offset().top;
-
-		if(scroll >= info &&scroll <= review){
-			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
-			$($(".product_selling_nav_item")[0]).addClass("product_selling_nav_item-active");
-		}else if(scroll >= review){
-			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
-			$($(".product_selling_nav_item")[1]).addClass("product_selling_nav_item-active");
-		}
 	});
 	
 	//Prev button click event
@@ -914,6 +1028,38 @@
 			$(this).addClass("production-review-feed_filter_order-active");
 		});
 	});
+
+	$(document).ready(function(){
+		$(".product-question-feed_item_header_delete").on("click", function(){
+			if(mno == ""){
+				location.href = "/WiShopping/auth/login";
+			}else{
+				var var_confirm = confirm("해당 문의를 삭제하시겠습니까?");
+				
+				if(var_confirm){
+					var qno = $(this).closest("article").attr("qnanumber");
+					
+					$.ajax({
+						url : "/WiShopping/productions/questionDelete",
+						type : "post",
+						data : {qno : qno},
+						success : function(result){
+							if(result == 1){
+								location.reload(); 
+
+								var href = $("#production-selling-question").offset();
+								href.top -= 40;
+								
+								$("html, body").animate({scrollTop : href.top},300);
+							}else if(result == 0){
+								location.href = "/WiShopping/auth/login";
+							}
+						}
+					});
+				}
+			}
+		});
+	});
 </script>
 <meta charset="UTF-8">
 <title>위쇼핑! - ${product.pname}</title>
@@ -1192,9 +1338,46 @@
 								<h1 class="product_selling_section-header-title">문의 <span class="count">0</span>
 								</h1>
 								<div class="product_selling_section-right">
-									<button>문의하기</button>
+									<button type="button">문의하기</button>
 								</div>
 							</header>
+							<div class="product-question-feed">
+								<div class="product-question-feed_list">
+									<c:forEach var="question" items="${questions}">
+									<article class="product-question-feed_item" qnanumber="${question.qno}">
+										<header class="product-question-feed_item_header">${question.category} | 
+											<c:if test="${question.status eq 0}">
+												<span class="unanswered">답변대기</span>
+											</c:if>
+											<c:if test="${question.status eq 1}">
+												<span class="answered">답변완료</span>
+											</c:if>
+											<c:if test="${question.mno eq login.mno}">
+												<button class="product-question-feed_item_header_delete" type="button">삭제</button>
+											</c:if>
+											<c:if test="${product.isseller eq 1}">
+												<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
+											</c:if>
+										</header>
+										<p class="product-question-feed_item_author">${question.name} | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>
+										<div class="product-question-feed_item_question">
+											<span class="product-question-feed_item_badge">Q</span>
+											<p class="product-question-feed_item_content">${question.content}</p>
+										</div>
+										<c:if test="${question.brand ne null}">
+										<div class="product-question-feed_item_answer">
+											<span class="product-question-feed_item_badge">A</span>
+											<p class="product-question-feed_item_answer_author">
+												<span class="author">${question.brand}</span> 
+												<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></span>
+											</p>
+											<p class="product-question-feed_item_content">${question.answer}</p>
+										</div>
+										</c:if>
+									</article>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 					</div>	
 				</div>
