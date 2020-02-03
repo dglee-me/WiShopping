@@ -140,6 +140,11 @@ public class ProductionsController {
 			product = productService.view(cri.setMno(0));
 		}
 		
+		//QnA pageMaker create
+		CommentPageMaker qnaPageMaker = new CommentPageMaker();
+		qnaPageMaker.setCri(cri);
+		count = productService.questionListCount(cri.getPno());
+		qnaPageMaker.setTotalCount(count);
 		
 		//Detail image url split to show
 		String[] detailUrl = product.getProducturl().split(";");		
@@ -157,11 +162,13 @@ public class ProductionsController {
 		model.addAttribute("option",productService.view_option(cri.getPno()));
 		model.addAttribute("max",productService.view_option(cri.getPno()).size());
 		model.addAttribute("image",imageList);
+		
 		model.addAttribute("reviews", reviewlist);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("reviewCount", productService.listCount(cri.getPno()));
 
 		model.addAttribute("questions", question_list);
+		model.addAttribute("qnaPageMaker", qnaPageMaker);
 	}
 	
 	@ResponseBody
@@ -316,5 +323,23 @@ public class ProductionsController {
 		}
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/questionListCount", method=RequestMethod.POST)
+	public int questionListCount(int pno) throws Exception{
+		return productService.questionListCount(pno);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="questionListUpdate", method=RequestMethod.POST)
+	public List<ProductQuestionVO> questionListUpdatePOST(CommentCriteria cri) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS QUESTION LIST UPDATE METHOD=POST --------");
+		logger.info("-------- THIS PNO = " + cri.getPno() + " --------");
+		logger.info("-------- CRITERIA INFO = " + cri.toString() + " --------");
+		
+		List<ProductQuestionVO> list = productService.questionList(cri);
+		
+		return list;
 	}
 }

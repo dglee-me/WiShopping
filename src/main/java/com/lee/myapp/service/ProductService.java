@@ -39,6 +39,7 @@ public interface ProductService {
 	public void questionRegist(ProductQuestionVO question) throws Exception;
 	public void answerRegist(ProductQuestionVO question) throws Exception;
 	public List<ProductQuestionVO> questionList(CommentCriteria cri) throws Exception;
+	public int questionListCount(int pno) throws Exception;
 	public int questionStatusUpdate(int qno) throws Exception;
 	public int questionDelete(int pno) throws Exception;
 	

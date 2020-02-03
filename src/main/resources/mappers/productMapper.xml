@@ -151,7 +151,7 @@
 	<!-- Product Question and answer -->
 	<insert id="questionRegist">
 		INSERT INTO TBL_PRODUCT_QUESTION(QNO, PNO, MNO, CATEGORY, CONTENT, WRITEDATE, ISSECRET, STATUS)
-		VALUES(TBL_PRODUCT_QUESTION_QNO_SEQ.NEXTVAL, #{pno}, #{mno}, #{category}, #{content}, sysdate, #{issecret}, 0)
+		VALUES(TBL_PRODUCT_QUESTION_QNO_SEQ.NEXTVAL, #{pno}, #{mno}, #{category}, #{content}, SYSDATE, #{issecret}, 0)
 	</insert>
 	
 	<insert id="answerRegist">
@@ -160,10 +160,26 @@
 	</insert>
 	
 	<select id="questionList" resultType="com.lee.myapp.domain.ProductQuestionVO">
-		SELECT A.QNO, A.MNO, (SELECT NAME FROM MEMBER WHERE MNO = A.MNO) AS NAME ,A.CATEGORY, A.CONTENT, A.WRITEDATE, A.ISSECRET, A.STATUS, B.BRAND, B.ANSWERDATE, B.ANSWER
- 		  FROM TBL_PRODUCT_QUESTION A LEFT OUTER JOIN TBL_PRODUCT_ANSWER B ON A.QNO = B.QNO
- 		 WHERE A.PNO = 421
- 		 ORDER BY QNO DESC
+	<![CDATA[
+		 SELECT *
+		   FROM(
+		        SELECT ROWNUM AS RNUM, A.*
+		          FROM(
+		               SELECT A.QNO, A.MNO, (SELECT NAME FROM MEMBER WHERE MNO = A.MNO) AS NAME ,A.CATEGORY, A.CONTENT, A.WRITEDATE, A.ISSECRET, A.STATUS, B.BRAND, B.ANSWERDATE, B.ANSWER
+		                 FROM TBL_PRODUCT_QUESTION A LEFT OUTER JOIN TBL_PRODUCT_ANSWER B ON A.QNO = B.QNO
+		                 WHERE A.PNO = #{pno}
+		                 ORDER BY QNO DESC
+		              ) A
+		          WHERE ROWNUM <= #{rowEnd}
+		  )
+		  WHERE RNUM >= #{rowStart}
+	]]>
+	</select>
+	
+	<select id="questionListCount" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM TBL_PRODUCT_QUESTION
+		 WHERE PNO = #{pno}
 	</select>
 	
 	<update id="questionStatusUpdate">

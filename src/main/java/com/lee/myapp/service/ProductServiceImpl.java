@@ -143,6 +143,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public int questionListCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.questionListCount(pno);
+	}
+
+	@Override
 	public int questionStatusUpdate(int qno) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.questionStatusUpdate(qno);

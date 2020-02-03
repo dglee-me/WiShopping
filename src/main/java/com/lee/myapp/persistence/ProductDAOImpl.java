@@ -145,6 +145,12 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
+	public int questionListCount(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".questionListCount", pno);
+	}
+
+	@Override
 	public int questionStatusUpdate(int qno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.update(namespace+".questionStatusUpdate", qno);
