@@ -16,6 +16,7 @@ public interface ProductService {
 	public List<ProductVO> list(ProductVO product) throws Exception;
 	public ProductVO view(CommentCriteria cri) throws Exception;
 	public List<ProductOptionVO> view_option(int pno) throws Exception;
+	public void deleteProduct(ProductVO product) throws Exception;
 	public int checkInventory(int ono) throws Exception;
 
 	public int isSeller(int mno) throws Exception;

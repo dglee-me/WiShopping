@@ -169,6 +169,7 @@ public class ProductionsController {
 
 		model.addAttribute("questions", question_list);
 		model.addAttribute("qnaPageMaker", qnaPageMaker);
+		model.addAttribute("questionCount", productService.questionListCount(cri.getPno()));
 	}
 	
 	@ResponseBody
@@ -341,5 +342,24 @@ public class ProductionsController {
 		List<ProductQuestionVO> list = productService.questionList(cri);
 		
 		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public int productionsDelete(HttpSession session,ProductVO product) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS PRODUCT DELETE METHOD = GET --------");
+		
+		int result = 0;
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			product.setMno(member.getMno());
+			
+			productService.deleteProduct(product);
+			
+			result = 1;
+		}
+		
+		return result;
 	}
 }

@@ -29,7 +29,10 @@
 		day = day >= 10 ? day : "0" + day;
 		
 		var hour = date.getHours();
+		hour = hour >= 10 ? hour : "0" + hour;
+		
 		var min = date.getMinutes();
+		min = min >= 10 ? min : "0" + min;
 
 		date = year + "년 " + month + "월 " +day + "일 " + hour + "시 " + min + "분";
 		
@@ -82,7 +85,7 @@
 	
 	//If this product is a single option, reflect total price
 	$(document).ready(function(){
-		var price = parseInt($(".selling-option-item_price_number").text(),10);
+		var price = parseInt(uncomma($(".selling-option-item_price_number").text()),10);
 		
 		if(!isNaN(price)){
 			$(".selling-option-form-content_price_number").text(comma(price));
@@ -1444,9 +1447,12 @@
 						var date = new Date(this.writedate);
 						
 						var year = date.getFullYear();
+						
 						var month = (1 + date.getMonth());
 						month = month >= 10 ? month : "0" + month;
+						
 						var day = date.getDate();
+						day = day >= 10 ? day : "0" + day;
 						
 						date = year + "-" + month + "-" +day;
 
@@ -1569,6 +1575,40 @@
 </script>
 <script type="text/javascript">
 	/*
+		This is product javascript part
+	*/
+	$(document).ready(function(){
+		$(".product-selling-admin-button").click(function(){
+			var text = $(this).text();
+
+			var url = decodeURI(location.href);
+			var pno = url.slice(url.indexOf('=') + 1);
+			
+			if(text == "수정"){ // Modify button clicked event
+				
+			}else{//Delete button clicked event
+				var var_confirm = confirm("정말로 삭제하시겠습니까?\n삭제된 상품 정보는 다시 복구할 수 없습니다.");
+			
+				if(var_confirm){
+					$.ajax({
+						url : "/WiShopping/productions/delete",
+						type : "get",
+						data : {pno : pno},
+						success : function(result){
+							if(result == 1){
+								alert("상품이 삭제되었습니다.");
+								location.href = "/WiShopping";
+							}else if(result == 0) location.href = "/WiShopping/erorr";
+						}
+					});
+				}
+			}
+		});
+	});
+	
+</script>
+<script type="text/javascript">
+	/*
 		This is Questions javascript part
 	*/
 	
@@ -1661,7 +1701,7 @@
 
 	//Product question answer button clicked event
 	$(document).on("click", ".product-question-feed_item_header_answer", function(){
-		var content = $(".product-question-feed_item_content").text();
+		var content = $(this).closest("article").children("div").children("p").text();
 		var qno = $(this).closest("article").attr("qna-number");
 		
 		var div = document.createElement("div");
@@ -1754,6 +1794,14 @@
 						</c:if>
 					</ul>
 				</nav>
+				<c:if test="${product.isseller eq 1}">
+					<nav class="product-selling-admin-category">
+						<ul class="product-selling-admin-category_breadcrumb">
+							<li><button type="button" class="product-selling-admin-button">수정</button></li>
+							<li><button type="button" class="product-selling-admin-button">삭제</button></li>
+						</ul>
+					</nav>
+				</c:if>
 				<div class="product-selling-overview_container row">
 					<div class="product-selling-overview_cover-image-wrap">
 						<div class="product-selling-overview_cover-image">
@@ -1846,7 +1894,7 @@
 																	<a href="javascript:void(0);" class="ico up_count on">+증가</a></div>
 																</div>
 															<p class="selling-option-item_price">
-																<span class="selling-option-item_price_number">${product.price}</span>원
+																<span class="selling-option-item_price_number"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.price}"/></span>원
 															</p>
 														</div>
 													</c:if>
@@ -1997,7 +2045,7 @@
 						<a id="production-selling-question"></a>
 						<div class="product_selling_section">
 							<header class="product_selling_section-header">
-								<h1 class="product_selling_section-header-title">문의 <span class="count">0</span>
+								<h1 class="product_selling_section-header-title">문의 <span class="count">${questionCount}</span>
 								</h1>
 								<div class="product_selling_section-right">
 									<button type="button">문의하기</button>

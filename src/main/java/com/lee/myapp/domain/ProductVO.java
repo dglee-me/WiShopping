@@ -130,7 +130,7 @@ public class ProductVO {
 	}
 	
 	public String toString() {
-		return "ProductVO = [pno= "+pno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
+		return "ProductVO = [pno= "+pno+", mno = "+mno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
 				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday+", isseller = "+isseller
 				+"]";
 	}

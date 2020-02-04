@@ -275,6 +275,10 @@ span.txt_byte{margin-left:5px;}
 .product-selling-category ul li{position:relative; float:left; padding:0 9px 0 14px; line-height:14px; color:#666;}
 .product-selling-category ul li:before{content:''; position:absolute; top:5px; left:0; background-position:-165px -319px; width:5px; height:9px;}
 
+.product-selling-admin-category{display:inline-block; position:relative; float:right; margin:20px 0 0; padding:0; border:none;}
+
+.product-selling-admin-category_breadcrumb li{float:left; margin-right:5px; font-size:15px; color:#757575; line-height:1.2;}
+
 .product-selling-overview_container{margin-top:40px; margin-bottom:40px;}
 .row{display:flex; flex-wrap:wrap; box-sizing:border-box; margin-right:-10px; margin-left:-10px;}
 

@@ -51,6 +51,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public void deleteProduct(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		productDAO.deleteProduct(product);
+	}
+
+	@Override
 	public int checkInventory(int ono) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.checkInventory(ono);

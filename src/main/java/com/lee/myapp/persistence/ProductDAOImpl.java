@@ -53,6 +53,12 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
+	public void deleteProduct(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".productDelete", product);
+	}
+
+	@Override
 	public int checkInventory(int ono) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".checkInventory",ono);
