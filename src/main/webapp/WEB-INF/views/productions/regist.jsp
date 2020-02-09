@@ -105,7 +105,7 @@
 		});
 
 		$(document).on("change",".fcheck",function(){
-	        var checked = $(this).val();
+			var checked = $(this).val();
 	        
 	        if(checked == "T"){
 	           document.getElementById("option_btn").style.display = "block";
@@ -115,6 +115,11 @@
 	           document.getElementById("defaultsize").name="none";
 	           document.getElementById("defaultinventory").name="none";
 	           
+	           $(".createOption").attr("name", "optioncolor");
+	           
+	           $("#defaultcolor").val("");
+	           $("#defaultsize").val("");
+	           $("#defaultinventory").val("");
 	        }else{
 	           document.getElementById("option_btn").style.display = "none";
 	           document.getElementById("product-register-option-area").style.display = "none";
@@ -123,6 +128,7 @@
 	           document.getElementById("defaultsize").name="optionsize";
 	           document.getElementById("defaultinventory").name="inventory";
 	           
+	           $(".createOption").attr("name", "optioncolor_none");
 	        }
 	     });
 		
@@ -147,6 +153,7 @@
 							var input_option = document.createElement("input");
 							input_option.type = "hidden";
 							input_option.name = "optioncolor";
+							input_option.className = "createOption";
 							input_option.value = option_color[i]+"#$%"+option_size[j];
 
 							$(".option-row_color").append(input_option);
@@ -206,6 +213,13 @@
 					document.getElementById('frm').submit();
 				}
 			});
+			
+			//Batch application clicked event
+			$("#product-register-item-batch-apply").click(function(){
+				var batch_value = $("input:text[name='batch_value']").val();
+				
+				$("input:text[name='inventory']").val(batch_value);
+			});
 		});
 		
 		//Delete select option
@@ -247,7 +261,7 @@
 										<li><a href="${pageContext.request.contextPath}">홈</a></li>
 										<li><a href="${pageContext.request.contextPath}/admin/main">관리자 홈</a></li>
 										<li><a href="javascript:void(0);">상품관리</a></li>
-										<li class="now"><a href="javascript:void(0);">상품 등록</a></li>
+										<li class="now"><a href="${pageContext.request.contextPath}/productions/regist">상품 등록</a></li>
 									</ul>
 								</div>
 							</div>
@@ -461,7 +475,7 @@
 									                                	<tr class="positive">
 									                                		<td class="right"><strong class="txt_strong">일괄 적용</strong></td>
 									                                		<td></td>
-									                                		<td><input type="text" class="ftext right" style="width:100%;" value="0"></td>
+									                                		<td><input type="text" class="ftext right" name="batch_value" style="width:100%;" value="0"></td>
 									                                		<td><a href="javascript:void(0);" class="btnApply" id="product-register-item-batch-apply">일괄 적용</a></td>
 									                                	</tr>
 									                                </tbody>

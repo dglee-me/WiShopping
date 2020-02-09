@@ -1585,7 +1585,7 @@
 			var pno = url.slice(url.indexOf('=') + 1);
 			
 			if(text == "수정"){ // Modify button clicked event
-				
+				location.href = "/WiShopping/productions/modify?pno="+pno;
 			}else{//Delete button clicked event
 				var var_confirm = confirm("정말로 삭제하시겠습니까?\n삭제된 상품 정보는 다시 복구할 수 없습니다.");
 			

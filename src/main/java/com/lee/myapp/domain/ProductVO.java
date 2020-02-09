@@ -28,7 +28,7 @@ public class ProductVO {
 		CREATE SEQUENCE TBL_SALES_VOLUME_SEQ START WITH 1;
 	 */
 	private int pno;
-	private int mno; // Use only for product regist (brand)
+	private int mno; // Use only for product regist (brand) and product modify (brand)
 	private String category1; //��з�
 	private String category2; //�ߺз�
 	private String pname; //��ǰ��

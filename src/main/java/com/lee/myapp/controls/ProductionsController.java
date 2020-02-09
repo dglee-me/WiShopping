@@ -27,6 +27,7 @@ import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 import com.lee.myapp.service.ProductService;
+import com.lee.myapp.utils.FileDelete;
 import com.lee.myapp.utils.UploadFileUtils;
 
 @Controller
@@ -346,7 +347,7 @@ public class ProductionsController {
 	
 	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
-	public int productionsDelete(HttpSession session,ProductVO product) throws Exception{
+	public int productionsDeleteGET(HttpSession session,ProductVO product) throws Exception{
 		logger.info("-------- PRODUCTIONS : ACCESS PRODUCT DELETE METHOD = GET --------");
 		
 		int result = 0;
@@ -361,5 +362,105 @@ public class ProductionsController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value="modify", method=RequestMethod.GET)
+	public void productionsModifyGET(Model model, HttpSession session, CommentCriteria cri) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS PRODUCT MODIFY METHOD = GET --------");
+		logger.info("-------- PRODUCTIONS : ACCESS PNO = "+cri.getPno()+" --------");
+
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			ProductVO product = productService.view(cri);
+			
+			//Detail image url split to show
+			String[] detailUrl = product.getProducturl().split(";");		
+			
+			List<String> imageList = new ArrayList<String>();
+			
+			for(int i=0;i<detailUrl.length;i++) {
+				imageList.add(detailUrl[i]);
+			}
+			
+			//Product option check the number
+			List<ProductOptionVO> options = productService.view_option(cri.getPno());
+			int option_count = options.size();
+			
+			//Setting
+			model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
+			
+			model.addAttribute("product", product);
+			model.addAttribute("option_count", option_count);
+			model.addAttribute("option", options);
+			model.addAttribute("image", imageList);
+		}
+	}
+	
+	@RequestMapping(value="modify", method=RequestMethod.POST)
+	public void productionsModifyPOST(HttpSession session, @RequestParam("product_thumurl") MultipartFile file1, @RequestParam("product_url") MultipartFile[] file2,
+			ProductVO product, char has_option, ProductOptionVO option, int[] inventory) throws Exception{
+		logger.info("-------- UPDATE : PRODUCTIONS MODIFY METHOD=POST --------");
+
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			String imgUploadPath = uploadPath + File.separator + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			
+			CommentCriteria cri = new CommentCriteria().setMno(member.getMno()).setPno(product.getPno());
+			ProductVO exist_product = productService.view(cri);
+			
+			if(file1.getOriginalFilename() != "") {
+				//Set thumbnail image name and upload image to server and delete exist image
+				FileDelete.deleteFile(exist_product.getProductthumurl());
+				product.setProductthumurl("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file1.getOriginalFilename(), file1.getBytes(), ymdPath));
+			}
+			
+			//Detail images upload to server
+			for(int i=0;i<file2.length;i++) {
+				if(file2[i].getOriginalFilename() == "") break;
+				
+				if(i == 0) {
+					product.setProducturl("/" + "imgUpload" + ymdPath + "/" 
+											+ UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath));
+				}else {
+					product.setProducturl(product.getProducturl() 
+							+";" + "/" + "imgUpload" + ymdPath + "/" 
+							+ UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath));
+				}
+			}
+
+			if(product.getProducturl() != null) {
+				String[] arr_exist = exist_product.getProducturl().split(";");
+				
+				for(int i=0;i<arr_exist.length;i++) {
+					FileDelete.deleteFile(arr_exist[i]);
+				}
+			}
+			
+			product.setMno(member.getMno());
+			productService.modifyProduct(product);
+			
+			//Exist option delete and new option regist
+			productService.delete_option(product.getPno());
+			
+			if(has_option == 'T') {
+				int inventory_count = 0;
+				String[] array_option = option.getOptioncolor().split(",");
+
+				for(int i=0;i<array_option.length;i++) {
+					String[] temp = array_option[i].split("\\#\\$\\%");
+					
+					option.setOptioncolor(temp[0])
+						.setOptionsize(temp[1])
+						.setInventory(inventory[inventory_count++]);
+
+					productService.register_option(option);
+				}
+			}else {
+				productService.register_option(option);
+			}
+		}
 	}
 }

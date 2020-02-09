@@ -16,8 +16,14 @@
 	</insert>
 	
 	<insert id="register_option">
-		INSERT INTO TBL_PRODUCT_OPTION(ONO,PNO,OPTION_COLOR,OPTION_SIZE,INVENTORY)
-			VALUES(ono_seq.nextval,pno_seq.currval,#{optioncolor},#{optionsize},#{inventory})
+		<if test='pno == 0'>
+			INSERT INTO TBL_PRODUCT_OPTION(ONO,PNO,OPTION_COLOR,OPTION_SIZE,INVENTORY)
+			VALUES(ONO_SEQ.NEXTVAL,PNO_SEQ.CURRVAL,#{optioncolor},#{optionsize},#{inventory})
+		</if>
+		<if test='pno != 0'>
+			INSERT INTO TBL_PRODUCT_OPTION(ONO,PNO,OPTION_COLOR,OPTION_SIZE,INVENTORY)
+			VALUES(ONO_SEQ.NEXTVAL,#{pno},#{optioncolor},#{optionsize},#{inventory})
+		</if>
 	</insert>
 	
 	<!-- Cateogry list -->
@@ -58,10 +64,33 @@
 		 WHERE MNO = (SELECT MNO FROM MEMBER WHERE MNO = #{mno})
 	</select>
 	
+	<update id="modifyProduct">
+		UPDATE PRODUCT
+		   SET CATEGORY1 = #{category1},
+		       CATEGORY2 = #{category2},
+		       PNAME = #{pname},
+		       PRICE = #{price},
+		       <if test="productthumurl != null">
+		       PRODUCT_THUMURL = #{productthumurl},
+		       </if>
+		       <if test="producturl != null">
+		       PRODUCT_URL = #{producturl},
+		       </if>
+		       SHIPPING_FEE = #{shippingfee},
+		       SHIPPING_DAY = #{shippingday}
+		 WHERE PNO = #{pno} AND BRAND = (SELECT BRAND FROM TBL_SELLER WHERE MNO = #{mno})
+	</update>
+	
 	<delete id="productDelete">
 		DELETE 
 		  FROM PRODUCT
 		 WHERE PNO = #{pno} AND BRAND = (SELECT BRAND FROM TBL_SELLER WHERE MNO = #{mno})
+	</delete>
+	
+	<delete id="optionDelete">
+		DELETE
+		  FROM TBL_PRODUCT_OPTION
+		 WHERE PNO = #{pno}
 	</delete>
 	
 	<insert id="reviewRegist">

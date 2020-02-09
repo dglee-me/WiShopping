@@ -33,6 +33,12 @@ public class ProductDAOImpl implements ProductDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".register_option",option);
 	}
+
+	@Override
+	public void delete_option(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace+".optionDelete", pno);
+	}
 	
 	@Override
 	public List<ProductVO> list(ProductVO product) throws Exception {
@@ -50,6 +56,12 @@ public class ProductDAOImpl implements ProductDAO{
 	public List<ProductOptionVO> view_option(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".view_option",pno);
+	}
+
+	@Override
+	public void modifyProduct(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".modifyProduct", product);
 	}
 
 	@Override

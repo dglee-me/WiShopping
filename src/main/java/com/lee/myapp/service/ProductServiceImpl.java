@@ -31,6 +31,12 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDAO.register_option(option);
 	}
+
+	@Override
+	public void delete_option(int pno) throws Exception {
+		// TODO Auto-generated method stub
+		productDAO.delete_option(pno);
+	}
 	
 	@Override
 	public List<ProductVO> list(ProductVO product) throws Exception {
@@ -48,6 +54,12 @@ public class ProductServiceImpl implements ProductService{
 	public List<ProductOptionVO> view_option(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.view_option(pno);
+	}
+
+	@Override
+	public void modifyProduct(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		productDAO.modifyProduct(product);
 	}
 
 	@Override
