@@ -11,6 +11,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/default.js"></script>
 
+<!-- Import 'iamport'  -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -86,6 +89,7 @@
 		});
 	});
 	
+	/*
 	$(document).ready(function(){
 		$("#do_payment").click(function(){
 			var orderrec = $("input:text[name='orderrec']").val();
@@ -111,6 +115,70 @@
 				}
 			}
 			
+		});
+	});
+	*/
+	
+	$(document).ready(function(){
+		$("#do_payment").click(function(){
+			var orderrec = $("input:text[name='orderrec']").val();
+			var zipcode = $("input:text[name='zipcode']").val();
+			var received_at = $("input:text[name='receivedat']").val();
+			var received_at_detail = $("input:text[name='receivedatdetail']").val();
+			var received_phone = $("input:text[name='receivedphone']").val();
+			
+			var payer_name = $("input:text[name='payername']").val();
+			var payer_email = $("input:text[name='payeremail']").val();
+			var payer_phone = $("input:text[name='payerphone']").val();
+			
+			var amount = parseInt(uncomma($("#preview_selling_cost").text()),10);
+			
+			if(orderrec == "" || zipcode == "" || received_at == "" || received_at_detail == "" || received_phone == "" || payer_name == "" 
+					|| payer_email == "" || payer_phone == ""){
+				alert("입력 사항을 모두 입력하여주세요.");
+			}else{
+				var checked = $("#check_agree_policy");
+				
+				if(checked[0].checked == true){	
+					var payment = $("input[name='order[payment_method]']:checked").attr("id");
+					
+					if(payment == "order_payment_method_credit_card"){
+						IMP.init("imp00584928");
+						
+						IMP.request_pay({
+						    pg : 'html5_inicis',
+						    pay_method : 'card',
+						    merchant_uid : 'merchant_' + new Date().getTime(),
+						    name : '위쇼핑',
+						    amount : amount,
+						    buyer_email : payer_email,
+						    buyer_name : payer_name,
+						    buyer_tel : payer_phone,
+						    buyer_addr : received_at + received_at_detail,
+						    buyer_postcode : zipcode
+						}, function(rsp) {
+						    if ( rsp.success ) {
+						        var msg = "결제가 완료되었습니다.";
+						        msg += "\n고유ID : " + rsp.imp_uid;
+						        msg += "\n상점 거래ID : " + rsp.merchant_uid;
+						        msg += "\n결제 금액 : " + rsp.paid_amount;
+						        msg += "\n카드 승인번호 : " + rsp.apply_num;
+						    } else {
+						        var msg = "결제에 실패하였습니다.\n";
+						        msg += '에러내용 : ' + rsp.error_msg;
+						    }
+
+						    alert(msg);
+						    
+						    if(rsp.success){
+						    	document.order_frm.submit();
+						    }
+						});
+					}
+				}else{
+					alert("결제 진행 필수사항에 동의해주세요.");
+				}
+			}
 		});
 	});
 </script>
@@ -323,8 +391,15 @@
 					</div>
 				</div>
 				<div class="panel">
-					<div class="title">
-						<div class="title">결제 수단</div>
+					<div class="title">결제 수단</div>
+					<div class="pay_method">
+						<div class="payment_panel">
+							<input type="radio" value="credit_card" name="order[payment_method]" id="order_payment_method_credit_card" checked="checked">
+							<label class="first top" for="order_payment_method_credit_card">
+				            	<img class="img" width="64" src="https://bucketplace-v2-development.s3.amazonaws.com/pg/card.png" alt="Card">
+				                <div class="title">카드</div>
+							</label>
+						</div>
 					</div>
 				</div>
 				<div id="confirm_checkbox">

@@ -94,13 +94,18 @@ public class OrderController {
 	
 	@Transactional
 	@RequestMapping(value="/pre_order", method=RequestMethod.POST)
-	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, String[] ono, int[] inventory) throws Exception{
+	public String pre_orderPOST(HttpSession session, OrderVO order, String[] cartno, String[] ono, int[] inventory
+			, @RequestParam(value="order[payment_method]") String payment) throws Exception{
 		logger.info("-------- ORDER : PRE_ORDER METHOD=POST --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 				
 		if(member != null) {
 			String orderNo = CommonUtils.CreateRandomNumber();
+			
+			if(payment.equals("credit_card")) { //If order by credit card
+				order.setDeliverystatus(1);
+			}
 			
 			//If product to order case, flag is false, and cart to order case, flag is true;
 			boolean flag = true;

@@ -721,6 +721,20 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 #pre_order>form #confirm_checkbox>.policies>.policy>.title_panel>.opener{flex:0 0 auto; font-size:12px; line-hieght:1;
 	color:#bdbdbd; margin-left:10px; cursor:pointer;}
 
+#pre_order>form>.panel>.pay_method{margin-top:20px;}
+#pre_order>form>.panel>.pay_method>.payment_panel{display:flex; flex-wrap:wrap;}
+#pre_order>form>.panel>.pay_method>.payment_panel input[type=radio]{display:none;}
+
+#pre_order>form>.panel>.pay_method>.payment_panel>label{/*flex:1 0 12.5%;*/ width:110px; box-sizing:border-box; text-align:center; cursor:pointer; padding-bottom:4px;
+	border-bottom:1px solid #eaebef; border-right:1px solid #eaebef;}
+#pre_order>form>.panel>.pay_method>.payment_panel>label.top{border-top:1px solid #eaebef;}
+#pre_order>form>.panel>.pay_method>.payment_panel>label.first{border-left:1px solid #eaebef;}
+
+#pre_order>form>.panel>.pay_method>.payment_panel>input[type=radio]:checked+label{background:#eaebef;}
+
+#pre_order>form>.panel>.pay_method>.payment_panel>label>.img{pointer-events:none; margin:0 auto 10px; width:64px; height:64px;}
+#pre_order>form>.panel>.pay_method>.payment_panel>label>.title{color:#424242; font-size:13px; line-height:1; margin-bottom:2px;}
+
 #pre_order>form #do_payment{margin:40px 10px 40px; text-align:center; color:white; font-weight:bold;
 	font-size:24px; line-height:50px; background:#5FCAEC; border-radius:4px; cursor:pointer;}
 	
