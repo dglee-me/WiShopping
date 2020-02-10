@@ -347,7 +347,7 @@
 						</div>
 						<div class="content_main">
 							<div class="headerTitle">
-								<h1>상품 등록</h1>
+								<h1>상품 수정</h1>
 							</div>
 							<div class="bar product-register-bar">
 								<h2>기본 정보</h2>

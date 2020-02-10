@@ -119,4 +119,9 @@
 		  FROM TBL_PROMOTIONS_COMMENT
 		 WHERE RNO = #{rno}
 	</delete>
+	
+	<insert id="commentReport">
+		INSERT INTO TBL_PROMOTIONS_REPORT(RNO,CNO,RMNO,CONTENT,CAUSE)
+		VALUES(TBL_PROMOTIONS_REPORT_RNO.NEXTVAL, #{cno}, #{rmno}, (SELECT CONTENT FROM TBL_PROMOTIONS_COMMENT WHERE RNO = #{cno}), #{cause})
+	</insert>
 </mapper>

@@ -39,6 +39,21 @@
 							</ul>
 						</section>
 						<section class="admin-category-list">
+							<h2 class="admin-category-list_title">회원 관리</h2>
+							<ul class="admin-category-tree admin-category-list_categories list_hide">
+								<li class="admin-category-tree_entry">
+									<div class="admin-category-tree_entry_header">
+										<a class="admin-category-tree_entry_title" href="javascript:void(0);">회원 목록</a>
+									</div>
+								</li>
+								<li class="admin-category-tree_entry">
+									<div class="admin-category-tree_entry_header">
+										<a class="admin-category-tree_entry_title" href="javascript:void(0);">신고 목록</a>
+									</div>
+								</li>
+							</ul>
+						</section>
+						<section class="admin-category-list">
 							<h2 class="admin-category-list_title">상품 관리</h2>
 							<ul class="admin-category-tree admin-category-list_categories list_hide">
 								<li class="admin-category-tree_entry">

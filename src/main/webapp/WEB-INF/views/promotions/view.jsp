@@ -364,6 +364,84 @@
 		}
 	});
 </script>
+<script>
+	/*
+		Report clicked event
+	*/
+	$(document).on("click", ".comment-feed_item_footer_report-btn", function(){
+		$("body").css("overflow-y","scroll");
+		
+		var report = document.createElement("div");
+		report.id = "create_report";
+		report.className = "popup ui-popup";
+		
+		report.innerHTML = 
+			"<div class='create_report'>"+
+				"<div class='title'>신고사유를 선택해주세요.</div>"+
+				"<div class='contents'>"+
+					"<form class='new_report' id='new_report' action='report' method='post'>"+
+						"<input type='hidden' name='report[user]' value='"+$(this).parent().siblings().children("a").attr("user-number")+"'>"+
+						"<input type='hidden' name='report[number]' value='" + $(this).parent().attr("data-number") + "'>"+
+						"<div class='radio ui-checked ui-checked-right-left-text'>"+
+							"<input type='radio' value='0' name='report[report_type]' id='report_report_type_0'>"+
+							"<label for='report_report_type_0'>주제와 맞지 않음</label>"+
+							"<div class='image'></div>"+
+						"</div>"+
+						"<div class='radio ui-checked ui-checked-right-left-text'>"+
+							"<input type='radio' value='1' name='report[report_type]' id='report_report_type_1'>"+
+							"<label for='report_report_type_1'>정보가 부정확함</label>"+
+							"<div class='image'></div>"+
+						"</div>"+
+						"<div class='radio ui-checked ui-checked-right-left-text'>"+
+							"<input type='radio' value='2' name='report[report_type]' id='report_report_type_2'>"+
+							"<label for='report_report_type_2'>광고성 댓글</label>"+
+							"<div class='image'></div>"+
+						"</div>"+
+						"<div class='radio ui-checked ui-checked-right-left-text'>"+
+							"<input type='radio' value='3' name='report[report_type]' id='report_report_type_3'>"+
+							"<label for='report_report_type_3'>도배 및 중복성 댓글</label>"+
+							"<div class='image'></div>"+
+						"</div>"+
+						"<div class='radio ui-checked ui-checked-right-left-text'>"+
+							"<input type='radio' value='4' name='report[report_type]' id='report_report_type_4'>"+
+							"<label for='report_report_type_4'>지나친 욕설</label>"+
+							"<div class='image'></div>"+
+						"</div>"+
+					"</form>"+
+				"<button name='button' type='submit' class='submit close_popup'>신고하기</button>"
+				
+		$("body").append(report);
+	});
+
+	//Delete layer pop-up when click outside popup area
+	$(document).on("click","html",function(e){
+		if($(e.target).hasClass("ui-popup")){ //Modal popup exit
+			$("body").css("overflow-y","scroll");
+			$("#create_report").remove();
+		}
+	});
+	
+	$(document).on("click", ".close_popup", function(){
+		var cause = $("input:radio[name='report[report_type]']:checked").val();
+		var cno = $("input[name='report[number]']").val();
+		var rmno = $("input[name='report[user]']").val();
+		
+		if(typeof cause != "undefined"){
+			$.ajax({
+				url : "/WiShopping/promotions/report",
+				type : "post",
+				data : {
+					cause : cause,
+					cno : cno,
+					rmno : rmno
+				},success : function(result){
+					if(result == 0) location.href = "/WiShopping/auth/login";
+					else if(result == 1) alert("신고 완료되었습니다.");
+				}
+			});
+		}
+	});
+</script>
 <meta charset="UTF-8">
 <title>${promotion.subject} | 위쇼핑</title>
 </head>
@@ -397,7 +475,7 @@
 							<li class="comment-feed_list_item">
 								<article class="comment-feed_item">
 									<p class="comment-feed_item_content">
-										<a href="javascript:void(0);" class="comment-feed_item_content_author">
+										<a href="javascript:void(0);" class="comment-feed_item_content_author" user-number="${comment.mno}">
 											<img src="/WiShopping/resources/image/none_user.png" class="comment-feed_item_content_author_image" alt="${comment.name}">
 											<span class="comment-feed_item_content_author_name">${comment.name}</span>
 										</a>

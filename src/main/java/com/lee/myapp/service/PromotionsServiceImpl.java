@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.PromotionsCommentVO;
+import com.lee.myapp.domain.PromotionsReportVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.persistence.PromotionsDAO;
 
@@ -96,5 +97,11 @@ public class PromotionsServiceImpl implements PromotionsService{
 	public int deleteComment(int rno) throws Exception {
 		// TODO Auto-generated method stub
 		return promotionsDAO.deleteComment(rno);
+	}
+
+	@Override
+	public void commentReport(PromotionsReportVO report) throws Exception {
+		// TODO Auto-generated method stub
+		promotionsDAO.commentReport(report);
 	}
 }

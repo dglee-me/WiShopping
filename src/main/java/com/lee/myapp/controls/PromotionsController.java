@@ -23,6 +23,7 @@ import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.CommentPageMaker;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.PromotionsCommentVO;
+import com.lee.myapp.domain.PromotionsReportVO;
 import com.lee.myapp.domain.PromotionsVO;
 import com.lee.myapp.service.PromotionsService;
 import com.lee.myapp.utils.FileDelete;
@@ -355,5 +356,21 @@ public class PromotionsController {
 		}
 
 		return comments;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="report", method=RequestMethod.POST)
+	public int promotionCommentReportPOST(HttpSession session, PromotionsReportVO report) throws Exception{
+		logger.info("-------- PROMOTIONS : COMMENT REPORT METHOD=GET --------");
+		
+		int result = 0;
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			promotionsService.commentReport(report);
+			result = 1;
+		}
+		
+		return result;
 	}
 }

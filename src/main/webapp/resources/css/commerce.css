@@ -1125,6 +1125,26 @@ button:disabled{cursor:default;}
 
 .comment-feed_item_footer_delete-btn:hover, .comment-feed_item_footer_report-btn:hover{text-decoration:underline;}
 
+#create_report .create_report{background-color:white; box-shadow:0 1px 3px 0 rgba(0,0,0,0.2); margin:45px auto; width:330px; padding:30px; box-sizing:border-box;}
+#create_report .create_report>.title{font-size:18px; padding-bottom:28px; color:#424242;}
+
+#create_report .create_report>.contents>form>.radio{padding:8px 0; overflow:hidden;}
+.ui-checked-right-left-text{position:relative;}
+.ui-checked>input{display:none;}
+.ui-checked-right-left-text>label{position:relative; display:block; float:left; font-size:13px; color:#424242; padding:3px 0; width:100%; z-index:1;}
+
+.ui-checked-right-left-text .image{position:absolute; top:10px; right:0;}
+
+.ui-checked-right-left-text input[type=radio]:checked+label+.image{width:22px; height:22px; 
+	background-image:url('/WiShopping/resources/image/mobile_order_group.png'); background-repeat:no-repeat; background-size:360px;
+	background-position:top -41px left -58px;}
+	
+.ui-checked .image{width:22px; height:22px;
+	background-image:url('/WiShopping/resources/image/mobile_order_group.png'); background-repeat:no-repeat; background-size:360px;
+	background-position:top -41px left -29px;}
+
+#create_report .create_report>.contents>button{width:100%; padding:10px; margin-top:20px; text-align:center; border-radius:4px; border:1px solid #5FCAEC; font-size:15px;
+	color:#fff; background-color:#5FCAEC; font-weight:bold;}
 
 /* Promotions modify CSS */
 section[class*="admin-promotions-"] .table-block td.image .img_exist:hover

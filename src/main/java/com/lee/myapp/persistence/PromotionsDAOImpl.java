@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.PromotionsCommentVO;
+import com.lee.myapp.domain.PromotionsReportVO;
 import com.lee.myapp.domain.PromotionsVO;
 
 @Repository
@@ -97,5 +98,11 @@ public class PromotionsDAOImpl implements PromotionsDAO{
 	public int deleteComment(int rno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".deleteComment",rno);
+	}
+
+	@Override
+	public void commentReport(PromotionsReportVO report) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".commentReport", report);
 	}
 }
