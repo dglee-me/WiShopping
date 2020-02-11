@@ -1,6 +1,7 @@
 package com.lee.myapp.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,15 +20,15 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<PurchaseVO> purchaseList(int mno) throws Exception {
+	public List<PurchaseVO> purchaseList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".purchaseList",mno);
+		return sqlSession.selectList(namespace+".purchaseList", map);
 	}
 
 	@Override
-	public List<OrderVO> ordernoList(int mno) throws Exception {
+	public List<OrderVO> ordernoList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".ordernoList",mno);
+		return sqlSession.selectList(namespace+".ordernoList", map);
 	}
 
 	@Override

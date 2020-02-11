@@ -1,6 +1,7 @@
 package com.lee.myapp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,15 +18,15 @@ public class PurchaseServiceImpl implements PurchaseService{
 	PurchaseDAO purchaseDAO;
 	
 	@Override
-	public List<PurchaseVO> purchaseList(int mno) throws Exception {
+	public List<PurchaseVO> purchaseList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return purchaseDAO.purchaseList(mno);
+		return purchaseDAO.purchaseList(map);
 	}
 
 	@Override
-	public List<OrderVO> ordernoList(int mno) throws Exception {
+	public List<OrderVO> ordernoList(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return purchaseDAO.ordernoList(mno);
+		return purchaseDAO.ordernoList(map);
 	}
 
 	@Override

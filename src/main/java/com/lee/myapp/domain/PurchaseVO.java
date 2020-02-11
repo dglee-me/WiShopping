@@ -18,7 +18,7 @@ public class PurchaseVO {
 	private int shippingfee;
 	private int deliverystatus;
 	private int reviewstatus;
-
+	
 	public int getNum() {
 		return num;
 	}
@@ -128,6 +128,6 @@ public class PurchaseVO {
 	public String toString() {
 		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", ono = "+ono+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", productthumurl= "
 				+productthumurl+", optioncolor= "+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+", price= "+price+", shippingfee= "+shippingfee
-				+", deliverystatus= "+deliverystatus+", reviewstatus = "+reviewstatus+"] ";
+				+", deliverystatus= "+deliverystatus+", reviewstatus = "+reviewstatus+" ] ";
 	}
 }

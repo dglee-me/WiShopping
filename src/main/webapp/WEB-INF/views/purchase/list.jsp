@@ -12,8 +12,55 @@
 <html>
 <head>
 <script type="text/javascript">
-	//Regist review
+	//selectbox option selected setting when page entry
 	$(document).ready(function(){
+		var url = window.location.search.substring(1);
+		var arr = url.split("&");
+		
+		if(arr.length == 1){
+			var param =  arr[0].split("=")[0];
+			var val = arr[0].split("=")[1];
+			
+			if(param == "before"){
+				var select = $("#delivery_before option");
+				
+				$.each(select, function(){
+					if($(this).val() == val){
+						$(this).attr("selected","selected");
+					}
+				});
+			}else if(param == "status"){
+				var select = $("#delivery_status option");
+				
+				$.each(select, function(){
+					if($(this).val() == val){
+						$(this).attr("selected","selected");
+					}
+				});
+			}
+		}else{ // Before and status all select
+			var before = $("#delivery_before option");
+			var status = $("#delivery_status option");
+			
+			var before_val = arr[0].split("=")[1];
+			var status_val = arr[1].split("=")[1];
+
+			$.each(before, function(){
+				if($(this).val() == before_val){
+					$(this).attr("selected","selected");
+				}
+			});
+
+			$.each(status, function(){
+				if($(this).val() == status_val){
+					$(this).attr("selected","selected");
+				}
+			});
+		}
+	})
+
+	$(document).ready(function(){
+		//Regist review
 		$(".write_comments").click(function(){
 			$("body").css("overflow-y","hidden");
 
@@ -72,6 +119,30 @@
 			
 			$("body").append(div);
 		});
+		
+		//Before and status reflect
+		$("#delivery_before").change(function(){
+			var status = $("#delivery_status").val();
+			var before = $(this).val();
+			
+			if(status == -1){
+				location.href = "/WiShopping/purchase/list?before="+before;
+			}else{
+				location.href = "/WiShopping/purchase/list?before="+before+"&status="+status;
+			}
+		});
+
+		//status and before reflect
+		$("#delivery_status").change(function(){
+			var status = $(this).val();
+			var before = $("#delivery_before").val();
+			
+			if(before == 3){
+				location.href = "/WiShopping/purchase/list?status="+status;
+			}else{
+				location.href = "/WiShopping/purchase/list?before="+before+"&status="+status;
+			}
+		});
 	});
 	
 	//Add review image
@@ -123,7 +194,7 @@
 			}
 		});
 	});
-	
+		
 	//Regist review
 	$(document).on("click",".submit",function(){
 		var formData = new FormData($("#production_review_form")[0]);

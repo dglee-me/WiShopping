@@ -9,15 +9,37 @@
 	<select id="purchaseList" resultType="com.lee.myapp.domain.PurchaseVO">
 		SELECT ROW_NUMBER() OVER(PARTITION BY A.ORDERNO ORDER BY A.ORDERNO DESC) AS NUM,A.ORDERNO,B.PNO,B.ONO,A.ORDERDATE,C.BRAND,C.PNAME,C.PRODUCT_THUMURL,B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, C.PRICE, A.DELIVERY_STATUS, A.REVIEW_STATUS
 		  FROM TBL_ORDER A INNER JOIN TBL_ORDER_DETAIL B ON A.ORDERNO = B.ORDERNO INNER JOIN PRODUCT C ON B.PNO = C.PNO
-		 WHERE A.MNO = #{mno}
+		 <if test='before == null and status == null or status == "-1"'>
+			 WHERE A.MNO = #{mno} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -3)) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before == null and status != null and status != "-1"'>
+			 WHERE A.MNO = #{mno} AND A.DELIVERY_STATUS = #{status} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -3)) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before != null and status == null'>
+			 WHERE A.MNO = #{mno} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -#{before})) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before != null and status != null and status != "-1"'>
+			 WHERE A.MNO = #{mno} AND A.DELIVERY_STATUS = #{status} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -#{before})) AND TO_DATE(SYSDATE)
+		 </if>
 		 ORDER BY ORDERDATE DESC, NUM ASC
 	</select>
 	
 	<select id="ordernoList" resultType="com.lee.myapp.domain.OrderVO">
-		SELECT ORDERNO,ORDERDATE
-		  FROM TBL_ORDER
- 		 WHERE MNO = #{mno}
- 		 ORDER BY ORDERDATE DESC
+		 SELECT ORDERNO,ORDERDATE
+		   FROM TBL_ORDER
+		 <if test='before == null and status == null or status == "-1"'>
+			 WHERE MNO = #{mno} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -3)) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before == null and status != null and status != "-1"'>
+			 WHERE MNO = #{mno} AND DELIVERY_STATUS = #{status} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -3)) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before != null and status == null'>
+			 WHERE MNO = #{mno} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -#{before})) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before != null and status != null and status != "-1"'>
+			 WHERE MNO = #{mno} AND DELIVERY_STATUS = #{status} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -#{before})) AND TO_DATE(SYSDATE)
+		 </if>
+		  ORDER BY ORDERDATE DESC
 	</select>
 	
 	<!-- Detail View -->
