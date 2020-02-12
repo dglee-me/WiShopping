@@ -19,6 +19,8 @@ public class PurchaseVO {
 	private int deliverystatus;
 	private int reviewstatus;
 	
+	private int statuscount; //deliverystatus count
+	
 	public int getNum() {
 		return num;
 	}
@@ -124,10 +126,16 @@ public class PurchaseVO {
 		this.reviewstatus = reviewstatus;
 		return this;
 	}
+	public int getStatuscount() {
+		return statuscount;
+	}
+	public void setStatuscount(int statuscount) {
+		this.statuscount = statuscount;
+	}
 	
 	public String toString() {
 		return "PurchaseVO = [num= "+num+", orderno= "+orderno+", pno= "+pno+", ono = "+ono+", orderdate= "+orderdate+", brand= "+brand+", pname= "+pname+", productthumurl= "
 				+productthumurl+", optioncolor= "+optioncolor+", optionsize= "+optionsize+", inventory= "+inventory+", price= "+price+", shippingfee= "+shippingfee
-				+", deliverystatus= "+deliverystatus+", reviewstatus = "+reviewstatus+" ] ";
+				+", deliverystatus= "+deliverystatus+", reviewstatus = "+reviewstatus+", statuscount = "+statuscount+" ] ";
 	}
 }

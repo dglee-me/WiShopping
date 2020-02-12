@@ -6,6 +6,19 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="purchaseMapper">
+	<select id="purchaseStatusList" resultType="com.lee.myapp.domain.PurchaseVO">
+		SELECT DELIVERY_STATUS, COUNT(DELIVERY_STATUS) AS STATUS_COUNT
+		  FROM TBL_ORDER
+		 <if test='before == null'>
+		 WHERE MNO = #{mno} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -3)) AND TO_DATE(SYSDATE)
+		 </if>
+		 <if test='before != null'>
+		 WHERE MNO = #{mno} AND TO_DATE(ORDERDATE) BETWEEN TO_DATE(ADD_MONTHS(SYSDATE, -#{before})) AND TO_DATE(SYSDATE)
+		 </if>
+		 GROUP BY DELIVERY_STATUS
+		 ORDER BY DELIVERY_STATUS
+	</select>
+
 	<select id="purchaseList" resultType="com.lee.myapp.domain.PurchaseVO">
 		SELECT ROW_NUMBER() OVER(PARTITION BY A.ORDERNO ORDER BY A.ORDERNO DESC) AS NUM,A.ORDERNO,B.PNO,B.ONO,A.ORDERDATE,C.BRAND,C.PNAME,C.PRODUCT_THUMURL,B.OPTIONCOLOR, B.OPTIONSIZE, B.INVENTORY, C.PRICE, A.DELIVERY_STATUS, A.REVIEW_STATUS
 		  FROM TBL_ORDER A INNER JOIN TBL_ORDER_DETAIL B ON A.ORDERNO = B.ORDERNO INNER JOIN PRODUCT C ON B.PNO = C.PNO

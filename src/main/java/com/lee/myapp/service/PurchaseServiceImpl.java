@@ -16,6 +16,12 @@ import com.lee.myapp.persistence.PurchaseDAO;
 public class PurchaseServiceImpl implements PurchaseService{
 	@Inject
 	PurchaseDAO purchaseDAO;
+
+	@Override
+	public List<PurchaseVO> purchaseStatusList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return purchaseDAO.purchaseStatusList(map);
+	}
 	
 	@Override
 	public List<PurchaseVO> purchaseList(Map<String, Object> map) throws Exception {

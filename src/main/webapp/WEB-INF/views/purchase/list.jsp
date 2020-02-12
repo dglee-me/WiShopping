@@ -57,8 +57,20 @@
 				}
 			});
 		}
+		
+		$(".step").click(function(){
+			var status = $(this).attr("data-status");
+			var before = $("#delivery_before").val();
+			
+			if(before == 3){
+				location.href = "/WiShopping/purchase/list?status="+status;
+			}else{
+				location.href = "/WiShopping/purchase/list?before="+before+"&status="+status;
+			}
+		});
 	})
-
+	
+	
 	$(document).ready(function(){
 		//Regist review
 		$(".write_comments").click(function(){
@@ -239,23 +251,23 @@
 	<c:set var="count_3" value="0"/>
 	<c:set var="count_4" value="0"/>
 	<c:set var="count_5" value="0"/>
-	<c:forEach var="order" items="${orders}">
-		<c:if test="${order.deliverystatus eq 0}">
+	<c:forEach var="status" items="${status}">
+		<c:if test="${status.deliverystatus eq 0}">
 			<c:set var="count_0" value="${count_0 + 1}"/>
 		</c:if>
-		<c:if test="${order.deliverystatus eq 1}">
+		<c:if test="${status.deliverystatus eq 1}">
 			<c:set var="count_1" value="${count_1 + 1}"/>
 		</c:if>
-		<c:if test="${order.deliverystatus eq 2}">
+		<c:if test="${status.deliverystatus eq 2}">
 			<c:set var="count_2" value="${count_2 + 1}"/>
 		</c:if>
-		<c:if test="${order.deliverystatus eq 3}">
+		<c:if test="${status.deliverystatus eq 3}">
 			<c:set var="count_3" value="${count_3 + 1}"/>
 		</c:if>
-		<c:if test="${order.deliverystatus eq 4}">
+		<c:if test="${status.deliverystatus eq 4}">
 			<c:set var="count_4" value="${count_4 + 1}"/>
 		</c:if>
-		<c:if test="${order.deliverystatus eq 5}">
+		<c:if test="${status.deliverystatus eq 5}">
 			<c:set var="count_5" value="${count_5 + 1}"/>
 		</c:if>
 	</c:forEach>
@@ -281,33 +293,33 @@
        			 </div>
 			</div>
 			<div class="order_status">
-				<div class="step" data-status="">
+				<div class="step" data-status="0">
 					<div class="title">입금대기</div>
 					<div class="count">${count_0}</div>
 				</div>
 				<div class="image_arrow"></div>
-				<div class="step" data-status="">
+				<div class="step" data-status="1">
 					<div class="title">결제완료</div>
 					<div class="count">${count_1}</div>
 				</div>
 				<div class="image_arrow"></div>
-				<div class="step" data-status="">
+				<div class="step" data-status="2">
 					<div class="title">배송준비</div>
 					<div class="count">${count_2}</div>
 				</div>
 				<div class="image_arrow"></div>
-				<div class="step" data-status="">
+				<div class="step" data-status="3">
 					<div class="title">배송중</div>
 					<div class="count">${count_3}</div>
 				</div>
 				<div class="image_arrow"></div>
-				<div class="step" data-status="">
+				<div class="step" data-status="4">
 					<div class="title">배송완료</div>
 					<div class="count">${count_4}</div>
 				</div>
 				<div class="image_arrow"></div>
 				<div class="step" data-status="">
-					<div class="title">리뷰작성</div>
+					<div class="title">리뷰쓰기</div>
 					<div class="count">${count_5}</div>
 				</div>
 			</div>

@@ -40,12 +40,14 @@ public class PurchaseController {
 			map.put("before", before);
 			map.put("status", status);
 			
+			List<PurchaseVO> statusList = purchaseService.purchaseStatusList(map);
 			List<PurchaseVO> orders = purchaseService.purchaseList(map);
 			List<OrderVO> ordernos = purchaseService.ordernoList(map);
 
 			//Setting
 			model.addAttribute("headerBanners", purchaseService.mainBannerList("헤더")); // Main banner list in this view
-			
+
+			model.addAttribute("status",statusList);
 			model.addAttribute("orders",orders);
 			model.addAttribute("ordernos",ordernos);
 			

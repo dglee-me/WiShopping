@@ -8,6 +8,7 @@ import com.lee.myapp.domain.OrderVO;
 import com.lee.myapp.domain.PurchaseVO;
 
 public interface PurchaseDAO {
+	public List<PurchaseVO> purchaseStatusList(Map<String, Object> map) throws Exception;
 	public List<PurchaseVO> purchaseList(Map<String, Object> map) throws Exception;
 	public List<OrderVO> ordernoList(Map<String, Object> map) throws Exception;
 	public OrderVO viewOrderNo(String orderno) throws Exception;

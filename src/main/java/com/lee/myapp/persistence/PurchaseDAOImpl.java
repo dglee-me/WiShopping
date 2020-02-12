@@ -18,6 +18,12 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	
 	@Inject
 	SqlSession sqlSession;
+
+	@Override
+	public List<PurchaseVO> purchaseStatusList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".purchaseStatusList", map);
+	}
 	
 	@Override
 	public List<PurchaseVO> purchaseList(Map<String, Object> map) throws Exception {
