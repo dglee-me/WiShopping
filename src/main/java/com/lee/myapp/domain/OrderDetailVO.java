@@ -10,6 +10,7 @@ public class OrderDetailVO {
 		    OPTIONCOLOR VARCHAR2(50) NOT NULL,
 		    OPTIONSIZE VARCHAR2(50) NOT NULL,
 		    INVENTORY INT NOT NULL,
+    		REVIEW_STATUS INT DEFAULT 0,
 		    PRIMARY KEY(ORDERDETAILNO),
 		    FOREIGN KEY(ONO) REFERENCES TBL_PRODUCT_OPTION(ONO),
 		    FOREIGN KEY(PNO) REFERENCES PRODUCT(PNO)
@@ -21,6 +22,7 @@ public class OrderDetailVO {
 	private String optioncolor;
 	private String optionsize;
 	private int inventory;
+	private int reviewstatus;
 	
 	public int getOrderdetailno() {
 		return orderdetailno;
@@ -64,9 +66,16 @@ public class OrderDetailVO {
 		this.inventory = inventory;
 		return this;
 	}
+	public int getReviewstatus() {
+		return reviewstatus;
+	}
+	public OrderDetailVO setReviewstatus(int reviewstatus) {
+		this.reviewstatus = reviewstatus;
+		return this;
+	}
 	
 	public String toString() {
 		return "OrderDetailVO = [orderdetailno= "+orderdetailno+", orderno= "+orderno+", pno= "+pno+", optioncolor= "+optioncolor+", optionsize= "+optionsize
-				+", inventory= "+inventory+"]";
+				+", inventory= "+inventory+", review_status = "+reviewstatus+"]";
 	}
 }

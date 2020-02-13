@@ -1816,7 +1816,7 @@
 						<div class="production-selling-header">
 							<h1 class="production-selling-header_title">
 								<p class="production-selling-header_title_brand-wrap">
-									<a href="javascript:void(0);" class="production-selling-header_title_brand">${product.brand}</a>
+									<a href="${pageContext.request.contextPath}/brands/home?query=${product.brand}" class="production-selling-header_title_brand">${product.brand}</a>
 								</p>
 								<span class="production-selling-header_title_name">${product.pname}</span>
 							</h1>

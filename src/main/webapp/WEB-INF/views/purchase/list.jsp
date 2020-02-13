@@ -85,6 +85,7 @@
 			var option = $(this).parent().parent().siblings(".product_info").children(".product_detail").children(".option_name").text();
 			var ono = $(this).parent().parent().siblings(".product_info").children(".product_detail").children(".option_name").attr("data-number");
 			
+			var order_number = $(this).closest(".order_list").children(".head").children().text().split(" | ")[0];
 			
 			var div = document.createElement("div");
 			div.className = "popup new ui-popup ui-editing-popup";
@@ -97,6 +98,7 @@
 				"<div class='title'>리뷰쓰기</div>"+
 				"<form id='production_review_form' action='production_review' enctype='multipart/form-data' method='post'>"+
 				"<input type='hidden' name='production_review[pno]' value='"+pno+"'>"+
+				"<input type='hidden' name='production_review[order_number]' value='"+order_number+"'>"+
 				"<div class='select_production field'>"+
 				"<div class='production_image' style='"+thumb+"'></div>"+
 				"<div class='production_info'>"+
@@ -212,6 +214,10 @@
 		var formData = new FormData($("#production_review_form")[0]);
 		
 		formData.append("pno",$("input:hidden[name='production_review[pno]']").val());
+		formData.append("ono", $(".option").attr("data-number"));
+		formData.append("optioncolor", $(".option").text().split("/")[0]);
+		formData.append("optionsize", $(".option").text().split("/")[1]);
+		formData.append("orderno", $("input:hidden[name='production_review[order_number]']").val());
 		formData.append("ono", $(".option").attr("data-number"));
 		formData.append("content",$("#production_review_comment").val());
 		formData.append("image",$("#image_uploader")[0].files[0]);

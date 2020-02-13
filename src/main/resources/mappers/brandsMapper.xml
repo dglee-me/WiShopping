@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="brandsMapper">
+	<!-- Brands Service part -->
+	<select id="categoryList" resultType="String">
+		SELECT DISTINCT CATEGORY1 
+		  FROM PRODUCT 
+		 WHERE BRAND = #{brand}
+		 ORDER BY CATEGORY1 DESC
+	</select>
+	
+	<select id="brandProductList" resultType="com.lee.myapp.domain.ProductVO">
+		SELECT PNO, BRAND, PNAME, PRICE, PRODUCT_THUMURL
+		  FROM PRODUCT
+		 WHERE BRAND = #{brand}
+	</select>
+
+	<!-- Header banner -->
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = #{area}
+		 ORDER BY BNO DESC
+	</select>
+</mapper>

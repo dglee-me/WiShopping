@@ -100,8 +100,8 @@
 			#{pno}, 
 			#{mno},
 			#{ono},
-			(SELECT OPTION_COLOR FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}),
-			(SELECT OPTION_SIZE FROM TBL_PRODUCT_OPTION WHERE ONO = #{ono}),
+			#{optioncolor},
+			#{optionsize},
 			#{content},
 			SYSDATE,
 			#{contentimg}
@@ -162,9 +162,9 @@
 	</select>
 	
 	<update id="updateReviewStatus">
-		 UPDATE TBL_ORDER
+		 UPDATE TBL_ORDER_DETAIL
 		    SET REVIEW_STATUS = 1
-		  WHERE MNO = #{mno} AND ONO = (SELECT ONO FROM TBL_ORDER WHERE MNO = #{mno} AND ORDERNO = (SELECT ORDERNO FROM TBL_ORDER_DETAIL WHERE ONO = #{ono}))
+		  WHERE ONO = #{ono} AND ORDERNO = #{orderno}
 	</update>
 	
 	<select id="checkLike" resultType="Integer">

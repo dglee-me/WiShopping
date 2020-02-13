@@ -20,7 +20,6 @@ public class OrderVO {
 		    amount int not null,
 		    orderdate date default sysdate,
 		    delivery_status int default 0,
-		    REVIEW_STATUS INT DEFAULT 0,
 		    PRIMARY KEY(ONO),
 		    FOREIGN KEY(MNO) REFERENCES MEMBER(MNO)
 		);
@@ -40,7 +39,6 @@ public class OrderVO {
 	private int amount;
 	private Date orderdate;
 	private int deliverystatus;
-	private int reviewstatus;
 	
 	public int getOno() {
 		return ono;
@@ -147,17 +145,10 @@ public class OrderVO {
 		this.deliverystatus = deliverystatus;
 		return this;
 	}
-	public int getReviewstatus() {
-		return reviewstatus;
-	}
-	public OrderVO setReviewstatus(int reviewstatus) {
-		this.reviewstatus = reviewstatus;
-		return this;
-	}
 	
 	public String toString() {
 		return "OrderVO = [ono = "+ono+", orderno= "+orderno+", mno= "+mno+", orderrec= "+orderrec+", zipcode= "+zipcode+", receivedat= "+receivedat+", receivedatdetail= "
 				+receivedatdetail+", receivedphone= "+receivedphone+", deliverymessage= "+deliverymessage+", payername= "+payername+", payeremail= "+payeremail
-				+", payerphone= "+payerphone+", amount= "+amount+", orderdate= "+orderdate+", deliverystatus= "+deliverystatus+", reviewstatus = "+reviewstatus+"]";
+				+", payerphone= "+payerphone+", amount= "+amount+", orderdate= "+orderdate+", deliverystatus= "+deliverystatus+" ]";
 	}
 }

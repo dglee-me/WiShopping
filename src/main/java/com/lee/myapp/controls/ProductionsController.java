@@ -201,6 +201,8 @@ public class ProductionsController {
 				review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
 			}
 			
+			System.out.println(review.toString());
+			
 			productService.reviewRegist(review);
 			productService.updateReviewStatus(review);
 			
