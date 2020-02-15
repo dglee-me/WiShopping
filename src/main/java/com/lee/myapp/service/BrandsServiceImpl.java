@@ -1,5 +1,6 @@
 package com.lee.myapp.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.persistence.BrandsDAO;
 
@@ -16,15 +18,39 @@ public class BrandsServiceImpl implements BrandsService {
 		BrandsDAO brandsDAO;
 
 		@Override
-		public List<String> categoryList(String brand) throws Exception {
+		public List<CategoryVO> categoryList(String brand) throws Exception {
 			// TODO Auto-generated method stub
 			return brandsDAO.categoryList(brand);
 		}
 
 		@Override
-		public List<ProductVO> brandProductList(String brand) throws Exception {
+		public List<CategoryVO> subCategoryList(HashMap<String, Object> map) throws Exception {
 			// TODO Auto-generated method stub
-			return brandsDAO.brandProductList(brand);
+			return brandsDAO.subCategoryList(map);
+		}
+
+		@Override
+		public CategoryVO selected_sub_category(HashMap<String, Object> map) throws Exception {
+			// TODO Auto-generated method stub
+			return brandsDAO.selected_sub_category(map);
+		}
+
+		@Override
+		public List<ProductVO> brandProductList(HashMap<String, Object> map) throws Exception {
+			// TODO Auto-generated method stub
+			return brandsDAO.brandProductList(map);
+		}
+
+		@Override
+		public int brandProductListCount(HashMap<String, Object> map) throws Exception {
+			// TODO Auto-generated method stub
+			return brandsDAO.brandProductListCount(map);
+		}
+
+		@Override
+		public String brandInfo(String brand) throws Exception {
+			// TODO Auto-generated method stub
+			return brandsDAO.brandInfo(brand);
 		}
 		
 		//Header banner

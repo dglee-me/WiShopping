@@ -7,20 +7,74 @@
 
 <mapper namespace="brandsMapper">
 	<!-- Brands Service part -->
-	<select id="categoryList" resultType="String">
-		SELECT DISTINCT CATEGORY1 
-		  FROM PRODUCT 
+	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT DISTINCT CATEGORY1 AS CNAME, CLASSIFY AS CATEGORY1
+		  FROM PRODUCT A INNER JOIN TBL_CATEGORY B ON A.CATEGORY1 = B.CNAME
 		 WHERE BRAND = #{brand}
-		 ORDER BY CATEGORY1 DESC
+		 ORDER BY CATEGORY1 ASC
+	</select>
+	
+	<select id="subCategoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT DISTINCT A.CATEGORY1 AS CATEGORY, A.CATEGORY2 AS CNAME, B.CREF AS CATEGORY1, B.CLASSIFY AS CATEGORY2
+		  FROM PRODUCT A INNER JOIN TBL_CATEGORY B ON A.CATEGORY2 = B.CNAME
+		 WHERE BRAND = #{brand} AND CATEGORY1 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 1 AND CLASSIFY = #{category1})
+		 ORDER BY CATEGORY2 ASC
+	</select>
+	
+	<select id="selected_sub_category" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT CNAME, CREF AS CATEGORY1, CLASSIFY AS CATEGORY2
+		  FROM TBL_CATEGORY
+		 WHERE CREF = #{category1}
+		   AND CLASSIFY = #{category2}
+	</select>
+	
+	<select id="brandProductListCount" resultType="int">
+		<if test='category1 == null'>
+			SELECT COUNT(*)
+			  FROM PRODUCT
+			 WHERE BRAND =#{brand}
+		</if>
+		<if test='category1 != null and category2 == null'>
+			SELECT COUNT(*)
+			  FROM PRODUCT
+			 WHERE BRAND = #{brand} AND CATEGORY1 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 1 AND CLASSIFY = #{category1})
+		</if>
+		<if test='category2 != null'>
+			SELECT COUNT(*)
+			  FROM PRODUCT
+			 WHERE BRAND = #{brand} 
+			   AND CATEGORY1 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 1 AND CLASSIFY = #{category1})
+			   AND CATEGORY2 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 2 AND CLASSIFY = #{category2} AND CREF = #{category1})
+		</if>
 	</select>
 	
 	<select id="brandProductList" resultType="com.lee.myapp.domain.ProductVO">
-		SELECT PNO, BRAND, PNAME, PRICE, PRODUCT_THUMURL
-		  FROM PRODUCT
+		<if test='category1 == null'>
+			SELECT PNO, BRAND, PNAME, PRICE, PRODUCT_THUMURL
+			  FROM PRODUCT
+			 WHERE BRAND = #{brand}
+		</if>
+		<if test='category1 != null and category2 == null'>
+			SELECT PNO, BRAND, PNAME, PRICE, PRODUCT_THUMURL
+			  FROM PRODUCT
+			 WHERE BRAND = #{brand} AND CATEGORY1 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 1 AND CLASSIFY = #{category1})
+		</if>
+		<if test='category2 != null'>
+			SELECT PNO, BRAND, PNAME, PRICE, PRODUCT_THUMURL
+			  FROM PRODUCT
+			 WHERE BRAND = #{brand} 
+			   AND CATEGORY1 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 1 AND CLASSIFY = #{category1})
+			   AND CATEGORY2 = (SELECT CNAME FROM TBL_CATEGORY WHERE DEPTH = 2 AND CLASSIFY = #{category2} AND CREF = #{category1})
+		</if>
+	</select>
+	
+	<select id="brandInfo" resultType="String">
+		SELECT ABOUT_PRODUCT 
+		  FROM TBL_SELLER
 		 WHERE BRAND = #{brand}
 	</select>
 
-	<!-- Header banner -->
+	<!-- — Header banner -->
 	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
 		SELECT *
 		  FROM TBl_BANNER

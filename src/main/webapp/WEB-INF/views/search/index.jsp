@@ -36,7 +36,7 @@
 				</h1>
 				<c:if test="${!empty brand}">
 				<p class="production-feed_header-brand-suggestion">
-					<a class="brand-name" href="javascript:void(0);">${brand}</a>
+					<a class="brand-name" href="${pageContext.request.contextPath}/brands/home?query=${brand}">${brand}</a>
 					브랜드가 궁금하세요?
 				</p>
 				</c:if>

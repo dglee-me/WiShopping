@@ -1238,3 +1238,36 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 
 .production-item_overlay:active~.production-item_image .image, .production-item_overlay:hover~.production-item_image .image{transform:translate(-50%,-50%) scale(1.1);}
 
+.brand_production-section_filter-wrap{position:relative; padding:5px 0; background-color:#fff;}
+.category-filter-bar_secondary{display:flex; align-items:center; justify-content:space-between;}
+.category-filter-bar_secondary_summary{flex:0 0 auto; font-size:13px; color:#757575;}
+
+.commerce-category-list_title{margin:0 0 27px; font-size:20px; font-weight:700; color:#000;}
+.commerce-category-list_title>a{transition:opacity .1s;}
+.commerce-category-list_title>a:hover{opacity: .7;}
+
+.commerce-category-tree_entry_header{display:flex; align-items:center; min-width:0; height:23px; padding:0 0 10px; color:#000;}
+.commerce-category-tree_entry_title{flex:1 0 0px; min-width:0; font-size:13px; line-height:23px; white-space:nowrap; overflow:hidden; transition:opacity .1s;}
+.commerce-category-tree_entry_title:hover, .commerce-category-tree_entry_expand:hover{opacity: .7;}
+
+.commerce-category-tree_entry_expand{flex:0 0 auto; margin:0; padding:0 0 0 5px; line-height:23px; border:none; background:none; transition:opacity .1s;}
+.commerce-category-tree_entry_expand>.icon{transition:transform .1s;}
+
+.commerce-category-breadcrumb_entry{position:relative; padding:0 9px 0 14px;}
+.commerce-category-breadcrumb_entry:before{content:''; position:absolute; top:5px; left:0px; background-position:-165px -319px; width:5px; height:9px; 
+	background-image:url('/WiShopping/resources/image/common.png');}
+.commerce-category-breadcrumb_entry:first-child:before{background:none;}
+.commerce-category-breadcrumb_entry:first-child{padding:0;}
+
+.brand_introduce_section{position:relative; flex:1 0 auto; font-weight:400; color:#424242;}
+
+
+
+
+
+
+
+
+
+
+
