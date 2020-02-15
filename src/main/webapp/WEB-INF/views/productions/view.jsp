@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css?after">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?after">
@@ -2008,6 +2009,7 @@
 									</div>
 									</c:forEach>
 								</div>
+								<c:if test="${!empty reviews}">
 								<ul class="list-paginator production-review_paginator">
 									<li>
 										<button class="list-paginator_prev review-list-paginator_prev" type="button">
@@ -2040,6 +2042,7 @@
 										</button>
 									</li>
 								</ul>
+								</c:if>
 							</div>
 						</div>
 						<a id="production-selling-question"></a>
@@ -2071,7 +2074,7 @@
 												</c:if>
 											</c:if>
 										</header>
-										<p class="product-question-feed_item_author">${question.name} | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>
+										<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>
 										<div class="product-question-feed_item_question">
 											<span class="product-question-feed_item_badge">Q</span>
 											<p class="product-question-feed_item_content">${question.content}</p>
@@ -2089,6 +2092,7 @@
 									</article>
 									</c:forEach>
 								</div>
+								<c:if test="${!empty questions}">
 								<ul class="list-paginator production-qna_paginator">
 									<li>
 										<button class="list-paginator_prev qna-list-paginator_prev" type="button">
@@ -2121,6 +2125,7 @@
 										</button>
 									</li>
 								</ul>
+								</c:if>
 							</div>
 						</div>
 					</div>	
