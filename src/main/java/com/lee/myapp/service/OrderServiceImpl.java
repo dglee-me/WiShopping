@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 import com.lee.myapp.persistence.OrderDAO;
@@ -83,6 +84,13 @@ public class OrderServiceImpl implements OrderService{
 	public int productToUpdateSalesVolume(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return orderDAO.productToUpdateSalesVolume(map);
+	}
+
+	//Header category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return orderDAO.categoryList();
 	}
 
 	//Header banner

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductQuestionVO;
@@ -178,6 +179,31 @@ public class ProductDAOImpl implements ProductDAO{
 	public int questionDelete(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".questionDelete", pno);
+	}
+	
+	//Category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".categoryList");
+	}
+	
+	@Override
+	public List<CategoryVO> selectCategoryList(String category1) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".selectCategoryList", category1);
+	}
+
+	@Override
+	public List<CategoryVO> subCategoryList(String category1) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".subCategoryList", category1);
+	}
+
+	@Override
+	public CategoryVO selectSubCategory(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".selectSubCategory", product);
 	}
 	
 	//Header banner

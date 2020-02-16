@@ -41,6 +41,7 @@ public class ServiceController {
 		pageMaker.setTotalCount(boardService.listCount("공지사항"));
 
 		//Setting
+		model.addAttribute("categories", boardService.categoryList());
 		model.addAttribute("headerBanners", boardService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("pageMaker", pageMaker);
@@ -64,6 +65,7 @@ public class ServiceController {
 		}
 
 		//Setting
+		model.addAttribute("categories", boardService.categoryList());
 		model.addAttribute("headerBanners", boardService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("view",board);
@@ -75,6 +77,7 @@ public class ServiceController {
 		BoardVO board = boardService.view(bno);
 
 		//Setting
+		model.addAttribute("categories", boardService.categoryList());
 		model.addAttribute("headerBanners", boardService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("board",board);

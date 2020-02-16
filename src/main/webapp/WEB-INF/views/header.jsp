@@ -226,46 +226,16 @@
 					</a>
 					<div class="category_list_wrap">
 						<ul>
-							<li class="m_category">
-								<a href="${pageContext.request.contextPath}/category/group/fashion?category2=all">
-									<strong class="category_title">
-										<span class="thum">
-											<img src="${pageContext.request.contextPath}/resources/image/fashion.png" alt="패션">
-										</span>
-										<span class="m_title">패션</span>
-									</strong>
-								</a>
-							</li>
-							<li class="m_category">
-								<a href="${pageContext.request.contextPath}/category/group/accessories?category2=all">
-									<strong class="category_title">
-										<span class="thum">
-											<img src="${pageContext.request.contextPath}/resources/image/accessories.png" alt="잡화">
-										</span>
-										<span class="m_title">잡화</span>
-									</strong>
-								</a>
-							</li>
-							<li class="m_category">
-								<a href="${pageContext.request.contextPath }/category/group/interior?category2=all">
-									<strong class="category_title">
-										<span class="thum">
-											<img src="${pageContext.request.contextPath}/resources/image/interior.png" alt="인테리어">
-										</span>
-										<span class="m_title">인테리어</span>
-									</strong>
-								</a>
-							</li>
-							<li class="m_category">
-								<a href="${pageContext.request.contextPath }/category/group/digital?category2=all">
-									<strong class="category_title">
-										<span class="thum">
-											<img src="${pageContext.request.contextPath}/resources/image/appliances.png" alt="가전·디지털">
-										</span>
-										<span class="m_title">가전·디지털</span>
-									</strong>
-								</a>
-							</li>
+							<c:forEach var="category" items="${categories}">
+								<li class="m_category">
+									<a href="${pageContext.request.contextPath}/category/group/list?category1=${category.classify}">
+										<strong class="category_title">
+											<span class="thum category_${category.classify}"></span>
+											<span class="m_title">${category.cname}</span>
+										</strong>
+									</a>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

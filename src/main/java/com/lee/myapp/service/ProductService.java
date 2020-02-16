@@ -3,6 +3,7 @@ package com.lee.myapp.service;
 import java.util.List;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductQuestionVO;
@@ -45,6 +46,12 @@ public interface ProductService {
 	public int questionListCount(int pno) throws Exception;
 	public int questionStatusUpdate(int qno) throws Exception;
 	public int questionDelete(int pno) throws Exception;
+
+	//Category list
+	public List<CategoryVO> categoryList() throws Exception;
+	public List<CategoryVO> selectCategoryList(String category1) throws Exception;
+	public List<CategoryVO> subCategoryList(String category1) throws Exception;
+	public CategoryVO selectSubCategory(ProductVO product) throws Exception;
 	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;

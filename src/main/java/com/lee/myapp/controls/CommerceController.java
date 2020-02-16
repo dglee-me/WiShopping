@@ -34,6 +34,7 @@ public class CommerceController {
 		}
 
 		//Setting
+		model.addAttribute("categories", commerceService.categoryList());
 		model.addAttribute("headerBanners", commerceService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("best",commerceService.bestList(category));

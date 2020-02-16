@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
+import com.lee.myapp.domain.CategoryVO;
 
 @Repository
 public class CartDAOImpl  implements CartDAO {
@@ -65,6 +66,13 @@ public class CartDAOImpl  implements CartDAO {
 	public int upInventory(HashMap<String,Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".upInventory",map);
+	}
+
+	//Header category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".categoryList");
 	}
 
 	//Header banner

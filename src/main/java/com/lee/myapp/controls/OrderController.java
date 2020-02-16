@@ -87,6 +87,7 @@ public class OrderController {
 		}
 
 		//Setting
+		model.addAttribute("categories", orderService.categoryList());
 		model.addAttribute("headerBanners", orderService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return "/order/preorder";
@@ -187,6 +188,7 @@ public class OrderController {
 		logger.info("-------- ORDER : RESULT METHOD=GET --------");
 		
 		//Setting
+		model.addAttribute("categories", orderService.categoryList());
 		model.addAttribute("headerBanners", orderService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	

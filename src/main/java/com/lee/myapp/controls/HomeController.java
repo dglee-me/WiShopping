@@ -35,8 +35,11 @@ public class HomeController {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		//Setting
+		model.addAttribute("categories", homeService.categoryList());
+		
 		model.addAttribute("allBest", homeService.selectAllBest()); // Best product list in home view
 		model.addAttribute("mainBanners", homeService.mainBannerList("메인상단")); // Main banner list in home view
+		
 		model.addAttribute("headerBanners", homeService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return "home";

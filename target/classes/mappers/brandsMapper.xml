@@ -7,7 +7,7 @@
 
 <mapper namespace="brandsMapper">
 	<!-- Brands Service part -->
-	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+	<select id="mainCategoryList" resultType="com.lee.myapp.domain.CategoryVO">
 		SELECT DISTINCT CATEGORY1 AS CNAME, CLASSIFY AS CATEGORY1
 		  FROM PRODUCT A INNER JOIN TBL_CATEGORY B ON A.CATEGORY1 = B.CNAME
 		 WHERE BRAND = #{brand}
@@ -72,6 +72,13 @@
 		SELECT ABOUT_PRODUCT 
 		  FROM TBL_SELLER
 		 WHERE BRAND = #{brand}
+	</select>
+
+	<!-- Header category list -->
+	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT CNAME, CLASSIFY
+		  FROM TBL_CATEGORY
+		 WHERE DEPTH = 1
 	</select>
 
 	<!-- — Header banner -->

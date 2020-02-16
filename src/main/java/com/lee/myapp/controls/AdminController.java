@@ -39,6 +39,7 @@ public class AdminController {
 		logger.info("-------- ADMIN : ADMIN HOME METHOD=GET --------");
 		
 		//Setting
+		model.addAttribute("categories", adminService.categoryList());
 		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	
@@ -47,6 +48,7 @@ public class AdminController {
 		logger.info("-------- Service : ADMIN WRITE METHOD=GET --------");
 		
 		//Setting
+		model.addAttribute("categories", adminService.categoryList());
 		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	
@@ -76,6 +78,7 @@ public class AdminController {
 		}
 
 		//Setting
+		model.addAttribute("categories", adminService.categoryList());
 		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return path;
@@ -132,6 +135,7 @@ public class AdminController {
 		}
 
 		//Setting
+		model.addAttribute("categories", adminService.categoryList());
 		model.addAttribute("headerBanners", adminService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return path;
@@ -168,7 +172,9 @@ public class AdminController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
+			//Setting
 			model.addAttribute("banner",adminService.bannerView(bno));
+			model.addAttribute("categories", adminService.categoryList());
 		}
 	}
 	

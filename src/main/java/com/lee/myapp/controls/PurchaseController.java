@@ -45,6 +45,7 @@ public class PurchaseController {
 			List<OrderVO> ordernos = purchaseService.ordernoList(map);
 
 			//Setting
+			model.addAttribute("categories", purchaseService.categoryList());
 			model.addAttribute("headerBanners", purchaseService.mainBannerList("헤더")); // Main banner list in this view
 
 			model.addAttribute("status",statusList);
@@ -77,6 +78,7 @@ public class PurchaseController {
 		
 		if(member != null) {
 			//Setting
+			model.addAttribute("categories", purchaseService.categoryList());
 			model.addAttribute("headerBanners", purchaseService.mainBannerList("헤더")); // Main banner list in this view
 			
 			model.addAttribute("order",purchaseService.viewOrderNo(orderno));

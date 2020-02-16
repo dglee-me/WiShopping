@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 import com.lee.myapp.persistence.MemberDAO;
@@ -147,6 +148,13 @@ public class MemberServiceImpl implements MemberService {
 	public int sellerUpdate(int mno) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.sellerUpdate(mno);
+	}
+
+	//Header category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.categoryList();
 	}
 
 	//Header banner

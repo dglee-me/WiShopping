@@ -6,6 +6,7 @@ import java.util.List;
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CartListVO;
 import com.lee.myapp.domain.CartVO;
+import com.lee.myapp.domain.CategoryVO;
 
 public interface CartDAO {
 	public void addCart(HashMap<String,Object> map) throws Exception;
@@ -17,6 +18,9 @@ public interface CartDAO {
 	public String existCart(HashMap<String,Object> map) throws Exception;
 	public int upInventory(HashMap<String,Object> map) throws Exception;
 
+	//Category list
+	public List<CategoryVO> categoryList() throws Exception;
+	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

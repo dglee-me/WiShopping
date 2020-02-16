@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsReportVO;
@@ -103,5 +104,11 @@ public class PromotionsServiceImpl implements PromotionsService{
 	public void commentReport(PromotionsReportVO report) throws Exception {
 		// TODO Auto-generated method stub
 		promotionsDAO.commentReport(report);
+	}
+
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return promotionsDAO.categoryList();
 	}
 }

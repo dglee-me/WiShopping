@@ -5,16 +5,7 @@
 	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="promotionsMapper">
-	<!-- Header banner -->
-	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
-		SELECT *
-		  FROM TBl_BANNER
-		 WHERE BANNER_STATUS = 1
-		   AND AREA = #{area}
-		 ORDER BY BNO DESC
-	</select>
-	
+<mapper namespace="promotionsMapper">	
 	<select id="promotionList" resultType="com.lee.myapp.domain.PromotionsVO">
 		SELECT A.PNO, A.SUBJECT, A.THUMBNAIL_URL, A.IMAGES_URL, A.STARTDATE, A.ENDDATE, A.STATUS ,COUNT(B.PNO) AS COMMENT_COUNT
 		  FROM TBL_PROMOTIONS A LEFT OUTER JOIN TBL_PROMOTIONS_COMMENT B ON A.PNO = B.PNO
@@ -124,4 +115,20 @@
 		INSERT INTO TBL_PROMOTIONS_REPORT(RNO,CNO,RMNO,CONTENT,CAUSE)
 		VALUES(TBL_PROMOTIONS_REPORT_RNO.NEXTVAL, #{cno}, #{rmno}, (SELECT CONTENT FROM TBL_PROMOTIONS_COMMENT WHERE RNO = #{cno}), #{cause})
 	</insert>
+	
+	<!-- Header category list -->
+	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT CNAME, CLASSIFY
+		  FROM TBL_CATEGORY
+		 WHERE DEPTH = 1
+	</select>
+	
+	<!-- Header banner -->
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = #{area}
+		 ORDER BY BNO DESC
+	</select>
 </mapper>

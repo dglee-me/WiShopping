@@ -45,7 +45,9 @@ public class BrandsController {
 		}
 				
 		//Setting
-		model.addAttribute("category", brandsService.categoryList(query));
+		model.addAttribute("categories", brandsService.categoryList());
+		
+		model.addAttribute("category", brandsService.mainCategoryList(query));
 		model.addAttribute("count", brandsService.brandProductListCount(map));
 		model.addAttribute("products", brandsService.brandProductList(map));
 		model.addAttribute("brandInfo", brandsService.brandInfo(query));

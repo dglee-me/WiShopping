@@ -15,6 +15,13 @@
 		 ORDER BY SALES DESC
 	</select>
 	
+	<!-- Header category list -->
+	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT CNAME, CLASSIFY
+		  FROM TBL_CATEGORY
+		 WHERE DEPTH = 1
+	</select>
+	
 	<!-- Header banner -->
 	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
 		SELECT *

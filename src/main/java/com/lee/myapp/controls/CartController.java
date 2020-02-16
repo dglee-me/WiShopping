@@ -35,6 +35,7 @@ public class CartController {
 
 		if(member != null) {
 			//Setting
+			model.addAttribute("categories", cartService.categoryList());
 			model.addAttribute("headerBanners", cartService.mainBannerList("헤더")); // Main banner list in this view
 			
 			model.addAttribute("cartList",cartService.cartList(member.getMno()));

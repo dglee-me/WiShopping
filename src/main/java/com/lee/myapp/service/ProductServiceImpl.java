@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.ProductOptionVO;
 import com.lee.myapp.domain.ProductQuestionVO;
@@ -176,6 +177,30 @@ public class ProductServiceImpl implements ProductService{
 	public int questionDelete(int pno) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.questionDelete(pno);
+	}
+	
+	//Category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.categoryList();
+	}
+	@Override
+	public List<CategoryVO> selectCategoryList(String category1) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.selectCategoryList(category1);
+	}
+
+	@Override
+	public List<CategoryVO> subCategoryList(String category1) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.subCategoryList(category1);
+	}
+
+	@Override
+	public CategoryVO selectSubCategory(ProductVO product) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.selectSubCategory(product);
 	}
 	
 	//Header banner

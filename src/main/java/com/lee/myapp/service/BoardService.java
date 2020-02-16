@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.Criteria;
 
 public interface BoardService {
@@ -17,6 +18,9 @@ public interface BoardService {
 	public int listCount(String category) throws Exception;
 	public List<BoardVO> listPaging(Criteria cri) throws Exception;
 
+	//Header category list
+	public List<CategoryVO> categoryList() throws Exception;
+	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

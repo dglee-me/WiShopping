@@ -25,6 +25,8 @@ public class CategoryVO {
 	private int category1;
 	private int category2;
 	
+	private int isselect;
+	
 	public int getCno() {
 		return cno;
 	}
@@ -81,9 +83,16 @@ public class CategoryVO {
 		this.category2 = category2;
 		return this;
 	}
+	public int getIsselect() {
+		return isselect;
+	}
+	public CategoryVO setIsselect(int isselect) {
+		this.isselect = isselect;
+		return this;
+	}
 	
 	public String toString() {
 		return "CategoryVO = [ cno = "+cno+", depth = "+depth+", cname = "+cname+", classify = "+classify+", cref = "
-				+cref+", category = "+category+", category1 = "+category1+", category2 = "+category2+" ]";
+				+cref+", category = "+category+", category1 = "+category1+", category2 = "+category2+", isselect = "+isselect+" ]";
 	}
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.SellerVO;
 
@@ -42,6 +43,9 @@ public interface MemberDAO {
 	public int sellerRegist(SellerVO seller) throws Exception;
 	public int sellerUpdate(int mno) throws Exception;
 
+	//Category list
+	public List<CategoryVO> categoryList() throws Exception;
+	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

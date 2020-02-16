@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.persistence.AdminDAO;
 
 @Service
@@ -57,6 +58,13 @@ public class AdminServiceImpl implements AdminService{
 	public int bannerDelete(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		return adminDAO.bannerDelete(bno);
+	}
+
+	//Category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return adminDAO.categoryList();
 	}
 
 	//Header banner

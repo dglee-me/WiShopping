@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.OrderListVO;
 import com.lee.myapp.domain.OrderVO;
 
@@ -21,6 +22,9 @@ public interface OrderService {
 	public int cartUpdateSalesVolume(String cartno) throws Exception;
 	public int productToUpdateSalesVolume(Map<String,Object> map) throws Exception;
 
+	//Header category list
+	public List<CategoryVO> categoryList() throws Exception;
+	
 	//Header banner
 	public List<BannerVO> mainBannerList(String area) throws Exception;
 }

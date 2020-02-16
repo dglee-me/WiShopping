@@ -52,6 +52,8 @@ public class PromotionsController {
 		logger.info("-------- PROMOTIONS : ACCESS MAIN METHOD=GET --------");
 
 		//Setting
+		model.addAttribute("categories", promotionsService.categoryList());
+		
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
 		model.addAttribute("promotions", promotionsService.promotionList("all"));
 	}
@@ -63,6 +65,7 @@ public class PromotionsController {
 				+" METHOD=GET --------");
 
 		//Setting
+		model.addAttribute("categories", promotionsService.categoryList());
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
 	}
 	
@@ -128,6 +131,7 @@ public class PromotionsController {
 		pageMaker.setTotalCount(count);
 		
 		//Settings
+		model.addAttribute("categories", promotionsService.categoryList());
 		model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
 		model.addAttribute("promotion", promotion);
 		model.addAttribute("images", imageList);
@@ -155,6 +159,7 @@ public class PromotionsController {
 			}
 
 			//Settings
+			model.addAttribute("categories", promotionsService.categoryList());
 			model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
 		}
 
@@ -237,6 +242,7 @@ public class PromotionsController {
 			String[] images = promotion.getImagesurl().split(";");
 			
 			//Settings
+			model.addAttribute("categories", promotionsService.categoryList());
 			model.addAttribute("headerBanners", promotionsService.mainBannerList("헤더")); // Main banner list in this view
 			model.addAttribute("promotion", promotion);
 			model.addAttribute("images", images);

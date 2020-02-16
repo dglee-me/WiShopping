@@ -67,5 +67,12 @@
 .gnb_wrap .all_category_wrap .category_list_wrap .m_category a{position:relative; display:block; padding:0 15px;}
 .gnb_wrap .all_category_wrap .category_list_wrap .m_category .category_title{position:relative; display:block; height:34px; font-weight:normal;}
 .gnb_wrap .all_category_wrap .category_list_wrap .m_category .category_title .thum{position:absolute; top:3px; left:0; width:28px; height:28px;}
+.gnb_wrap .all_category_wrap .category_list_wrap .m_category .category_title .thum{background-image:url('/WiShopping/resources/image/thum_image.png');}
+
+.thum.category_1{background-position:top 0px left -71px; background-repeat:no-repeat;}
+.thum.category_2{background-position:top 0px left 3px; background-repeat:no-repeat;}
+.thum.category_3{background-position:top 0px left -109px; background-repeat:no-repeat;}
+.thum.category_4{background-position:top 0px left -31px; background-repeat:no-repeat;}
+
 .gnb_wrap .all_category_wrap .category_list_wrap .m_category .category_title .m_title{position:relative; display:inline-block; margin-left:38px; 
 	letter-spacing:-1px; line-height:38px;}

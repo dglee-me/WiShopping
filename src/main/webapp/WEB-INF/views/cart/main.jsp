@@ -379,7 +379,7 @@
 		<div class="commerce-cart-empty">
 			<div class="commerce-cart-empty_content">
 				<img class="commerce-cart-empty_content_image" src="${pageContext.request.contextPath}/resources/image/cart-empty-placeholder.png" alt="장바구니가 비었습니다.">
-				<a class="button button-color-blue commerce-cart-empty_content_button" href="${pageContext.request.contextPath}/category/group/fashion?category2=all">상품 담으러 가기</a>
+				<a class="button button-color-blue commerce-cart-empty_content_button" href="${pageContext.request.contextPath}/category/group/list?category1=1">상품 담으러 가기</a>
 			</div>
 		</div>
 	</c:if>

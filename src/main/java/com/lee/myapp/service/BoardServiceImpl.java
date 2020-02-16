@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.Criteria;
 import com.lee.myapp.persistence.BoardDAO;
 
@@ -60,11 +61,16 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.delete(map);
 	}
 
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.categoryList();
+	}
+
 	//Header banner
 	@Override
 	public List<BannerVO> mainBannerList(String area) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDao.mainBannerList(area);
 	}
-
 }

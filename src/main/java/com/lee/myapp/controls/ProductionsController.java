@@ -55,7 +55,9 @@ public class ProductionsController {
 				path = "redirect:/auth/notseller";
 			}else {
 				//Setting
+				model.addAttribute("categories", productService.categoryList());
 				model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
+				
 				path = "/productions/regist";
 			}
 		}
@@ -157,6 +159,7 @@ public class ProductionsController {
 		}
 		
 		//Setting
+		model.addAttribute("categories", productService.categoryList());
 		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 		
 		model.addAttribute("product",product);
@@ -390,6 +393,7 @@ public class ProductionsController {
 			int option_count = options.size();
 			
 			//Setting
+			model.addAttribute("categories", productService.categoryList());
 			model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
 			
 			model.addAttribute("product", product);

@@ -163,7 +163,7 @@
 		
 	});
 </script>
-<title>Home</title>
+<title>위쇼핑 !</title>
 <meta charset="UTF-8">
 </head>
 <body>

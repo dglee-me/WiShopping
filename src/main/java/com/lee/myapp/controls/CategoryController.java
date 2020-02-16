@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.service.ProductService;
 
@@ -20,47 +21,22 @@ public class CategoryController {
 	@Inject
 	ProductService productService;
 
-	@RequestMapping(value="/group/fashion", method=RequestMethod.GET)
-	public void fashionCategoryGET(Model model, ProductVO product) throws Exception{
+	@RequestMapping(value="/group/list", method=RequestMethod.GET)
+	public void fashionCategoryGET(Model model,ProductVO product) throws Exception{
 		logger.info("-------- CATEGORY : GROUP 1 (FASHION) METHOD=GET --------");	
 
-		product.setCategory1("패션");
+		CategoryVO sub_category2 = new CategoryVO();
+		
+		if(product.getCategory2() != null) {
+			sub_category2 = productService.selectSubCategory(product);
+		}
 		
 		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
+		model.addAttribute("categories", productService.selectCategoryList(product.getCategory1())); // Header area categories settings
+		model.addAttribute("sub_categories", productService.subCategoryList(product.getCategory1())); // Main side-bar area sub categories settings
 		model.addAttribute("list", productService.list(product));
-	}
-	
-	@RequestMapping(value="/group/accessories", method=RequestMethod.GET)
-	public void accessoriesCategoryGET(Model model, ProductVO product) throws Exception{
-		logger.info("-------- CATEGORY : GROUP 1 (ACCESSORIES) METHOD=GET --------");	
+		model.addAttribute("sub_category2", sub_category2);
 
-		product.setCategory1("잡화");
-		
-		//Setting
 		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
-		model.addAttribute("list", productService.list(product));
-	}
-	
-	@RequestMapping(value="/group/interior", method=RequestMethod.GET)
-	public void interiorCategoryGET(Model model, ProductVO product) throws Exception{
-		logger.info("-------- CATEGORY : GROUP 1 (INTERIOR) METHOD=GET --------");	
-
-		product.setCategory1("인테리어");
-		
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
-		model.addAttribute("list", productService.list(product));
-	}
-
-	@RequestMapping(value="/group/digital", method=RequestMethod.GET)
-	public void digitalCategoryGET(Model model, ProductVO product) throws Exception{
-		logger.info("-------- CATEGORY : GROUP 1 (DIGITAL) METHOD=GET --------");	
-
-		product.setCategory1("가전·디지털");
-		
-		//Setting
-		model.addAttribute("headerBanners", productService.mainBannerList("헤더")); // Main banner list in this view
-		model.addAttribute("list", productService.list(product));
 	}
 }

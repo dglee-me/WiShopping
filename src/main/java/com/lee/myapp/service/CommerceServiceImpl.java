@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.persistence.CommerceDAO;
 
@@ -20,6 +21,13 @@ public class CommerceServiceImpl implements CommerceService{
 	public List<ProductVO> bestList(String category) throws Exception {
 		// TODO Auto-generated method stub
 		return commerceDAO.bestList(category);
+	}
+	
+	//Header category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return commerceDAO.categoryList();
 	}
 
 	//Header banner

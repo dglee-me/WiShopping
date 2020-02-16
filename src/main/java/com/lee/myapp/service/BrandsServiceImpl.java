@@ -18,9 +18,9 @@ public class BrandsServiceImpl implements BrandsService {
 		BrandsDAO brandsDAO;
 
 		@Override
-		public List<CategoryVO> categoryList(String brand) throws Exception {
+		public List<CategoryVO> mainCategoryList(String brand) throws Exception {
 			// TODO Auto-generated method stub
-			return brandsDAO.categoryList(brand);
+			return brandsDAO.mainCategoryList(brand);
 		}
 
 		@Override
@@ -51,6 +51,13 @@ public class BrandsServiceImpl implements BrandsService {
 		public String brandInfo(String brand) throws Exception {
 			// TODO Auto-generated method stub
 			return brandsDAO.brandInfo(brand);
+		}
+
+		//Header category list
+		@Override
+		public List<CategoryVO> categoryList() throws Exception {
+			// TODO Auto-generated method stub
+			return brandsDAO.categoryList();
 		}
 		
 		//Header banner

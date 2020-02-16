@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.CategoryVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -58,6 +59,13 @@ public class AdminDAOImpl implements AdminDAO{
 	public int bannerDelete(int bno) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".bannerDelete",bno);
+	}
+
+	//Category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".categoryList");
 	}
 
 	//Header banner

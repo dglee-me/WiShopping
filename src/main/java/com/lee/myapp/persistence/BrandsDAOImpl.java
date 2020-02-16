@@ -20,9 +20,9 @@ public class BrandsDAOImpl implements BrandsDAO{
 	SqlSession sqlSession;
 
 	@Override
-	public List<CategoryVO> categoryList(String brand) throws Exception {
+	public List<CategoryVO> mainCategoryList(String brand) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace+".categoryList", brand);
+		return sqlSession.selectList(namespace+".mainCategoryList", brand);
 	}
 
 	@Override
@@ -53,6 +53,13 @@ public class BrandsDAOImpl implements BrandsDAO{
 	public String brandInfo(String brand) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".brandInfo", brand);
+	}
+
+	//Category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".categoryList");
 	}
 	
 	//Header banner

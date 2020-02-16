@@ -3,6 +3,7 @@ package com.lee.myapp.service;
 import java.util.List;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.PromotionsCommentVO;
 import com.lee.myapp.domain.PromotionsReportVO;
@@ -25,4 +26,7 @@ public interface PromotionsService {
 	public int listCount(int pno) throws Exception;
 	public int deleteComment(int rno) throws Exception;
 	public void commentReport(PromotionsReportVO report) throws Exception;
+	
+	//Header category list
+	public List<CategoryVO> categoryList() throws Exception;
 }
