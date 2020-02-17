@@ -56,7 +56,7 @@
 								<div class="image" style="background-image:url('${pageContext.request.contextPath}${purchase.productthumurl}')"></div>
 							</div>
 							<div class="product_detail">
-								<a class="name" href="${pageContext.request.contextPath}/productions/view?pno=${purchase.pno}">[${purchase.brand}] ${purchase.pname}</a>
+								<a class="name" href="${pageContext.request.contextPath}/productions/${purchase.pno}">[${purchase.brand}] ${purchase.pname}</a>
 								<div class="option">컬러: ${purchase.optioncolor} / 사이즈: ${purchase.optionsize}</div>
 								<div class="cost"><fmt:formatNumber type="number" maxFractionDigits="3" value="${purchase.price}"/>원</div>
 								<div class="count">| ${purchase.inventory}개</div>

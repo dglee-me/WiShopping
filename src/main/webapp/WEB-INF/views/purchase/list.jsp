@@ -372,13 +372,13 @@
 						<c:forEach var="order" items="${orders}">
 						<c:if test="${order.orderno eq orderno.orderno}">
 						<div class="order">
-							<a href="${pageContext.request.contextPath}/productions/view?pno=${order.pno}">
+							<a href="${pageContext.request.contextPath}/productions/${order.pno}">
 								<div class="image" style="background-image:url('${pageContext.request.contextPath}${order.productthumurl}');"></div>
 							</a>
 							<div class="product_info">
 								<div class="product_title">
-									<a class="product_brand" href="javascript:void(0);">${order.brand}</a>
-									<a class="product_name" href="${pageContext.request.contextPath}/productions/view?pno=${order.pno}">${order.pname}</a>
+									<a class="product_brand" href="${pageContext.request.contextPath}/brands/home?query=${order.brand}">${order.brand}</a>
+									<a class="product_name" href="${pageContext.request.contextPath}/productions/${order.pno}">${order.pname}</a>
 								</div>
 								<div class="product_detail">
 									<div class="option_name" data-number="${order.ono}">${order.optioncolor}/${order.optionsize}</div>

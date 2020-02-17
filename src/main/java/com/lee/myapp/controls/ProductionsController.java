@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -117,10 +118,12 @@ public class ProductionsController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public void productionViewGET(HttpSession session, Model model, CommentCriteria cri) throws Exception{
+	@RequestMapping(value="/{pno:.+}", method=RequestMethod.GET)
+	public String productionViewGET(HttpSession session, Model model, @PathVariable("pno") int pno) throws Exception{
 		logger.info("-------- VIEW : PRODUCTIONS METHOD=GET --------");
 
+		CommentCriteria cri = new CommentCriteria().setPno(pno);
+		
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		ProductVO product = new ProductVO();
 		
@@ -174,6 +177,8 @@ public class ProductionsController {
 		model.addAttribute("questions", question_list);
 		model.addAttribute("qnaPageMaker", qnaPageMaker);
 		model.addAttribute("questionCount", productService.questionListCount(cri.getPno()));
+		
+		return "/productions/view";
 	}
 	
 	@ResponseBody

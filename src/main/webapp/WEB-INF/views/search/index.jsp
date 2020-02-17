@@ -96,7 +96,7 @@
 					<c:forEach var="product" items="${items}">
 						<div class="production-feed_item-wrap">
 							<article class="production-item">
-								<a href="${pageContext.request.contextPath}/productions/view?pno=${product.pno}" class="production-item_overlay"></a>
+								<a href="${pageContext.request.contextPath}/productions/${product.pno}" class="production-item_overlay"></a>
 								<div class="production-item-image">
 									<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
 								</div>

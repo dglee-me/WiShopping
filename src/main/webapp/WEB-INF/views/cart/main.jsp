@@ -432,7 +432,7 @@
 																					</span>
 																				</label>
 																			</div>
-																			<a class="product-small-item product-small-item-clickable" href="${pageContext.request.contextPath}/productions/view?pno=${cart.pno}" data-number="${cart.pno}">
+																			<a class="product-small-item product-small-item-clickable" href="${pageContext.request.contextPath}/productions/${cart.pno}" data-number="${cart.pno}">
 																				<div class="product-small-item_image">
 																					<img src="${pageContext.request.contextPath}${cart.productthumurl}">
 																				</div>

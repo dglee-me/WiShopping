@@ -65,7 +65,7 @@
 					<c:forEach var="best" items="${best}">
 						<div class="best-feed_item-wrap">
 							<div class="best-production-item_wrap">
-								<a href="${pageContext.request.contextPath}/productions/view?pno=${best.pno}" class="best-production-item_link"></a>
+								<a href="${pageContext.request.contextPath}/productions/${best.pno}" class="best-production-item_link"></a>
 								<div class="best-production-item_img-wrap">
 									<div class="production-item_image">
 										<img class="image" src="${pageContext.request.contextPath}/${best.productthumurl}">

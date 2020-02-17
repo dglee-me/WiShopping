@@ -32,7 +32,7 @@
 							var item = $(".production-best-feed_item")[count++];
 							
 							//Product reflect for selected tab
-							$(item).children().children().attr("href","${pageContext.request.contextPath}/productions/view?pno="+this.pno);
+							$(item).children().children().attr("href","${pageContext.request.contextPath}/productions/"+this.pno);
 							$(item).children().children().children().children().attr("src","/WiShopping"+this.productthumurl);
 							$(item).children().children().children(".info").children(".product-name").text(this.pname);
 							$(item).children().children().children(".info").children(".price").children(".selling-price").text(comma(this.price));
@@ -216,7 +216,7 @@
 								<c:forEach var="best" items="${allBest}">
 									<div class="col-4 production-best-feed_item">
 										<div class="home-production-item">
-											<a href="${pageContext.request.contextPath}/productions/view?pno=${best.pno}">
+											<a href="${pageContext.request.contextPath}/productions/${best.pno}">
 												<div class="img-wrap square home-production-item_wrapper">
 													<img class="home-production-item_image" src="${pageContext.request.contextPath}/${best.productthumurl}">
 												</div>

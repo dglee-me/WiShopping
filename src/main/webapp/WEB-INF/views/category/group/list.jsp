@@ -73,7 +73,7 @@
 										<c:forEach items="${list}" var="product">
 											<div class="col-md-3 product-item-wrap">
 												<article class="product-item">
-													<a href="${pageContext.request.contextPath}/productions/view?pno=${product.pno}" class="product-item_overlay"></a>
+													<a href="${pageContext.request.contextPath}/productions/${product.pno}" class="product-item_overlay"></a>
 													<div class="product-item-image">
 														<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
 													</div>
