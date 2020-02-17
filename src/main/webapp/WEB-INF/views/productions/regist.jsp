@@ -546,6 +546,20 @@
 													</span>
 												</td>
 											</tr>
+											<tr>
+												<th scope="row">반품비용</th>
+												<td>
+													<span id="delivery-return-grade" class="delivery-return-grade-hidden">
+														반품비 <input type="text" class="ftext right" style="width:100px; border:1px solid #ededed;" name="returnfee" value="0"> 원을 부과합니다.
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">반품 받을 곳</th>
+												<td>
+													 <input type="text" class="ftext" style="width:50%; border:1px solid #ededed;" name="returnplace" placeholder="(06234) 서울특별시 강남구 테헤란로 124 삼원타워 0층" value="">
+												</td>
+											</tr>
 										</tbody>
 									</table>
 								</div>

@@ -530,6 +530,12 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .product-question_wrap_buttons{display:flex; width:100%; margin-top:16px;}
 .product-question_wrap_buttons_submit, .product-answer_wrap_buttons_submit{flex:1 0 0px; padding:11px 10px; font-size:17px; line-height:26px;}
 
+.product_selling_section-table{width:100%; font-size:13px; border-collapse:collapse; border-spacing:0; margin-top:28px;}
+.product_selling_section-table tr{border:none; border-bottom:1px solid #ededed;}
+
+.product_selling_section-table td, .product_selling_section-table th{padding:12px 6px; text-align:left; line-height:1.38;}
+.product_selling_section-table th{width:18ch; color:#757575; font-weight:normal;}
+.product_selling_section-table td{color:#424242; white-space:pre-line;}
 /* Cart CSS */
 
 .layout{display:flex; flex-direction:column; height:100%;}

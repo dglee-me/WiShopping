@@ -55,6 +55,9 @@
 			}else if(nav == "문의"){
 				var href = $("#production-selling-question").offset();
 				href.top -= 40;
+			}else if(nav == "배송/환불"){
+				var href = $("#production-selling-delivery").offset();
+				href.top -= 40;
 			}
 			
 			$("html, body").animate({scrollTop : href.top},300);
@@ -71,6 +74,7 @@
 		var info = $("#production-selling-information").offset().top;
 		var review = $("#production-selling-review").offset().top;
 		var qna = $("#production-selling-question").offset().top;
+		var delivery = $("#production-selling-delivery").offset().top;
 
 		if(scroll >= info &&scroll <= review){
 			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
@@ -78,9 +82,12 @@
 		}else if(scroll >= review && scroll <= qna){
 			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
 			$($(".product_selling_nav_item")[1]).addClass("product_selling_nav_item-active");
-		}else if( scroll >= qna ){
+		}else if(scroll >= qna && scroll <= delivery){
 			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
 			$($(".product_selling_nav_item")[2]).addClass("product_selling_nav_item-active");
+		}else if(scroll >= delivery){
+			$(".product_selling_nav_item-active").removeClass("product_selling_nav_item-active");
+			$($(".product_selling_nav_item")[3]).addClass("product_selling_nav_item-active");
 		}
 	});
 	
@@ -2190,6 +2197,48 @@
 									</li>
 								</ul>
 								</c:if>
+							</div>
+						</div>
+						<a id="production-selling-delivery"></a>
+						<div class="product_selling_section">
+							<header class="product_selling_section-header">
+								<h1 class="product_selling_section-header-title">배송</h1>
+							</header>
+							<table class="product_selling_section-table">
+								<tbody>
+									<tr>
+										<th>배송</th>
+										<td>일반택배</td>
+									</tr>
+									<tr>
+										<th>배송비</th>
+										<td><c:if test="${product.shippingfee eq 0}">무료배송</c:if><c:if test="${product.shippingfee ne 0}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.shippingfee}"/>원</c:if>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="product_selling_section">
+							<header class="product_selling_section-header">
+								<h1 class="product_selling_section-header-title">교환/환불</h1>
+							</header>
+							<div class="prouct_selling_section-refund">
+								<table class="product_selling_section-table product_selling_section-refund_table">
+									<tbody>
+										<tr>
+											<th>반품배송비</th>
+											<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.returnfee}"/>원</td>
+										</tr>
+										<tr>
+											<th>교환배송비</th>
+											<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.returnfee}"/>원</td>
+										</tr>
+										<tr>
+											<th>보내실 곳</th>
+											<td>${product.returnplace}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>	

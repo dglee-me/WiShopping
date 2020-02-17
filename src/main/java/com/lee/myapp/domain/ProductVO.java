@@ -13,6 +13,8 @@ public class ProductVO {
 			PRODUCT_URL VARCHAR2(500) NOT NULL,
 			SHIPPING_FEE INT NOT NULL,
 			SHIPPING_DAY INT NOT NULL,
+			RETURN_FEE INT,
+			RETURN_PLACE VARCHAR2(100),
 			PRIMARY KEY(PNO)			
 		)
 		
@@ -38,6 +40,8 @@ public class ProductVO {
 	private String productthumurl; //product thumnail image url
 	private int shippingfee;
 	private int shippingday;
+	private int returnfee;
+	private String returnplace;
 	
 	private int isseller;
 	
@@ -121,6 +125,21 @@ public class ProductVO {
 		this.shippingday = shippingday;
 		return this;
 	}	
+	public int getReturnfee() {
+		return returnfee;
+	}
+	public ProductVO setReturnfee(int returnfee) {
+		this.returnfee = returnfee;
+		return this;
+	}
+	public String getReturnplace() {
+		return returnplace;
+	}
+	public ProductVO setReturnplace(String returnplace) {
+		this.returnplace = returnplace;
+		return this;
+	}
+	
 	public int getIsseller() {
 		return isseller;
 	}
@@ -131,7 +150,7 @@ public class ProductVO {
 	
 	public String toString() {
 		return "ProductVO = [pno= "+pno+", mno = "+mno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
-				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday+", isseller = "+isseller
-				+"]";
+				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday+", return_fee = "+returnfee+
+				", return_place = "+returnplace+", isseller = "+isseller+"]";
 	}
 }
