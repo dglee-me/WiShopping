@@ -47,6 +47,25 @@
             <artifactId>spring-test</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
+        
+		 <!--Spring security web library-->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.2.2.RELEASE</version>
+		  </dependency>
+		  <!--Spring security core library-->
+		  <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.2.2.RELEASE</version>
+		  </dependency>
+		  <!--Spring security config library-->
+		  <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.2.2.RELEASE</version>
+		</dependency>
  
 		<!-- Mybatis -->
 		<dependency>

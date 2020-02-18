@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class MypageController {
 	
 	@Inject
 	MemberService memberService;
+	
+	@Inject
+	BCryptPasswordEncoder passEncoder;
 	
 	@RequestMapping(value="/request", method=RequestMethod.GET)
 	public String mypageMainGET(HttpSession session, Model model) throws Exception{
@@ -54,11 +58,12 @@ public class MypageController {
 			logger.info("-------- MYPAGE : REQUEST METHOD = POST --------");
 			logger.info("-------- ACCESSOR : MNO " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
 		
-			member = memberService.loginInfo(new MemberVO().setEmail(email).setPw(pw));
+			member = memberService.loginInfo(email);
 			
-			if(member != null) result = 1; //If correct email and pw
+			boolean passwordMatch = passEncoder.matches(pw, member.getPw());
+			
+			if(passwordMatch) result = 1; //If correct email and pw
 			else result = 2;
-			
 		}else {
 			logger.info("-------- MYPAGE : REQUEST METHOD = POST --------");
 			logger.info("-------- LOGINED MEMBER NONE --------");
@@ -90,6 +95,8 @@ public class MypageController {
 
 		if(member.getPw().equals("")) {
 			member.setPw(null);
+		}else {
+			member.setPw(passEncoder.encode(member.getPw()));
 		}
 		
 		memberService.modifyUserInfo(member);

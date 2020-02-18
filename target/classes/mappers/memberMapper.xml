@@ -32,7 +32,7 @@
 	<select id="loginInfo" resultType="com.lee.myapp.domain.MemberVO" >
 		SELECT * 
 		  FROM MEMBER
-		 WHERE EMAIL=#{email} AND PW=#{pw} 
+		 WHERE EMAIL=#{email} 
 	</select>
 
 	<insert id="create" parameterType="com.lee.myapp.domain.MemberVO">	
@@ -87,7 +87,12 @@
 	
 	<update id="modifyUserInfo">
 		UPDATE MEMBER
+		<if test='pw != null'>
 		   SET PW=#{pw}, TEL=#{tel}
+		</if>
+		<if test='pw == null'>
+		   SET TEL=#{tel}
+		</if>
 		 WHERE EMAIL=#{email}
 	</update>
 	

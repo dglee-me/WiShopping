@@ -24,7 +24,7 @@ public interface MemberService {
 	public int update(MemberVO member) throws Exception;
 	public int delete(int mno) throws Exception;
 	public MemberVO read(int mno) throws Exception;
-	public MemberVO loginInfo(MemberVO member) throws Exception;
+	public MemberVO loginInfo(String email) throws Exception;
 	
 	//Reset password
 	public MemberVO newPassword(String email) throws Exception;

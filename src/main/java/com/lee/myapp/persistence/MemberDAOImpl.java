@@ -76,8 +76,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public MemberVO loginInfo(MemberVO member) throws Exception{
-		return sqlSession.selectOne(namespace+".loginInfo",member);
+	public MemberVO loginInfo(String email) throws Exception{
+		return sqlSession.selectOne(namespace+".loginInfo", email);
 	}
 
 	@Override

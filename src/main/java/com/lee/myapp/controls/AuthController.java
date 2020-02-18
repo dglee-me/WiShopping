@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,9 @@ public class AuthController {
 	
 	@Inject
 	MemberService memberService;
+	
+	@Inject
+	BCryptPasswordEncoder passEncoder;
 	
 	@Inject
 	private JavaMailSender mailSender;
@@ -60,6 +64,11 @@ public class AuthController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String joinMemberPOST(MemberVO member) throws Exception{
 		logger.info("-------- AUTH : MEMBER JOIN METHOD=POST --------");
+		
+		//Password encryption
+		String encodePassword = passEncoder.encode(member.getPw());
+		member.setPw(encodePassword);
+		
 		if(memberService.create(member) == 1) {
 			logger.info("-------- AUTH : MEMBER JOIN COMPLETE EMAIL : "+member.getEmail()+"--------");
 			return "redirect:/";
@@ -90,19 +99,17 @@ public class AuthController {
 
 		HttpSession session = request.getSession();
 		
-		MemberVO loginMember = memberService.loginInfo(member);
-		
-		//������ login Session�� ������ ��� ���� �� ����
+		MemberVO loginMember = memberService.loginInfo(member.getEmail());
+				
+		//Remove existing value if login session already exists
 		if(session.getAttribute("login") != null) {
 			session.removeAttribute("login");
 		}
 		
-		if(loginMember == null) {
-			session.setAttribute("login", null);
-			rttr.addFlashAttribute("msg", false);
-			
-			return "redirect:/auth/login";
-		}else {
+		//Verify that the password you entered matches the one before the password was encrypted
+		boolean passwordMatch = passEncoder.matches(member.getPw(), loginMember.getPw());
+		
+		if(passwordMatch) {
 			if(loginMember.getAuth().equals("Y")) {
 				session.setAttribute("login", loginMember);
 				if(member.isUseCookie()) {
@@ -125,6 +132,11 @@ public class AuthController {
 				return "redirect:/auth/login";
 			}
 			return "redirect:/";
+		}else {
+			session.setAttribute("login", null);
+			rttr.addFlashAttribute("msg", false);
+			
+			return "redirect:/auth/login";
 		}
 	}
 	

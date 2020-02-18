@@ -98,8 +98,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO loginInfo(MemberVO member) throws Exception {
-		return memberDao.loginInfo(member);
+	public MemberVO loginInfo(String email) throws Exception {
+		return memberDao.loginInfo(email);
 	}
 
 	@Override
