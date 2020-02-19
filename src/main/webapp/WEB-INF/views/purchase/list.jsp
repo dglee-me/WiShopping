@@ -77,7 +77,7 @@
 			$("body").css("overflow-y","hidden");
 
 			var pno = $(this).parent().parent().siblings("a").attr("href");
-			pno = pno.slice(pno.indexOf('=') + 1);
+			pno = pno.split("/productions/")[1];
 			
 			var thumb = $(this).parent().parent().siblings("a").children().attr("style").replace("'","");
 			var brand = $(this).parent().parent().siblings(".product_info").children(".product_title").children(".product_brand").text();

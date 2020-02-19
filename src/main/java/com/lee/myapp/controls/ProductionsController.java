@@ -207,10 +207,10 @@ public class ProductionsController {
 				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 
 				review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
+			}else {
+				review.setContentimg("noImage");
 			}
-			
-			System.out.println(review.toString());
-			
+						
 			productService.reviewRegist(review);
 			productService.updateReviewStatus(review);
 			

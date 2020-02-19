@@ -102,7 +102,7 @@
 	</delete>
 	
 	<insert id="reviewRegist">
-		INSERT INTO TBL_PRODUCT_REVIEW(RNO,PNO,MNO,ONO,OPTION_COLOR,OPTION_SIZE,CONTENT,WRITEDATE,CONTENT_IMG)
+		INSERT INTO TBL_PRODUCT_REVIEW(RNO,PNO,MNO,ONO,OPTION_COLOR,OPTION_SIZE,CONTENT,CONTENT_IMG,WRITEDATE)
 		VALUES(
 			TBL_PRODUCT_REVIEW_RNO_SEQ.NEXTVAL, 
 			#{pno}, 
@@ -111,8 +111,8 @@
 			#{optioncolor},
 			#{optionsize},
 			#{content},
-			SYSDATE,
-			#{contentimg}
+			#{contentimg},
+			SYSDATE
 		)
 	</insert>
 	

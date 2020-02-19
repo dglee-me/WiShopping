@@ -167,11 +167,13 @@ public class PromotionsController {
 	
 	@ResponseBody
 	@RequestMapping(value="/commentRegist", method=RequestMethod.POST)
-	public List<PromotionsCommentVO> promotionCommentRegistPOST(HttpSession session, PromotionsCommentVO comment, CommentCriteria cri) throws Exception{
+	public int promotionCommentRegistPOST(HttpSession session, PromotionsCommentVO comment, CommentCriteria cri) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS COMMENT REGIST METHOD=POST --------");
 		logger.info("-------- THIS PNO = " + comment.getPno() + " --------");
 		logger.info("-------- REGISTER MNO = " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
 
+		int result = 0;
+		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		List<PromotionsCommentVO> list = new ArrayList<PromotionsCommentVO>();
 		
@@ -179,10 +181,11 @@ public class PromotionsController {
 			comment.setMno(member.getMno());
 			
 			promotionsService.commentRegist(comment);
-			list = promotionsService.listPaging(cri);	
+			
+			result = 1;
 		}
 
-		return list;
+		return result;
 	}
 	
 	@ResponseBody
@@ -347,6 +350,7 @@ public class PromotionsController {
 		return path;
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping(value="/commentDelete", method=RequestMethod.POST)
 	public List<PromotionsCommentVO> promotionCommentDeletePOST(HttpSession session, CommentCriteria cri, @RequestParam(value="data_number") int rno) throws Exception{
@@ -362,6 +366,24 @@ public class PromotionsController {
 		}
 
 		return comments;
+	}
+	*/
+	
+	@ResponseBody
+	@RequestMapping(value="/commentDelete", method=RequestMethod.POST)
+	public int promotionCommentDeletePOST(HttpSession session, CommentCriteria cri, @RequestParam(value="data_number") int rno) throws Exception{
+		logger.info("-------- PROMOTIONS : COMMENT DELETE METHOD=GET --------");
+
+		int result = 0;
+		
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		if(member.getMlevel() == 2) {
+			promotionsService.deleteComment(rno);
+			
+			result = 1;
+		}
+
+		return result;
 	}
 	
 	@ResponseBody

@@ -61,23 +61,47 @@ function tableRowSpanning(table, spanning_row_index){
 
 function direct_productionOptionCheck(input){
 	var ono = input.closest("article").children("h1").attr("data-number");
-	var now = input.val();
+	var now = parseInt(input.val(),10);
 	var price = parseInt(uncomma($('#price').text()),10);
-		
-	$.ajax({
-		url : "/WiShopping/productions/view/checkOption",
-		type : "post",
-		data : {ono : ono},
-		success : function(result){
-			if(now > result){
-				alert("선택한 수량이 재고보다 많습니다!");
-				
-				//Setting price and input value
-				input.val(previous);				
-				input.closest("article").children("div").children("p").children("span").text(comma(price * previous)+" ");//The reason for adding " " is because it splits above to compare option duplication.
+	
+	var options = $(".selling-option-item_price_number");
+	
+	if(now < 1){
+		alert("상품의 수량을 1개 이상으로 설정하여주세요.");
+		input.val(1);
+		input.closest("article").children("div").children("p").children("span").text(comma(price)+" ");
+
+		var total_price = 0;
+		$.each(options, function(){
+			total_price += parseInt(uncomma($(this).text()),10);
+		});
+
+		$(".selling-option-form-content_price_number").text(comma(total_price));
+	}else{
+		$.ajax({
+			url : "/WiShopping/productions/view/checkOption",
+			type : "post",
+			data : {ono : ono},
+			success : function(result){
+				if(now > result){
+					alert("선택한 수량이 재고보다 많습니다!");
+					
+					//Setting price and input value
+					input.val(previous);				
+					input.closest("article").children("div").children("p").children("span").text(comma(price * previous)+" ");//The reason for adding " " is because it splits above to compare option duplication.
+				}else{
+					input.closest("article").children("div").children("p").children("span").text(comma(price * now)+" ");
+					
+					var total_price = 0;
+					$.each(options, function(){
+						total_price += parseInt(uncomma($(this).text()),10);
+					});
+					
+					$(".selling-option-form-content_price_number").text(comma(total_price));
+				}
 			}
-		}
-	});
+		});
+	}
 }
 
 function productionOptionCheck(input){

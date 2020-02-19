@@ -12,17 +12,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script type="text/javascript">
-/*
-	$(document).ready(function(){
-		var url = decodeURI(location.href);
-		var query = url.slice(url.indexOf('=') + 1);
-		
-		$(".production-feed_header-title").text("'"+query+"'에 대한 스토어 검색 결과");
-	});
-	*/
-</script>
-
 <meta charset="UTF-8">
 <title>위쇼핑 ! - 검색결과</title>
 </head>

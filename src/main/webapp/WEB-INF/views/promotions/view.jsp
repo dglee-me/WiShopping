@@ -53,55 +53,22 @@
 					pno : pno,
 					content : content
 				},
-				success : function(list){
-					$(".comment-feed_list_item").remove(); //Delete an existing oul
-					
-					$.each(list, function(){
-						var comment = document.createElement("li");
+				success : function(result){
+					if(result == 1){
+						location.reload();
 
-						comment.className = "comment-feed_list_item";
-						comment.innerHTML = 
-							"<article class='comment-feed_item'>"
-							+"<p class='comment-feed_item_content'>"
-							+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-							+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
-							+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
-							+"</a>"
-							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
-							+"</p>"
-							+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
-							+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
-							+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
-							+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
-							+"</footer>"
-							+"</article>";
-							
-						$(".comment-feed_list").append(comment);
-						$(".comment-feed_form_content_text").text("");
-					});
-
-					//Initializing the paging number
-					var count = 1;
-					$.each($(".list-paginator_page"), function(){
-						$(this).text(count++);
-					});
-					
-					//Setting selected class
-					$(".selected").removeClass("selected");
-					$(".list-paginator li:first-child").next().children().addClass("selected");
+						var href = $("#promotion-page_comment_href").offset();
+						href.top -= 40;
+						
+						$("html, body").animate({scrollTop : href.top},300);
+					}
+					else if(result == 0){
+						alert("로그인 후 이용 가능합니다.");
+						
+						location.href = "/WiShopping/auth/login";
+					}
 				},error : function(){
-					alert("로그인 후 이용 가능합니다.");
-					
-					location.href = "/WiShopping/auth/login";
-				}
-			});
-			
-			$.ajax({
-				url : "/WiShopping/promotions/commentListCount",
-				type : "post",
-				data : {pno : pno},
-				success : function(count){
-					$(".comment-feed_header_count").text(count);
+					location.href = "/WiShopping/error";
 				}
 			});
 		});
@@ -114,7 +81,6 @@
 			var page = parseInt($(".list-paginator_page.selected").text(),10) - 1;
 			var prev_page = $(".list-paginator_page.selected").parent().prev().children();
 			
-			//
 			if(page > 0){
 				if(page >= 9){
 					var ul = $(".list-paginator li:first-child");
@@ -142,7 +108,7 @@
 							comment.innerHTML = 
 								"<article class='comment-feed_item'>"
 								+"<p class='comment-feed_item_content'>"
-								+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
+								+"<a href='javascript:void(0);' class='comment-feed_item_content_author' user-number='"+this.mno+"'>"
 								+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 								+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 								+"</a>"
@@ -212,7 +178,7 @@
 									comment.innerHTML = 
 										"<article class='comment-feed_item'>"
 										+"<p class='comment-feed_item_content'>"
-										+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
+										+"<a href='javascript:void(0);' class='comment-feed_item_content_author' user-number='"+this.mno+"'>"
 										+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 										+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 										+"</a>"
@@ -298,7 +264,7 @@
 								comment.innerHTML = 
 									"<article class='comment-feed_item'>"
 									+"<p class='comment-feed_item_content'>"
-									+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
+									+"<a href='javascript:void(0);' class='comment-feed_item_content_author' user-number='"+this.mno+"'>"
 									+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
 									+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
 									+"</a>"
@@ -319,6 +285,7 @@
 			});
 		});
 	});
+	
 	$(document).on("click",".comment-feed_item_footer_delete-btn",function(){
 		var var_confirm = confirm("정말로 삭제하시겠습니까?");
 		
@@ -334,31 +301,20 @@
 				data : {
 					pno : pno,
 					data_number : data_number
-				},success : function(comments){
-					$(".comment-feed_list_item").remove();
-					
-					$.each(comments, function(){
-						var comment = document.createElement("li");
+				},success : function(result){
+					if(result == 1){
+						location.reload();
 
-						comment.className = "comment-feed_list_item";
-						comment.innerHTML = 
-							"<article class='comment-feed_item'>"
-							+"<p class='comment-feed_item_content'>"
-							+"<a href='javascript:void(0);' class='comment-feed_item_content_author'>"
-							+"<img src='/WiShopping/resources/image/none_user.png' class='comment-feed_item_content_author_image' alt='"+this.name+"'>"
-							+"<span class='comment-feed_item_content_author_name'>"+this.name+"</span>"
-							+"</a>"
-							+"<span class='comment-feed_item_content_content'>"+this.content+"</span>"
-							+"</p>"
-							+"<footer class='comment-feed_item_footer' data-number='"+this.rno+"'>"
-							+"<time class='comment-feed_item_footer_time'>"+dateTimeToFormat(this.replytime)+"</time>"
-							+"<button class='comment-feed_item_footer_report-btn' type='button'>신고</button>"
-							+"<button class='comment-feed_item_footer_delete-btn' type='button'>삭제</button>"
-							+"</footer>"
-							+"</article>";
-							
-						$(".comment-feed_list").append(comment);
-					});
+						var href = $("#promotion-page_comment_href").offset();
+						href.top -= 40;
+						
+						$("html, body").animate({scrollTop : href.top},300);
+					}
+					else if(result == 0){
+						alert("로그인 후 이용 가능합니다.");
+						
+						location.href = "/WiShopping/auth/login";
+					}
 				}
 			});
 		}
@@ -427,6 +383,10 @@
 		var rmno = $("input[name='report[user]']").val();
 		
 		if(typeof cause != "undefined"){
+			console.log(cause);
+			console.log(cno);
+			console.log(rmno);
+			
 			$.ajax({
 				url : "/WiShopping/promotions/report",
 				type : "post",
@@ -452,6 +412,7 @@
 			<c:forEach var="image" items="${images}">
 				<img src="${pageContext.request.contextPath}${image}" class="col-12 promotion-page_image">
 			</c:forEach>
+			<a id="promotion-page_comment_href"></a>
 			<div class="promotion-page_comment">
 				<section class="comment-feed">
 					<h1 class="comment-feed_header">답글 <span class="comment-feed_header_count">${comment_count}</span></h1>

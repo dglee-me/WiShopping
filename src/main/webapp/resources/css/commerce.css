@@ -378,6 +378,8 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .selling_price .btn.close{background-position:-254px -269px; width:19px; height:19px; margin-left:7px;}
 .btn{overflow:hidden; display:inline-block; vertical-align:-5px; text-indent:-9999px;}
 
+.sold-out{color:#757575; background-color:#ededed; border:1px solid #ededed; cursor:default;}
+
 /* Review part*/
 .product_selling_section{margin:0 0 60px; padding:0;}
 .product_selling_section-header{display:-webkit-box; display:-webkit-flex; display:flex; -webkit-box-pack:justify; justify-content:space-between; 

@@ -120,7 +120,7 @@
 								<c:forEach var="product" items="${products}">
 									<div class="brand_production-section_item-wrap col-mg-4">
 										<article class="production-item">
-											<a class="production-item_overlay" href="${pageContext.request.contextPath}/productions/view?pno=${product.pno}"></a>
+											<a class="production-item_overlay" href="${pageContext.request.contextPath}/productions/${product.pno}"></a>
 											<div class="production-item-image production-item_image">
 												<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
 											</div>

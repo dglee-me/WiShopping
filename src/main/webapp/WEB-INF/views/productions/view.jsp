@@ -283,22 +283,39 @@
 					number = number + input[i].value +";";
 				}
 				
-				$.ajax({
-					url : "/WiShopping/cart/addCart",
-					type : "post",
-					data : {ono : ono,
-							number : number
-					},success : function(result){
-						if(result == 1){
-							alert("장바구니에 상품을 담았습니다. :)");
-						}else{
-							alert("회원만 담을 수 있습니다.");
-						}
-					},error : function(){
-						alert("다시 시도해주세요.");
-						location.href="/WiShopping/error";
+				var flag = true;
+				var check_inventory = number.split(";");
+				
+				for(var i=0;i<check_inventory.length;i++){
+					if(check_inventory[i] == "" || check_inventory[i] == null){
+						break;
 					}
-				});
+					
+					if(parseInt(check_inventory[i],10) == 0){
+						flag = false;
+					}
+				}
+				
+				if(flag){
+					$.ajax({
+						url : "/WiShopping/cart/addCart",
+						type : "post",
+						data : {ono : ono,
+								number : number
+						},success : function(result){
+							if(result == 1){
+								alert("장바구니에 상품을 담았습니다. :)");
+							}else{
+								alert("회원만 담을 수 있습니다.");
+							}
+						},error : function(){
+							alert("다시 시도해주세요.");
+							location.href="/WiShopping/error";
+						}
+					});
+				}else{
+					alert("상품의 수량을 1개 이상으로 설정하여주세요.");
+				}
 			}
 		});
 	});
@@ -322,22 +339,39 @@
 					number = number + input[i].value +";";
 				}
 				
-				$.ajax({
-					url : "/WiShopping/order/order_request",
-					type : "post",
-					data : {ono : ono,
-							number : number
-					},success : function(result){
-						if(result == 1){
-							location.href="/WiShopping/order/pre_order";
-						}else if(result == 2){
-							alert("로그인 후 이용해주세요!");
-							location.href="/WiShopping/auth/login";
-						}else{
-							location.href="/WiShopping/error";
-						}
+				var flag = true;
+				var check_inventory = number.split(";");
+				
+				for(var i=0;i<check_inventory.length;i++){
+					if(check_inventory[i] == "" || check_inventory[i] == null){
+						break;
 					}
-				});
+					
+					if(parseInt(check_inventory[i],10) == 0){
+						flag = false;
+					}
+				}
+				
+				if(flag){
+					$.ajax({
+						url : "/WiShopping/order/order_request",
+						type : "post",
+						data : {ono : ono,
+								number : number
+						},success : function(result){
+							if(result == 1){
+								location.href="/WiShopping/order/pre_order";
+							}else if(result == 2){
+								alert("로그인 후 이용해주세요!");
+								location.href="/WiShopping/auth/login";
+							}else{
+								location.href="/WiShopping/error";
+							}
+						}
+					});
+				}else{
+					alert("상품의 수량을 1개 이상으로 설정하여주세요.");
+				}
 			}
 		});
 	});
@@ -472,7 +506,7 @@
 	//Prev button click event
 	$(document).on("click",".list-paginator_prev",function(){
 		var url = decodeURI(location.href);
-		var pno = url.slice(url.indexOf('=') + 1);
+		var pno = url.split("/productions/")[1];
 		
 		if($(this).hasClass("review-list-paginator_prev")){
 			var page = parseInt($(".review-list-paginator_page.selected").text(),10) - 1;
@@ -773,7 +807,7 @@
 	//Next button click event
 	$(document).on("click", ".list-paginator_next", function(){
 		var url = decodeURI(location.href);
-		var pno = url.slice(url.indexOf('=') + 1);
+		var pno = url.split("/productions/")[1];
 		
 		if($(this).hasClass("review-list-paginator_next")){
 			var page = parseInt($(".review-list-paginator_page.selected").text(),10) + 1;
@@ -1095,7 +1129,7 @@
 			var idx = $(".qna-list-paginator_page");
 			
 			var url = decodeURI(location.href);
-			var pno = url.slice(url.indexOf('=') + 1);
+			var pno = url.split("/productions/")[1];
 			
 			//ajax to know page list count
 			$.ajax({
@@ -1300,7 +1334,7 @@
 			$(".review-list-paginator_page.selected").removeClass("selected");
 
 			var url = decodeURI(location.href);
-			var pno = url.slice(url.indexOf('=') + 1);
+			var pno = url.split("/productions/")[1];
 			
 			//ajax to know page list count
 			$.ajax({
@@ -1431,7 +1465,7 @@
 			var order = "desc";
 
 			var url = decodeURI(location.href);
-			var pno = url.slice(url.indexOf('=') + 1);
+			var pno = url.split("/productions/")[1];
 			
 			if(!$(this).hasClass("production-review-feed_filter_order-active")){
 				if(text == "베스트순"){
@@ -1590,7 +1624,7 @@
 			var text = $(this).text();
 
 			var url = decodeURI(location.href);
-			var pno = url.slice(url.indexOf('=') + 1);
+			var pno = url.split("/productions/")[1];
 			
 			if(text == "수정"){ // Modify button clicked event
 				location.href = "/WiShopping/productions/modify?pno="+pno;
@@ -1647,7 +1681,7 @@
 	//Question submit button clicked event
 	$(document).on("click", ".product-question_wrap_buttons_submit", function(){
 		var url = decodeURI(location.href);
-		var pno = url.slice(url.indexOf('=') + 1);
+		var pno = url.split("/productions/")[1];
 		
 		var category = $(".product-question_wrap_type-select_box-select").text();
 		var content = $(".product-question_wrap_question").val();
@@ -1775,6 +1809,13 @@
 </head>
 <body>
 	<div class="layout">
+		<!-- Check out of stock -->
+		<c:set var="option_count" value="0"/>
+		<c:forEach var="option" items="${option}">
+			<c:if test="${option.inventory ne 0}">
+				<c:set var="option_count" value="${option_count + option.inventory}"/>
+			</c:if>
+		</c:forEach>
 		<jsp:include page="../header.jsp"/>
 		<div class="production-selling">
 			<div class="production-selling-overview container">
@@ -1932,10 +1973,17 @@
 									</span>
 								</p>
 							</section>
+							<c:if test="${option_count ne 0}">
 							<div class="production-selling-option-form_footer">
 								<button type="button" class="button button-color-blue-inverted button-size-55 button-shape-4 cart">장바구니</button>
 								<button type="button" class="button button-color-blue button-size-55 button-shape-4 buy">바로구매</button>
 							</div>
+							</c:if>
+							<c:if test="${option_count eq 0}">
+							<div class="production-selling-option-form_footer">
+								<div class="button button-color-blue-inverted button-size-55 button-shape-4 sold-out">품절</div>
+							</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -1997,9 +2045,11 @@
 												</div>
 											</div>
 											<p class="production-review-item_name">색상: ${review.optioncolor} / 옵션: ${review.optionsize}</p>
-											<button type="button" class="production-review-item_img_btn">
-												<img class="production-review-item_img" src="${pageContext.request.contextPath}${review.contentimg}">
-											</button>
+											<c:if test="${review.contentimg ne 'noImage'}">
+												<button type="button" class="production-review-item_img_btn">
+													<img class="production-review-item_img" src="${pageContext.request.contextPath}${review.contentimg}">
+												</button>
+											</c:if>
 											<p class="production-review-item_description">${review.content}</p>
 											<div class="production-review-item_like">
 												<c:if test="${review.likecheck eq 0}">
