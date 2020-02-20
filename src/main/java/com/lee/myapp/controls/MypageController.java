@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.service.MemberService;
+import com.lee.myapp.utils.CommonUtils;
+import com.lee.myapp.utils.TempKey;
 
 @Controller
 @RequestMapping("/mypage/")
@@ -37,6 +39,7 @@ public class MypageController {
 			
 			//Setting
 			model.addAttribute("member", (MemberVO)session.getAttribute("login"));
+			model.addAttribute("token", new TempKey().getKey(36,false));
 			
 			return "/mypage/request";
 		}else {
@@ -49,10 +52,8 @@ public class MypageController {
 	
 	@ResponseBody
 	@RequestMapping(value="/request", method=RequestMethod.POST)
-	public int mypageMainPOST(HttpSession session, Model model, String email, String pw) throws Exception{
+	public String mypageMainPOST(HttpSession session, Model model, String email, String pw, String token) throws Exception{
 		MemberVO member  = (MemberVO)session.getAttribute("login");
-		
-		int result = 0;
 		
 		if(member != null) {
 			logger.info("-------- MYPAGE : REQUEST METHOD = POST --------");
@@ -61,27 +62,45 @@ public class MypageController {
 			member = memberService.loginInfo(email);
 			
 			boolean passwordMatch = passEncoder.matches(pw, member.getPw());
-			
-			if(passwordMatch) result = 1; //If correct email and pw
-			else result = 2;
+			if(passwordMatch) {
+				memberService.newPasswordTokenSet(member.setToken(token));
+			}else if(!passwordMatch) {
+				token = "passwordNotCorrect"; //If correct email and pw	
+			}
 		}else {
-			logger.info("-------- MYPAGE : REQUEST METHOD = POST --------");
-			logger.info("-------- LOGINED MEMBER NONE --------");
-			
-			result = 3;
+			token = "notLogined";
 		}
 		
-		return result;
+		return token;
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
-	public void mypageModifyGET(HttpSession session, Model model) throws Exception{
+	public String mypageModifyGET(HttpSession session, Model model, String token) throws Exception{
 		logger.info("-------- MYPAGE : MODIFY METHOD = GET --------");
+
+		String path = "";
+		MemberVO member  = (MemberVO)session.getAttribute("login");
 		
-		//Setting
-		model.addAttribute("categories", memberService.categoryList());
-		model.addAttribute("headerBanners", memberService.mainBannerList("헤더")); // Main banner list in this view
-		model.addAttribute("member", (MemberVO)session.getAttribute("login")); // Main banner list in this view
+		if(member != null) {
+			member = memberService.loginInfo(member.getEmail()); //Token info reload
+		
+			if(token == null) {
+				token = "abnormal approach";
+			}
+			
+			if(token.equals(member.getToken())) {
+				path = "/mypage/modify";
+				
+				//Setting
+				model.addAttribute("categories", memberService.categoryList());
+				model.addAttribute("headerBanners", memberService.mainBannerList("헤더")); // Main banner list in this view
+				model.addAttribute("member", (MemberVO)session.getAttribute("login")); // Main banner list in this view
+			}else {// Abnormal approach
+				path = "/error";
+			}
+		}
+		
+		return path;
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)

@@ -2,6 +2,7 @@ package com.lee.myapp.utils;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class CommonUtils {
 	public static String CreateRandomNumber() {
@@ -17,5 +18,9 @@ public class CommonUtils {
 		}
 		
 		return ymd + "-" + subNum;
+	}
+	
+	public static String createToken() {
+		return UUID.randomUUID().toString();
 	}
 }

@@ -13,6 +13,7 @@
 		$("#mypage-request-form_submit").click(function(){
 			var email = $("input:text[name='user[email]']").val();
 			var pw = $("input:password[name='user[password]']").val();
+			var token = $("input:hidden[name='user[token]']").val();
 			
 			if(pw == ""){// Password validation
 				$(".mypage-request-form_password-error").text("비밀번호를 입력하세요.");
@@ -23,15 +24,16 @@
 					type : "post",
 					data : { 
 						email : email,
-						pw : pw
-					},success : function(result){
-						if(result == 1){ // If correct email and pw
-							location.href="/WiShopping/mypage/modify";
-						}else if(result == 2){ // If pw is wrong
+						pw : pw,
+						token : token
+					},success : function(token){
+						if(token == "passwordNotCorrect"){ // If pw is wrong
 							$(".mypage-request-form_password-error").text("비밀번호가 정확하지 않습니다.");
 							$(".mypage-request-form_password-error").css("color","red");
-						}else{
+						}else if(token == "notLogined"){
 							location.href="/WiShopping/auth/login";
+						}else{ // If correct email and pw
+							location.href="/WiShopping/mypage/modify?token="+token;
 						}
 					}
 				});
@@ -46,6 +48,7 @@
 			if(e.keyCode == 13){
 				var email = $("input:text[name='user[email]']").val();
 				var pw = $("input:password[name='user[password]']").val();
+				var token = $("input:hidden[name='user[token]']").val();
 				
 				if(pw == ""){// Password validation
 					$(".mypage-request-form_password-error").text("비밀번호를 입력하세요.");
@@ -56,15 +59,16 @@
 						type : "post",
 						data : { 
 							email : email,
-							pw : pw
+							pw : pw,
+							token : token
 						},success : function(result){
-							if(result == 1){ // If correct email and pw
-								location.href="/WiShopping/mypage/modify";
-							}else if(result == 2){ // If pw is wrong
+							if(token == "passwordNotCorrect"){ // If pw is wrong
 								$(".mypage-request-form_password-error").text("비밀번호가 정확하지 않습니다.");
 								$(".mypage-request-form_password-error").css("color","red");
-							}else{
+							}else if(token == "notLogined"){
 								location.href="/WiShopping/auth/login";
+							}else{ // If correct email and pw
+								location.href="/WiShopping/mypage/modify?token="+token;
 							}
 						}
 					});
@@ -89,6 +93,7 @@
 			<p class="mypage-request-form_label">회원님의 정보를 보호하기 위해 <br> 비밀번호를 다시 한번 확인합니다.</p>
 		</div>
 		<form id="frm" action="request" method="post">
+			<input type="hidden" name="user[token]" value="${token}" readonly="readonly">
 			<input type="text" name="user[email]" id="mypage-request-user_email" value="${member.email}" readonly="readonly">
 			<input placeholder="새 비밀번호 확인" autofocus="autofocus" type="password" name="user[password]">
 			<div class="mypage-request-form_password-error"></div>
