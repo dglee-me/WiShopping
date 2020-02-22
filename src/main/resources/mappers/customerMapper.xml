@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="customerMapper">
+	<insert id="questionRegist">
+		INSERT INTO TBL_QUESTIONS(QNO, MNO, SUBJECT, CONTENT, IMAGES_URL, WRITEDATE)
+		VALUES(TBL_QUESTIONS_QNO_SEQ.NEXTVAL, #{mno}, #{subject}, #{content}, #{imagesurl}, sysdate)
+	</insert>
+	
+	<!-- Header banner -->
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = #{area}
+		 ORDER BY BNO DESC
+	</select>
+</mapper>

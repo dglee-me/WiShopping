@@ -144,3 +144,24 @@ function dateTimeToFormat(date){
 
 	return result.formatted;
 }
+
+//Image format validation
+function checkImageFIle(obj){
+	var path_point = obj.value.lastIndexOf(".");
+	var file_point = obj.value.substring(path_point+1, obj.length);
+	var file_type = file_point.toLowerCase();
+	
+	var check_array = new Array();
+	check_array = ["jpg", "gif", "png", "jpeg", "bmp"];
+	
+	if(check_array.indexOf(file_type) == -1){
+		alert("이미지 파일만 선택할 수 있습니다.");
+		
+		var parent_obj = obj.parentNode;
+		var node = parent_obj.replaceChild(obj.cloneNode(true), obj);
+
+		return false;
+	}
+	
+	return true;
+}

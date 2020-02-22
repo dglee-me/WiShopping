@@ -26,7 +26,7 @@
 					<a class="tab3" href="${pageContext.request.contextPath }/service/proposal">제안하기</a>
 				</li>
 				<li class="inquiry">
-					<a class="tab4" href="${pageContext.request.contextPath }/service/qna">1:1문의</a>
+					<a class="tab4" href="${pageContext.request.contextPath}/customer/questions">1:1문의</a>
 				</li>
 			</ul>
 			<div id="board">
