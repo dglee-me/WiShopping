@@ -9,6 +9,8 @@ public class CommentCriteria {
 	private int mno;
 	private String order;
 	
+	private String category; //Customer center category only
+	
 	public CommentCriteria() {
 		this.page=1;
 		this.perPageNum = 5;
@@ -73,9 +75,18 @@ public class CommentCriteria {
 		return this;
 	}
 
+	public CommentCriteria setCategory(String category) {
+		this.category = category;
+		return this;
+	}
+	
+	public String getcategory() {
+		return category;
+	}
+
 	@Override
 	public String toString() {
 		return "CommentCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd
-				+ ", pno = " + pno +", mno = "+mno+", order = "+order+"]";
+				+ ", pno = " + pno +", mno = "+mno+", order = "+order+", category = "+category+"]";
 	}
 }

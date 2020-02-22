@@ -15,14 +15,14 @@
 	$(document).ready(function(){
 		//Output error msg. if title are not entered
 		$("#question_title").blur(function(){
-			var subject = $("input:text[name='question[title]']").val();
+			var subject = $("input:text[name='subject']").val();
 
 			if(subject.length < 5){
-				$(".question-form-heade_title_subject .error").css("display", "block");
-				$("input:text[name='question[title]']").css("border-color", "#F77");
+				$(".question-form-header_title_subject .error").css("display", "block");
+				$("input:text[name='subject']").css("border-color", "#F77");
 			}else{
-				$(".question-form-heade_title_subject .error").css("display", "none");
-				$("input:text[name='question[title]']").css("border-color", "#dbdbdb");
+				$(".question-form-header_title_subject .error").css("display", "none");
+				$("input:text[name='subject']").css("border-color", "#dbdbdb");
 			}
 		});
 

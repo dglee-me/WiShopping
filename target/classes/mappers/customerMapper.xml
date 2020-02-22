@@ -6,10 +6,44 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="customerMapper">
+	<select id="listPaging" resultType="com.lee.myapp.domain.BoardVO" parameterType="com.lee.myapp.domain.CommentCriteria">
+		<if test='category == "1"'>
+			<![CDATA[
+				SELECT *
+	  		      FROM(
+	        		   SELECT A.*,ROWNUM AS RNUM
+	         			 FROM(
+	                		  SELECT *
+	                  			FROM BOARD
+	                  		   WHERE CATEGORY = '공지사항'
+	                		   ORDER BY BNO DESC
+	              			 ) A
+	         	   	   WHERE ROWNUM <= #{rowEnd}
+	      			  )
+	 			 WHERE RNUM >= #{rowStart}
+			]]>
+		</if>
+	</select>
+	
+	<select id="listCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 <if test='_parameter == "1"'>
+			WHERE CATEGORY = '공지사항'
+		 </if>
+	</select>
+	
 	<insert id="questionRegist">
 		INSERT INTO TBL_QUESTIONS(QNO, MNO, SUBJECT, CONTENT, IMAGES_URL, WRITEDATE)
 		VALUES(TBL_QUESTIONS_QNO_SEQ.NEXTVAL, #{mno}, #{subject}, #{content}, #{imagesurl}, sysdate)
 	</insert>
+	
+	<!-- Header category list -->
+	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT CNAME, CLASSIFY
+		  FROM TBL_CATEGORY
+		 WHERE DEPTH = 1
+	</select>
 	
 	<!-- Header banner -->
 	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">

@@ -1270,6 +1270,42 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 
 .brand_introduce_section{position:relative; flex:1 0 auto; font-weight:400; color:#424242;}
 
+/* Customer - center CSS */
+.main{display:flex; flex-direction:column; flex:1 0 auto; min-height:1px;}
+
+.customer-center_header{background-color:#f7f8fa; padding:40px 0 0;}
+.customer-center_header-title{font-size:24px; font-weight:700; color:#000; padding-left:476px;}
+
+.customer-center_header-category-child{position:relative;}
+.customer-category-filter{justify-content:center; background-color:#f7f8fa; border-bottom:1px solid #ededed; padding:20px 0 0;}
+.customer-category-filter_wrap{display:flex; overflow:auto; max-width:960px; margin:0 auto;}
+
+.customer-category-filter_item{display:inline-block; flex:1 0 auto; text-align:center; color:#424242; font-weight:700; font-size:17px; line-height:18px;
+	margin-right:25px;}
+.customer-category-filter_item-active{color:#5FCAEC; border-bottom:2px solid #5FCAEC;}
+.customer-category-filter_item:active, .customer-category-filter_item:hover{opacity: .5;}
+
+.customer-category-filter_item a{display:block; height:36px;}
+
+#board{position:relative; width:100%;}
+
+.customer-center_notice-title{margin:29px 0 10px; font-size:18px;}
+
+.customer-center_notice-list{width:100%; border-top:2px solid #5FCAEC; border-bottom:1px solid #ddd; border-right:1px solid #ddd;}
+.customer-center_notice-list .list{width:100%;}
+.customer-center_notice-list th{height:32px; font-size:11px; color:#333; text-align:center;
+	background-image:url('/WiShopping/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat: repeat-y;}
+.customer-center_notice-list td{padding:12px 0 10px; color:#666; line-height:15px; text-align:center; border-top:1px solid #ddd;
+	background-image:url('/WiShopping/resources/image/bg_1_1_Ceaeaea.gif'); background-repeat:repeat-y;}
+
+.customer-center_notice-write-btn{margin-top:9px; text-align:right;}
+.customer-center_notice-write-btn:after{content:''; display:block; clear:both;}
+
+.customer-center_notice-write-btn_fr{float:right; font-size:13px;}
+.btn_type1{width:74px; padding:9px 0; display:block; min-width:56px; height:36px; box-sizing:border-box; border:1px solid #d3d3d3; text-align:center; vertical-align:top;}
+
+.notice-list_paginator{margin-bottom:50px;}
+
 /* Customer - question CSS */
 .question-form{width:100%; max-width:720px; padding:0 15px; margin:60px auto;}
 

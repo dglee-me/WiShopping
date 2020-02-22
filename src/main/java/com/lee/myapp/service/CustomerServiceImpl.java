@@ -7,6 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.lee.myapp.domain.BannerVO;
+import com.lee.myapp.domain.BoardVO;
+import com.lee.myapp.domain.CategoryVO;
+import com.lee.myapp.domain.CommentCriteria;
 import com.lee.myapp.domain.QuestionsVO;
 import com.lee.myapp.persistence.CustomerDAO;
 
@@ -16,10 +19,31 @@ public class CustomerServiceImpl implements CustomerService{
 	@Inject
 	CustomerDAO customerDAO;
 	
+	//Questions query
 	@Override
 	public void questionRegist(QuestionsVO question) throws Exception {
 		// TODO Auto-generated method stub
 		customerDAO.questionRegist(question);
+	}
+
+	//Notice list query
+	@Override
+	public int listCount(String category) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.listCount(category);
+	}
+
+	@Override
+	public List<BoardVO> listPaging(CommentCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.listPaging(cri);
+	}
+
+	//Category list
+	@Override
+	public List<CategoryVO> categoryList() throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.categoryList();
 	}
 	
 	//Header banner
