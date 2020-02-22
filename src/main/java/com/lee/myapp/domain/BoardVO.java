@@ -11,8 +11,8 @@ public class BoardVO {
 	private int readcount;
 	private Date writedate;
 	private int replycount;
-	private int prev_bno;
-	private int next_bno;
+	private int prevbno;
+	private int nextbno;
 	
 	public int getBno() {
 		return bno;
@@ -80,23 +80,24 @@ public class BoardVO {
 		return this;
 	}
 	
-	public int getPrev_bno() {
-		return prev_bno;
+	public int getPrevbno() {
+		return prevbno;
 	}
-	public BoardVO setPrev_bno(int prev_bno) {
-		this.prev_bno = prev_bno;
+	public BoardVO setPrev_bno(int prevbno) {
+		this.prevbno = prevbno;
 		return this;
 	}
 	
-	public int getNext_bno() {
-		return next_bno;
+	public int getNextbno() {
+		return nextbno;
 	}
-	public BoardVO setNext_bno(int next_bno) {
-		this.next_bno = next_bno;
+	public BoardVO setNextbno(int nextbno) {
+		this.nextbno = nextbno;
 		return this;
 	}
 	
 	public String toString() {
-		return "BoardVO [bno="+bno+", category="+category+", subject="+subject+", content="+content+", author="+author+", readcount="+readcount+", writedate="+writedate+", replycount="+replycount;
+		return "BoardVO [bno="+bno+", category="+category+", subject="+subject+", content="+content+", author="+author+", readcount="+readcount
+				+", writedate="+writedate+", replycount="+replycount+", prev_bno = "+prevbno+", next_bno = "+nextbno+" ]";
 	}
 }

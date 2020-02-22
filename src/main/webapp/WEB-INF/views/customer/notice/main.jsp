@@ -219,7 +219,7 @@
 <title>고객센터 | 위쇼핑 !</title>
 </head>
 <body>
-	<jsp:include page="../header.jsp"/>
+	<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="main">
 		<div class="contact_us-center">
 			<div id="contact_us">
@@ -318,6 +318,6 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

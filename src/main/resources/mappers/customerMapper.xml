@@ -33,6 +33,30 @@
 		 </if>
 	</select>
 	
+	<select id="view" resultType="com.lee.myapp.domain.BoardVO">
+		SELECT *
+  		  FROM (
+		        SELECT BNO,
+		               SUBJECT,
+		               CATEGORY,
+		               AUTHOR,
+		               CONTENT,
+		               READCOUNT,
+		               WRITEDATE,
+		               REPLYCOUNT,
+		               lag(bno,1) over(order by bno desc) as prev_bno,
+		               lead(bno,1) over(order by bno desc) as next_bno
+		          FROM BOARD
+               )
+ 		 WHERE BNO=#{bno}
+	</select>
+	
+	<update id="viewCount">
+		UPDATE BOARD
+		   SET READCOUNT = READCOUNT + 1
+		 WHERE BNO=#{bno}
+	</update>
+	
 	<insert id="questionRegist">
 		INSERT INTO TBL_QUESTIONS(QNO, MNO, SUBJECT, CONTENT, IMAGES_URL, WRITEDATE)
 		VALUES(TBL_QUESTIONS_QNO_SEQ.NEXTVAL, #{mno}, #{subject}, #{content}, #{imagesurl}, sysdate)

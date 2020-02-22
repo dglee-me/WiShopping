@@ -168,7 +168,7 @@ __소셜 커머스__ 방식의 쇼핑몰로써, 판매를 하고 싶은 회원�
 
    email : admin@admin.com
 
-   password : admin
+   password : 1234qwer@
 
 
 

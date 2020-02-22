@@ -39,6 +39,19 @@ public class CustomerDAOImpl implements CustomerDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".listPaging", cri);
 	}
+	
+	//Notice view query
+	@Override
+	public BoardVO view(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".view", bno);
+	}
+
+	@Override
+	public void viewCount(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".viewCount", bno);
+	}
 
 	//Category list
 	@Override

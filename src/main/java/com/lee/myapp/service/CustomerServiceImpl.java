@@ -39,6 +39,19 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDAO.listPaging(cri);
 	}
 
+	//Notice view query
+	@Override
+	public BoardVO view(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.view(bno);
+	}
+
+	@Override
+	public void viewCount(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		customerDAO.viewCount(bno);
+	}
+
 	//Category list
 	@Override
 	public List<CategoryVO> categoryList() throws Exception {

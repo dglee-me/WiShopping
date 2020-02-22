@@ -1,7 +1,6 @@
 package com.lee.myapp.controls;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,7 +56,7 @@ public class CustomerController {
 		model.addAttribute("categories", customerService.categoryList());
 		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
 		
-		return "/customer/main";
+		return "/customer/notice/main";
 	}
 
 	@ResponseBody
@@ -78,6 +78,34 @@ public class CustomerController {
 		logger.info("-------- CUSTOMER : NOTICE UPDATE METHOD = POST --------");
 		
 		return customerService.listCount("1");
+	}
+	
+	@RequestMapping(value="/notice/{bno:.+}", method=RequestMethod.GET)
+	public String noticeViewGET(Model model, @PathVariable("bno") int bno) throws Exception{
+		logger.info("-------- CUSTOMER : NOTICE VIEW METHOD = GET --------");
+
+		//Increase Views by 1 
+		customerService.viewCount(bno);
+		
+		BoardVO board = customerService.view(bno);
+
+		//Line change processing
+		if(board.getContent().contains("\r\n")) {
+			board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
+		}else {
+			board.setContent("<p>"+board.getContent()+"</p>");
+		}
+		
+		System.out.println(board.toString());
+
+		//Setting
+		model.addAttribute("board",board);
+		
+		model.addAttribute("categories", customerService.categoryList());
+		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
+		
+		
+		return "/customer/notice/view";
 	}
 	
 	@RequestMapping(value="/questions", method=RequestMethod.GET)
