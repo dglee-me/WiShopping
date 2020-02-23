@@ -108,6 +108,44 @@ public class CustomerController {
 		return "/customer/notice/view";
 	}
 
+	@RequestMapping(value="/notice/write", method=RequestMethod.GET)
+	public String noticeWriteGET(HttpSession session, Model model) throws Exception{
+		logger.info("-------- CUSTOMER : NOTICE WRITE METHOD = GET --------");
+
+		String path = "";
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			//Setting
+			model.addAttribute("categories", customerService.categoryList());
+			model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
+			
+			path = "/customer/notice/write";
+		}else {
+			path = "/";
+		}
+		
+		return path;
+	}
+		
+	@RequestMapping(value="/notice/write", method=RequestMethod.POST)
+	public String noticeWritePOST(HttpSession session, Model model, BoardVO board) throws Exception{
+		logger.info("-------- CUSTOMER : NOTICE WRITE METHOD = POST --------");
+
+		String path = "";
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member.getMlevel() == 2) {
+			customerService.write(board.setCategory("공지사항").setAuthor(member.getName()));
+			
+			path = "redirect:/customer/notice/";
+		}else {
+			path = "/";
+		}
+		
+		return path;
+	}
+	
 	@RequestMapping(value="/notice/delete/{bno:.+}", method=RequestMethod.GET)
 	public String noticeDeleteGET(HttpSession session, @PathVariable("bno") int bno) throws Exception{
 		logger.info("-------- CUSTOMER : NOTICE DELETE METHOD = GET --------");

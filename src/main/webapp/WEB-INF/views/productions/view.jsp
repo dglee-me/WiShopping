@@ -2133,7 +2133,7 @@
 														</c:if>
 													</c:if>
 												</header>
-												<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>
+												<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
 												<div class="product-question-feed_item_question">
 													<span class="product-question-feed_item_badge">Q</span>
 													<p class="product-question-feed_item_content">${question.content}</p>
@@ -2143,7 +2143,7 @@
 													<span class="product-question-feed_item_badge">A</span>
 													<p class="product-question-feed_item_answer_author">
 														<span class="author">${question.brand}</span> 
-														<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></span>
+														<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span>
 													</p>
 													<p class="product-question-feed_item_content">${question.answer}</p>
 												</div>
@@ -2168,7 +2168,7 @@
 														</c:if>
 													</c:if>
 												</header>
-												<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>
+												<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
 												<div class="product-question-feed_item_question">
 													<span class="product-question-feed_item_badge">Q</span>
 													<p class="product-question-feed_item_content">비밀글입니다.</p>
@@ -2204,7 +2204,7 @@
 												<span class="product-question-feed_item_badge">A</span>
 												<p class="product-question-feed_item_answer_author">
 													<span class="author">${question.brand}</span> 
-													<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></span>
+													<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span>
 												</p>
 												<p class="product-question-feed_item_content">${question.answer}</p>
 											</div>

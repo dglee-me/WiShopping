@@ -1343,6 +1343,11 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 
 .notice-content-form{width:100%;}
 
+/* Customer - notice write CSS */
+.notice-content-header>.error, .notice-content-body>.error{display:none; font-size:13px; margin-top:10px; color:#F77; flex-basis:100%;}
+
+
+
 /* Customer - question CSS */
 .question-form{width:100%; max-width:720px; padding:0 15px; margin:60px auto;}
 

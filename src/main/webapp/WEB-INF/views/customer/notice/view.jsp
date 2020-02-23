@@ -28,7 +28,7 @@
 				</section>
 				<footer class="notice-content-footer">
 					<div class="notice-content-footer_meta text-caption">
-						<time class="notice-content-footer_date"><fmt:formatDate value="${board.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></time>
+						<time class="notice-content-footer_date"><fmt:formatDate value="${board.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></time>
 						<span class="notice-content-footer_views">조회 <span class="notice-content-footer_view_counts">${board.readcount}</span></span>
 					</div>
 				</footer>

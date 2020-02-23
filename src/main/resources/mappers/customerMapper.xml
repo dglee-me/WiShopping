@@ -33,6 +33,11 @@
 		 </if>
 	</select>
 	
+	<insert id="write" parameterType="com.lee.myapp.domain.BoardVO">
+		INSERT INTO BOARD(BNO, CATEGORY, SUBJECT, CONTENT, AUTHOR, READCOUNT, WRITEDATE, REPLYCOUNT)
+		VALUES(bno_seq.nextval, #{category}, #{subject}, #{content}, #{author}, 0, SYSDATE, 0)
+	</insert>
+	
 	<select id="view" resultType="com.lee.myapp.domain.BoardVO">
 		SELECT *
   		  FROM (

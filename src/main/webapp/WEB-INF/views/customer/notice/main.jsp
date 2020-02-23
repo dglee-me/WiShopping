@@ -276,7 +276,7 @@
 						</div>
 						<div class="customer-center_notice-write-btn">
 							<div class="customer-center_notice-write-btn_fr">
-								<a href="/WiShopping/admin/write" class="btn_type1 post_write">글쓰기</a>
+								<a href="${pageContext.request.contextPath}/customer/notice/write" class="btn_type1 post_write">글쓰기</a>
 							</div>
 						</div>
 						<c:if test="${!empty noticeList}">
