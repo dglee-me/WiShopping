@@ -50,20 +50,20 @@
 						</c:if>
 					</p>
 					<p class="notice-content-footer_view_right">
-						<c:if test="${board.author eq login.name }">
+						<c:if test="${board.author eq login.name}">
 							<span class="btn_default btn_delete">
-								<a href="${pageContext.request.contextPath }/notice/delete?bno=${board.bno}">
+								<a href="${pageContext.request.contextPath}/customer/notice/delete/${board.bno}">
 									<button type="button" class="btn_button">삭제</button>
 								</a>
 							</span>
 							<span class="btn_default btn_default_modify">
-								<a href="${pageContext.request.contextPath }/notice/modify?bno=${view.bno}">
+								<a href="${pageContext.request.contextPath}/customer/notice/modify/${board.bno}">
 									<button type="button" class="btn_button">수정</button>
 								</a>
 							</span>
 						</c:if>
 						<span class="btn_default btn_list">
-							<a href="${pageContext.request.contextPath }/notice/list">
+							<a href="${pageContext.request.contextPath}/customer/notice/">
 								<button type="button" class="btn_button">목록보기</button>
 							</a>
 						</span>

@@ -96,16 +96,53 @@ public class CustomerController {
 			board.setContent("<p>"+board.getContent()+"</p>");
 		}
 		
-		System.out.println(board.toString());
-
 		//Setting
 		model.addAttribute("board",board);
 		
 		model.addAttribute("categories", customerService.categoryList());
 		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
 		
-		
 		return "/customer/notice/view";
+	}
+
+	@RequestMapping(value="/notice/delete/{bno:.+}", method=RequestMethod.GET)
+	public String noticeDeleteGET(HttpSession session, @PathVariable("bno") int bno) throws Exception{
+		logger.info("-------- CUSTOMER : NOTICE DELETE METHOD = GET --------");
+		
+		String path = "";
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			customerService.delete(bno);
+			
+			path = "redirect:/customer/notice";
+		}else {
+			path = "/auth/login";
+		}
+		
+		return path;
+	}
+
+	@RequestMapping(value="/notice/modify/{bno:.+}", method=RequestMethod.GET)
+	public String noticeModifyGET(HttpSession session, Model model, @PathVariable("bno") int bno) throws Exception{
+		logger.info("-------- CUSTOMER : NOTICE MODIFY METHOD = GET --------");
+
+		BoardVO board = customerService.view(bno);
+
+		//Line change processing
+		if(board.getContent().contains("\r\n")) {
+			board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
+		}else {
+			board.setContent("<p>"+board.getContent()+"</p>");
+		}
+		
+		//Setting
+		model.addAttribute("board",board);
+		
+		model.addAttribute("categories", customerService.categoryList());
+		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
+		
+		return "/customer/notice/modify";
 	}
 	
 	@RequestMapping(value="/questions", method=RequestMethod.GET)

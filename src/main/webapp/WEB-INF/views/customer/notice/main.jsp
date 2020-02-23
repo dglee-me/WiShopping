@@ -200,7 +200,7 @@
 								var tr = document.createElement("tr");
 								tr.innerHTML = 
 									"<td>"+this.bno+"</td>"+
-									"<td><a href='/WiShopping/customer/notice/'"+this.bno+">"+this.subject+"</a></td>"+
+									"<td><a href='/WiShopping/customer/notice/"+this.bno+"'>"+this.subject+"</a></td>"+
 									"<td>"+date+"</td>"+
 									"<td>"+this.readcount+"</td>";
 									

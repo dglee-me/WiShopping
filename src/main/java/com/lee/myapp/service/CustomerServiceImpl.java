@@ -52,6 +52,13 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDAO.viewCount(bno);
 	}
 
+	//Notice delete query
+	@Override
+	public void delete(int bno) throws Exception {
+		// TODO Auto-generated method stub
+		customerDAO.delete(bno);
+	}
+
 	//Category list
 	@Override
 	public List<CategoryVO> categoryList() throws Exception {

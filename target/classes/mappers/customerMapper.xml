@@ -57,6 +57,12 @@
 		 WHERE BNO=#{bno}
 	</update>
 	
+	<delete id="delete">
+		DELETE 
+		  FROM BOARD
+		 WHERE BNO = #{bno}
+	</delete>
+	
 	<insert id="questionRegist">
 		INSERT INTO TBL_QUESTIONS(QNO, MNO, SUBJECT, CONTENT, IMAGES_URL, WRITEDATE)
 		VALUES(TBL_QUESTIONS_QNO_SEQ.NEXTVAL, #{mno}, #{subject}, #{content}, #{imagesurl}, sysdate)

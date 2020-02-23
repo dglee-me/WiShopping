@@ -1322,6 +1322,7 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 .notice-content-footer_meta{color:gray; margin:30px 0;}
 .text-caption{font-size:13px;}
 .notice-content-footer_meta>*:after{content:'·'; margin:0 4px;}
+.notice-content-footer_meta>*:last-child:after{content:'';}
 
 .notice-content-footer_view_button{padding-top:30px;}
 .notice-content-footer_view_left{display:block; float:left;}

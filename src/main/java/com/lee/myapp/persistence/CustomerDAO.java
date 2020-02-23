@@ -19,6 +19,9 @@ public interface CustomerDAO {
 	//Notice view query
 	public BoardVO view(int bno) throws Exception;
 	public void viewCount(int bno) throws Exception;
+	
+	//Notice delete query
+	public void delete(int bno) throws Exception;
 
 	//Header category list
 	public List<CategoryVO> categoryList() throws Exception;

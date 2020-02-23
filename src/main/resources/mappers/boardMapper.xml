@@ -6,85 +6,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="boardMapper">
-	<select id="listPaging" resultType="com.lee.myapp.domain.BoardVO" parameterType="com.lee.myapp.domain.Criteria">
-		<![CDATA[
-			SELECT *
-  		      FROM(
-        		   SELECT A.*,ROWNUM AS RNUM
-         			 FROM(
-                		  SELECT *
-                  			FROM BOARD
-                 		   WHERE CATEGORY=#{category}
-                		   ORDER BY BNO DESC
-              			 ) A
-         	   	   WHERE ROWNUM<=#{rowEnd}
-      			  )
- 			 WHERE RNUM>=#{rowStart}
-		]]>
-	</select>
-	
 	<insert id="write" parameterType="com.lee.myapp.domain.BoardVO">
 		INSERT INTO BOARD(bno,category,subject,content,author,readcount,writedate,replycount)
 		VALUES(bno_seq.nextval,#{category},#{subject},#{content},#{author},0,sysdate,0)
 	</insert>
-	
-	<select id="view" resultType="com.lee.myapp.domain.BoardVO">
-		SELECT *
-  		  FROM (
-        SELECT BNO,
-               SUBJECT,
-               CATEGORY,
-               AUTHOR,
-               CONTENT,
-               READCOUNT,
-               WRITEDATE,
-               REPLYCOUNT,
-               lag(bno,1) over(order by bno desc) as prev_bno,
-               lead(bno,1) over(order by bno desc) as next_bno
-          FROM BOARD
-               )
- 		 WHERE BNO=#{bno}
-	</select>
-	
-	<update id="modify">
-		UPDATE BOARD
-		   SET SUBJECT=#{subject}
-		     , CATEGORY=#{category}
-		     , CONTENT=#{content}
-		 WHERE BNO=#{bno}    
-	</update>
-	
-	<delete id="delete">
-		DELETE 
-		  FROM BOARD
-		 WHERE CATEGORY=#{category} AND BNO=#{bno}
-	</delete>
-	
-	<update id="viewCount">
-		UPDATE BOARD
-		   SET READCOUNT = READCOUNT+1
-		 WHERE BNO=#{bno}
-	</update>
-	
-	<select id="listCount" resultType="int">
-		SELECT COUNT(*)
-		  FROM BOARD
-		 WHERE CATEGORY=#{category}
-	</select>
-	
-	<!-- Header category list -->
-	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
-		SELECT CNAME, CLASSIFY
-		  FROM TBL_CATEGORY
-		 WHERE DEPTH = 1
-	</select>
-		
-	<!-- Header banner -->
-	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
-		SELECT *
-		  FROM TBl_BANNER
-		 WHERE BANNER_STATUS = 1
-		   AND AREA = #{area}
-		 ORDER BY BNO DESC
-	</select>
 </mapper>
