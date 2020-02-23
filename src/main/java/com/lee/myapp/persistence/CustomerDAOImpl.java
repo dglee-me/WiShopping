@@ -60,6 +60,13 @@ public class CustomerDAOImpl implements CustomerDAO{
 		sqlSession.delete(namespace+".delete", bno);
 	}
 
+	//Notice modify query
+	@Override
+	public void modify(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(namespace+".modify", board);
+	}
+
 	//Category list
 	@Override
 	public List<CategoryVO> categoryList() throws Exception {

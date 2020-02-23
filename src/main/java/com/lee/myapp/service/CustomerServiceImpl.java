@@ -59,6 +59,13 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDAO.delete(bno);
 	}
 
+	//Notice modify query
+	@Override
+	public void modify(BoardVO board) throws Exception {
+		// TODO Auto-generated method stub
+		customerDAO.modify(board);
+	}
+
 	//Category list
 	@Override
 	public List<CategoryVO> categoryList() throws Exception {

@@ -1334,6 +1334,15 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 .notice-content-footer_view_right>.btn_delete, .notice-content-footer_view_right>.btn_default_modify, .btn_prev, .btn_next{margin-right:9px;}
 .notice-content-footer_view_right>.btn_list{width:85px;}
 
+/* Customer - notice modify CSS */
+.notice-content-header_name-input{padding:5px 15px 5px 15px; border:1px solid #ededed;
+	width:100%; line-height:1.36; word-wrap:break-word; margin:-3px 0; font-weight:bold; font-size:25px; color:#000;}
+.notice-content-body_textarea{resize:none; font-size:15px; line-height:1.87;}
+
+.notice-content-body_textarea.form-control:focus{outline:none; box-shadow:0 0 0 3px rgba(130,224,250,0.5);}
+
+.notice-content-form{width:100%;}
+
 /* Customer - question CSS */
 .question-form{width:100%; max-width:720px; padding:0 15px; margin:60px auto;}
 

@@ -1,7 +1,10 @@
 package com.lee.myapp.controls;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -129,13 +132,6 @@ public class CustomerController {
 
 		BoardVO board = customerService.view(bno);
 
-		//Line change processing
-		if(board.getContent().contains("\r\n")) {
-			board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
-		}else {
-			board.setContent("<p>"+board.getContent()+"</p>");
-		}
-		
 		//Setting
 		model.addAttribute("board",board);
 		
@@ -143,6 +139,18 @@ public class CustomerController {
 		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
 		
 		return "/customer/notice/modify";
+	}
+
+	@RequestMapping(value="/notice/modify/{bno:.+}", method=RequestMethod.POST)
+	public String noticeModifyPOST(HttpSession session, Model model, @PathVariable("bno") int bno, BoardVO board) throws Exception{
+		SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+
+		logger.info("-------- CUSTOMER : NOTICE MODIFY METHOD = POST --------");
+		logger.info("-------- MODIFY DATE = "+dateFormat.format(new Date())+" --------");
+
+		customerService.modify(board);
+
+		return "redirect:/customer/notice/";
 	}
 	
 	@RequestMapping(value="/questions", method=RequestMethod.GET)
