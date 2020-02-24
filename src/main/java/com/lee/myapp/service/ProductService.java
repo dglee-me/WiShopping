@@ -46,6 +46,7 @@ public interface ProductService {
 	public int questionListCount(int pno) throws Exception;
 	public int questionStatusUpdate(int qno) throws Exception;
 	public int questionDelete(int pno) throws Exception;
+	public int answerDelete(ProductQuestionVO question) throws Exception;
 
 	//Category list
 	public List<CategoryVO> categoryList() throws Exception;

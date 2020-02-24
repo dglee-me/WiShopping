@@ -491,6 +491,7 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .product-question-feed_item_answer_author{margin:0 0 4px;}
 .product-question-feed_item_answer_author>.author{font-size:15px; font-weight:700; color:#424242;}
 .product-question-feed_item_answer_author>.date{font-size:12px; color:#bdbdbd; line-height:16px; vertical-align:1px;}
+.product-question-feed_item_answer_author>.delete{font-size:12px; color:#bdbdbd; line-height:16px; vertical-align:1px; float:right; cursor:pointer;}
 .product-question-feed_item_answer, .product-question-feed_item_question{position:relative; margin:0 0 10px; padding-left:22px; font-size:15px; 
 	line-height:22px; color:#424242;}
 .product-question-feed_item_badge{position:absolute; top:0; left:0; color:#5FCAEC; font-weight:700;}
@@ -1346,8 +1347,9 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 /* Customer - notice write CSS */
 .notice-content-header>.error, .notice-content-body>.error{display:none; font-size:13px; margin-top:10px; color:#F77; flex-basis:100%;}
 
-
-
+.notice-content-footer_view_button .btns{position:relative; display:flex; justify-content:center;}
+.notice-content-footer_view_button .btns>button{font-size:16px; font-weight:700; height:40px; width:140px; margin:0 9px;}
+.notice-content-footer_view_button .btns>button.btn_save{background-color:#5FCAEC; border-color:transparent; color:#fff;}
 /* Customer - question CSS */
 .question-form{width:100%; max-width:720px; padding:0 15px; margin:60px auto;}
 

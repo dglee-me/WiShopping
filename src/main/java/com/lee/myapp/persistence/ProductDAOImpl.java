@@ -180,6 +180,12 @@ public class ProductDAOImpl implements ProductDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".questionDelete", pno);
 	}
+
+	@Override
+	public int answerDelete(ProductQuestionVO question) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".answerDelete", question);
+	}
 	
 	//Category list
 	@Override

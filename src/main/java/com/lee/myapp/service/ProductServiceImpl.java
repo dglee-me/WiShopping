@@ -178,6 +178,12 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return productDAO.questionDelete(pno);
 	}
+
+	@Override
+	public int answerDelete(ProductQuestionVO question) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.answerDelete(question);
+	}
 	
 	//Category list
 	@Override

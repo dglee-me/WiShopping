@@ -13,8 +13,24 @@
 <head>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".btn_submit").click(function(){
-			document.frm.submit();
+		$(".btn_save").click(function(){
+			var subject = $("input:text[name='subject']").val();
+			var content = $(".notice-content-body_textarea").val();
+			
+			if(subject.length < 5 || content == ""){
+				alert("입력사항을 모두 입력하여주세요.");
+			}else{
+				document.frm.submit();
+			}
+			
+		});
+		
+		$(".btn_cancel").click(function(){
+			var confirm_val = confirm("작성 내용을 취소하시겠습니까?");
+			
+			if(confirm_val){
+				history.go(-1);
+			}
 		});
 		
 		$(".notice-info").blur(function(){
@@ -61,18 +77,10 @@
 						<p class="error">내용을 입력하여주세요.</p>
 					</section>
 					<div class="notice-content-footer_view_button">
-						<p class="notice-content-footer_view_right">
-							<span class="btn_default btn_delete">
-								<a href="javascript:void(0);">
-									<button type="button" class="btn_button btn_submit">작성하기</button>
-								</a>
-							</span>
-							<span class="btn_default btn_default_modify">
-								<a href="${pageContext.request.contextPath}/customer/notice/">
-									<button type="button" class="btn_button">취소하기</button>
-								</a>
-							</span>
-						</p>
+						<div class="btns">
+							<button type="button" class="btn_save">저장</button>
+							<button type="button" class="btn_cancel">취소</button>
+						</div>
 					</div>
 				</section>
 			</form>

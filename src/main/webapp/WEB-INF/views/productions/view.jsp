@@ -1802,6 +1802,34 @@
 			}
 		});
 	});
+	
+	$(document).on("click", ".product-question-feed_item_answer_author .delete", function(){
+		var var_confirm = confirm("답변을 삭제하시겠습니까?");		
+		
+		if(var_confirm){
+			var qno = $(".product-question-feed_item").attr("qna-number");
+			var ano = $(".product-question-feed_item_answer").attr("answer-number");
+
+			$.ajax({
+				url : "/WiShopping/productions/questionAnswerDelete",
+				type : "post",
+				data : {qno : qno, ano : ano},
+				success : function(result){
+					if(result == 1){
+						alert("답변이 삭제되었습니다.");
+						
+						location.reload();
+
+						var href = $("#production-selling-question").offset();
+						href.top -= 40;
+						
+						$("html, body").animate({scrollTop : href.top},300);
+					}
+				}
+			});
+			
+		}
+	});
 </script>
 
 <meta charset="UTF-8">
@@ -2139,11 +2167,14 @@
 													<p class="product-question-feed_item_content">${question.content}</p>
 												</div>
 												<c:if test="${question.brand ne null}">
-												<div class="product-question-feed_item_answer">
+												<div class="product-question-feed_item_answer" answer-number="${question.ano}">
 													<span class="product-question-feed_item_badge">A</span>
 													<p class="product-question-feed_item_answer_author">
 														<span class="author">${question.brand}</span> 
 														<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span>
+														<c:if test="${product.isseller eq 1}">
+															<span class="delete">삭제</span>
+														</c:if>
 													</p>
 													<p class="product-question-feed_item_content">${question.answer}</p>
 												</div>
@@ -2194,17 +2225,20 @@
 													</c:if>
 												</c:if>
 											</header>
-											<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 MM분"/></p>
+											<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
 											<div class="product-question-feed_item_question">
 												<span class="product-question-feed_item_badge">Q</span>
 												<p class="product-question-feed_item_content">${question.content}</p>
 											</div>
 											<c:if test="${question.brand ne null}">
-											<div class="product-question-feed_item_answer">
+											<div class="product-question-feed_item_answer" answer-number="${question.ano}">
 												<span class="product-question-feed_item_badge">A</span>
 												<p class="product-question-feed_item_answer_author">
 													<span class="author">${question.brand}</span> 
 													<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span>
+													<c:if test="${product.isseller eq 1}">
+														<span class="delete">삭제</span>
+													</c:if>
 												</p>
 												<p class="product-question-feed_item_content">${question.answer}</p>
 											</div>

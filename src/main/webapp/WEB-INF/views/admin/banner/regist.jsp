@@ -81,7 +81,7 @@
 		});
 		
 		$(".btn_cancel").click(function(){
-			var confirm_val = confirm("수정 내용을 취소하시겠습니까?");
+			var confirm_val = confirm("작성 내용을 취소하시겠습니까?");
 			
 			if(confirm_val){
 				history.go(-1);

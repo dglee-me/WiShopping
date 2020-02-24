@@ -356,6 +356,23 @@ public class ProductionsController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="questionAnswerDelete", method=RequestMethod.POST)
+	public int questionAnswerDeletePOST(HttpSession session, ProductQuestionVO question) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS ANSWER DELETE METHOD = POST --------");
+		logger.info("-------- VO INFO = " + question.toString()  + " --------");
+		
+		int result = 0;
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			productService.answerDelete(question.setMno(member.getMno()));
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public int productionsDeleteGET(HttpSession session,ProductVO product) throws Exception{
 		logger.info("-------- PRODUCTIONS : ACCESS PRODUCT DELETE METHOD = GET --------");
