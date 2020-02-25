@@ -6,6 +6,7 @@ import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
+import com.lee.myapp.domain.FaqVO;
 import com.lee.myapp.domain.QuestionsVO;
 
 public interface CustomerService {
@@ -28,6 +29,9 @@ public interface CustomerService {
 	//Notice modify query
 	public void modify(BoardVO board) throws Exception;
 
+	//FAQ query
+	public List<FaqVO> listFAQ(String order) throws Exception;
+	
 	//Header category list
 	public List<CategoryVO> categoryList() throws Exception;
 	

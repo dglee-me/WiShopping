@@ -244,4 +244,14 @@ public class CustomerController {
 		
 		return path;
 	}
+	
+	@RequestMapping(value="/faq", method=RequestMethod.GET)
+	public void customerFaqGET(HttpSession session, Model model, String order) throws Exception{
+		logger.info("-------- CUSTOMER : FAQ METHOD = POST --------");
+
+		//Settings
+		model.addAttribute("list", customerService.listFAQ(order));
+		model.addAttribute("categories", customerService.categoryList());
+		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
+	}
 }

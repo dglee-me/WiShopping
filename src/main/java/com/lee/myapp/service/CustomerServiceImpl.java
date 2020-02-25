@@ -10,6 +10,7 @@ import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
+import com.lee.myapp.domain.FaqVO;
 import com.lee.myapp.domain.QuestionsVO;
 import com.lee.myapp.persistence.CustomerDAO;
 
@@ -71,6 +72,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public void modify(BoardVO board) throws Exception {
 		// TODO Auto-generated method stub
 		customerDAO.modify(board);
+	}
+
+	@Override
+	public List<FaqVO> listFAQ(String order) throws Exception {
+		// TODO Auto-generated method stub
+		return customerDAO.listFAQ(order);
 	}
 
 	//Category list

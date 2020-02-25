@@ -79,6 +79,27 @@
 		VALUES(TBL_QUESTIONS_QNO_SEQ.NEXTVAL, #{mno}, #{subject}, #{content}, #{imagesurl}, sysdate)
 	</insert>
 	
+	<select id="listFAQ" resultType="com.lee.myapp.domain.FaqVO">
+		SELECT *
+		  FROM TBL_FAQ
+	 <if test='_parameter == "payment"'>	
+		 WHERE CATEGORY = '주문/결제'
+	 </if>
+	 <if test='_parameter == "shipping"'>	
+		 WHERE CATEGORY = '배송관련'
+	 </if>
+	 <if test='_parameter == "cancel"'>	
+		 WHERE CATEGORY = '취소/환불'
+	 </if>
+	 <if test='_parameter == "exchange"'>	
+		 WHERE CATEGORY = '반품/교환'
+	 </if>
+	 <if test='_parameter == "etc"'>	
+		 WHERE CATEGORY = '서비스/기타'
+	 </if>
+		 ORDER BY CATEGORY DESC
+	</select>
+	
 	<!-- Header category list -->
 	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
 		SELECT CNAME, CLASSIFY

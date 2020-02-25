@@ -230,10 +230,10 @@
 							<div class="customer-category-filter">
 								<ul class="customer-category-filter_wrap">
 									<li class="customer-category-filter_item customer-category-filter_item-active">
-										<a href="javascript:void(0);">공지사항</a>
+										<a href="${pageContext.request.contextPath}/customer/notice">공지사항</a>
 									</li>
 									<li class="customer-category-filter_item">
-										<a href="javascript:void(0);">자주묻는 질문</a>
+										<a href="${pageContext.request.contextPath}/customer/faq">자주묻는 질문</a>
 									</li>
 									<li class="customer-category-filter_item">
 										<a href="${pageContext.request.contextPath}/customer/questions">1:1 문의하기</a>

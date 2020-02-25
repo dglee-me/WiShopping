@@ -11,6 +11,7 @@ import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
+import com.lee.myapp.domain.FaqVO;
 import com.lee.myapp.domain.QuestionsVO;
 
 @Repository
@@ -72,6 +73,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public void modify(BoardVO board) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".modify", board);
+	}
+
+	@Override
+	public List<FaqVO> listFAQ(String order) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".listFAQ", order);
 	}
 
 	//Category list
