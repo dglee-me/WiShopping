@@ -1,7 +1,9 @@
 package com.lee.myapp.controls;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,20 +23,41 @@ public class SearchController {
 	SearchService searchService;
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public void searchIndexGET(String query, Model model) throws Exception{
+	public void searchIndexGET(String query, String delivery_free, String min, String max, String order, Model model) throws Exception{
 		logger.info("-------- SEARCH : INDEX METHOD=GET --------");
 		
 		if(!query.equals("")) {
-			//If query equal brand name
-			String brand = searchService.isBrand(query);
-			if(query.equals(brand)) {
-				model.addAttribute("brand",brand);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("query", query);			
+			map.put("delivery_free", delivery_free);
+			map.put("min", min);
+			map.put("max", max);
+			map.put("order", order);
+			
+			if(delivery_free != null) {
+				model.addAttribute("delivery_free", "not null");
+			}
+			
+			if(min != null || max != null) {
+				String price = "";
+				if(max != null && min != null){
+					price = min+"원 ~ "+max+"원";
+				}else if(min != null) {
+					price = min+"원";
+				}else if(max != null) {
+					price = max+"원";
+				}
+				
+				model.addAttribute("price", price);
 			}
 			
 			//Add attribute
+			model.addAttribute("categories", searchService.categoryList());
+			model.addAttribute("headerBanners", searchService.mainBannerList("헤더")); // Main banner list in this view
+			
 			model.addAttribute("parameter",query);
-			model.addAttribute("count",searchService.countResult(query));
-			model.addAttribute("items",searchService.searchProductList(query));
+			model.addAttribute("count",searchService.countResult(map));
+			model.addAttribute("items",searchService.searchProductList(map));
 		}
 	}	
 }

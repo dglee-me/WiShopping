@@ -43,7 +43,10 @@ public class ProductVO {
 	private int returnfee;
 	private String returnplace;
 	
+	private int category1url;
+	private int category2url;
 	private int isseller;
+	private int isbrand;
 	
 	public int getPno() {
 		return pno;
@@ -140,6 +143,20 @@ public class ProductVO {
 		return this;
 	}
 	
+	public int getCategory1url() {
+		return category1url;
+	}
+	public ProductVO setCategory1url(int category1url) {
+		this.category1url = category1url;
+		return this;
+	}
+	public int getCategory2url() {
+		return category2url;
+	}
+	public ProductVO setCategory2url(int category2url) {
+		this.category2url = category2url;
+		return this;
+	}
 	public int getIsseller() {
 		return isseller;
 	}
@@ -147,10 +164,17 @@ public class ProductVO {
 		this.isseller = isseller;
 		return this;
 	}
+	public int getIsbrand() {
+		return isbrand;
+	}
+	public ProductVO setIsbrand(int isbrand) {
+		this.isbrand = isbrand;
+		return this;
+	}
 	
 	public String toString() {
 		return "ProductVO = [pno= "+pno+", mno = "+mno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
 				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday+", return_fee = "+returnfee+
-				", return_place = "+returnplace+", isseller = "+isseller+"]";
+				", return_place = "+returnplace+", category1_url = "+category1url+", category2_url = "+category2url+", isseller = "+isseller+", is_brand = "+isbrand+"]";
 	}
 }

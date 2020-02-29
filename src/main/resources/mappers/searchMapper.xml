@@ -7,22 +7,94 @@
 
 <mapper namespace="searchMapper">
 	<select id="searchProductList" resultType="com.lee.myapp.domain.ProductVO">
-		SELECT *
-		  FROM PRODUCT
-		 WHERE BRAND LIKE '%'||#{query}||'%'
-		    OR PNAME LIKE '%'||#{query}||'%'
+		SELECT A.*, NVL(B.IS_BRAND, 0) AS IS_BRAND, NVL(C.SALES, 0) AS SALES
+		  FROM PRODUCT A LEFT OUTER JOIN (SELECT BRAND, COUNT(BRAND) AS IS_BRAND FROM TBL_SELLER WHERE BRAND = '메종키츠네' GROUP BY BRAND) B ON A.BRAND = B.BRAND LEFT OUTER JOIN (SELECT PNO, SALES FROM TBL_SALES_VOLUME) C ON A.PNO = C.PNO 
+    <if test='delivery_free == null &amp;&amp; min == null &amp;&amp; max == null'>
+   	 	WHERE A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+    </if>
+    <if test='delivery_free == null &amp;&amp; min != null &amp;&amp; max == null'>
+   		WHERE A.PRICE <![CDATA[ >= #{min} ]]> AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+    </if>
+    <if test='delivery_free == null &amp;&amp; min == null &amp;&amp; max != null'>
+   		WHERE A.PRICE <![CDATA[ <= #{max} ]]> AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+    </if>
+    <if test='delivery_free == null &amp;&amp; min != null &amp;&amp; max != null'>
+   		WHERE A.PRICE BETWEEN #{min} AND #{max} AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+    </if>
+	<if test='delivery_free == "true" &amp;&amp; min == null &amp;&amp; max == null'>
+		WHERE A.SHIPPING_FEE = 0 AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='delivery_free == "true" &amp;&amp; min != null &amp;&amp; max == null'>
+		WHERE A.SHIPPING_FEE = 0 AND A.PRICE <![CDATA[ >= #{min} ]]> AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='delivery_free == "true" &amp;&amp; min == null &amp;&amp; max != null'>
+		WHERE A.SHIPPING_FEE = 0 AND A.PRICE <![CDATA[ <= #{max} ]]> AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='delivery_free == "true" &amp;&amp; min != null &amp;&amp; max != null'>
+		WHERE A.SHIPPING_FEE = 0 AND A.PRICE BETWEEN #{min} AND #{max} AND A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='order == "recent"'>
+		ORDER BY A.PNO DESC
+	</if>
+	<if test='order == "popular" || order == null'>
+		ORDER BY C.SALES DESC
+	</if>
+	<if test='order == "min_cost"'>
+		ORDER BY A.PRICE ASC
+	</if>
+	<if test='order == "max_cost"'>
+		ORDER BY A.PRICE DESC
+	</if>
 	</select>
 	
 	<select id="countResult" resultType="Integer">
 		SELECT COUNT(*)
 		  FROM PRODUCT
-		 WHERE BRAND LIKE '%'||#{query}||'%'
-		    OR PNAME LIKE '%'||#{query}||'%'
+    <if test='delivery_free == null &amp;&amp; min == null &amp;&amp; max == null'>
+   	 	WHERE BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+    </if>
+    <if test='delivery_free == null &amp;&amp; min != null &amp;&amp; max == null'>
+   		WHERE PRICE <![CDATA[ >= #{min} ]]> AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+    </if>
+    <if test='delivery_free == null &amp;&amp; min == null &amp;&amp; max != null'>
+   		WHERE PRICE <![CDATA[ <= #{max} ]]> AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+    </if>
+    <if test='delivery_free == null &amp;&amp; min != null &amp;&amp; max != null'>
+   		WHERE PRICE BETWEEN #{min} AND #{max} AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+    </if>
+	<if test='delivery_free == "true" &amp;&amp; min == null &amp;&amp; max == null'>
+		WHERE SHIPPING_FEE = 0 AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='delivery_free == "true" &amp;&amp; min != null &amp;&amp; max == null'>
+		WHERE SHIPPING_FEE = 0 AND PRICE <![CDATA[ >= #{min} ]]> AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='delivery_free == "true" &amp;&amp; min == null &amp;&amp; max != null'>
+		WHERE SHIPPING_FEE = 0 AND PRICE <![CDATA[ <= #{max} ]]> AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+	</if>
+	<if test='delivery_free == "true" &amp;&amp; min != null &amp;&amp; max != null'>
+		WHERE SHIPPING_FEE = 0 AND PRICE BETWEEN #{min} AND #{max} AND BRAND LIKE '%'||#{query}||'%' OR PNAME LIKE '%'||#{query}||'%'
+	</if>
 	</select>
 	
 	<select id="isBrand" resultType="String">
 		SELECT DISTINCT BRAND
 		  FROM PRODUCT
 		 WHERE BRAND LIKE #{query}
+	</select>
+	
+	<!-- Header category list -->
+	<select id="categoryList" resultType="com.lee.myapp.domain.CategoryVO">
+		SELECT CNAME, CLASSIFY
+		  FROM TBL_CATEGORY
+		 WHERE DEPTH = 1
+	</select>
+	
+	<!-- Header banner -->
+	<select id="mainBannerList" resultType="com.lee.myapp.domain.BannerVO">
+		SELECT *
+		  FROM TBl_BANNER
+		 WHERE BANNER_STATUS = 1
+		   AND AREA = #{area}
+		 ORDER BY BNO DESC
 	</select>
 </mapper>
