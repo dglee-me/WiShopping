@@ -30,6 +30,7 @@ public interface ProductDAO {
 	public List<ReviewVO> listPaging(CommentCriteria cri) throws Exception;
 	public int listCount(int pno) throws Exception;
 	public int updateReviewStatus(ReviewVO review) throws Exception;
+	public int deleteReview(ReviewVO review) throws Exception;
 	
 	//Review like
 	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception;

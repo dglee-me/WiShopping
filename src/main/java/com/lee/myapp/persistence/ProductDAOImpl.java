@@ -109,6 +109,12 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
+	public int deleteReview(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(namespace+".deleteReview", review);
+	}
+
+	@Override
 	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".reviewLike", review);

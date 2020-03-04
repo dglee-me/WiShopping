@@ -1831,6 +1831,46 @@
 		}
 	});
 </script>
+<script type="text/javascript">
+	/*
+		This script, productions review script
+	*/
+	$(document).on("click", ".production-review-item_writer_info-right-btn", function(){
+		var text = $(this).text();
+		
+		var rno = $(this).closest("article").attr("data-number");
+		
+		if(text == "수정"){
+			
+		}else if(text == "삭제"){
+			var var_confirm = confirm("리뷰를 정말 삭제하시겠습니까?");
+			
+			if(var_confirm){
+				$.ajax({
+					url : "/WiShopping/productions/review/delete/"+rno,
+					type : "get",
+					data : {rno : rno},
+					success : function(result){
+						if(result == 1){
+							alert("리뷰가 정상적으로 삭제되었습니다.");
+							
+							location.reload();
+
+							var href = $("#production-selling-review").offset();
+							href.top -= 40;
+							
+							$("html, body").animate({scrollTop : href.top},300);
+						}else{
+							alert("삭제가 불가능합니다. 다시 시도해주세요.");
+							
+							location.reload();
+						}
+					}
+				});
+			}
+		}
+	});
+</script>
 
 <meta charset="UTF-8">
 <title>위쇼핑! - ${product.pname}</title>

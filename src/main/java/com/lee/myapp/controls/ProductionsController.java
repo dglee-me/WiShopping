@@ -295,6 +295,23 @@ public class ProductionsController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/review/delete/{rno:.+}", method=RequestMethod.GET)
+	public int reviewDelete(HttpSession session, @PathVariable(value="rno") int rno) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS REVIEW DELETE METHOD = GET --------");
+		
+		int result = 0;
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			ReviewVO review = new ReviewVO().setRno(rno).setMno(member.getMno());
+			
+			result = productService.deleteReview(review);
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/questionRegist", method=RequestMethod.POST)
 	public void questionRegistPOST(ProductQuestionVO question) throws Exception{
 		logger.info("-------- PRODUCTIONS : ACCESS QUESTION REGIST METHOD=POST --------");

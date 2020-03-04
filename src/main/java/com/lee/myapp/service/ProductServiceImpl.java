@@ -107,6 +107,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public int deleteReview(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.deleteReview(review);
+	}
+
+	@Override
 	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.reviewLike(review);

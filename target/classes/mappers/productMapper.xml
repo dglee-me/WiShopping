@@ -205,6 +205,12 @@
 		 WHERE MNO = #{mno} AND RNO = #{rno}
 	</delete>
 	
+	<delete id="deleteReview">
+		DELETE
+		  FROM TBL_PRODUCT_REVIEW
+		 WHERE MNO = #{mno} AND RNO = #{rno}
+	</delete>
+	
 	<!-- Product Question and answer -->
 	<insert id="questionRegist">
 		INSERT INTO TBL_PRODUCT_QUESTION(QNO, PNO, MNO, CATEGORY, CONTENT, WRITEDATE, ISSECRET, STATUS)

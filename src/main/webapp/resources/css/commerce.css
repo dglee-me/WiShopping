@@ -401,6 +401,9 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 
 .production-review-item_writer .production-review-item_writer_img{margin-top:4px; margin-right:8px; width:24px; height:24px; border-radius:100%;}
 .production-review-item_writer_img, .production-review-item_writer_info{flex:0 0 auto;}
+.production-review-item_writer_info-right{float:right;}
+.production-review-item_writer_info-right-btn{cursor:pointer;}
+.production-review-item_writer_info-right-btn:first-child{float:left; margin-right:15px;}
 
 .production-review-item_writer_info_name{font-size:13px; color:#424242; margin-bottom:7px;}
 .production-review-item_writer_info_date{vertical-align:3px; font-family:Tahoma,sans; color:#757575;}
