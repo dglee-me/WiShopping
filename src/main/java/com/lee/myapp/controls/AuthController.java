@@ -258,7 +258,8 @@ public class AuthController {
 
 			path = "redirect:/error";
 		}else {
-			MemberVO member = new MemberVO().setToken(token).setPw(password);
+			MemberVO member = new MemberVO().setToken(token).setPw(passEncoder.encode(password));
+			
 			int result = memberService.resetPassword(member);
 			
 			if(result == 0) { //If the token value has expired

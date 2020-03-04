@@ -8,7 +8,7 @@
 <mapper namespace="searchMapper">
 	<select id="searchProductList" resultType="com.lee.myapp.domain.ProductVO">
 		SELECT A.*, NVL(B.IS_BRAND, 0) AS IS_BRAND, NVL(C.SALES, 0) AS SALES
-		  FROM PRODUCT A LEFT OUTER JOIN (SELECT BRAND, COUNT(BRAND) AS IS_BRAND FROM TBL_SELLER WHERE BRAND = '메종키츠네' GROUP BY BRAND) B ON A.BRAND = B.BRAND LEFT OUTER JOIN (SELECT PNO, SALES FROM TBL_SALES_VOLUME) C ON A.PNO = C.PNO 
+		  FROM PRODUCT A LEFT OUTER JOIN (SELECT BRAND, COUNT(BRAND) AS IS_BRAND FROM TBL_SELLER WHERE BRAND = #{query} GROUP BY BRAND) B ON A.BRAND = B.BRAND LEFT OUTER JOIN (SELECT PNO, SALES FROM TBL_SALES_VOLUME) C ON A.PNO = C.PNO 
     <if test='delivery_free == null &amp;&amp; min == null &amp;&amp; max == null'>
    	 	WHERE A.BRAND LIKE '%'||#{query}||'%' OR A.PNAME LIKE '%'||#{query}||'%'
     </if>

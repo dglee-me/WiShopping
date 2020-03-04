@@ -2051,6 +2051,12 @@
 									<c:forEach var="review" items="${reviews}">
 									<div class="production-review-feed-item_container">
 										<article class="production-review-item" data-number="${review.rno}">
+											<c:if test="${login.mno eq review.mno}">
+												<div class="production-review-item_writer_info-right">
+													<span class="production-review-item_writer_info-right-btn">수정</span>
+													<span class="production-review-item_writer_info-right-btn">삭제</span>
+												</div>
+											</c:if>
 											<div class="production-review-item_writer">
 												<a href="javascript:void(0);">
 													<img src="${pageContext.request.contextPath}/resources/image/none_user.png" class="production-review-item_writer_img">
