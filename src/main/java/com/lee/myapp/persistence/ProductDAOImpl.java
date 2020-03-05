@@ -85,6 +85,12 @@ public class ProductDAOImpl implements ProductDAO{
 
 	//Reivew
 	@Override
+	public ReviewVO reviewView(int rno) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".reviewView", rno);
+	}
+	
+	@Override
 	public int reviewRegist(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(namespace+".reviewRegist", review);
@@ -112,6 +118,12 @@ public class ProductDAOImpl implements ProductDAO{
 	public int deleteReview(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete(namespace+".deleteReview", review);
+	}
+
+	@Override
+	public int modifyReview(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(namespace+".modifyReview", review);
 	}
 
 	@Override

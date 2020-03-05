@@ -83,6 +83,12 @@ public class ProductServiceImpl implements ProductService{
 
 	//Review
 	@Override
+	public ReviewVO reviewView(int rno) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.reviewView(rno);
+	}
+	
+	@Override
 	public int reviewRegist(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.reviewRegist(review);
@@ -110,6 +116,12 @@ public class ProductServiceImpl implements ProductService{
 	public int deleteReview(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
 		return productDAO.deleteReview(review);
+	}
+
+	@Override
+	public int modifyReview(ReviewVO review) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.modifyReview(review);
 	}
 
 	@Override

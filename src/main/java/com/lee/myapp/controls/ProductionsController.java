@@ -296,7 +296,7 @@ public class ProductionsController {
 	
 	@ResponseBody
 	@RequestMapping(value="/review/delete/{rno:.+}", method=RequestMethod.GET)
-	public int reviewDelete(HttpSession session, @PathVariable(value="rno") int rno) throws Exception{
+	public int reviewDeleteGET(HttpSession session, @PathVariable(value="rno") int rno) throws Exception{
 		logger.info("-------- PRODUCTIONS : ACCESS REVIEW DELETE METHOD = GET --------");
 		
 		int result = 0;
@@ -308,6 +308,41 @@ public class ProductionsController {
 			result = productService.deleteReview(review);
 		}
 		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/review/modify", method=RequestMethod.POST)
+	public int reviewModifyPOST(HttpSession session, ReviewVO review, MultipartFile image, boolean image_check) throws Exception{
+		logger.info("-------- PRODUCTIONS : ACCESS REVIEW MODIFY METHOD = GET --------");
+		
+		int result = 0;
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		if(member != null) {
+			ReviewVO exist_review = productService.reviewView(review.getRno());
+
+			if(image_check) {
+				if(image != null) {
+					if(!exist_review.getContentimg().equals("noImage")) {
+						FileDelete.deleteFile(exist_review.getContentimg());
+					}
+				
+					String imgUploadPath = uploadPath + "/" + "imgUpload";
+					String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+
+					review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
+				}
+			}else {
+				if(!exist_review.getContentimg().equals("noImage")) {
+					FileDelete.deleteFile(exist_review.getContentimg());
+					
+					review.setContentimg("noImage");
+				}
+			}
+			result = productService.modifyReview(review);
+		}
+
 		return result;
 	}
 	

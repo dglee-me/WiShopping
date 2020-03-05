@@ -115,6 +115,12 @@
 		 WHERE PNO = #{pno}
 	</delete>
 	
+	<select id="reviewView" resultType="com.lee.myapp.domain.ReviewVO">
+		SELECT *
+		  FROM TBL_PRODUCT_REVIEW
+		 WHERE RNO = #{rno}
+	</select>
+	
 	<insert id="reviewRegist">
 		INSERT INTO TBL_PRODUCT_REVIEW(RNO,PNO,MNO,ONO,OPTION_COLOR,OPTION_SIZE,CONTENT,CONTENT_IMG,WRITEDATE)
 		VALUES(
@@ -210,6 +216,15 @@
 		  FROM TBL_PRODUCT_REVIEW
 		 WHERE MNO = #{mno} AND RNO = #{rno}
 	</delete>
+	
+	<update id="modifyReview">
+		UPDATE TBL_PRODUCT_REVIEW
+		   SET CONTENT = #{content}
+		   <if test='contentimg != null'>
+		     , CONTENT_IMG = #{contentimg}
+		   </if>
+		 WHERE RNO = #{rno}
+	</update>
 	
 	<!-- Product Question and answer -->
 	<insert id="questionRegist">

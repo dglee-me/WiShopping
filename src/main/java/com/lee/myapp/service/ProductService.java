@@ -25,12 +25,14 @@ public interface ProductService {
 	public int isSeller(int mno) throws Exception;
 	
 	//Review
+	public ReviewVO reviewView(int rno) throws Exception;
 	public int reviewRegist(ReviewVO review) throws Exception;
 	public List<ReviewVO> reviewList(int pno) throws Exception;
 	public List<ReviewVO> listPaging(CommentCriteria cri) throws Exception;
 	public int listCount(int pno) throws Exception;
 	public int updateReviewStatus(ReviewVO review) throws Exception;
 	public int deleteReview(ReviewVO review) throws Exception;
+	public int modifyReview(ReviewVO review) throws Exception;
 	
 	//Review like
 	public List<ReviewLikeVO> reviewLike(ReviewVO review) throws Exception;

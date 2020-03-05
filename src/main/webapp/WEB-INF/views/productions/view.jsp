@@ -1841,7 +1841,106 @@
 		var rno = $(this).closest("article").attr("data-number");
 		
 		if(text == "수정"){
+			$("body").css("overflow-y","hidden");
 			
+			var product_image = $(".product-selling_cover-image_entry_image").attr("src");
+			var brand = $(".production-selling-header_title_brand").text();
+			var pname = $(".production-selling-header_title_name").text();
+			
+			var option = $(this).parent().siblings(".production-review-item_name").text();
+			var image = $(this).parent().siblings(".production-review-item_img_btn").children("img").attr("src");
+			var text = $(this).parent().siblings(".production-review-item_description").text();
+			
+			var check = typeof image == "undefined" ? false : true;
+
+			var div = document.createElement("div");
+			div.className = "popup new ui-popup ui-editing-popup";
+			
+			if(check){
+				div.innerHTML = 
+					"<div class='close_popup'>"+
+						"<div class='pop_extra'>"+
+							"<div class='pop_container'>"+
+								"<div id='production_review_popup'>"+
+									"<div class='title'>리뷰수정</div>"+
+										"<form id='production_review_form' action='modify' enctype='multipart/form-data' method='post'>"+
+											"<input type='hidden' name='production_review[rno]' value='"+rno+"'>"+
+											"<input type='hidden' name='production_review[image_check]' value='"+check+"'>"+
+											"<div class='select_production field'>"+
+												"<div class='production_image' style='background-image:url("+product_image+")'></div>"+
+												"<div class='production_info'>"+
+													"<div class='brand_name'>"+brand+"</div>"+
+													"<div class='name'>"+pname+"</div>"+
+													"<div class='option' data-number=''>"+option+"</div>"+
+												"</div>"+
+											"</div>"+
+											"<div class='select_img field'>"+
+												"<div class='title'>사진을 등록해주세요. <span class='caption'>(선택)</span></div>"+
+												"<div class='guide'><strong>상품과 관련이 없거나 부적합한 사진을 등록하는 경우, 사진이 삭제될 수 있습니다.</strong></div>"+
+												"<div id='upload_panel' style='display:block;'><img src='"+image+"'><div id='delete_review_image'>사진 삭제하기</div></div>"+
+												"<div id='add_review_image' style='display:none;'>새로운 사진 업로드<input type='file' name='review_image' id='image_uploader'></div>"+
+											"</div>"+
+											"<div class='select_comment field'>"+
+												"<div class='title'>리뷰를 작성해주세요.</div>"+
+												"<div class='guide'>제품의 소감을 자세하게 작성하여주세요.</div>"+
+												"<div class='counting'>최소 20자</div>"+
+												"<textarea placeholder='이 제품을 사용하면서 느꼈던 장점과 단점을 솔직하게 알려주세요.' name='production_review[comment]' id='production_review_comment'>"+text+"</textarea>"+
+												"<div class='refer'>*해당 상품과 무관한 내용이나 동일 문자의 반복 등 부적합한 내용은 삭제될 수 있습니다.</div>"+
+											"</div>"+
+											"<div class='actions'>"+
+												"<input type='button' name='commit' value='등록하기' id='submit' class='submit'>"+
+												"<div class='close_popup cancel'>취소하기</div>"+
+											"</div>"+
+										"</form>"+
+									"</div>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+					"</div>";
+			}else{
+				div.innerHTML = 
+					"<div class='close_popup'>"+
+						"<div class='pop_extra'>"+
+							"<div class='pop_container'>"+
+								"<div id='production_review_popup'>"+
+									"<div class='title'>리뷰수정</div>"+
+										"<form id='production_review_form' action='modify' enctype='multipart/form-data' method='post'>"+
+											"<input type='hidden' name='production_review[rno]' value='"+rno+"'>"+
+											"<input type='hidden' name='production_review[image_check]' value='"+check+"'>"+
+											"<div class='select_production field'>"+
+												"<div class='production_image' style='background-image:url("+product_image+")'></div>"+
+												"<div class='production_info'>"+
+													"<div class='brand_name'>"+brand+"</div>"+
+													"<div class='name'>"+pname+"</div>"+
+													"<div class='option' data-number=''>"+option+"</div>"+
+												"</div>"+
+											"</div>"+
+											"<div class='select_img field'>"+
+												"<div class='title'>사진을 등록해주세요. <span class='caption'>(선택)</span></div>"+
+												"<div class='guide'><strong>상품과 관련이 없거나 부적합한 사진을 등록하는 경우, 사진이 삭제될 수 있습니다.</strong></div>"+
+												"<div id='upload_panel'><img src='"+image+"'><div id='delete_review_image'>사진 삭제하기</div></div>"+
+												"<div id='add_review_image'>새로운 사진 업로드<input type='file' name='review_image' id='image_uploader'></div>"+
+											"</div>"+
+											"<div class='select_comment field'>"+
+												"<div class='title'>리뷰를 작성해주세요.</div>"+
+												"<div class='guide'>제품의 소감을 자세하게 작성하여주세요.</div>"+
+												"<div class='counting'>최소 20자</div>"+
+												"<textarea placeholder='이 제품을 사용하면서 느꼈던 장점과 단점을 솔직하게 알려주세요.' name='production_review[comment]' id='production_review_comment'>"+text+"</textarea>"+
+												"<div class='refer'>*해당 상품과 무관한 내용이나 동일 문자의 반복 등 부적합한 내용은 삭제될 수 있습니다.</div>"+
+											"</div>"+
+											"<div class='actions'>"+
+												"<input type='button' name='commit' value='등록하기' id='submit' class='submit'>"+
+												"<div class='close_popup cancel'>취소하기</div>"+
+											"</div>"+
+										"</form>"+
+									"</div>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+					"</div>";
+			}
+			
+			$("body").append(div);
 		}else if(text == "삭제"){
 			var var_confirm = confirm("리뷰를 정말 삭제하시겠습니까?");
 			
@@ -1870,8 +1969,80 @@
 			}
 		}
 	});
+	
+	$(document).on("click", "#delete_review_image", function(){
+		$(this).parent().css("display","none");
+		$(this).siblings("img").attr("src","");
+		
+		$("input:hidden[name='production_review[image_check]']").val(false);
+		
+		$("#add_review_image").css("display","block");
+	});
+	
+	$(document).on("click", "#add_review_image", function(){
+		$("#image_uploader").click();
+	});
+	$(document).on("change", "#image_uploader", function(){
+		if(this.files && this.files[0]){
+			$("#upload_panel").css("display","block");
+			$("input:hidden[name='production_review[image_check]']").val(true);
+			
+			var reader = new FileReader;
+			reader.onload = function(data){
+				$("#upload_panel img").attr("src", data.target.result);
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
+	});
+	
+	//Delete review layer pop-up when click outside review area
+	$(document).ready(function(){
+		$("html").click(function(e){
+			if($(e.target).hasClass("pop_container")){
+				var var_confirm = confirm("작성중인 내용이 사라집니다.");
+				
+				if(var_confirm){
+					$("body").css("overflow-y","scroll");
+					$(".ui-editing-popup").remove();
+				}
+			}
+		});
+	});
+	
+	//Submit review modify
+	$(document).on("click",".submit",function(){
+		var formData = new FormData($("#production_review_form")[0]);
+		
+		formData.append("rno",$("input:hidden[name='production_review[rno]']").val());
+		formData.append("content",$("#production_review_comment").val());
+		formData.append("image_check", $("input:hidden[name='production_review[image_check]']").val());
+		formData.append("image",$("#image_uploader")[0].files[0]);
+		
+		if(formData.get("image") == "undefined"){
+			formData.delete("image");
+		}
+		
+		$.ajax({
+			url : "/WiShopping/productions/review/modify",
+			type : "post",
+			contentType: false,
+			processData: false,
+			data : formData,
+			success : function(result){
+				if(result == 0) location.href= "/WiShopping/auth/login";
+				else if(result == 1){
+					alert("리뷰가 정상 등록되었습니다.");
+					
+					//Init
+					$("body").css("overflow-y","scroll");
+					$(".ui-editing-popup").remove();
+					
+					location.reload();
+				}
+			}
+		});
+	});
 </script>
-
 <meta charset="UTF-8">
 <title>위쇼핑! - ${product.pname}</title>
 </head>
