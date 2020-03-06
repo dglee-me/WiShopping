@@ -34,9 +34,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void delete_option(int pno) throws Exception {
+	public void not_used_option(int pno) throws Exception {
 		// TODO Auto-generated method stub
-		productDAO.delete_option(pno);
+		productDAO.not_used_option(pno);
 	}
 	
 	@Override

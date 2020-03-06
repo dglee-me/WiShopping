@@ -3,15 +3,15 @@ package com.lee.myapp.domain;
 public class ProductOptionVO {
 	/*
 		 CREATE TABLE TBL_PRODUCT_OPTION(
-		    ONO INT NOT NULL,
-		    PNO INT NOT NULL,
-		    OPTION_COLOR VARCHAR2(50) NOT NULL,
-		    OPTION_SIZE VARCHAR2(50) NOT NULL,
-		    INVENTORY INT NOT NULL,
-		    STATUS VARCHAR2(10) DEFAULT 'TRUE',
-		    PRIMARY KEY(ONO),
-		    FOREIGN KEY(PNO) REFERENCES PRODUCT(PNO) ON DELETE CASCADE
-		);
+	    ONO INT NOT NULL,
+	    PNO INT NOT NULL,
+	    OPTION_COLOR VARCHAR2(50) NOT NULL,
+	    OPTION_SIZE VARCHAR2(50) NOT NULL,
+	    INVENTORY INT NOT NULL,
+	    STATUS VARCHAR2(10) DEFAULT 'TRUE',
+	    PRIMARY KEY(ONO),
+	    FOREIGN KEY(PNO) REFERENCES PRODUCT(PNO) ON DELETE CASCADE
+	);
 	*/
 	private int ono;
 	private int sequence;
@@ -19,6 +19,7 @@ public class ProductOptionVO {
 	private String optioncolor;
 	private String optionsize;
 	private int inventory;
+	private String status;
 	
 	public int getOno() {
 		return ono;
@@ -62,8 +63,16 @@ public class ProductOptionVO {
 		this.inventory = inventory;
 		return this;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public ProductOptionVO setStatus(String status) {
+		this.status = status;
+		return this;
+	}
 	
 	public String toString() {
-		return "ProductOptionVO = [ono= "+ono+", sequence= "+sequence+", pno= "+pno+", option_color= "+optioncolor+", option_size= "+optionsize+", inventory= "+inventory+"]";
+		return "ProductOptionVO = [ono= "+ono+", sequence= "+sequence+", pno= "+pno+", option_color= "+optioncolor+", option_size= "+optionsize+", inventory= "
+					+inventory+", status = "+status+"]";
 	}
 }

@@ -70,7 +70,7 @@
 	<select id="view_option" resultType="com.lee.myapp.domain.ProductOptionVO">
 		SELECT ONO, ROW_NUMBER() OVER(ORDER BY ONO ASC) AS SEQUENCE, PNO, OPTION_COLOR, OPTION_SIZE, INVENTORY
 		  FROM TBL_PRODUCT_OPTION
-		 WHERE PNO = #{pno}
+		 WHERE PNO = #{pno} AND STATUS = 'TRUE'
 		 ORDER BY ONO ASC
 	</select>
 	
@@ -109,9 +109,9 @@
 		 WHERE PNO = #{pno} AND BRAND = (SELECT BRAND FROM TBL_SELLER WHERE MNO = #{mno})
 	</delete>
 	
-	<delete id="optionDelete">
-		DELETE
-		  FROM TBL_PRODUCT_OPTION
+	<delete id="not_used_option">
+		UPDATE TBL_PRODUCT_OPTION
+		   SET STATUS = 'FALSE'
 		 WHERE PNO = #{pno}
 	</delete>
 	

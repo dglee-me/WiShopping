@@ -523,7 +523,7 @@ public class ProductionsController {
 			productService.modifyProduct(product);
 			
 			//Exist option delete and new option regist
-			productService.delete_option(product.getPno());
+			productService.not_used_option(product.getPno());
 			
 			if(has_option == 'T') {
 				int inventory_count = 0;

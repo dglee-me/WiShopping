@@ -36,9 +36,9 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public void delete_option(int pno) throws Exception {
+	public void not_used_option(int pno) throws Exception {
 		// TODO Auto-generated method stub
-		sqlSession.delete(namespace+".optionDelete", pno);
+		sqlSession.delete(namespace+".not_used_option", pno);
 	}
 	
 	@Override

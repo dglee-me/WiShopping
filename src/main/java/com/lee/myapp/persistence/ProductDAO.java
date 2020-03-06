@@ -15,7 +15,7 @@ public interface ProductDAO {
 	public int register(ProductVO product) throws Exception;
 	public int register_option(ProductOptionVO option) throws Exception;
 	public List<ProductOptionVO> view_option(int pno) throws Exception;
-	public void delete_option(int pno) throws Exception;
+	public void not_used_option(int pno) throws Exception;
 	public List<ProductVO> list(ProductVO product) throws Exception;
 	public ProductVO view(CommentCriteria cri) throws Exception;
 	public void modifyProduct(ProductVO product) throws Exception;
