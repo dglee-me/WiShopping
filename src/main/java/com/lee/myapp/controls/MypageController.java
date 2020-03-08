@@ -144,7 +144,6 @@ public class MypageController {
 	public String mypageWithdrawalPOST(HttpSession session) throws Exception{
 		logger.info("-------- MYPAGE : WITHDRAWAL METHOD = POST --------");
 		
-
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		if(member != null) {
 			memberService.withdrawalUser((MemberVO)session.getAttribute("login"));

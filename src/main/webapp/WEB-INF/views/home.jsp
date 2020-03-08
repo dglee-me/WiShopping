@@ -200,7 +200,7 @@
 			</div>
 			<section class="container home-section home-best">
 				<header class="row home-section_header">
-					<h2 class="col home-section_header_content"><a href="${pageContext.request.contextPath}/commerce/best/main?category=all">베스트</a></h2>
+					<h2 class="col home-section_header_content"><a href="${pageContext.request.contextPath}/commerce/best/main">베스트</a></h2>
 				</header>
 				<div class="production-best-feed">
 					<ul class="production-best-feed_category">

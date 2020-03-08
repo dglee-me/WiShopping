@@ -106,37 +106,44 @@ public class AuthController {
 			session.removeAttribute("login");
 		}
 		
-		//Verify that the password you entered matches the one before the password was encrypted
-		boolean passwordMatch = passEncoder.matches(member.getPw(), loginMember.getPw());
-		
-		if(passwordMatch) {
-			if(loginMember.getAuth().equals("Y")) {
-				session.setAttribute("login", loginMember);
-				if(member.isUseCookie()) {
-					Cookie cookie = new Cookie("loginCookie",session.getId());
-					cookie.setPath("/");
-					
-					int amount = 60*60*24*7; 
-					cookie.setMaxAge(amount);//Set the effective time to 7 days
-					
-					//Cookie Enabled
-					response.addCookie(cookie);
-					
-					Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
-					
-					memberService.keepLogin(loginMember.getEmail(), session.getId(), sessionLimit);
-				}
-			}else {
-				session.setAttribute("login", null);
-				rttr.addFlashAttribute("msg",true);
-				return "redirect:/auth/login";
-			}
-			return "redirect:/";
-		}else {
+		if(loginMember == null) {
 			session.setAttribute("login", null);
-			rttr.addFlashAttribute("msg", false);
+			rttr.addFlashAttribute("msg",false);
 			
 			return "redirect:/auth/login";
+		}else {
+			//Verify that the password you entered matches the one before the password was encrypted
+			boolean passwordMatch = passEncoder.matches(member.getPw(), loginMember.getPw());
+			
+			if(passwordMatch) {
+				if(loginMember.getAuth().equals("Y")) {
+					session.setAttribute("login", loginMember);
+					if(member.isUseCookie()) {
+						Cookie cookie = new Cookie("loginCookie",session.getId());
+						cookie.setPath("/");
+						
+						int amount = 60*60*24*7; 
+						cookie.setMaxAge(amount);//Set the effective time to 7 days
+						
+						//Cookie Enabled
+						response.addCookie(cookie);
+						
+						Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
+						
+						memberService.keepLogin(loginMember.getEmail(), session.getId(), sessionLimit);
+					}
+				}else {
+					session.setAttribute("login", null);
+					rttr.addFlashAttribute("msg",true);
+					return "redirect:/auth/login";
+				}
+				return "redirect:/";
+			}else {
+				session.setAttribute("login", null);
+				rttr.addFlashAttribute("msg", false);
+				
+				return "redirect:/auth/login";
+			}
 		}
 	}
 	

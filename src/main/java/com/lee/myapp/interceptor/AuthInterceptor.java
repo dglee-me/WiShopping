@@ -33,20 +33,21 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		//로그인 상태 여부 확인
 		if(obj == null) {
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			
 			//Session정보가 없을 시 Cookie 정보를 확인
 			if(loginCookie != null) {
 				//Cookie에서 SessionID 추출
 				String sessionId = loginCookie.getValue();
 				//SessionId 값으로 로그인 정보 추출
 				MemberVO memberVO = memberService.checkUserWithSessionKey(sessionId);
-				
+
 				if(memberVO != null) {
 					session.setAttribute("login", memberVO);
 					return true;
-				}else {
+				}/*else {
 					response.sendRedirect(request.getContextPath()+"/auth/login");
 					return false;
-				}
+				}*/
 			}
 		}
 		return true;

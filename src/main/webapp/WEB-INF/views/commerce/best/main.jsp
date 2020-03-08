@@ -16,10 +16,10 @@
 	$(document).ready(function(){
 		var url = location.href;
 		var category = url.slice((url.indexOf('=') + 1));
-	
+
 		var li = $(".best-category-filter_item");
 		
-		if(category == "all"){
+		if(category == "all" || category.length > 3){
 			li.removeClass("best-category-filter_item-active");
 			$(li[0]).addClass("best-category-filter_item-active");
 		}else if(category == "1"){

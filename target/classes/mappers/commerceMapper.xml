@@ -7,12 +7,11 @@
 
 <mapper namespace="commerceMapper">
 	<select id="bestList" resultType="com.lee.myapp.domain.ProductVO">
-		SELECT A.PNO, A.PNAME, A.BRAND, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
+		SELECT ROW_NUMBER() OVER(ORDER BY B.SALES DESC) AS NUM, A.PNO, A.CATEGORY1, A.CATEGORY2 ,A.PNAME, A.BRAND, A.PRICE, A.PRODUCT_THUMURL, B.SALES 
 		  FROM PRODUCT A INNER JOIN TBL_SALES_VOLUME B ON A.PNO = B.PNO
-		 <if test='_parameter != null and _parameter != "all"'>
-		 	WHERE A.CATEGORY1 = #{_parameter}
+		 <if test='_parameter != "all"'>
+		 	WHERE A.CATEGORY1 = (SELECT CNAME FROM TBL_CATEGORY WHERE CLASSIFY = #{category} AND DEPTH = 1)
 		 </if>
-		 ORDER BY SALES DESC
 	</select>
 	
 	<!-- Header category list -->

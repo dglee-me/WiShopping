@@ -326,7 +326,7 @@ span.txt_byte{margin-left:5px;}
 .select-input{position:relative;}
 .input-group{flex:1 0 auto;}
 .selling-option-select-input_option.select-input>.form-control{border-color:#5FCAEC; font-size:15px; border-radius:4px;}
-.selling-option-select-input_option.select-input>.form-control.empty{color:#424242;}
+.selling-option-select-input_option.select-input>.form-control.empty{color:#424242; outline:none;}
 .select-input>.form-control{width:100%; padding-right:30px; background-image:none;}
 .form-control{transition: .2s border-color, .2s box-shadow, .2s background-color; display:block; box-sizing:border-box; height:40px; width:100%; padding:0 15px; 
 	line-height:40px; border-radius:4px; border:1px solid #dbdbdb; background-color:#ffffff; color:#424242; font-size:12px; flex:1 0 auto; }
@@ -352,6 +352,7 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .product_selling_nav_item{position:relative; display:blcok; top:1px; margin:-1px 0 0 -1px; padding:14px 0 15px; box-sizing:border-box; text-align:center; 
 	background-color:#fff; color:#424242; font-size:13px; line-height:20px; font-weight:700; border-color:transparent transparent #ededed #ededed; transition:color .1s;}
 .product_selling_nav_item{display:block; left:1px; padding:14px 10px 15px; font-size:15px; background-color:#fafafa;}
+.product_selling_nav_item-count{margin-left:4px; color:#5FCAEC; font-size:15px;}
 
 .product_selling_nav_item-active{color:#5FCAEC; border-bottom:3px solid #5FCAEC; z-index:1;}
 .product_selling_nav_content-list a:hover{color:#5FCAEC;}
@@ -396,6 +397,10 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 .production-review-feed_filter_order-active{color:#5FCAEC;}
 
 .production-review-feed-item_container{padding-bottom:40px; margin-bottom:40px; border-bottom:1px solid #ededed;}
+
+.production-review-feed_header{margin:40px 0; text-align:center;}
+.production-review-feed_header_text{font-size:15px; line-height:22px; color:#424242;}
+
 .production-review-item{position:relative;}
 .production-review-item_writer{display:flex;}
 
@@ -485,6 +490,8 @@ li:first-child>.product_selling_nav_item{border-left:none;}
 
 .product-question-feed{margin-top:0px;}
 .product-question-feed_item{margin:0 0 40px;}
+
+.product-question-feed_list_empty{text-align:center; font-size:15px; color:#757575; margin-bottom:40px;}
 
 .product-question-feed_item_header{position:relative; display:block; margin:0 0 8px; font-size:12px; line-height:16px; color:#424242;}
 .product-question-feed_item_header>.answered{color:#5FCAEC;}
@@ -1372,6 +1379,8 @@ section[class*="admin-promotions-"] .table-block td.image .img_exist:hover
 
 #question_title:focus, .question-form-body_content:focus{outline:none; box-shadow:0 0 0 3px rgba(130,224,250,0.5);}
 .product-question_wrap_question_answer:focus{outline:none;}
+
+.question-form-body_content-text:focus{outline:none; box-shadow:0 0 0 3px rgba(130,224,250,0.5);}
 
 .question-form_submit{display:inline-block; margin-left:25%; background-color:#5FCAEC; border-color:#5FCAEC; color:#ffffff; transition:.2s ease; 
 	line-height:1; height:70px; padding:26px 0; font-size:18px; border-width:1px; border-style:solid; text-align:center; border-radius:4px; font-weight:bold;}

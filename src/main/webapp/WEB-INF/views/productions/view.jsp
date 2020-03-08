@@ -44,20 +44,22 @@
 		$(".product_selling_nav_content-list li").click(function(e){
 			e.preventDefault();
 			
-			var nav = $(this).children().text();
+			var nav = $(this).children().attr("href")
 			
-			if(nav == "상품정보"){
+			console.log(nav);
+			
+			if(nav == "#production-selling-information"){
 				var href = $("#production-selling-information").offset();
 				href.top -= 80;
-			}else if(nav == "리뷰"){
+			}else if(nav == "#production-selling-review"){
 				var href = $("#production-selling-review").offset();
 				href.top -= 40;
-			}else if(nav == "문의"){
+			}else if(nav == "#production-selling-question"){
 				var href = $("#production-selling-question").offset();
-				href.top -= 40;
-			}else if(nav == "배송/환불"){
+				href.top -= 60;
+			}else if(nav == "#production-selling-delivery"){
 				var href = $("#production-selling-delivery").offset();
-				href.top -= 40;
+				href.top -= 60;
 			}
 			
 			$("html, body").animate({scrollTop : href.top},300);
@@ -2220,9 +2222,9 @@
 					<nav class="product_selling_nav_content">
 						<ol class="product_selling_nav_content-list">
 							<li><a href="#production-selling-information" class="product_selling_nav_item product_selling_nav_item-active">상품정보</a></li>
-							<li><a href="#production-selling-review" class="product_selling_nav_item">리뷰</a></li>
-							<li><a href="javascript:void(0);" class="product_selling_nav_item">문의</a></li>
-							<li><a href="javascript:void(0);" class="product_selling_nav_item">배송/환불</a></li>
+							<li><a href="#production-selling-review" class="product_selling_nav_item">리뷰<span class="product_selling_nav_item-count">${reviewCount}</span></a></li>
+							<li><a href="#production-selling-question" class="product_selling_nav_item">문의<span class="product_selling_nav_item-count">${questionCount}</span></a></li>
+							<li><a href="#production-selling-delivery" class="product_selling_nav_item">배송/환불</a></li>
 						</ol>
 					</nav>
 				</div>
@@ -2259,45 +2261,52 @@
 									</div>
 								</div>
 								<div class="production-review-feed_list">
-									<c:forEach var="review" items="${reviews}">
-									<div class="production-review-feed-item_container">
-										<article class="production-review-item" data-number="${review.rno}">
-											<c:if test="${login.mno eq review.mno}">
-												<div class="production-review-item_writer_info-right">
-													<span class="production-review-item_writer_info-right-btn">수정</span>
-													<span class="production-review-item_writer_info-right-btn">삭제</span>
-												</div>
-											</c:if>
-											<div class="production-review-item_writer">
-												<a href="javascript:void(0);">
-													<img src="${pageContext.request.contextPath}/resources/image/none_user.png" class="production-review-item_writer_img">
-												</a>
-												<div class="production-review-item_writer_info">
-													<p class="production-review-item_writer_info_name">${review.name}</p>
-													<span class="production-review-item_writer_info_date">${review.writedate}</span>
-												</div>
-											</div>
-											<p class="production-review-item_name">색상: ${review.optioncolor} / 옵션: ${review.optionsize}</p>
-											<c:if test="${review.contentimg ne 'noImage'}">
-												<button type="button" class="production-review-item_img_btn">
-													<img class="production-review-item_img" src="${pageContext.request.contextPath}${review.contentimg}">
-												</button>
-											</c:if>
-											<p class="production-review-item_description">${review.content}</p>
-											<div class="production-review-item_like">
-												<c:if test="${review.likecheck eq 0}">
-													<button type="button" class="production-review-item_like_btn">좋아요</button>
+									<c:if test="${!empty reviews}">
+										<c:forEach var="review" items="${reviews}">
+										<div class="production-review-feed-item_container">
+											<article class="production-review-item" data-number="${review.rno}">
+												<c:if test="${login.mno eq review.mno}">
+													<div class="production-review-item_writer_info-right">
+														<span class="production-review-item_writer_info-right-btn">수정</span>
+														<span class="production-review-item_writer_info-right-btn">삭제</span>
+													</div>
 												</c:if>
-												<c:if test="${review.likecheck eq 1}">
-													<button type="button" class="production-review-item_like_btn production-review-item_like_btn-active">좋아요</button>
-												</c:if>
-												<div class="production-review-item_like_text">
-													<span class="production-review-item_help_like_number">${review.likecount}</span>명이 좋아했습니다.
+												<div class="production-review-item_writer">
+													<a href="javascript:void(0);">
+														<img src="${pageContext.request.contextPath}/resources/image/none_user.png" class="production-review-item_writer_img">
+													</a>
+													<div class="production-review-item_writer_info">
+														<p class="production-review-item_writer_info_name">${review.name}</p>
+														<span class="production-review-item_writer_info_date">${review.writedate}</span>
+													</div>
 												</div>
-											</div>
-										</article>
-									</div>
-									</c:forEach>
+												<p class="production-review-item_name">색상: ${review.optioncolor} / 옵션: ${review.optionsize}</p>
+												<c:if test="${review.contentimg ne 'noImage'}">
+													<button type="button" class="production-review-item_img_btn">
+														<img class="production-review-item_img" src="${pageContext.request.contextPath}${review.contentimg}">
+													</button>
+												</c:if>
+												<p class="production-review-item_description">${review.content}</p>
+												<div class="production-review-item_like">
+													<c:if test="${review.likecheck eq 0}">
+														<button type="button" class="production-review-item_like_btn">좋아요</button>
+													</c:if>
+													<c:if test="${review.likecheck eq 1}">
+														<button type="button" class="production-review-item_like_btn production-review-item_like_btn-active">좋아요</button>
+													</c:if>
+													<div class="production-review-item_like_text">
+														<span class="production-review-item_help_like_number">${review.likecount}</span>명이 좋아했습니다.
+													</div>
+												</div>
+											</article>
+										</div>
+										</c:forEach>
+									</c:if>
+									<c:if test="${empty reviews}">
+										<div class="production-review-feed_header">
+											<p class="production-review-feed_header_text">첫 리뷰를 남겨주세요!
+										</div>
+									</c:if>
 								</div>
 								<c:if test="${!empty reviews}">
 								<ul class="list-paginator production-review_paginator">
@@ -2346,9 +2355,74 @@
 							</header>
 							<div class="product-question-feed">
 								<div class="product-question-feed_list">
-									<c:forEach var="question" items="${questions}">
-									<c:if test="${question.issecret eq 1}">
-										<c:if test="${question.mno eq login.mno }">
+									<c:if test="${!empty questions}">
+										<c:forEach var="question" items="${questions}">
+										<c:if test="${question.issecret eq 1}">
+											<c:if test="${question.mno eq login.mno }">
+												<article class="product-question-feed_item" qna-number="${question.qno}">
+													<header class="product-question-feed_item_header">${question.category} | 
+														<c:if test="${question.status eq 0}">
+															<span class="unanswered">답변대기</span>
+														</c:if>
+														<c:if test="${question.status eq 1}">
+															<span class="answered">답변완료</span>
+														</c:if>
+														<c:if test="${question.mno eq login.mno}">
+															<button class="product-question-feed_item_header_delete" type="button">삭제</button>
+														</c:if>
+														<c:if test="${product.isseller eq 1}">
+															<c:if test="${question.status eq 0}">
+																<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
+															</c:if>
+														</c:if>
+													</header>
+													<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
+													<div class="product-question-feed_item_question">
+														<span class="product-question-feed_item_badge">Q</span>
+														<p class="product-question-feed_item_content">${question.content}</p>
+													</div>
+													<c:if test="${question.brand ne null}">
+													<div class="product-question-feed_item_answer" answer-number="${question.ano}">
+														<span class="product-question-feed_item_badge">A</span>
+														<p class="product-question-feed_item_answer_author">
+															<span class="author">${question.brand}</span> 
+															<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span>
+															<c:if test="${product.isseller eq 1}">
+																<span class="delete">삭제</span>
+															</c:if>
+														</p>
+														<p class="product-question-feed_item_content">${question.answer}</p>
+													</div>
+													</c:if>
+												</article>
+											</c:if>
+											<c:if test="${question.mno ne login.mno}">
+												<article class="product-question-feed_item" qna-number="${question.qno}">
+													<header class="product-question-feed_item_header">${question.category} | 
+														<c:if test="${question.status eq 0}">
+															<span class="unanswered">답변대기</span>
+														</c:if>
+														<c:if test="${question.status eq 1}">
+															<span class="answered">답변완료</span>
+														</c:if>
+														<c:if test="${question.mno eq login.mno}">
+															<button class="product-question-feed_item_header_delete" type="button">삭제</button>
+														</c:if>
+														<c:if test="${product.isseller eq 1}">
+															<c:if test="${question.status eq 0}">
+																<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
+															</c:if>
+														</c:if>
+													</header>
+													<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
+													<div class="product-question-feed_item_question">
+														<span class="product-question-feed_item_badge">Q</span>
+														<p class="product-question-feed_item_content">비밀글입니다.</p>
+													</div>
+												</article>
+											</c:if>
+										</c:if>
+										<c:if test="${question.issecret eq 0}">
 											<article class="product-question-feed_item" qna-number="${question.qno}">
 												<header class="product-question-feed_item_header">${question.category} | 
 													<c:if test="${question.status eq 0}">
@@ -2386,71 +2460,11 @@
 												</c:if>
 											</article>
 										</c:if>
-										<c:if test="${question.mno ne login.mno}">
-											<article class="product-question-feed_item" qna-number="${question.qno}">
-												<header class="product-question-feed_item_header">${question.category} | 
-													<c:if test="${question.status eq 0}">
-														<span class="unanswered">답변대기</span>
-													</c:if>
-													<c:if test="${question.status eq 1}">
-														<span class="answered">답변완료</span>
-													</c:if>
-													<c:if test="${question.mno eq login.mno}">
-														<button class="product-question-feed_item_header_delete" type="button">삭제</button>
-													</c:if>
-													<c:if test="${product.isseller eq 1}">
-														<c:if test="${question.status eq 0}">
-															<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
-														</c:if>
-													</c:if>
-												</header>
-												<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
-												<div class="product-question-feed_item_question">
-													<span class="product-question-feed_item_badge">Q</span>
-													<p class="product-question-feed_item_content">비밀글입니다.</p>
-												</div>
-											</article>
-										</c:if>
+										</c:forEach>
 									</c:if>
-									<c:if test="${question.issecret eq 0}">
-										<article class="product-question-feed_item" qna-number="${question.qno}">
-											<header class="product-question-feed_item_header">${question.category} | 
-												<c:if test="${question.status eq 0}">
-													<span class="unanswered">답변대기</span>
-												</c:if>
-												<c:if test="${question.status eq 1}">
-													<span class="answered">답변완료</span>
-												</c:if>
-												<c:if test="${question.mno eq login.mno}">
-													<button class="product-question-feed_item_header_delete" type="button">삭제</button>
-												</c:if>
-												<c:if test="${product.isseller eq 1}">
-													<c:if test="${question.status eq 0}">
-														<button class="product-question-feed_item_header_answer" type="button">답변하기</button>
-													</c:if>
-												</c:if>
-											</header>
-											<p class="product-question-feed_item_author"><c:out value="${fn:substring(question.name,0,2)}"/>* | <fmt:formatDate value="${question.writedate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></p>
-											<div class="product-question-feed_item_question">
-												<span class="product-question-feed_item_badge">Q</span>
-												<p class="product-question-feed_item_content">${question.content}</p>
-											</div>
-											<c:if test="${question.brand ne null}">
-											<div class="product-question-feed_item_answer" answer-number="${question.ano}">
-												<span class="product-question-feed_item_badge">A</span>
-												<p class="product-question-feed_item_answer_author">
-													<span class="author">${question.brand}</span> 
-													<span class="date"><fmt:formatDate value="${question.answerdate}" pattern="yyyy년 MM월 dd일 HH시 mm분"/></span>
-													<c:if test="${product.isseller eq 1}">
-														<span class="delete">삭제</span>
-													</c:if>
-												</p>
-												<p class="product-question-feed_item_content">${question.answer}</p>
-											</div>
-											</c:if>
-										</article>
+									<c:if test="${empty questions}">
+										<div class="product-question-feed_list_empty">문의 내역이 없습니다.</div>
 									</c:if>
-									</c:forEach>
 								</div>
 								<c:if test="${!empty questions}">
 								<ul class="list-paginator production-qna_paginator">

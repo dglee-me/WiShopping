@@ -10,13 +10,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:forEach var="product" items="${products}">
+	<c:set var="brand" value="${product.brand}"/>
+</c:forEach>
 <meta charset="UTF-8">
-<title>땡땡땡 홈 | 위쇼핑 !</title>
+<title>${brand} 홈 | 위쇼핑 !</title>
 </head>
 <body>
-	<c:forEach var="product" items="${products}">
-		<c:set var="brand" value="${product.brand}"/>
-	</c:forEach>
 	<div class="layout">
 		<jsp:include page="../header.jsp"/>
 		<div class="brand-wrap container">

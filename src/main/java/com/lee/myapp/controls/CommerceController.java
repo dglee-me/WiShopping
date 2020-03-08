@@ -23,16 +23,8 @@ public class CommerceController {
 	public void commerceBestGET(Model model,String category) throws Exception{
 		logger.info("-------- COMMERCE : BEST MAIN METHOD=GET --------");
 		
-		if(category.equals("1")) {
-			category = "패션";
-		}else if(category.equals("2")) {
-			category = "잡화";
-		}else if(category.equals("3")) {
-			category = "인테리어";
-		}else if(category.equals("4")) {
-			category = "가전·디지털";
-		}
-
+		if(category == null) category = "all";
+		
 		//Setting
 		model.addAttribute("categories", commerceService.categoryList());
 		model.addAttribute("headerBanners", commerceService.mainBannerList("헤더")); // Main banner list in this view

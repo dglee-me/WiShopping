@@ -7,7 +7,7 @@
 
 <mapper namespace="memberMapper">
 	<select id="emailCheck" parameterType="String" resultType="int">
-		select count(*) from member where email=#{email}
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL=#{email} AND 
 	</select>
 	
 	<update id="authConfirm" parameterType="com.lee.myapp.domain.MemberVO">
@@ -98,12 +98,13 @@
 	
 	<update id="withdrawalUser">
 		UPDATE MEMBER
-		   SET EMAIL = NULL,
-		       AUTH = NULL,
+		   SET EMAIL = CONCAT('DELETE_',EMAIL),
+		   	   AUTH = NULL,
 		       PW = 'DELETE',
 		       SESSIONKEY = 'DELETE',
 		       SESSIONLIMIT = SYSDATE,
 		       STATUS = 'N'
+		 WHERE EMAIL = #{email}
 	</update>
 	
 	<insert id="sellerRegist" parameterType="com.lee.myapp.domain.SellerVO">

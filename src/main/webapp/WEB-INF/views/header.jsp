@@ -216,7 +216,7 @@
 			<div class="category_inner">
 				<div class="gnb">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/commerce/best/main?category=all" class="t_bold">베스트</a></li>
+						<li><a href="${pageContext.request.contextPath}/commerce/best/main" class="t_bold">베스트</a></li>
 					</ul>
 				</div>
 				<div class="all_category_wrap">

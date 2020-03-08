@@ -72,7 +72,7 @@
 <body>
 	<div class="layout">
 		<header id="sales-gnb">
-			<span class="logo-page-sales"></span>
+			<a href="${pageContext.request.contextPath}"><span class="logo-page-sales"></span></a>
 		</header>
 		<div class="seller-layout">
 			<div class="container">
