@@ -66,9 +66,12 @@
 						<div class="best-feed_item-wrap">
 							<div class="best-production-item_wrap">
 								<a href="${pageContext.request.contextPath}/productions/${best.pno}" class="best-production-item_link"></a>
+								<div class="best-production-item_number-wrap best-production-item_number_medal<c:if test="${best.num eq 1}"> best-production-item_number_gold-wrap</c:if><c:if test="${best.num eq 2}"> best-production-item_number_silver-wrap</c:if><c:if test="${best.num eq 3}"> best-production-item_number_bronze-wrap</c:if>">
+									<span class="best-production-item_number<c:if test="${best.num eq 1}"> best-production-item_number_gold</c:if><c:if test="${best.num eq 2}"> best-production-item_number_silver</c:if><c:if test="${best.num eq 3}"> best-production-item_number_bronze</c:if>">${best.num}</span>
+								</div>
 								<div class="best-production-item_img-wrap">
 									<div class="production-item_image">
-										<img class="image" src="${pageContext.request.contextPath}/${best.productthumurl}">
+										<img class="image" src="${pageContext.request.contextPath}${best.productthumurl}">
 									</div>
 								</div>
 								<div class="best-production-item_content">

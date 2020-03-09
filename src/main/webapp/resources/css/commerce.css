@@ -132,11 +132,23 @@ input, textarea, select{font-family:inherit; font-size:inherit; font-weight:inhe
 .best-feed_item-wrap{position:relative; width:100%; min-height:1px; box-sizing:border-box; flex:0 0 25%; max-width:25%; padding-left:10px; padding-right:10px;}
 .best-production-item_wrap{position:relative; align-items:center; margin-bottom:10px;}
 .best-production-item_link{position:absolute; top:0; left:0; right:0; bottom:0; z-index:1;}
+
+.best-production-item_number-wrap{position:absolute; width:40px; padding:10px 0; font-size:20px; border-radius:0 0 12px 0; background-color:#fff;
+	text-align:center; z-index:1; flex:0 0 auto; -webkit-box-flex:0; font-weight:700; color:#757575;}
+
+.best-production-item_number_gold-wrap{background-color:#E1D248;}
+.best-production-item_number_gold,.best-production-item_number_silver,.best-production-item_number_bronze{color:#fff;}
+.best-production-item_number_silver-wrap{background-color:#9e9e9e;}
+.best-production-item_number_bronze-wrap{background-color:#BA602B;}
+
 .best-production-item_img-wrap{position:relative;}
 .production-item_image{position:relative; background-color:#f5f5f5; padding-bottom:100%; border-radius:4px; overflow:hidden;}
-.production-item_image>img{position:absolute; width:100%; height:100%;}
-.best-production-item_link:active~.best-production-item_img-wrap .production-item-image>img, .best-production-item_link:hover~
-	.best-production-item_img-wrap .production-item-image>img{transform:translate(-50%,-50%) scale(1.1);}
+
+.production-item_image>img{position:absolute; width:100%; height:100%; top:50%; left:50%; transform:translate(-50%,-50%); transition:.2s;}
+
+.best-production-item_link:active~.best-production-item_img-wrap .production-item_image>img,
+.best-production-item_link:hover~.best-production-item_img-wrap .production-item_image>img{transform:translate(-50%,-50%) scale(1.1);}
+	
 .best-production-item_content{padding:0 4px;}
 .best-production-item_header{margin:9px 0 0;}
 .best-production-item_header-brand{display:block; color:#757575; word-break:break-all; font-size:11px; font-weight:400; line-height:13px;}

@@ -29,6 +29,7 @@ public class ProductVO {
 		
 		CREATE SEQUENCE TBL_SALES_VOLUME_SEQ START WITH 1;
 	 */
+	private int num;
 	private int pno;
 	private int mno; // Use only for product regist (brand) and product modify (brand)
 	private String category1; //��з�
@@ -48,6 +49,13 @@ public class ProductVO {
 	private int isseller;
 	private int isbrand;
 	
+	public int getNum() {
+		return num;
+	}
+	public ProductVO setNum(int num) {
+		this.num = num;
+		return this;
+	}
 	public int getPno() {
 		return pno;
 	}
@@ -173,7 +181,7 @@ public class ProductVO {
 	}
 	
 	public String toString() {
-		return "ProductVO = [pno= "+pno+", mno = "+mno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
+		return "ProductVO = [num = "+num+", pno= "+pno+", mno = "+mno+", category1= "+category1+", category2= "+category2+", pname= "+pname+", brand= "+brand+", price= "+price+", producturl= "
 				+producturl+", productthumurl= "+productthumurl+", shippingfee= "+shippingfee+", shippingday= "+shippingday+", return_fee = "+returnfee+
 				", return_place = "+returnplace+", category1_url = "+category1url+", category2_url = "+category2url+", isseller = "+isseller+", is_brand = "+isbrand+"]";
 	}
