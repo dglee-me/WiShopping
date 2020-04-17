@@ -1,7 +1,8 @@
 package com.lee.myapp.service;
 
-import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
@@ -12,11 +13,12 @@ public interface AdminService {
 	public int write(BoardVO board) throws Exception;
 	
 	/* Banner */
-	public int bannerRegist(BannerVO banner) throws Exception;
+	public String imageUpload(MultipartFile file) throws Exception;
+	public int bannerRegist(BannerVO banner, MultipartFile file) throws Exception;
 	public List<BannerVO> bannerList(String parameter) throws Exception;
-	public int bannerStatusUpdate(HashMap<String,Object> map) throws Exception;
+	public int bannerStatusUpdate(BannerVO banner) throws Exception;
 	public BannerVO bannerView(int bno) throws Exception;
-	public int bannerUpdate(BannerVO banner) throws Exception;
+	public int bannerUpdate(BannerVO banner, MultipartFile file) throws Exception;
 	public int bannerDelete(int bno) throws Exception;
 
 	//Category list

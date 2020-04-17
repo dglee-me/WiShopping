@@ -1,16 +1,18 @@
 package com.lee.myapp.service;
 
-import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.persistence.AdminDAO;
+import com.lee.myapp.utils.UploadFileUtils;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -18,16 +20,37 @@ public class AdminServiceImpl implements AdminService{
 	@Inject
 	AdminDAO adminDAO;
 	
+	@Resource(name="uploadPath")
+	private String uploadPath;
+	
 	@Override
 	public int write(BoardVO board) throws Exception {
 		// TODO Auto-generated method stub
 		return adminDAO.write(board);
 	}
 
+	/*
+	 * 이미지 업로드 및 이미지 경로 return
+	 */
 	@Override
-	public int bannerRegist(BannerVO banner) throws Exception {
-		// TODO Auto-generated method stub
-		return adminDAO.bannerRegist(banner);
+	public String imageUpload(MultipartFile file) throws Exception{
+		if(file != null) {
+			String imgUploadPath = uploadPath + "/" + "imgUpload";
+			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			
+			return "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+		}else {
+			return "none";
+		}
+	}
+	
+	/*
+	 * 이미지 업로드 후 DB에 배너 등록
+	 */
+	@Override
+	public int bannerRegist(BannerVO banner, MultipartFile file) throws Exception {
+		// TODO Auto-generated method stub		
+		return adminDAO.bannerRegist(banner.setBannerurl(imageUpload(file)));
 	}
 
 	@Override
@@ -37,9 +60,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int bannerStatusUpdate(HashMap<String,Object> map) throws Exception {
+	public int bannerStatusUpdate(BannerVO banner) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDAO.bannerStatusUpdate(map);
+		return adminDAO.bannerStatusUpdate(banner);
 	}
 
 	@Override
@@ -49,9 +72,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int bannerUpdate(BannerVO banner) throws Exception {
+	public int bannerUpdate(BannerVO banner, MultipartFile file) throws Exception {
 		// TODO Auto-generated method stub
-		return adminDAO.bannerUpdate(banner);
+		return adminDAO.bannerUpdate(banner.setBannerurl(imageUpload(file)));
 	}
 
 	@Override

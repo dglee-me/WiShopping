@@ -29,10 +29,10 @@
 	
 	<update id="updateStatus">
 		UPDATE TBL_BANNER
-		<if test='status != null and status != 1'>
+		<if test='bannerstatus != null and bannerstatus != 1'>
 		   SET BANNER_STATUS = 0
 		</if>
-		<if test='status != null and status != 0'>
+		<if test='bannerstatus != null and bannerstatus != 0'>
 		   SET BANNER_STATUS = 1
 		</if>
 		 WHERE BNO = #{bno}

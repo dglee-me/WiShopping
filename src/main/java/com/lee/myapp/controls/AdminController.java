@@ -1,9 +1,5 @@
 package com.lee.myapp.controls;
 
-import java.io.File;
-import java.util.HashMap;
-
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,16 +16,12 @@ import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.service.AdminService;
-import com.lee.myapp.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
 	@Inject
 	AdminService adminService;
 	
@@ -55,22 +46,32 @@ public class AdminController {
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String serviceWritePost(BoardVO board) throws Exception{
 		logger.info("-------- Service : ADMIN WRITE METHOD=POST --------");
-
-		adminService.write(board);		
+		
+		/*
+		 *  만약 글 작성 후 category가 공지사항이라면 redirect될 페이지를 고객센터 > 공지사항으로 설정
+	     */
+		String path = "redirect:/";
+		
 		if(board.getCategory().equals("공지사항")) {
-			return "redirect:/notice/list";
+			path = "redirect:/customer/notice";
 		}
-		return "redirect:/";
+
+		adminService.write(board);
+		
+		return path;
 	}
 	
 	@RequestMapping(value="/banner/regist", method=RequestMethod.GET)
 	public String bannerRegistGET(HttpSession session,Model model) throws Exception{
 		logger.info("-------- ADMIN : BANNER REGIST METHOD=GET --------");
 		
-		String path = "";
-		
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
+		String path = "";
+		
+		/*
+		 * 로그인한 유저가 관리자일 경우 배너 등록 화면으로, 그렇지 않을 경우 메인화면으로 이동
+		 */
 		if(member.getMlevel() == 2) {
 			path = "admin/banner/regist";
 		}else {
@@ -86,7 +87,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/banner/regist", method=RequestMethod.POST)
-	public int bannerRegistPOST(HttpSession session,BannerVO banner, MultipartFile file) throws Exception{
+	public int bannerRegistPOST(HttpSession session, BannerVO banner, MultipartFile file) throws Exception{
 		logger.info("-------- ADMIN : BANNER REGIST METHOD=POST --------");
 		
 		int result = 0;
@@ -95,12 +96,7 @@ public class AdminController {
 		
 		//If access member level is 2(Admin) over
 		if(member.getMlevel() == 2) {
-			String imgUploadPath = uploadPath + "/" + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			
-			//Set image name and upload image to server
-			banner.setBannerurl("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath));
-			adminService.bannerRegist(banner);
+			adminService.bannerRegist(banner, file);
 			
 			result = 1;
 		}else {
@@ -119,15 +115,11 @@ public class AdminController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 
 		if(member.getMlevel() == 2) {
-			if(status == null) {
-				status = "all";
-			}
-			
-			if(status.equals("all")) {
-				model.addAttribute("banners",adminService.bannerList("all"));
-			}else {
-				model.addAttribute("banners",adminService.bannerList("used"));
-			}
+			if(status == null) status = "all"; // 만약 status가 null 이라면, all로 설정해준다.
+				
+			//status에 맞춰 사용 중인 배너만 보여줄 것인지, 전체를 보여줄 것인지 설정해준다.
+			if(status.equals("all")) model.addAttribute("banners",adminService.bannerList("all"));
+			else model.addAttribute("banners",adminService.bannerList("used"));
 			
 			path = "admin/banner/management";
 		}else {
@@ -143,19 +135,18 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/banner/updateStatus", method=RequestMethod.POST)
-	public int bannerUpdateStatusPOST(HttpSession session, Model model, int bno, int status) throws Exception{
+	public int bannerUpdateStatusPOST(HttpSession session, Model model, BannerVO banner) throws Exception{
 		logger.info("-------- ADMIN : BANNER UPDATE STATUS METHOD=POST --------");
 		int result = 0;
 
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
+		//관리자일 경우에만 동작한다.
 		if(member.getMlevel() == 2) {
-			HashMap<String,Object> map = new HashMap<String,Object>();
-			
-			map.put("bno", bno);
-			map.put("status", status);
-			
-			adminService.bannerStatusUpdate(map);
+			/*
+			 * 기존 배너 상태가 1일 경우, 0으로 수정하여 종료 상태로 전환, 0일 경우, 1으로 수정하여 사용 중인 상태로 전환한다.
+			 */
+			adminService.bannerStatusUpdate(banner);
 			
 			result = 1;
 		}
@@ -190,14 +181,7 @@ public class AdminController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
-			if(file != null ) {
-				String imgUploadPath = uploadPath + File.separator + "imgUpload";
-				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-				
-				//Set image name and upload image to server
-				banner.setBannerurl("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath));
-			}
-			adminService.bannerUpdate(banner);
+			adminService.bannerUpdate(banner, file);
 			
 			result = 1;
 		}
@@ -212,7 +196,7 @@ public class AdminController {
 		logger.info("-------- ACCESSOR : "+((MemberVO)session.getAttribute("login")).getName()+", NUMBER : "+((MemberVO)session.getAttribute("login")).getMno()+" --------");
 		logger.info("-------- ACCESS BANNER : "+bno+" --------");
 		
-		String path = "";
+		String path = ""; 
 
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		

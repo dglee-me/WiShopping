@@ -74,8 +74,10 @@
 											<div class="col-md-3 product-item-wrap">
 												<article class="product-item">
 													<a href="${pageContext.request.contextPath}/productions/${product.pno}" class="product-item_overlay"></a>
-													<div class="product-item-image">
-														<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
+													<div class="product-item-image-wrap">
+														<div class="product-item-image">
+															<img class="image" src="${pageContext.request.contextPath}${product.productthumurl}">
+														</div>
 													</div>
 													<div class="product-item-content">
 														<h1 class="product-item_header">

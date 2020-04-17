@@ -1,6 +1,5 @@
 package com.lee.myapp.persistence;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,9 +37,9 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public int bannerStatusUpdate(HashMap<String,Object> map) throws Exception {
+	public int bannerStatusUpdate(BannerVO banner) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.update(namespace+".updateStatus",map);
+		return sqlSession.update(namespace+".updateStatus", banner);
 	}
 
 	@Override

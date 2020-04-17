@@ -50,14 +50,14 @@
 				var item = $(this);
 			
 				var bno = $(this).closest("li").children("em").attr("banner-number");
-				var status = 1;
+				var bannerstatus = 1;
 			
 				$.ajax({
 					url : "/WiShopping/admin/banner/updateStatus",
 					type : "post",
 					data : {
 						bno : bno,
-						status : status		
+						bannerstatus : bannerstatus		
 					},
 					success : function(result){
 						if(result == 1){
@@ -80,14 +80,14 @@
 				var item = $(this);
 				
 				var bno = $(this).closest("li").children("em").attr("banner-number");
-				var status = 0;
+				var bannerstatus = 0;
 				
 				$.ajax({
 					url : "/WiShopping/admin/banner/updateStatus",
 					type : "post",
 					data : {
 						bno : bno,
-						status : status		
+						bannerstatus : bannerstatus		
 					},
 					success : function(result){
 						if(result == 1){
