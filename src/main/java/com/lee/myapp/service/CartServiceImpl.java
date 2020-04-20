@@ -15,13 +15,34 @@ import com.lee.myapp.persistence.CartDAO;
 
 @Service
 public class CartServiceImpl implements CartService{
+	
 	@Inject
 	CartDAO cartDAO;
 	
 	@Override
-	public void addCart(HashMap<String,Object> map) throws Exception {
+	public void addCart(int mno, String[] ono, String number) throws Exception {
 		// TODO Auto-generated method stub
-		cartDAO.addCart(map);
+		
+		//선택한 상품의 수량을 ;로 나누어 배열로 만들어줍니다.
+		String[] inventory = number.split(";");
+		
+		for(int i=0;i<ono.length;i++) {
+			HashMap<String,Object> map = new HashMap<String,Object>();
+
+			map.put("mno", mno);
+			map.put("ono", Integer.parseInt(ono[i]));
+			map.put("inventory", Integer.parseInt(inventory[i]));
+
+			//If there is already a product and option in the cart
+			String cartno = existCart(map);
+
+			if(cartno == null) {
+				cartDAO.addCart(map);
+			}else {
+				map.put("cartno", cartno);
+				upInventory(map);
+			}
+		}
 	}
 
 	@Override
@@ -43,9 +64,15 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public int cartRemove(CartVO cart) throws Exception {
+	public void cartRemove(int mno, List<String> pno) throws Exception {
 		// TODO Auto-generated method stub
-		return cartDAO.cartRemove(cart);
+		CartVO cart = new CartVO().setMno(mno);
+		
+		for(int i=0;i<pno.size();i++) {
+			cartDAO.cartRemove(cart.setPno(Integer.parseInt(pno.get(i))));
+		}
+		
+		//return cartDAO.cartRemove(cart);
 	}
 
 	@Override

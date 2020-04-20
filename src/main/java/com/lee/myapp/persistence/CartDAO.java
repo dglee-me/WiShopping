@@ -13,7 +13,7 @@ public interface CartDAO {
 	public List<CartListVO> cartList(int mno) throws Exception;
 	public List<CartVO> cartOption(int mno) throws Exception;
 	public int cartUpdate(CartVO cart) throws Exception;
-	public int cartRemove(CartVO cart) throws Exception;
+	public void cartRemove(CartVO cart) throws Exception;
 	public int cartOptionRemove(CartVO cart) throws Exception;
 	public String existCart(HashMap<String,Object> map) throws Exception;
 	public int upInventory(HashMap<String,Object> map) throws Exception;

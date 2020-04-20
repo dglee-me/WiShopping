@@ -1,6 +1,5 @@
 package com.lee.myapp.controls;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -53,32 +52,15 @@ public class CartController {
 	public int addCartListPOST(@RequestParam(value="ono[]") String[] ono, String number, HttpSession session) throws Exception{
 		logger.info("-------- CART : ADD METHOD=POST --------");
 		
+		//회원일 경우에만 장바구니에 담을 수 있도록 매개변수 사용함.
 		int result = 0;
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
 			logger.info("-------- ACCESSOR : " + member.getMno() + " --------");
-			
-			String[] inventory = number.split(";");
-
-			for(int i=0;i<ono.length;i++) {
-				HashMap<String,Object> map = new HashMap<String,Object>();
-
-				map.put("mno", member.getMno());
-				map.put("ono", Integer.parseInt(ono[i]));
-				map.put("inventory", Integer.parseInt(inventory[i]));
-
-				//If there is already a product and option in the cart
-				String cartno = cartService.existCart(map);
-
-				if(cartno == null) {
-					cartService.addCart(map);
-				}else {
-					map.put("cartno", cartno);
-					cartService.upInventory(map);
-				}
-			}
+				
+			cartService.addCart(member.getMno(), ono, number);
 			result = 1;
 		}
 		
@@ -94,9 +76,7 @@ public class CartController {
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member != null) {
-			cart.setMno(member.getMno());
-			cartService.cartUpdate(cart);
-			
+			cartService.cartUpdate(cart.setMno(member.getMno()));
 			result = 1;
 		}
 		
@@ -111,12 +91,10 @@ public class CartController {
 		int result = 0;
 
 		MemberVO member = (MemberVO)session.getAttribute("login");
+		
 		if(member != null) {
-			CartVO cart = new CartVO().setMno(member.getMno());
-
-			for(int i=0;i<pno.size();i++) {
-				cartService.cartRemove(cart.setPno(Integer.parseInt(pno.get(i))));
-			}
+			cartService.cartRemove(member.getMno(), pno);
+			
 			result = 1;
 		}
 		return result;

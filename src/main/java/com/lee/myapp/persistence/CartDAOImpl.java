@@ -45,9 +45,9 @@ public class CartDAOImpl  implements CartDAO {
 	}
 
 	@Override
-	public int cartRemove(CartVO cart) throws Exception {
+	public void cartRemove(CartVO cart) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(namespace+".cartRemove",cart);
+		sqlSession.delete(namespace+".cartRemove",cart);
 	}
 
 	@Override
