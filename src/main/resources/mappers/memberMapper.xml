@@ -62,12 +62,6 @@
 		WHERE MNO=#{MNO}
 	</delete>
 	
-	<select id="newPassword" resultType="com.lee.myapp.domain.MemberVO">
-		SELECT *
-		  FROM MEMBER
-		 WHERE EMAIL=#{email}
-	</select>
-	
 	<update id="setToken">
 		UPDATE MEMBER
 		   SET TOKEN = #{token}

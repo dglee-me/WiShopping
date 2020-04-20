@@ -29,7 +29,6 @@ public interface MemberDAO {
 	public MemberVO loginInfo(String email) throws Exception;
 	
 	//Reset Password
-	public MemberVO newPassword(String email) throws Exception;
 	public int newPasswordTokenSet(MemberVO member) throws Exception;
 	public int resetPassword(MemberVO member) throws Exception;
 	public int resetToken() throws Exception;

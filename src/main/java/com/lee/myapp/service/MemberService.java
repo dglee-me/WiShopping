@@ -3,6 +3,11 @@ package com.lee.myapp.service;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.MemberVO;
@@ -15,6 +20,10 @@ public interface MemberService {
 	//회원가입 Confirm
 	public int authConfirm(MemberVO member) throws Exception;
 
+	//로그인 & 로그아웃 서비스
+	public String login(HttpServletRequest request, HttpServletResponse response, MemberVO member, RedirectAttributes rttr) throws Exception;
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	//자동로그인 관련
 	public void keepLogin(String email, String sessionId, Date next) throws Exception;
 	public MemberVO checkUserWithSessionKey(String value);
@@ -27,9 +36,9 @@ public interface MemberService {
 	public MemberVO loginInfo(String email) throws Exception;
 	
 	//Reset password
-	public MemberVO newPassword(String email) throws Exception;
+	public String newPassword(String email) throws Exception;
 	public int newPasswordTokenSet(MemberVO member) throws Exception;
-	public int resetPassword(MemberVO member) throws Exception;
+	public String resetPassword(HttpServletRequest request, String token, String password) throws Exception;
 	public int resetToken() throws Exception;
 
 	//Modify user info
