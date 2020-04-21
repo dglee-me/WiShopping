@@ -1,12 +1,10 @@
 package com.lee.myapp.controls;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -27,16 +25,12 @@ import com.lee.myapp.domain.CommentPageMaker;
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.domain.QuestionsVO;
 import com.lee.myapp.service.CustomerService;
-import com.lee.myapp.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/customer/")
 public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
 	@Inject
 	CustomerService customerService;
 	
@@ -90,17 +84,8 @@ public class CustomerController {
 		//Increase Views by 1 
 		customerService.viewCount(bno);
 		
-		BoardVO board = customerService.view(bno);
-
-		//Line change processing
-		if(board.getContent().contains("\r\n")) {
-			board.setContent("<p>"+board.getContent().replace("\r\n","</p><p>"));
-		}else {
-			board.setContent("<p>"+board.getContent()+"</p>");
-		}
-		
 		//Setting
-		model.addAttribute("board",board);
+		model.addAttribute("board",customerService.view(bno));
 		
 		model.addAttribute("categories", customerService.categoryList());
 		model.addAttribute("headerBanners", customerService.mainBannerList("헤더")); // Main banner list in this view
@@ -115,6 +100,7 @@ public class CustomerController {
 		String path = "";
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
+		//공지사항 작성을 위해 관리자인지를 확인합니다. 관리자가 아닐 시, 메인 화면으로 이동되도록 함.
 		if(member.getMlevel() == 2) {
 			//Setting
 			model.addAttribute("categories", customerService.categoryList());
@@ -134,7 +120,8 @@ public class CustomerController {
 
 		String path = "";
 		MemberVO member = (MemberVO) session.getAttribute("login");
-		
+
+		//공지사항 작성을 위해 관리자인지를 확인합니다. 관리자가 아닐 시, 메인 화면으로 이동되도록 함.
 		if(member.getMlevel() == 2) {
 			customerService.write(board.setCategory("공지사항").setAuthor(member.getName()));
 			
@@ -218,28 +205,11 @@ public class CustomerController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member != null) {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+			customerService.questionRegist(question.setMno(member.getMno()), images);
 			
-			String url = "";
-			for(int i=0;i<images.length;i++) {
-				if(images[i].getOriginalFilename().equals("")) continue;
-				
-				if(i == 0) {
-					url = "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
-					continue;
-				}
-				url = url + ";" + "/" + "imgUpload" + ymdPath + "/" +UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
-			}
-
-			question.setMno(member.getMno());
-			question.setImagesurl(url);
-			
-			customerService.questionRegist(question);
-			
-			path = "/customer/notice";
+			path = "redirect:/customer/notice";
 		}else {
-			path = "/auth/login";
+			path = "redirect:/auth/login";
 		}
 		
 		return path;

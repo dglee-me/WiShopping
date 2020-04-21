@@ -2,6 +2,8 @@ package com.lee.myapp.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.BoardVO;
 import com.lee.myapp.domain.CategoryVO;
@@ -10,7 +12,9 @@ import com.lee.myapp.domain.FaqVO;
 import com.lee.myapp.domain.QuestionsVO;
 
 public interface CustomerService {
-	public void questionRegist(QuestionsVO question) throws Exception;
+	public String imageUpload(MultipartFile[] images) throws Exception;
+	
+	public void questionRegist(QuestionsVO question, MultipartFile[] images) throws Exception;
 
 	//Notice list query
 	public int listCount(String category) throws Exception;
