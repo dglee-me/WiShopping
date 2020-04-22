@@ -236,9 +236,25 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int newPasswordTokenSet(MemberVO member) throws Exception {
+	public String newPasswordTokenSet(MemberVO member) throws Exception {
 		// TODO Auto-generated method stub
-		return memberDao.newPasswordTokenSet(member);
+		/*
+		 * User가 입력한 이메일과 비밀번호가 실제 DB에 저장된 것과 일치하는지 확인 후
+		 * 맞다면 token을 업데이트 해주고 token 값을 return해주며
+		 * 틀리다면 token 값이 아닌 passwordNotCorrect 라는 임의의 msg를 리턴해줍니다.
+		 */
+		
+		String msg = member.getToken();
+		MemberVO exist_member = loginInfo(member.getEmail());
+		
+		boolean passwordMatch = passEncoder.matches(member.getPw(), exist_member.getPw());
+		if(passwordMatch) {
+			memberDao.newPasswordTokenSet(member);
+		}else if(!passwordMatch) {
+			msg = "passwordNotCorrect"; //If not correct email and pw	
+		}
+		
+		return msg;
 	}
 
 	@Override

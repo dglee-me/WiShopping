@@ -37,7 +37,7 @@ public interface MemberService {
 	
 	//Reset password
 	public String newPassword(String email) throws Exception;
-	public int newPasswordTokenSet(MemberVO member) throws Exception;
+	public String newPasswordTokenSet(MemberVO member) throws Exception;
 	public String resetPassword(HttpServletRequest request, String token, String password) throws Exception;
 	public int resetToken() throws Exception;
 

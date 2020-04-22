@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lee.myapp.domain.MemberVO;
 import com.lee.myapp.service.MemberService;
-import com.lee.myapp.utils.CommonUtils;
 import com.lee.myapp.utils.TempKey;
 
 @Controller
@@ -59,14 +58,7 @@ public class MypageController {
 			logger.info("-------- MYPAGE : REQUEST METHOD = POST --------");
 			logger.info("-------- ACCESSOR : MNO " + ((MemberVO)session.getAttribute("login")).getMno() + " --------");
 		
-			member = memberService.loginInfo(email);
-			
-			boolean passwordMatch = passEncoder.matches(pw, member.getPw());
-			if(passwordMatch) {
-				memberService.newPasswordTokenSet(member.setToken(token));
-			}else if(!passwordMatch) {
-				token = "passwordNotCorrect"; //If correct email and pw	
-			}
+			token = memberService.newPasswordTokenSet(new MemberVO().setEmail(email).setPw(pw).setToken(token).setMno(member.getMno()));
 		}else {
 			token = "notLogined";
 		}
