@@ -24,15 +24,15 @@ public class ProductDAOImpl implements ProductDAO{
 	SqlSession sqlSession;
 	
 	@Override
-	public int register(ProductVO product) throws Exception {
+	public void register(ProductVO product) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+".register",product);
+		sqlSession.insert(namespace+".register",product);
 	}
 
 	@Override
-	public int register_option(ProductOptionVO option) throws Exception {
+	public void register_option(ProductOptionVO option) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+".register_option",option);
+		sqlSession.insert(namespace+".register_option",option);
 	}
 
 	@Override
@@ -91,9 +91,9 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 	
 	@Override
-	public int reviewRegist(ReviewVO review) throws Exception {
+	public void reviewRegist(ReviewVO review) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(namespace+".reviewRegist", review);
+		sqlSession.insert(namespace+".reviewRegist", review);
 	}
 
 	@Override

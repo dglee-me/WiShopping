@@ -1,10 +1,8 @@
 package com.lee.myapp.controls;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -28,16 +26,11 @@ import com.lee.myapp.domain.ProductVO;
 import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 import com.lee.myapp.service.ProductService;
-import com.lee.myapp.utils.FileDelete;
-import com.lee.myapp.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/productions/")
 public class ProductionsController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductionsController.class);
-	
-	@Resource(name="uploadPath")
-	private String uploadPath;
 	
 	@Inject
 	ProductService productService;
@@ -47,9 +40,13 @@ public class ProductionsController {
 		logger.info("-------- CREATE : PRODUCTIONS METHOD=GET --------");
 		
 		String path = "redirect:/auth/login";
-		
 		MemberVO member = (MemberVO)session.getAttribute("login");
+		
 		if(member != null) {
+			/*
+			 * 만약 셀러로 등록되어있는 회원이 아니라면, notseller 페이지로 이동시킵니다.
+			 * 셀러로 등록되어 있다면, 상품 등록 페이지로 이동합니다.
+			 */
 			int seller = productService.isSeller(member.getMno());
 			
 			if(seller == 0) {
@@ -71,49 +68,11 @@ public class ProductionsController {
 			ProductVO product, char has_option, ProductOptionVO option, int[] inventory,HttpSession session) throws Exception{
 		logger.info("-------- CREATE : PRODUCTIONS METHOD=POST --------");
 		logger.info("-------- SELLER : "+((MemberVO)session.getAttribute("login")).getName()+" --------");
-		
-		String imgUploadPath = uploadPath + File.separator + "imgUpload";
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-		String thumbUrl = null;
-		
-		//Thumbnail image upload to server
-		thumbUrl = UploadFileUtils.fileUpload(imgUploadPath, file1.getOriginalFilename(), file1.getBytes(), ymdPath);
-		product.setProductthumurl("/" + "imgUpload" + ymdPath + "/" + thumbUrl);	
-			
-		//Detail images upload to server
-		String detailUrl = "";
-		
-		for(int i=0;i<file2.length-1;i++) {
-			if(i == 0) {
-				detailUrl = "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath);
-				continue;
-			}
-			detailUrl = detailUrl + ";"+ "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath);
-		}
-		
-		product.setProducturl(detailUrl);
-				
-		//Insert product into database
-		product.setMno(((MemberVO)session.getAttribute("login")).getMno());
-		productService.register(product);
-		
-		//Create options for a product and insert into database
-		if(has_option == 'T') {
-			int inventory_count = 0;
-			String[] array_option = option.getOptioncolor().split(",");
 
-			for(int i=0;i<array_option.length;i++) {
-				String[] temp = array_option[i].split("\\#\\$\\%");
-				
-				option.setOptioncolor(temp[0])
-					.setOptionsize(temp[1])
-					.setInventory(inventory[inventory_count++]);
-
-				productService.register_option(option);
-			}
-		}else {
-			productService.register_option(option);
-		}
+		MemberVO member = (MemberVO) session.getAttribute("login");
+		
+		productService.register(product.setMno(member.getMno()), file1, file2);
+		productService.register_option(option, inventory, has_option);
 		
 		return "redirect:/";
 	}
@@ -121,7 +80,7 @@ public class ProductionsController {
 	@RequestMapping(value="/{pno:.+}", method=RequestMethod.GET)
 	public String productionViewGET(HttpSession session, Model model, @PathVariable("pno") int pno) throws Exception{
 		logger.info("-------- VIEW : PRODUCTIONS METHOD=GET --------");
-
+		
 		CommentCriteria cri = new CommentCriteria().setPno(pno);
 		
 		MemberVO member = (MemberVO) session.getAttribute("login");
@@ -129,18 +88,23 @@ public class ProductionsController {
 		
 		CommentPageMaker pageMaker = new CommentPageMaker();
 		pageMaker.setCri(cri);
-		int count = productService.listCount(cri.getPno());
-		pageMaker.setTotalCount(count);
+		pageMaker.setTotalCount(productService.listCount(cri.getPno()));
 
 		//Check member login when review paging and question paging
 		List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
 		List<ProductQuestionVO> question_list = new ArrayList<ProductQuestionVO>();
 		
 		if(member != null) {
+			/*
+			 * 로그인 되어 있을 경우, 해당 상품의 판매자인지, 리뷰 및 문의글의 본인 여부를 확인 하기 위해 mno를 사용한다.
+			 */
 			reviewlist = productService.listPaging(cri.setMno(member.getMno()));
 			question_list = productService.questionList(cri.setMno(member.getMno()));
 			product = productService.view(cri.setMno(member.getMno()));
 		}else {
+			/*
+			 * 로그인 되어 있지 않은 경우, 본인 여부를 확인할 필요가 없으므로 사용되지 않는 값인 0으로 조회한다.
+			 */
 			reviewlist = productService.listPaging(cri.setMno(0));
 			question_list = productService.questionList(cri.setMno(0));
 			product = productService.view(cri.setMno(0));
@@ -149,8 +113,7 @@ public class ProductionsController {
 		//QnA pageMaker create
 		CommentPageMaker qnaPageMaker = new CommentPageMaker();
 		qnaPageMaker.setCri(cri);
-		count = productService.questionListCount(cri.getPno());
-		qnaPageMaker.setTotalCount(count);
+		qnaPageMaker.setTotalCount(productService.questionListCount(cri.getPno()));
 		
 		//Detail image url split to show
 		String[] detailUrl = product.getProducturl().split(";");		
@@ -199,20 +162,9 @@ public class ProductionsController {
 		int result = 0;
 		
 		MemberVO member = (MemberVO) session.getAttribute("login");
+		
 		if(member != null) {
-			review.setMno(member.getMno());
-			
-			if(image != null) {
-				String imgUploadPath = uploadPath + "/" + "imgUpload";
-				String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-
-				review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
-			}else {
-				review.setContentimg("noImage");
-			}
-						
-			productService.reviewRegist(review);
-			productService.updateReviewStatus(review);
+			productService.reviewRegist(review.setMno(member.getMno()), image);
 			
 			result = 1;
 		}
@@ -320,27 +272,7 @@ public class ProductionsController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member != null) {
-			ReviewVO exist_review = productService.reviewView(review.getRno());
-
-			if(image_check) {
-				if(image != null) {
-					if(!exist_review.getContentimg().equals("noImage")) {
-						FileDelete.deleteFile(exist_review.getContentimg());
-					}
-				
-					String imgUploadPath = uploadPath + "/" + "imgUpload";
-					String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-
-					review.setContentimg("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, image.getOriginalFilename(), image.getBytes(), ymdPath));
-				}
-			}else {
-				if(!exist_review.getContentimg().equals("noImage")) {
-					FileDelete.deleteFile(exist_review.getContentimg());
-					
-					review.setContentimg("noImage");
-				}
-			}
-			result = productService.modifyReview(review);
+			result = productService.modifyReview(review, image, image_check);
 		}
 
 		return result;
@@ -485,62 +417,7 @@ public class ProductionsController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member != null) {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			
-			CommentCriteria cri = new CommentCriteria().setMno(member.getMno()).setPno(product.getPno());
-			ProductVO exist_product = productService.view(cri);
-			
-			if(file1.getOriginalFilename() != "") {
-				//Set thumbnail image name and upload image to server and delete exist image
-				FileDelete.deleteFile(exist_product.getProductthumurl());
-				product.setProductthumurl("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, file1.getOriginalFilename(), file1.getBytes(), ymdPath));
-			}
-			
-			//Detail images upload to server
-			for(int i=0;i<file2.length;i++) {
-				if(file2[i].getOriginalFilename() == "") break;
-				
-				if(i == 0) {
-					product.setProducturl("/" + "imgUpload" + ymdPath + "/" 
-											+ UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath));
-				}else {
-					product.setProducturl(product.getProducturl() 
-							+";" + "/" + "imgUpload" + ymdPath + "/" 
-							+ UploadFileUtils.fileUpload(imgUploadPath, file2[i].getOriginalFilename(), file2[i].getBytes(), ymdPath));
-				}
-			}
-
-			if(product.getProducturl() != null) {
-				String[] arr_exist = exist_product.getProducturl().split(";");
-				
-				for(int i=0;i<arr_exist.length;i++) {
-					FileDelete.deleteFile(arr_exist[i]);
-				}
-			}
-			
-			product.setMno(member.getMno());
-			productService.modifyProduct(product);
-			
-			//Exist option delete and new option regist
-			productService.not_used_option(product.getPno());
-			
-			if(has_option == 'T') {
-				int inventory_count = 0;
-				String[] array_option = option.getOptioncolor().split(",");
-
-				for(int i=0;i<array_option.length;i++) {
-					String[] temp = array_option[i].split("\\#\\$\\%");
-					
-					option.setOptioncolor(temp[0])
-						.setOptionsize(temp[1])
-						.setInventory(inventory[inventory_count++]);
-
-					productService.register_option(option);
-				}
-			}else {
-				productService.register_option(option);
-			}
+			productService.modifyProduct(product.setMno(member.getMno()), file1, file2, option, inventory, has_option);
 		}
 	}
 }

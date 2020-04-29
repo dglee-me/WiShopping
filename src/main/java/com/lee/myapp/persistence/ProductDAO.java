@@ -12,8 +12,8 @@ import com.lee.myapp.domain.ReviewLikeVO;
 import com.lee.myapp.domain.ReviewVO;
 
 public interface ProductDAO {
-	public int register(ProductVO product) throws Exception;
-	public int register_option(ProductOptionVO option) throws Exception;
+	public void register(ProductVO product) throws Exception;
+	public void register_option(ProductOptionVO option) throws Exception;
 	public List<ProductOptionVO> view_option(int pno) throws Exception;
 	public void not_used_option(int pno) throws Exception;
 	public List<ProductVO> list(ProductVO product) throws Exception;
@@ -26,7 +26,7 @@ public interface ProductDAO {
 	
 	//Review
 	public ReviewVO reviewView(int rno) throws Exception;
-	public int reviewRegist(ReviewVO review) throws Exception;
+	public void reviewRegist(ReviewVO review) throws Exception;
 	public List<ReviewVO> reviewList(int pno) throws Exception;
 	public List<ReviewVO> listPaging(CommentCriteria cri) throws Exception;
 	public int listCount(int pno) throws Exception;
