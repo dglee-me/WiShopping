@@ -2,6 +2,8 @@ package com.lee.myapp.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.lee.myapp.domain.BannerVO;
 import com.lee.myapp.domain.CategoryVO;
 import com.lee.myapp.domain.CommentCriteria;
@@ -12,12 +14,12 @@ import com.lee.myapp.domain.PromotionsVO;
 public interface PromotionsService {
 	public List<BannerVO> mainBannerList(String area) throws Exception;	//Header banner
 	public List<PromotionsVO> promotionList(String parameter) throws Exception;
-	public int promotionRegist(PromotionsVO promotion) throws Exception;
+	public int promotionRegist(PromotionsVO promotion, MultipartFile thumb, MultipartFile[] images) throws Exception;
 	public int endPromotion() throws Exception;
 	public PromotionsVO promotionView(int pno) throws Exception;
 	public int updateStatus(PromotionsVO promotion) throws Exception;
 	public int deletePromotion(int pno) throws Exception;
-	public int modifyPromotion(PromotionsVO promotion) throws Exception;
+	public int modifyPromotion(PromotionsVO promotion, MultipartFile thumb, MultipartFile[] images) throws Exception;
 
 	/* Comment */
 	public int commentRegist(PromotionsCommentVO comment) throws Exception;

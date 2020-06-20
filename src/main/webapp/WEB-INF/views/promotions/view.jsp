@@ -61,8 +61,7 @@
 						href.top -= 40;
 						
 						$("html, body").animate({scrollTop : href.top},300);
-					}
-					else if(result == 0){
+					}else if(result == 0){
 						alert("로그인 후 이용 가능합니다.");
 						
 						location.href = "/WiShopping/auth/login";

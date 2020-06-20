@@ -1,6 +1,5 @@
 package com.lee.myapp.controls;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,34 +70,20 @@ public class PromotionsController {
 	
 	@RequestMapping(value="/regist", method=RequestMethod.POST)
 	public String promotionsRegisterPOST(HttpSession session, Model model, PromotionsVO promotion,
-			@RequestParam("promotions[images_url]") MultipartFile[] images, @RequestParam("promotions[thumbnail_url]") MultipartFile thumb) throws Exception{
+			@RequestParam("promotions[images_url]") MultipartFile[] images,
+			@RequestParam("promotions[thumbnail_url]") MultipartFile thumb) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS REGIST METHOD=POST --------");
-		logger.info("-------- ACCESSOR NAME = "+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() 
-				+" METHOD=GET --------");
+		logger.info("-------- ACCESSOR NAME = "+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() +" METHOD=GET --------");
+		
 		String path = "";
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
+		/*
+		 * 사용자의 등급이 관리자 등급일 경우, 프로모션을 등록. 그 외의 등급이라면 홈페이지로 redirect시킨다.
+		 */
 		if(member.getMlevel() == 2) {
-			String imgUploadPath = uploadPath + File.separator + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			
-			//Set inner images naming and upload to server
-			String innerUrl = "";
-			
-			for(int i=0;i<images.length-1;i++) {
-				if(i == 0) {
-					innerUrl = "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
-					continue;
-				}
-				innerUrl = innerUrl + ";" + "/" + "imgUpload" + ymdPath + "/" +UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
-			}
-
-			//Set naming and upload image to server
-			promotion.setThumbnailurl("/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, thumb.getOriginalFilename(), thumb.getBytes(), ymdPath));
-			promotion.setImagesurl(innerUrl);
-			
-			promotionsService.promotionRegist(promotion);
+			promotionsService.promotionRegist(promotion, thumb, images);
 			
 			path = "redirect:/promotions/main";
 		}else {
@@ -148,6 +133,7 @@ public class PromotionsController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
+			//만약, status가 null 이라면 all로 설정해준다.(최초 진입시 기본 Init.)
 			if(status == null){
 				status = "all";
 			}
@@ -175,12 +161,9 @@ public class PromotionsController {
 		int result = 0;
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
-		List<PromotionsCommentVO> list = new ArrayList<PromotionsCommentVO>();
 		
 		if(member != null) {
-			comment.setMno(member.getMno());
-			
-			promotionsService.commentRegist(comment);
+			promotionsService.commentRegist(comment.setMno(member.getMno()));
 			
 			result = 1;
 		}
@@ -195,10 +178,7 @@ public class PromotionsController {
 		logger.info("-------- THIS PNO = " + cri.getPno() + " --------");
 		logger.info("-------- CRITERIA INFO = " + cri.toString() + " --------");
 		
-		List<PromotionsCommentVO> comments = new ArrayList<PromotionsCommentVO>();
-		comments = promotionsService.listPaging(cri);		
-		
-		return comments;
+		return promotionsService.listPaging(cri);
 	}
 
 	@ResponseBody
@@ -207,9 +187,7 @@ public class PromotionsController {
 		logger.info("-------- PROMOTIONS : ACCESS COMMENT LIST COUNT UPDATE METHOD=POST --------");
 		logger.info("-------- THIS PNO = " + pno + " --------");
 		
-		int count = promotionsService.listCount(pno);
-		
-		return count;
+		return promotionsService.listCount(pno);
 	}
 	
 	@ResponseBody
@@ -223,9 +201,7 @@ public class PromotionsController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
-			promotionsService.updateStatus(promotion);
-			
-			result = 1;
+			result = promotionsService.updateStatus(promotion);
 		}
 		
 		return result;
@@ -254,65 +230,16 @@ public class PromotionsController {
 
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String promotionModifyPOST(HttpSession session, PromotionsVO promotion,
-			@RequestParam("promotions[images_url]") MultipartFile[] images, @RequestParam("promotions[thumbnail_url]") MultipartFile thumb) throws Exception{
+			@RequestParam("promotions[images_url]") MultipartFile[] images,
+			@RequestParam("promotions[thumbnail_url]") MultipartFile thumb) throws Exception{
 		logger.info("-------- PROMOTIONS : ACCESS MODIFY METHOD=POST --------");
-		logger.info("-------- ACCESSOR NAME = "+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() 
-				+" --------");
-		
-		PromotionsVO exist_promotion = promotionsService.promotionView(promotion.getPno());
-		String[] exist_images = exist_promotion.getImagesurl().split(";");
+		logger.info("-------- ACCESSOR NAME = "+ ((MemberVO)session.getAttribute("login")).getName() + ", NUMBER = "+ ((MemberVO)session.getAttribute("login")).getMno() +" --------");
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
-			String imgUploadPath = uploadPath + "/" + "imgUpload";
-			String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-			
-			//If change thumbnail image, change this path and upload image to server
-			if(!thumb.getOriginalFilename().equals("")) {
-				//Delete exist thumbnail image file
-				FileDelete.deleteFile(exist_promotion.getThumbnailurl());
-				
-				//Upload new thumbnail image file and setting to object
-				promotion.setThumbnailurl("/" + "imgUpload" + ymdPath + "/" 
-						+ UploadFileUtils.fileUpload(imgUploadPath, thumb.getOriginalFilename(), thumb.getBytes(), ymdPath));
-			}
-
-			//Confirm image change
-			boolean images_change = false;
-			
-			for(int i=0;i<images.length;i++) {
-				if(images[i].getOriginalFilename().equals("")) continue;
-				
-				images_change = true;
-			}
-			
-			//If the image has been changed, delete existing saved images
-			if(images_change) {
-				for(int i=0;i<exist_images.length;i++) {
-					FileDelete.deleteFile(exist_images[i]);
-				}
-			}
-
-			//If change inner images, change this path and upload images to server
-			String imagesUrl = "";
-			for(int i=0;i<images.length;i++) {
-				if(images[i].getOriginalFilename().equals("")) break; //Exception of input file inside btn_add div
-				
-				if(i == 0) {// When if i is 0
-					imagesUrl = "/" + "imgUpload" + ymdPath + "/" + UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
-				}else {//When if not i is 0
-					imagesUrl += ";" + "/" + "imgUpload" + ymdPath + "/" +UploadFileUtils.fileUpload(imgUploadPath, images[i].getOriginalFilename(), images[i].getBytes(), ymdPath);
-				}
-			}
-
-			//Save to object if image changes
-			if(!imagesUrl.equals("")) {
-				promotion.setImagesurl(imagesUrl);
-			}
-			
 			//Run modify query
-			promotionsService.modifyPromotion(promotion);
+			promotionsService.modifyPromotion(promotion, thumb, images);
 			
 			return "redirect:/promotions/management";
 		}
@@ -330,18 +257,7 @@ public class PromotionsController {
 		MemberVO member = (MemberVO) session.getAttribute("login");
 		
 		if(member.getMlevel() == 2) {
-			PromotionsVO promotion = promotionsService.promotionView(pno);
-			
-			//Image file delete
-			String thumbnail = promotion.getThumbnailurl();
-			FileDelete.deleteFile(thumbnail);
-			
-			String[] images = promotion.getImagesurl().split(";");
-			for(int i=0;i<images.length;i++) {
-				FileDelete.deleteFile(images[i]);
-			}
-			
-			//Delete db
+			//Delete from db
 			promotionsService.deletePromotion(pno);
 			
 			path = "redirect:/promotions/management";
@@ -349,25 +265,6 @@ public class PromotionsController {
 		
 		return path;
 	}
-	
-	/*
-	@ResponseBody
-	@RequestMapping(value="/commentDelete", method=RequestMethod.POST)
-	public List<PromotionsCommentVO> promotionCommentDeletePOST(HttpSession session, CommentCriteria cri, @RequestParam(value="data_number") int rno) throws Exception{
-		logger.info("-------- PROMOTIONS : COMMENT DELETE METHOD=GET --------");
-
-		List<PromotionsCommentVO> comments = new ArrayList<PromotionsCommentVO>();
-		
-		MemberVO member = (MemberVO) session.getAttribute("login");
-		if(member.getMlevel() == 2) {
-			promotionsService.deleteComment(rno);
-			
-			comments = promotionsService.listPaging(cri);		
-		}
-
-		return comments;
-	}
-	*/
 	
 	@ResponseBody
 	@RequestMapping(value="/commentDelete", method=RequestMethod.POST)
